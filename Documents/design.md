@@ -3,9 +3,9 @@
 #### Grundidé  
 Man ska bygga och planera en by. Man måste bygga ut saker som agrikultur, fabriker, skolor, militär-baser och byggnader för folk att bo i. **Kommer där finnas en dag/natt-cykel? Om inte kan det bli konstigt om alla måste gå hem ibland, framförallt om spelaren har mycket precis kontroll.** Man spelar som en sorts ledare som bestämmer vilket jobb folk ska utföra. Militärens teknologi ska sakta utvecklas som man hittar nya resurser och folket blir mer utbildade.
 
-För att göra det svårt så ska det finnas andra byar som är mer utvecklade och aggressiva. Man måste beskydda sin by från dem och man måste själv ibland gå på attack och använda sig av **gerilla attacker. Förstår inte riktigt vad det innebär i praktiken. Konkreta exempel? Nån form av stealth mechanics?** För att man inte ska hitta deras by eller fästen direkt så ska det finnas en ”fog of war” så att man måste kartlägga världen.
+För att göra det svårt så ska det finnas andra byar som är mer utvecklade och aggressiva. Man måste beskydda sin by från dem och man måste själv ibland gå på attack och använda sig av gerilla attacker. Gerrila methoder betyder att ligga i bakhåll, att göra stealth attacks och sabotage.För att man inte ska hitta deras by eller fästen direkt så ska det finnas en ”fog of war” så att man måste kartlägga världen.
 
-Det ska kosta mat för att ”producera” mer folk **snarare att de använder dem hela tiden, och måste vara mätta tänker jag.** Metaller för att utbilda soldater. Soldater ska även ha stats som hur bra de kan träffa, hur starka dem är, tålighet och spring hastighet. Soldatens träffsäkerhet och styrka ska också bestämma vilka vapen de kan använda, starkhet låter soldaten använda maskingevär och raketgevär och träffsäkerhet ger pickskyttsgevär. **Olika  former av vapen och ammunition är dyrare än andra och kräver mer teknologi. Ska man på nåt sätt producera research-poäng och låsa upp saker i ett tech tree, eller ska det vara mer suttle, dvs till exempel att bygga byggnader låser upp nästa uppgradering, och den kanske kräver andra, mer sällsynta resurser?**
+Det ska kosta mat för att ”producera” mer folk **snarare att de använder dem hela tiden, och måste vara mätta tänker jag.** Metaller för att utbilda soldater. Soldater ska även ha stats som hur bra de kan träffa, hur starka dem är, tålighet och spring hastighet. Soldatens träffsäkerhet och styrka ska också bestämma vilka vapen de kan använda, starkhet låter soldaten använda maskingevär och raketgevär och träffsäkerhet ger pickskyttsgevär. **Olika  former av vapen och ammunition är dyrare än andra och kräver mer teknologi. Ska man på nåt sätt producera research-poäng och låsa upp saker i ett tech tree, eller ska det vara mer suttle, dvs till exempel att bygga byggnader låser upp nästa uppgradering, och den kanske kräver andra, mer sällsynta resurser?** **Ska vi lägga till ingejörer som ökar ens reserch poäng?**
 
 #### Byggnader och karaktärer
 Soldater ska kunna utbildas till olika klasser som bestämmer deras stats(stats ska också påverkas av rng). 
@@ -14,7 +14,7 @@ Rifleman: alla stats ska vara lagom.
 Heavy: Låg träffsäkerhet, låg hastighet men stark och tålig. 
 Recon: Hög träffsäkerhet, hög hastighet men lågt tålighet och styrka.
 
-**Det finns bättre och bättre versioner av samma stil av enhet, och varje version är längre in i tech tree:t, hur nu det ska fungera, se ovan.**
+Det finns bättre och bättre versioner av samma stil av enhet, och varje version är längre in i tech tree:t, hur nu det ska fungera, se ovan.
 
 Kan lägga till fler senare. 
 
