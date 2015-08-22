@@ -1,7 +1,7 @@
 ### Designdokument 
 
 #### Grundidé  
-Man ska bygga och planera en by. Man måste bygga ut saker som agrikultur, fabriker, skolor, militär-baser och byggnader för folk att bo i. **Kommer där finnas en dag/natt-cykel? Om inte kan det bli konstigt om alla måste gå hem ibland, framförallt om spelaren har mycket precis kontroll.** **Borde vi lägga till att de blir trötta?**  **Kan bli intressant, eller för mycket micro management. Vi får prova.** 
+Man ska bygga och planera en by. Man måste bygga ut saker som agrikultur, fabriker, skolor, militär-baser och byggnader för folk att bo i. **Kommer där finnas en dag/natt-cykel? Om inte kan det bli konstigt om alla måste gå hem ibland, framförallt om spelaren har mycket precis kontroll.** **Borde vi lägga till att de blir trötta?**  **Kan bli intressant, eller för mycket micro management. Vi får prova.** ** Kan passa stealth takitken bättre om man kan låta vissa trupper sova under dagen och sen skickar man dem på sabotage uppdrag under natten eller dylikt** 
 
 Man spelar som en sorts ledare som bestämmer vilket jobb folk ska utföra. Militärens teknologi ska sakta utvecklas som man hittar nya resurser och folket blir mer utbildade.
 
@@ -26,12 +26,12 @@ Civila klasser ska vara bonde, lärare och fabriksarbetare. (snickare och ingje�
 
 #### Byggnaderna som ska finnas:
 
-- Fabrik som ska producera vapen och annan krigsutrustning. **Olika fabriker producerar olika resurser och items, och att bygga dem i sig kostar resurser. För att komma uppåt i tech måste man bygga dyrare och mer avancerade fabriker.**
+- Fabrik som ska producera vapen och annan krigsutrustning. Olika fabriker producerar olika resurser och items, och att bygga dem i sig kostar resurser. För att komma uppåt i tech måste man bygga dyrare och mer avancerade fabriker.
 - Gårdar som ska producera mat. Man måste sen sätta upp fält i närheten så att bönderna man satt till den gården kan plocka på fälten och sen lämna in det på gården. 
 
 - Mat fabrik som gör något med resurserna från fälten. 
 
-- Woodshops(?) som man sätter upp nära en skog så att arbetare kan hugga ner trä och sen lämna där. **Också nån sorts fabrik tänker jag.**
+- Fabriker för saker av trä som man sätter upp nära en skog så att arbetare kan hugga ner trä och sen lämna där. 
 
 - Mineshops(?) som man sätter upp nära mineraler så att arbetare kan hugga ut metaller och lämna in. **Och samma här**
 
