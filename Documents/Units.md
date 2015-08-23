@@ -16,7 +16,7 @@
 
    Gerrila taktiker är inte något automatiskt som görs, det ska vara något som spelaren uppmuntras att göra. Eftersom att    de andra byarna är starkare är det bättre att smyg och begå sabotage för att försvaga dem istället för att försöka       skjuta sig in.
    
-   **Stealth mechanics alltså. Vakter i byarna som man smyger sig runt eller dödar, och möjlighet att sabotera deras fabriker på olika sätt: sätta eld på dem, själa saker, etc, och även möjlighet att tex bränna ner folks bostäder. Då är det mer passande med en dag/natt-cykel.**
+   **Stealth mechanics alltså. Vakter i byarna som man smyger sig runt eller dödar, och möjlighet att sabotera deras fabriker på olika sätt: sätta eld på dem, själa saker, etc, och även möjlighet att tex bränna ner folks bostäder. Då är det mer passande med en dag/natt-cykel.** 
 
 - #### Arbetarenheter
   Arbetare är alla enheter som inte kan slåss. De guidas av spelaren i var de ska arbeta och gör så hela tiden.  
