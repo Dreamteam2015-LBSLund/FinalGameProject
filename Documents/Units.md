@@ -7,7 +7,7 @@
   - Vilka vapen de har (**produceras av fabriker, antingen hela eheten eller så har de nån slags inventory**)
   - Vilka vapen de är bra på att använda (nåt slags erfarenhetsystem? **Sitter ihop med deras klass?** **borde sitta ihop med klassen**)
   - Health
-  - **Abilities och nåt slags manasystem(?), beroende på deras klass? Recon blir tillfäligt osynlig, heavy tillfäligt    odödlig eller liknande?**
+  - Adrelinesputor eller liknande som tillfäligt ökar soldatens stats 
   - Klass **? Stats borde sättas av klassen**
   - Stats för träffsäkerhet, max health, snabbhet
   
