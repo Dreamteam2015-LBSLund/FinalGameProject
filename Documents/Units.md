@@ -8,8 +8,8 @@
   - Vilka vapen de är bra på att använda (nåt slags erfarenhetsystem? **Sitter ihop med deras klass?** **borde sitta ihop med klassen**)
   - Health
   - Adrelinesputor eller liknande som tillfäligt ökar soldatens stats 
-  - Klass **? Stats borde sättas av klassen**
-  - Stats för träffsäkerhet, max health, snabbhet
+  - Klass, stats sättas av klass
+  - Stats för träffsäkerhet, max health, snabbhet. Bestämmer vilken sorts vapen soldaten kan använda
   
    För att kunna utföra gerrila taktiker så ska man kunna sätta soldaten/soldaternas betende på aggresive(skjuter direkt    om den ser en fiende) eller stealth(skjuter endast om man säger till soldaten eller om soldaten blir beskjuten).
    Man ska också kunna säga vart en soldat ska gå genom att trycka på marken där den ska gå.
