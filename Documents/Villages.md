@@ -9,7 +9,7 @@ Dessa måste man försvara sig från, annars förstör de ens framsteg.
 
 #### Att invadera byar
 I byarna finns vakter. Dessa kan spelaren välja att smyga sig runt, eller döda på olika sätt.
-Att göra för mycket ljud medför att fler vakter kommer.
+Att göra för mycket ljud medför att fler vakter kommer. Man kan använda sabotage som en distraktion för byns soldater och som ett sätt att försvaga byn.
 I byarna finns också resurser som spelaren kan ta. 
 Detta kan vara en genväg uppåt i tech, men då får man se till att inte bli upptäckt.
 
