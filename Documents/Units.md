@@ -21,4 +21,4 @@
 - #### Arbetarenheter
   Arbetare är alla enheter som inte kan slåss. De guidas av spelaren i var de ska arbeta och gör så hela tiden.  
 
-  Arbetar antingen i en fabrik, eller jobbar med att bygga nya fabriker eller byggnader.
+  Arbetar antingen i en fabrik, samla resurser genom att hugga metall eller träd eller jobbar med att bygga nya fabriker eller byggnader.
