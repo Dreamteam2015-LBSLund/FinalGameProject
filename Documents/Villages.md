@@ -5,7 +5,9 @@ Detta innebär att spelaren måstea använda gerilla taktiker tills hen blir til
 #### Byarnas invasioner
 Vissa byar är större än andra, och ibland skickar de ut enheter som invaderar spelarens by. 
 Dessa måste man försvara sig från, annars förstör de ens framsteg.  
-**Vi måste se till så att de inte är för starka. Blir inte kul då. Borde följa spelaren i styrka på nåt sätt.**
+**Vi måste se till så att de inte är för starka. Blir inte kul då. Borde följa spelaren i styrka på nåt sätt.**  
+
+De attackerar även spelerarens enheter när de är ute och rör sig, tex på väg till eller från olika byar.
 
 #### Att invadera byar
 I byarna finns vakter. Dessa kan spelaren välja att smyga sig runt, eller döda på olika sätt.
