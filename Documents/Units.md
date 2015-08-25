@@ -6,9 +6,8 @@
   ##### Egenskaper
   - Vilka vapen de har (**produceras av fabriker, antingen hela eheten eller så har de nån slags inventory?**)
   - Vilka vapen de är bra på att använda. Styrs av deras klass **och kanske även av nåt erfarenhetssystem**
-  - Health
-  - Adrelinesputor eller liknande som tillfäligt ökar soldatens stats 
-  - Klass, stats sättas av klass
+  - Adrenalinsputor eller liknande som tillfäligt ökar soldatens stats. Exakt vad beror på klassen
+  - Klass som bestämmer enhetens stats och abilities
   - Stats för träffsäkerhet, max health, snabbhet. Bestämmer vilken sorts vapen soldaten kan använda
   
    För att kunna utföra gerrila taktiker så ska man kunna sätta soldaten/soldaternas betende på aggresive(skjuter direkt    om den ser en fiende) eller stealth(skjuter endast om man säger till soldaten eller om soldaten blir beskjuten).
