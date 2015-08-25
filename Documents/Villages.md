@@ -1,6 +1,6 @@
 ## Fiendebyar  
 Fiendebyarna i spelet startar mycket starkare än spelaren, men de utvecklas inte särskilt mycket. 
-Detta innebär att spelaren kommer vara starkare efter ett tag, och kan slå tillbaka.  
+Detta innebär att spelaren måstea använda gerilla taktiker tills hen blir tillräckligt stark att slå till direkt. 
 
 #### Byarnas invasioner
 Vissa byar är större än andra, och ibland skickar de ut enheter som invaderar spelarens by. 
@@ -14,7 +14,7 @@ I byarna finns också resurser som spelaren kan ta.
 Detta kan vara en genväg uppåt i tech, men då får man se till att inte bli upptäckt.
 
 #### Att ta över byar
-**Osäker på detta, men jag slänger ut nåt iaf.**  
-När spelaren har dödat alla vakter i en by **(och hövdingen om det finns nåt i den stilen?)**, tar den över all arbetskraft och resurser.
+**Osäker på detta, men jag slänger ut nåt i all fall.**  
+När spelaren har dödat alla soldater i en by och allt motsånd är krossat, tar den över all arbetskraft och resurser.
 Man kan välja att riva det och ta hem det till sin egen by, eller behålla det där det är, och så att säga styra två byar.   
-**bra om det iaf finns ett alternativ att ta hem det. Kan bli irriterande om allt spelaren behöver hålla koll på är utspritt överallt**
+**bra om det iaf finns ett alternativ att ta hem det. Kan bli irriterande om allt spelaren behöver hålla koll på är utspritt överallt** **det blir risk and reward. Dubbel produktion utan att behöva slösa resurser och manpower på att riva och bygga upp men med risken av attack på två ställen samtidgt*
