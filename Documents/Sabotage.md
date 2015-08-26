@@ -7,4 +7,4 @@ Mer avancerade tekniker kräver mer avancerad teknologi.
 - Bomber. I början bara på stubin eller liknande men man kan låsa upp fjärrutlösning senare i "teknikträdet".
 - Mörda folk. Kan bli lite op? *
 
-Alla tekniker borde ha nån risk associerad, så man inte kan spamma den bästa hela tiden. **Bomber dyra och att byn ökar sin säkerhet?**
+Alla tekniker borde ha nån risk associerad, så man inte kan spamma den bästa hela tiden. Bomber är dyra, byn ökar sin säkerhet efter attacker och byn kan ibland få slut på elden.
