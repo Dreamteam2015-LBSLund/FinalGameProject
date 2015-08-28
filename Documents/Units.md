@@ -23,3 +23,4 @@
   Arbetar antingen i en fabrik, samla resurser genom att hugga metall eller träd eller jobbar med att bygga nya fabriker eller byggnader.
   
   **Kanske ska vara typ robotar, med tanke på att de är så mycket mindre komplexa än de militära enheterna?**
+** Vad händer med agrikulturen? Om du tittar på verkligheten så är en soldats arbets beskrvning och träning mycket mer avancerad än en person som jobbar på en gård eller som en standrard fabrik arbetare**
