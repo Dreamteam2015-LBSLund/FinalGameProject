@@ -18,9 +18,10 @@ Kontrollsystem | Tom | Minimal
 Soldater | Tom | Minimal
 UI | Tom | Minimal
 Arbetare | Johannes | Minimal
-AI | Johannes | Minimal 
+Basic AI | Johannes | Minimal 
 Fabriker | Johannes | Minimal
 Tech | Båda | Minimal
 Menyer | Tom | Normal
 Dag/Natt | Tom | Normal
+Mer Avancerad AI | Johannes | Normal
 VFX | Tom | Bonus
