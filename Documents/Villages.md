@@ -1,3 +1,7 @@
+##Byar
+
+**Ska byar starta med en sorts barack med arbetare eller dylikt?**
+
 ## Fiendebyar  
 Fiendebyarna i spelet startar mycket starkare än spelaren, men de utvecklas inte särskilt mycket. 
 Detta innebär att spelaren måstea använda gerilla taktiker tills hen blir tillräckligt stark att slå till direkt. 
