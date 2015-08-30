@@ -4,7 +4,7 @@
 
    De militära enheterna är spelarens verktyg i strid. De har ett relativt avancerat liv, jämfört med arbetarenheterna.
   ##### Egenskaper
-  - Vilka vapen de har (**produceras av fabriker, antingen hela eheten eller så har de nån slags inventory?**)
+  - Vilka vapen de har. Vapnen produceras av fabriker och läggs i ett simpelt inventory. 
   - Vilka vapen de är bra på att använda. Styrs av deras klass **och kanske även av nåt erfarenhetssystem**
   - Adrenalinsputor eller liknande som tillfäligt ökar soldatens stats. Exakt vad beror på klassen
   - Klass som bestämmer enhetens stats och abilities
