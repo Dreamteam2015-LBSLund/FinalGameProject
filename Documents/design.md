@@ -1,7 +1,7 @@
 ### Designdokument 
 
 #### Grundidé  
-Man ska bygga och planera en by. Man måste bygga ut saker som agrikultur, fabriker, skolor, militär-baser och byggnader för folk att bo i. **Kommer där finnas en dag/natt-cykel? Om inte kan det bli konstigt om alla måste gå hem ibland, framförallt om spelaren har mycket precis kontroll.** **Borde vi lägga till att de blir trötta?**  **Kan bli intressant, eller för mycket micro management. Vi får prova.** ** Kan passa stealth takitken bättre om man kan låta vissa trupper sova under dagen och sen skickar man dem på sabotage uppdrag under natten eller dylikt** 
+Man ska bygga och planera en by. Man måste bygga ut saker som agrikultur, fabriker, skolor, militär-baser och byggnader för folk att bo i. Det kommer finnas en dag och natt cykel. ** Om inte kan det bli konstigt om alla måste gå hem ibland, framförallt om spelaren har mycket precis kontroll.** **Borde vi lägga till att de blir trötta?**  **Kan bli intressant, eller för mycket micro management. Vi får prova.** ** Kan passa stealth takitken bättre om man kan låta vissa trupper sova under dagen och sen skickar man dem på sabotage uppdrag under natten eller dylikt** 
 
 Man spelar som en sorts ledare som bestämmer vilket jobb folk ska utföra. Militärens teknologi ska sakta utvecklas som man hittar nya resurser och folket blir mer utbildade.
 
