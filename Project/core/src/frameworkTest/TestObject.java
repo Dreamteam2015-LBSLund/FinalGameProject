@@ -12,6 +12,7 @@ public class TestObject extends GameObject {
 
 	public TestObject() {
 		super(new Vector2(0, 0), new Vector2(3, 3), new Sprite(new Texture("badlogic.jpg")));
+		setDepth(10);
 	}
 	
 	public void update() {

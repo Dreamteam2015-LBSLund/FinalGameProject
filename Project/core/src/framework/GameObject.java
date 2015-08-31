@@ -6,6 +6,7 @@ package framework;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 /**
  * @author Johannes
@@ -15,6 +16,7 @@ public abstract class GameObject {
 	private Vector2 position, size;
 	private Sprite sprite;
 	private Scene scene;
+	private float depth;
 	
 	public void setPosition(Vector2 p) { 
 		position = p;
@@ -32,6 +34,13 @@ public abstract class GameObject {
 
 	public Scene getScene() { return scene; }
 	
+	public float getDepth() {
+		return depth;
+	}
+	public void setDepth(float depth) {
+		this.depth = depth;
+		if (scene != null) scene.onDepthChange();
+	}
 	public GameObject(Vector2 position, Vector2 size, Sprite sprite) {
 		this.sprite = sprite;
 		setPosition(position);

@@ -1,11 +1,14 @@
 package framework;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Scene {
+	private boolean depthChanged;
 	
 	private ArrayList<GameObject> objects, toAdd, toRemove;
 	private OrthographicCamera camera, uiCamera;
@@ -24,11 +27,22 @@ public abstract class Scene {
 	}
 	
 	public void update() {
+		if (depthChanged) {
+			//could be more effective with knowledge of which object changed and a bunch of custom sorting
+			Collections.sort(objects, new Comparator<GameObject>() {
+				@Override
+				public int compare(GameObject o1, GameObject o2) {
+					return Float.compare(o1.getDepth(), o2.getDepth());
+				}
+			});
+		}
+		
 		for (GameObject g : objects) g.update();
 		
 		for (GameObject g : toAdd) {
 			objects.add(g);
 			g.onAdd(this);
+			onDepthChange();
 		}
 		for (GameObject g : toRemove) {
 			objects.remove(g);
@@ -36,6 +50,10 @@ public abstract class Scene {
 		}
 		toAdd.clear();
 		toRemove.clear();
+	}
+	
+	public void onDepthChange() {
+		depthChanged = true;
 	}
 	
 	public void onPause() { }
