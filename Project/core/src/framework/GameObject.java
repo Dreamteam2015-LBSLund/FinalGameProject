@@ -18,47 +18,6 @@ public abstract class GameObject {
 	private Scene scene;
 	private float depth;
 	
-	private int currentFrame;
-	private int animationCount;
-	private int maxAnimationCount;
-	private int maxFrame;
-	private int minFrame;
-	private boolean vertical;
-	
-	public void setAnimation(int maxAnimationCount, int maxFrame, int minFrame, boolean vertical) {
-		this.maxAnimationCount = maxAnimationCount;
-		this.maxFrame = maxFrame;
-		this.minFrame = minFrame;
-		this.vertical = vertical;
-	}
-	
-	public void animate() {
-		animationCount += 1;
-		
-		if(!vertical)
-			sprite.setRegion(minFrame*sprite.getRegionWidth() + currentFrame*sprite.getRegionWidth(), 
-					sprite.getRegionY(), sprite.getRegionWidth(), sprite.getRegionHeight());
-		else
-			sprite.setRegion(sprite.getRegionX(), minFrame*sprite.getRegionHeight()+ currentFrame*sprite.getRegionWidth(), 
-					sprite.getRegionWidth(), sprite.getRegionHeight());
-		
-		if(currentFrame == maxFrame)
-			currentFrame = 0;
-		
-		if(animationCount >= maxAnimationCount) {
-			currentFrame += 1;
-			animationCount = 0;
-		}
-	}
-	
-	public void setCurrentFrame(int currentFrame) {
-		this.currentFrame = currentFrame;
-	}
-	
-	public void setAnimationCount(int animationCount) {
-		this.animationCount = animationCount;
-	}
-	
 	public void setPosition(Vector2 p) { 
 		position = p;
 		if (sprite != null) sprite.setPosition(p.x, p.y); 
