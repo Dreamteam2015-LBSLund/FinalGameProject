@@ -22,11 +22,13 @@ public abstract class GameObject {
 	private int animationCount;
 	private int maxAnimationCount;
 	private int maxFrame;
+	private int minFrame;
 	private boolean vertical;
 	
-	public void setAnimation(int maxAnimationCount, int maxFrame, boolean vertical) {
+	public void setAnimation(int maxAnimationCount, int maxFrame, int minFrame, boolean vertical) {
 		this.maxAnimationCount = maxAnimationCount;
 		this.maxFrame = maxFrame;
+		this.minFrame = minFrame;
 		this.vertical = vertical;
 	}
 	
@@ -34,11 +36,11 @@ public abstract class GameObject {
 		animationCount += 1;
 		
 		if(!vertical)
-			sprite.setRegion(sprite.getRegionX() + currentFrame*sprite.getRegionWidth(), 
+			sprite.setRegion(minFrame*sprite.getRegionWidth() + currentFrame*sprite.getRegionWidth(), 
 					sprite.getRegionY(), sprite.getRegionWidth(), sprite.getRegionHeight());
 		else
 			sprite.setRegion(sprite.getRegionX(), 
-					sprite.getRegionY()+ currentFrame*sprite.getRegionHeight(), sprite.getRegionWidth(), sprite.getRegionHeight());
+					minFrame*sprite.getRegionHeight(), sprite.getRegionWidth(), sprite.getRegionHeight());
 		
 		if(currentFrame == maxFrame)
 			currentFrame = 0;
