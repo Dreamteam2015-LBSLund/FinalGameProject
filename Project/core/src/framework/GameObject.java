@@ -39,8 +39,8 @@ public abstract class GameObject {
 			sprite.setRegion(minFrame*sprite.getRegionWidth() + currentFrame*sprite.getRegionWidth(), 
 					sprite.getRegionY(), sprite.getRegionWidth(), sprite.getRegionHeight());
 		else
-			sprite.setRegion(sprite.getRegionX(), 
-					minFrame*sprite.getRegionHeight(), sprite.getRegionWidth(), sprite.getRegionHeight());
+			sprite.setRegion(sprite.getRegionX(), minFrame*sprite.getRegionHeight()+ currentFrame*sprite.getRegionWidth(), 
+					sprite.getRegionWidth(), sprite.getRegionHeight());
 		
 		if(currentFrame == maxFrame)
 			currentFrame = 0;
