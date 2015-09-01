@@ -1,13 +1,12 @@
-package frameworkTest;
+package com.dreamteam.villageTycoon.frameworkTest;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-
-import framework.Animation;
-import framework.GameObject;
-import framework.Scene;
+import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Scene;
 
 public class TestObject extends GameObject {
 

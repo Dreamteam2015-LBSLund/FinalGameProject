@@ -1,4 +1,4 @@
-package characters;
+package com.dreamteam.villageTycoon.characters;
 
 public class Weapon {
 	private WeaponType type;

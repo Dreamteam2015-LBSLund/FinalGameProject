@@ -1,9 +1,8 @@
-package characters;
+package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.math.Vector2;
-
-import framework.Animation;
-import framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.GameObject;
 
 public abstract class Soldier extends GameObject {
 	

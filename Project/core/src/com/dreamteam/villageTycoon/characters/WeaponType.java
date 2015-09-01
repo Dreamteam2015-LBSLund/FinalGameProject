@@ -1,4 +1,4 @@
-package characters;
+package com.dreamteam.villageTycoon.characters;
 
 public class WeaponType {
 	public enum Type { RIFE, HANDGUN, ROCKETLAUNCER, MELEE};

@@ -1,6 +1,6 @@
-package frameworkTest;
+package com.dreamteam.villageTycoon.frameworkTest;
 
-import framework.Scene;
+import com.dreamteam.villageTycoon.framework.Scene;
 
 public class TestScene extends Scene {
 	public TestScene() {

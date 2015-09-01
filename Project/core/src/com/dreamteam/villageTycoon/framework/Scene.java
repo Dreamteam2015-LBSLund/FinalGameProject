@@ -1,4 +1,4 @@
-package framework;
+package com.dreamteam.villageTycoon.framework;
 
 import java.util.ArrayList;
 import java.util.Comparator;

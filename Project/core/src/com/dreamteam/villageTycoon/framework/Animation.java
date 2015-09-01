@@ -1,4 +1,4 @@
-package framework;
+package com.dreamteam.villageTycoon.framework;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
