@@ -14,7 +14,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
  */
 public abstract class GameObject {
 	private Vector2 position, size;
-	private Sprite sprite;
+	private Animation sprite;
 	private Scene scene;
 	private float depth;
 	
@@ -30,7 +30,7 @@ public abstract class GameObject {
 	}
 	public Vector2 getSize() { return size; }
 	
-	public Sprite getSprite() { return sprite; }
+	public Animation getSprite() { return sprite; }
 
 	public Scene getScene() { return scene; }
 	
@@ -41,13 +41,13 @@ public abstract class GameObject {
 		this.depth = depth;
 		if (scene != null) scene.onDepthChange();
 	}
-	public GameObject(Vector2 position, Vector2 size, Sprite sprite) {
+	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
 		this.sprite = sprite;
 		setPosition(position);
 		setSize(size);
 	}
 	
-	public GameObject(Vector2 position, Sprite sprite) {
+	public GameObject(Vector2 position, Animation sprite) {
 		this(position, new Vector2((sprite != null ? sprite.getWidth() : 0), (sprite != null ? sprite.getHeight() : 0)), sprite);
 	}
 	

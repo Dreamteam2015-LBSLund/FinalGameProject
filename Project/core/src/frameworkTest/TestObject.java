@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import framework.Animation;
 import framework.GameObject;
 import framework.Scene;
 
 public class TestObject extends GameObject {
 
 	public TestObject() {
-		super(new Vector2(0, 0), new Vector2(3, 3), new Sprite(new Texture("badlogic.jpg")));
+		super(new Vector2(0, 0), new Vector2(3, 3), new Animation(new Texture("badlogic.jpg")));
 		setDepth(10);
 	}
 	
