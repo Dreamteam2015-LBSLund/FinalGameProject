@@ -10,39 +10,34 @@ public class Weapon {
 	private float reloadCount;
 	private float currentFireRate;
 	
-	private boolean reloading;
-	
 	public Weapon(WeaponType type) {
 		this.type = type;
 	}
 	
-	public void update() {
-		if(currentFireRate > 0) coolDown();
+	public void update(float deltaTime) {
+		if(currentFireRate > 0) coolDown(deltaTime);
 		
-		if(clipCount < 1) reload(); 
+		if(clipCount < 1) reload(deltaTime); 
 	}
 	
-	public void coolDown() {
-		currentFireRate += Gdx.graphics.getDeltaTime()*100;
+	public void coolDown(float deltaTime) {
+		currentFireRate += deltaTime*100;
 
 		if(currentFireRate >= type.getMaxFireRate()) {
 			currentFireRate = 0;
 		}
 	}
 	
-	public void reload() {
-		reloading = true;
-		
-		reloadCount += Gdx.graphics.getDeltaTime()*100;
+	public void reload(float deltaTime) {
+		reloadCount += deltaTime*100;
 		if(reloadCount >= type.getReloadTime()) {
 			clipCount = type.getClipSize();
 			reloadCount = 0;
-			reloading = false;
 		}
 	}
 	
 	public boolean canShoot() {
-		return !reloading && currentFireRate <= 0;
+		return clipCount < 1 && currentFireRate <= 0;
 	}
 	
 	public float getCurrentFireRate() {
