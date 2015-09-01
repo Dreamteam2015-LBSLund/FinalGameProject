@@ -1,5 +1,6 @@
 package framework;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Animation extends Sprite {
@@ -10,14 +11,12 @@ public class Animation extends Sprite {
 	private int minFrame;
 	private boolean vertical;
 	
-	private Sprite sprite;
-	
-	public Animation(Sprite sprite){
-		this.sprite = sprite;
+	public Animation(Texture sprite){
+		super(sprite);
 	}
 	
 	public Animation(Sprite sprite, int maxAnimationCount, int maxFrame, int minFrame, boolean vertical){
-		this.sprite = sprite;
+		super(sprite);
 		setAnimation(maxAnimationCount, maxFrame, minFrame, vertical);
 	}
 	
@@ -32,11 +31,11 @@ public class Animation extends Sprite {
 		animationCount += 1;
 		
 		if(!vertical)
-			sprite.setRegion(minFrame*sprite.getRegionWidth() + currentFrame*sprite.getRegionWidth(), 
-					sprite.getRegionY(), sprite.getRegionWidth(), sprite.getRegionHeight());
+			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth(), 
+					this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		else
-			sprite.setRegion(sprite.getRegionX(), minFrame*sprite.getRegionHeight()+ currentFrame*sprite.getRegionWidth(), 
-					sprite.getRegionWidth(), sprite.getRegionHeight());
+			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight()+ currentFrame*this.getRegionWidth(), 
+					this.getRegionWidth(), this.getRegionHeight());
 		
 		if(currentFrame == maxFrame)
 			currentFrame = 0;
@@ -45,10 +44,6 @@ public class Animation extends Sprite {
 			currentFrame += 1;
 			animationCount = 0;
 		}
-	}
-	
-	public Sprite getSprite() {
-		return sprite;
 	}
 	
 	public void setCurrentFrame(int currentFrame) {
