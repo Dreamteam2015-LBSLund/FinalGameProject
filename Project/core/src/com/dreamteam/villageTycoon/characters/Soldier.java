@@ -7,7 +7,8 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 public abstract class Soldier extends Character {
 	private Weapon weapon;
 	
-	public Soldier(Vector2 position, Animation sprite) {
+	public Soldier(Vector2 position, Animation sprite, Weapon weapon) {
 		super(position, sprite);
+		this.weapon = weapon;
 	}
 }
