@@ -26,7 +26,7 @@ public abstract class Scene {
 		camera = new OrthographicCamera(16, 9);
 	}
 	
-	public void update() {
+	public void update(float deltaTime) {
 		if (depthChanged) {
 			//could be more effective with knowledge of which object changed and a bunch of custom sorting
 			Collections.sort(objects, new Comparator<GameObject>() {
@@ -35,9 +35,10 @@ public abstract class Scene {
 					return Float.compare(o1.getDepth(), o2.getDepth());
 				}
 			});
+			depthChanged = false;
 		}
 		
-		for (GameObject g : objects) g.update();
+		for (GameObject g : objects) g.update(deltaTime);
 		
 		for (GameObject g : toAdd) {
 			objects.add(g);

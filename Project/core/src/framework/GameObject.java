@@ -57,7 +57,7 @@ public abstract class GameObject {
 	
 	public void onRemove() { };
 	
-	public void update() { }
+	public void update(float deltaTime) { }
 	
 	public void draw(SpriteBatch batch) {
 		if (sprite != null) sprite.draw(batch);

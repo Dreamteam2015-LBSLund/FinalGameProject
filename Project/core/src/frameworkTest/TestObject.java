@@ -16,7 +16,7 @@ public class TestObject extends GameObject {
 		setDepth(10);
 	}
 	
-	public void update() {
+	public void update(float deltaTime) {
 		setPosition(getPosition().add(.1f, 0));
 	}
 	

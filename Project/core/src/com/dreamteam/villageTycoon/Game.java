@@ -28,7 +28,7 @@ public class Game extends ApplicationAdapter {
 	}
 	
 	public void update() {
-		currentScene.update();
+		currentScene.update(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
