@@ -44,10 +44,6 @@ public class Weapon {
 		return currentFireRate;
 	}
 	
-	public boolean getReloading() {
-		return reloading;
-	}
-	
 	public WeaponType getType() {
 		return type;
 	}
