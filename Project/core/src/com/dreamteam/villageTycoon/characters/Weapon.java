@@ -16,6 +16,12 @@ public class Weapon {
 		this.type = type;
 	}
 	
+	public void update() {
+		if(currentFireRate > 0) coolDown();
+		
+		if(clipCount < 1) reload(); 
+	}
+	
 	public void coolDown() {
 		currentFireRate += Gdx.graphics.getDeltaTime()*100;
 
@@ -33,6 +39,10 @@ public class Weapon {
 			reloadCount = 0;
 			reloading = false;
 		}
+	}
+	
+	public boolean canShoot() {
+		return !reloading && currentFireRate <= 0;
 	}
 	
 	public float getCurrentFireRate() {

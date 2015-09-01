@@ -3,7 +3,7 @@ package com.dreamteam.villageTycoon.characters;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class WeaponType {
-	public enum Type { RIFE, HANDGUN, ROCKETLAUNCER, MELEE};
+	public enum Type { RIFE, HANDGUN, ROCKETLAUNCER, MELEE };
 	
 	Sprite icon;
 	
@@ -18,7 +18,7 @@ public class WeaponType {
 	
 	private String name;
 	
-	public WeaponType(int damege, float maxFireRate, int clipSize, float recoil, String name, float reloadTime, Type type) {
+	public WeaponType(int damege, float maxFireRate, int clipSize, float recoil, String name, float reloadTime, Sprite icon, Type type) {
 		this.damege = damege;
 		this.maxFireRate = maxFireRate;
 		this.clipSize = clipSize;
@@ -26,6 +26,7 @@ public class WeaponType {
 		this.reloadTime = reloadTime;
 		this.name = name;
 		this.type = type;
+		this.icon = icon;
 	}
 	
 	public int getClipSize() {
