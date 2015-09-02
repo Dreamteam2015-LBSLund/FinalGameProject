@@ -21,6 +21,7 @@ public class Character extends GameObject {
 		
 		if(health <= 0) {
 			setSprite(deathAnimation);
+			if(getSprite().animationDone()) getScene().removeObject(this);
 		}
 	}
 	

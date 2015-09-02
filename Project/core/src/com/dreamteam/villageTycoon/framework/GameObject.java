@@ -3,6 +3,7 @@
  */
 package com.dreamteam.villageTycoon.framework;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -28,6 +29,11 @@ public abstract class GameObject {
 		size = s;
 		if (sprite != null) sprite.setSize(s.x, s.y); 
 	}
+	
+	public void setColor(Color c) {
+		if(sprite != null) sprite.setColor(c);
+	}
+	
 	public Vector2 getSize() { return size; }
 	
 	public Animation getSprite() { return sprite; }
@@ -37,6 +43,7 @@ public abstract class GameObject {
 	public float getDepth() {
 		return depth;
 	}
+	
 	public void setDepth(float depth) {
 		this.depth = depth;
 		if (scene != null) scene.onDepthChange();

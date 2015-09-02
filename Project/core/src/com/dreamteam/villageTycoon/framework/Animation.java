@@ -17,6 +17,10 @@ public class Animation extends Sprite {
 		super(sprite);
 	}
 	
+	public Animation(Sprite sprite) {
+		super(sprite);
+	}
+	
 	public Animation(Sprite sprite, float maxAnimationTime, int maxFrame, int minFrame, boolean vertical){
 		super(sprite);
 		setAnimation(maxAnimationTime, maxFrame, minFrame, vertical);
