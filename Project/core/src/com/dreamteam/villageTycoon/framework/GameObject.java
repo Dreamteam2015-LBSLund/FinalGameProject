@@ -41,6 +41,11 @@ public abstract class GameObject {
 		this.depth = depth;
 		if (scene != null) scene.onDepthChange();
 	}
+	
+	public void setSprite(Animation sprite) {
+		this.sprite = sprite;
+	}
+	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
 		this.sprite = sprite;
 		setPosition(position);

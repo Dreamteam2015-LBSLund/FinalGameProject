@@ -9,6 +9,7 @@ public class Character extends GameObject {
 	private boolean selected;
 	
 	private int health;
+	private Animation deathAnimation;
 	
 	public Character(Vector2 position, Animation sprite) {
 		super(position, sprite);
@@ -17,6 +18,10 @@ public class Character extends GameObject {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		if(health <= 0) {
+			setSprite(deathAnimation);
+		}
 	}
 	
 	public void setHealth(int health) {
