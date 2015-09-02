@@ -29,6 +29,10 @@ public class Rectangle {
 		this.height = height;
 	}
 	
+	public void printValues() {
+		System.out.print("x: " + x + "\ny: " + y + "\nw: " + width + "\nh: " + height +  "\n");
+	}
+	
 	public float getX() {
 		return x;
 	}

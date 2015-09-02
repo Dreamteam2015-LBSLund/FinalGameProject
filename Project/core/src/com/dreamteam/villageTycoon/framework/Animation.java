@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.framework;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animation extends Sprite {
 	private int currentFrame;
@@ -15,6 +16,10 @@ public class Animation extends Sprite {
 	
 	public Animation(Texture sprite){
 		super(sprite);
+	}
+	
+	public Animation(TextureRegion region){
+		super(new Sprite(region));
 	}
 	
 	public Animation(Sprite sprite) {

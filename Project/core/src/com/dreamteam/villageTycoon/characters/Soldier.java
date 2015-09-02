@@ -19,6 +19,5 @@ public abstract class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		
 	}
 }
