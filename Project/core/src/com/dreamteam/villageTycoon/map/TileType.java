@@ -22,6 +22,7 @@ public class TileType {
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
 		resources = r.getList("resources");
+		//sprite = AssetManager.get(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
 
 	public TileType(String name, boolean isWalkable, boolean isBuildable) {

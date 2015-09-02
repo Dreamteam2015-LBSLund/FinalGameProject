@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Disposable;
 
 public class ResourceReader {
 	
