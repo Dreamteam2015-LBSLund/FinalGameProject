@@ -3,9 +3,11 @@ package com.dreamteam.villageTycoon.utils;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 public class ResourceReader {
 	
@@ -39,7 +41,6 @@ public class ResourceReader {
 		return data.get(name).split(", ");
 	}
 	
-	//reads from the Assets folder. TODO: move to constructor and make read<type>(String property)
 	private HashMap<String, String> readResource(String filename) {
 		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
 		HashMap<String, String> out = new HashMap<String, String>();

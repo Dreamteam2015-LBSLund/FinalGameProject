@@ -3,7 +3,6 @@ package com.dreamteam.villageTycoon.map;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
@@ -36,10 +35,10 @@ public class TileType {
 			out.add(new TileType(f));
 			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
 		}
-		return null;
+		return out;
 	}
 
-	//Tile.isWalkable should probably be used since this does not take building into account
+	//Tile.isWalkable should probably be used since this does not take buildings into account
 	public boolean isWalkable() {
 		return isWalkable;
 	}
