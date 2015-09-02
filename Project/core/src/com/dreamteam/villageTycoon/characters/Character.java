@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
@@ -18,6 +19,8 @@ public class Character extends GameObject {
 	private int health;
 	private Animation deathAnimation;
 	
+	private Rectangle hitbox = new Rectangle(0, 0, 0, 0);
+	
 	public Character(Vector2 position, Animation sprite) {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
@@ -28,10 +31,28 @@ public class Character extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
+		hitbox = new Rectangle(getPosition(), getSize());
+		
+		for(GameObject c : getScene().getObjects()) if(c instanceof Controller) {
+			if(((Controller) c).getSelectionRectangle().collision(hitbox) && ((Controller) c).getActive()) {
+				selected = true;
+			}
+		}
+		
+		if(selected) {
+			setColor(new Color(1, 0.5f, 1, 0.1f));
+		} else {
+			setColor(new Color(1, 1, 1, 1));
+		}
+		
 		if(health <= 0) {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			if(getSprite().animationDone()) getScene().removeObject(this);
 		}
+	}
+	
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 	}
 	
 	public void setHealth(int health) {

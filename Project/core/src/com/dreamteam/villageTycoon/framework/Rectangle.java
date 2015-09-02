@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.framework;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Rectangle {
 	private float x;
 	private float y; 
@@ -10,16 +12,21 @@ public class Rectangle {
 		set(x, y, width, height);
 	}
 	
+	public Rectangle(Vector2 position, Vector2 size) {
+		set(position.x, position.y, size.x, size.y);
+	}
+	
 	public boolean collision(Rectangle object) {
-		 if (y >= object.getY() + object.getHeight())
-             return false;
-         if (x >= object.getX() + object.getWidth())
-             return false;
-         if (y + height <= object.getY())
-             return false;
-         if (x + width <= object.getX())
-             return false;
-         return true;
+        if (y >= object.getY() + object.getHeight())
+            return false;
+        if (x >= object.getX() + object.getWidth())
+            return false;
+        if (y + height <= object.getY())
+            return false;
+        if (x + width <= object.getX())
+        	return false;
+        
+		return true;
 	}
 	
 	public void set(float x, float y, float width, float height) {
