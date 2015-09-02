@@ -20,7 +20,7 @@ public class Character extends GameObject {
 		super.update(deltaTime);
 		
 		if(health <= 0) {
-			setSprite(deathAnimation);
+			if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			if(getSprite().animationDone()) getScene().removeObject(this);
 		}
 	}
