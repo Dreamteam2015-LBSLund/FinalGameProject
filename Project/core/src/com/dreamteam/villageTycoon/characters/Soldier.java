@@ -5,10 +5,20 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 
 public abstract class Soldier extends Character {
+	enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
+	
+	private AggressionState  aggressionState;
 	private Weapon weapon;
+	
+	private float attackDistance;
 	
 	public Soldier(Vector2 position, Animation sprite, Weapon weapon) {
 		super(position, sprite);
 		this.weapon = weapon;
+	}
+	
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		
 	}
 }

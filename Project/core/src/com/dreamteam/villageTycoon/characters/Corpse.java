@@ -13,6 +13,7 @@ public class Corpse extends GameObject {
 	
 	public Corpse(Vector2 position, Animation sprite) {
 		super(position, sprite);
+		alpha = 1;
 	}
 
 	public void upate(float deltaTime) {

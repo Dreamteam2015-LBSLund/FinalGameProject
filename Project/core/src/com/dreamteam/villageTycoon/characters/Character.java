@@ -1,8 +1,10 @@
 package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Rectangle;
 
 public class Character extends GameObject {
 	// So that all characters owned by the player can be controlled without reapting code
@@ -10,6 +12,8 @@ public class Character extends GameObject {
 	
 	private int health;
 	private Animation deathAnimation;
+	
+	private Rectangle selectionRectangle;
 	
 	public Character(Vector2 position, Animation sprite) {
 		super(position, sprite);
@@ -23,6 +27,10 @@ public class Character extends GameObject {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			if(getSprite().animationDone()) getScene().removeObject(this);
 		}
+	}
+	
+	public Vector3 getMouse() {
+		return null;
 	}
 	
 	public void setHealth(int health) {

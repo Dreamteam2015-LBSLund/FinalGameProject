@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public abstract class Scene {
 	private boolean depthChanged;
@@ -69,5 +72,12 @@ public abstract class Scene {
 	
 	public void draw(SpriteBatch batch) {
 		for (GameObject g : objects) g.draw(batch);
+	}
+	
+
+	public Vector2 getMouse() {
+		Vector3 mouse = new Vector3(Gdx.input.getY(), Gdx.input.getY(), 0);
+		camera.unproject(mouse);
+		return new Vector2(mouse.x, mouse.y);
 	}
 }
