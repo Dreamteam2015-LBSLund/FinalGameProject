@@ -41,6 +41,10 @@ public class ResourceReader {
 		return data.get(name).split(", ");
 	}
 	
+	public String[] getAllKeys() {
+		return data.keySet().toArray(new String[data.size()]);
+	}
+	
 	private HashMap<String, String> readResource(String filename) {
 		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
 		HashMap<String, String> out = new HashMap<String, String>();
