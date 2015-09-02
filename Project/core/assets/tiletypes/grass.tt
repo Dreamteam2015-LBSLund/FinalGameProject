@@ -1,0 +1,4 @@
+name: Grass
+isWalkable: true
+isBuildable: true
+resources: wood, iron, diamond

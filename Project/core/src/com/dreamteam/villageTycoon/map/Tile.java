@@ -11,7 +11,7 @@ public class Tile {
 		return type;
 	}
 
-	private boolean hasBuilding;
+	private boolean hasBuilding; //should be set to true when a building is built on this tile. observer?
 	
 	public Tile(Vector2 position, TileType type) {
 		this.type = type;
