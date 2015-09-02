@@ -1,7 +1,11 @@
 package com.dreamteam.villageTycoon.map;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.io.File;
+import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class TileType {
@@ -16,19 +20,23 @@ public class TileType {
 	//ArrayList<Resource> 
 	
 	//should only be called on startup!
-	public TileType(String filename) {
-		ResourceReader r = new ResourceReader("tiletypes/grass.tt");
+	public TileType(File data) {
+		ResourceReader r = new ResourceReader(data.getAbsolutePath());
 		isWalkable = r.getBool("isWalkable");
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
-		resources = r.getList("resources");
+		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
 		//sprite = AssetManager.get(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
 
-	public TileType(String name, boolean isWalkable, boolean isBuildable) {
-		this.name = name;
-		this.isWalkable = isWalkable;
-		this.isBuildable = isBuildable;
+	public static ArrayList<TileType> loadAll() {
+		ArrayList<TileType> out = new ArrayList<TileType>();
+		File[] files = new FileHandle(ResourceReader.getAssetPath() + "/tileTypes").file().listFiles();
+		for (File f : files) {
+			out.add(new TileType(f));
+			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
+		}
+		return null;
 	}
 
 	//Tile.isWalkable should probably be used since this does not take building into account

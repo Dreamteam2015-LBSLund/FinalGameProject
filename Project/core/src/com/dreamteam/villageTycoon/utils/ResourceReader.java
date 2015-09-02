@@ -9,6 +9,10 @@ import com.badlogic.gdx.Gdx;
 
 public class ResourceReader {
 	
+	public static String getAssetPath() {
+		return Gdx.files.internal("assets/").file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
+	}
+	
 	private HashMap<String, String> data;
 	
 	public ResourceReader(String path) {
@@ -37,7 +41,7 @@ public class ResourceReader {
 	
 	//reads from the Assets folder. TODO: move to constructor and make read<type>(String property)
 	private HashMap<String, String> readResource(String filename) {
-		filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core");
+		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
 		HashMap<String, String> out = new HashMap<String, String>();
 		String read = readFile(filename);
 		if (read == null) {
@@ -69,7 +73,6 @@ public class ResourceReader {
 	        if(reader !=null){try {
 				reader.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}}
 	    }

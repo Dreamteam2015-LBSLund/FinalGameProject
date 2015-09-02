@@ -8,6 +8,6 @@ public class TestScene extends Scene {
 	public TestScene() {
 		super();
 		addObject(new TestObject());
-		TileType t = new TileType("grass.tt");
+		TileType.loadAll();
 	}
 }

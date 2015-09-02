@@ -1,0 +1,5 @@
+name: Water
+isWalkable: false
+isBuildable: false
+resources: water
+sprite: waterTile
