@@ -33,12 +33,6 @@ public class Character extends GameObject {
 		
 		hitbox = new Rectangle(getPosition(), getSize());
 		
-		for(GameObject c : getScene().getObjects()) if(c instanceof Controller) {
-			if(((Controller) c).getSelectionRectangle().collision(hitbox) && ((Controller) c).getActive()) {
-				selected = true;
-			}
-		}
-		
 		if(selected) {
 			setColor(new Color(1, 0.5f, 1, 0.1f));
 		} else {
@@ -49,6 +43,10 @@ public class Character extends GameObject {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			if(getSprite().animationDone()) getScene().removeObject(this);
 		}
+	}
+	
+	public Rectangle getHitbox() {
+		return hitbox;
 	}
 	
 	public void draw(SpriteBatch batch) {
