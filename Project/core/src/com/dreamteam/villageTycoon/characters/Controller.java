@@ -1,6 +1,7 @@
 package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,49 +17,59 @@ public class Controller extends GameObject {
 
 	private Vector2 selectionPoint;
 	
-	private boolean active;
-	private boolean selectionReleased;
+	private boolean mousePressed;
 
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(new Texture("badlogic.jpg")));
 		setColor(new Color(0, 1, 0, 0.3f));
 		setDepth(1000);
+		selectionPoint = new Vector2();
+	}
+	
+	void onMousePressed() {
+		System.out.println("mouse pressed");
+		selectionPoint = new Vector2(getScene().getMouse());
+	}
+	
+	void onMouseReleased() {
+		System.out.println("mouse released");
+		for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Character && ((Character) g).getHitbox().collision(selectionRectangle)) {
+				((Character)g).setSelected(true);
+			}
+		}
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		setSize(new Vector2(selectionRectangle.getWidth(), selectionRectangle.getHeight()));
-		if(selectionPoint != null) setPosition(selectionPoint);
-		
-		selectionRectangle.printValues();
-		
-		if(Gdx.input.isTouched() && selectionRectangle != new Rectangle(0, 0, 0, 0)) {
-			active = true;
-			selectionRectangle = new Rectangle(getScene().getMouse().x-selectionRectangle.getWidth(), getScene().getMouse().y-selectionRectangle.getHeight(), 
-					getScene().getMouse().x-selectionPoint.x, getScene().getMouse().y-selectionPoint.y);
-		}
-		
-		if(!Gdx.input.isTouched()) {
-			if(active) selectionReleased = true; 
-			active = false;
-			for(GameObject c : getScene().getObjects()) if(c instanceof Character){
-				if(((Character) c).getHitbox().collision(selectionRectangle) && selectionReleased) {
-					((Character) c).setSelected(true);
-				}
+		if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			if (mousePressed) {
+				onMouseReleased();
 			}
-			selectionReleased = false;
-			selectionRectangle.set(0, 0, 0, 0);
-			selectionPoint = getScene().getMouse();
+			mousePressed = false;
+		} else {
+			if (!mousePressed) {
+				onMousePressed();
+			}
+			mousePressed = true;
 		}
+	
+		Vector2 rel = getScene().getMouse().sub(selectionPoint);
+		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
+		if (selectionRectangle.getWidth() < 0) selectionRectangle.set(selectionRectangle.getX() + selectionRectangle.getWidth(), selectionRectangle.getY(), -selectionRectangle.getWidth(), selectionRectangle.getHeight());
+		if (selectionRectangle.getHeight() < 0) selectionRectangle.set(selectionRectangle.getX(), selectionRectangle.getY() + selectionRectangle.getHeight(), selectionRectangle.getWidth(), -selectionRectangle.getHeight());
 	}
 	
 	public void draw(SpriteBatch batch) {
-		super.draw(batch);
+		if (mousePressed) {
+			getSprite().setBounds(selectionRectangle.getX(), selectionRectangle.getY(), selectionRectangle.getWidth(), selectionRectangle.getHeight());
+			super.draw(batch);
+		}
 	}
 	
 	public boolean getActive() {
-		return active;
+		return false;
 	}
 	
 	public Rectangle getSelectionRectangle() {
