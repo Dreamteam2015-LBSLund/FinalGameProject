@@ -16,17 +16,16 @@ public class Rectangle {
 		set(position.x, position.y, size.x, size.y);
 	}
 	
-	public boolean collision(Rectangle object) {
-        if (y >= object.getY() + object.getHeight())
-            return false;
-        if (x >= object.getX() + object.getWidth())
-            return false;
-        if (y + height <= object.getY())
-            return false;
-        if (x + width <= object.getX())
-        	return false;
-        
-		return true;
+	private boolean overlap(float p1, float p2, float s1, float s2) {
+		return (p1 > p2 && p1 <= p2 + s2) || (p2 > p1 && p2 <= p1 + s1);
+	}
+	
+	public boolean collision(Rectangle r) {
+        boolean res = overlap(x, r.getX(), width, r.getWidth()) && overlap(y, r.getY(), height, r.getHeight());
+        printValues();
+        System.out.println((res ? "does" : "does not") + " intersect with ");
+        r.printValues();
+        return res;
 	}
 	
 	public void set(float x, float y, float width, float height) {
