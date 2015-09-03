@@ -17,7 +17,7 @@ public class Controller extends GameObject {
 	private Vector2 selectionPoint;
 	
 	private boolean active;
-	private boolean selectionRealsed;
+	private boolean selectionReleased;
 
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(new Texture("badlogic.jpg")));
@@ -40,14 +40,14 @@ public class Controller extends GameObject {
 		}
 		
 		if(!Gdx.input.isTouched()) {
-			if(active) selectionRealsed = true; 
+			if(active) selectionReleased = true; 
 			active = false;
 			for(GameObject c : getScene().getObjects()) if(c instanceof Character){
-				if(((Character) c).getHitbox().collision(selectionRectangle) && selectionRealsed) {
+				if(((Character) c).getHitbox().collision(selectionRectangle) && selectionReleased) {
 					((Character) c).setSelected(true);
 				}
 			}
-			selectionRealsed = false;
+			selectionReleased = false;
 			selectionRectangle.set(0, 0, 0, 0);
 			selectionPoint = getScene().getMouse();
 		}
