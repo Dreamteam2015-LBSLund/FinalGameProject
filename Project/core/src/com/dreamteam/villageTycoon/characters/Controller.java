@@ -31,22 +31,22 @@ public class Controller extends GameObject {
 		setSize(new Vector2(selectionRectangle.getWidth(), selectionRectangle.getHeight()));
 		if(selectionPoint != null) setPosition(selectionPoint);
 		
-		selectionRectangle.printValues();
+		//selectionRectangle.printValues();
 		
 		if(Gdx.input.isTouched() && selectionRectangle != new Rectangle(0, 0, 0, 0)) {
+			if (!active) {
+				selectionPoint = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+			}
 			active = true;
-			selectionRectangle = new Rectangle(getScene().getMouse().x-selectionRectangle.getWidth(), getScene().getMouse().y-selectionRectangle.getHeight(), 
-					getScene().getMouse().x-selectionPoint.x, getScene().getMouse().y-selectionPoint.y);
-		}
-		
-		if(!Gdx.input.isTouched()) {
-			if(active) selectionReleased = true; 
-			active = false;
-			for(GameObject c : getScene().getObjects()) if(c instanceof Character){
-				if(((Character) c).getHitbox().collision(selectionRectangle) && selectionReleased) {
-					((Character) c).setSelected(true);
+		} else if(!Gdx.input.isTouched()) {
+			if(active) {
+				for(GameObject c : getScene().getObjects()) if(c instanceof Character){
+					if(((Character) c).getHitbox().collision(selectionRectangle)) {
+						((Character) c).setSelected(true);
+					}
 				}
 			}
+			active = false;
 			selectionReleased = false;
 			selectionRectangle.set(0, 0, 0, 0);
 			selectionPoint = getScene().getMouse();
