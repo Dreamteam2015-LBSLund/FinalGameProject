@@ -1,8 +1,10 @@
 package com.dreamteam.villageTycoon.framework;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 public class Animation extends Sprite {
 	private int currentFrame;
@@ -24,6 +26,12 @@ public class Animation extends Sprite {
 	
 	public Animation(Sprite sprite) {
 		super(sprite);
+	}
+	
+	public Animation(TextureRegion region, Vector2 size, Color color) {
+		super(new Sprite(region));
+		setSize(size.x, size.y);
+		setColor(color);
 	}
 	
 	public Animation(Sprite sprite, float maxAnimationTime, int maxFrame, int minFrame, boolean vertical){
