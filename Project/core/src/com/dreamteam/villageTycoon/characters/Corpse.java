@@ -23,8 +23,9 @@ public class Corpse extends GameObject {
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
 			alpha -= deltaTime;
-			setColor(new Color(1, 1, 1, alpha));
 		}
+		
+		setColor(new Color(1, 1, 1, alpha));
 		
 		if(alpha <= 0) getScene().removeObject(this);
 	}

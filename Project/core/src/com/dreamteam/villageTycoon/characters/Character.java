@@ -6,14 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 
 public class Character extends GameObject {
-	// So that all characters owned by the player can be controlled without reapting code
 	private boolean selected;
 	
 	private int health;
@@ -21,9 +19,12 @@ public class Character extends GameObject {
 	
 	private Rectangle hitbox = new Rectangle(0, 0, 0, 0);
 	
+	private Animation selectedSign;
+	
 	public Character(Vector2 position, Animation sprite) {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
+		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		deathAnimation = getSprite();
 		health = 1;
 	}
@@ -33,15 +34,12 @@ public class Character extends GameObject {
 		
 		hitbox = new Rectangle(getPosition(), getSize());
 		
-		if(selected) {
-			setColor(new Color(1, 0.5f, 1, 0.1f));
-		} else {
-			setColor(new Color(1, 1, 1, 1));
-		}
+		if(selected) selectedSign.setPosition(getPosition().x+getSprite().getWidth()/2-selectedSign.getWidth()/2, getPosition().y+getSprite().getHeight());
 		
 		if(health <= 0) {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			if(getSprite().animationDone()) getScene().removeObject(this);
+			getSprite().animate(deltaTime);
 		}
 	}
 	
@@ -51,6 +49,7 @@ public class Character extends GameObject {
 	
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
+		if(selected) selectedSign.draw(batch);
 	}
 	
 	public void setHealth(int health) {

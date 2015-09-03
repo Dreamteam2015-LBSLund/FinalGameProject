@@ -11,6 +11,9 @@ public abstract class Soldier extends Character {
 	private Weapon weapon;
 	
 	private float attackDistance;
+	private float shootAngle;
+	
+	private boolean isMoving;
 	
 	public Soldier(Vector2 position, Animation sprite, Weapon weapon) {
 		super(position, sprite);
@@ -19,5 +22,10 @@ public abstract class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		attack();
+	}
+	
+	public void attack() {
+		
 	}
 }
