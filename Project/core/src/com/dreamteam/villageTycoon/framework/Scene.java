@@ -41,6 +41,8 @@ public abstract class Scene {
 			depthChanged = false;
 		}
 		
+		camera.update();
+		
 		for (GameObject g : objects) g.update(deltaTime);
 		
 		for (GameObject g : toAdd) {
@@ -74,7 +76,10 @@ public abstract class Scene {
 		for (GameObject g : objects) g.draw(batch);
 	}
 	
-
+	public Vector2 getScreenMouse() {
+		return new Vector2(Gdx.input.getX(), Gdx.input.getY());
+	}
+	
 	public Vector2 getMouse() {
 		Vector3 mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);

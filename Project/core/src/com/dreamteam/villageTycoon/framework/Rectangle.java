@@ -22,9 +22,9 @@ public class Rectangle {
 	
 	public boolean collision(Rectangle r) {
         boolean res = overlap(x, r.getX(), width, r.getWidth()) && overlap(y, r.getY(), height, r.getHeight());
-        printValues();
-        System.out.println((res ? "does" : "does not") + " intersect with ");
-        r.printValues();
+        //printValues();
+        //System.out.println((res ? "does" : "does not") + " intersect with ");
+        //r.printValues();
         return res;
 	}
 	

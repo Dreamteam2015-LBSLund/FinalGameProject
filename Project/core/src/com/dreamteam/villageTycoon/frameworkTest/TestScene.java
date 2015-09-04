@@ -16,10 +16,10 @@ public class TestScene extends Scene {
 	public TestScene() {
 		super();
 
-		//addObject(new TestObject(null));
-		addObject(new Controller());
-
 		AssetManager.load();
+		
+		addObject(new TestObject(AssetManager.getTexture("test")));
+		addObject(new Controller());
 		//addObject(new TestObject(AssetManager.getTexture("test")));
 		//addObject(new Character(new Vector2(0, 0), new Animation(AssetManager.getTexture("test"))));
 		//addObject(new Character(new Vector2(0, -1.5f), new Animation(AssetManager.getTexture("test"))));

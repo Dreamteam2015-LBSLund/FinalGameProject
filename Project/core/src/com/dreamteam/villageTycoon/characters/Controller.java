@@ -19,11 +19,15 @@ public class Controller extends GameObject {
 	
 	private boolean mousePressed;
 
+	private float cameraSpeed;
+	final float MOVE_CAMERA_FIELD = 16;
+	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(new Texture("badlogic.jpg")));
 		setColor(new Color(0, 1, 0, 0.3f));
 		setDepth(1000);
 		selectionPoint = new Vector2();
+		cameraSpeed = 5;
 	}
 	
 	void onMousePressed() {
@@ -43,6 +47,8 @@ public class Controller extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
+		cameraMovment(deltaTime);
+		
 		if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			if (mousePressed) {
 				onMouseReleased();
@@ -59,6 +65,26 @@ public class Controller extends GameObject {
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
 		if (selectionRectangle.getWidth() < 0) selectionRectangle.set(selectionRectangle.getX() + selectionRectangle.getWidth(), selectionRectangle.getY(), -selectionRectangle.getWidth(), selectionRectangle.getHeight());
 		if (selectionRectangle.getHeight() < 0) selectionRectangle.set(selectionRectangle.getX(), selectionRectangle.getY() + selectionRectangle.getHeight(), selectionRectangle.getWidth(), -selectionRectangle.getHeight());
+	}
+	
+	public void cameraMovment(float deltaTime) {
+		// I tried to replicate the camera movment from red alert.
+		// TODO: Make the camera not when the mouse is over UI
+		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD) {
+			getScene().getCamera().translate(new Vector2(deltaTime*cameraSpeed, 0));
+		}
+		
+		if(getScene().getScreenMouse().x <= MOVE_CAMERA_FIELD) {
+			getScene().getCamera().translate(new Vector2(-deltaTime*cameraSpeed, 0));
+		}
+		
+		if(getScene().getScreenMouse().y >= Gdx.graphics.getHeight()-MOVE_CAMERA_FIELD) {
+			getScene().getCamera().translate(new Vector2(0, -deltaTime*cameraSpeed));
+		}
+		
+		if(getScene().getScreenMouse().y <= MOVE_CAMERA_FIELD) {
+			getScene().getCamera().translate(new Vector2(0, deltaTime*cameraSpeed));
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {

@@ -21,11 +21,11 @@ public class Character extends GameObject {
 	
 	private Animation selectedSign;
 	
-	public Character(Vector2 position, Animation sprite) {
+	public Character(Vector2 position, Animation sprite, Animation deathAnimation) {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
-		deathAnimation = getSprite();
+		this.deathAnimation = deathAnimation;
 		health = 1;
 	}
 	

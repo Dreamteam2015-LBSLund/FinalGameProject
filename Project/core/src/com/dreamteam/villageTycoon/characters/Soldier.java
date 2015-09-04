@@ -24,7 +24,7 @@ public class Soldier extends Character {
 	private boolean enemy;
 	
 	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType) {
-		super(position, new Animation(new Texture("badlogic.jpg")));
+		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));
 		this.weapon = new Weapon(weaponType);
 		this.soldierType = soldierType;
 		setSoldierType();
