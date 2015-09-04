@@ -18,7 +18,7 @@ public class WeaponType {
 	
 	private String name;
 	
-	public WeaponType(int damege, float maxFireRate, int clipSize, float recoil, String name, float reloadTime, Sprite icon, Type type) {
+	public WeaponType(String name, int damege, float maxFireRate, int clipSize, float recoil, float reloadTime, Sprite icon, Type type) {
 		this.damege = damege;
 		this.maxFireRate = maxFireRate;
 		this.clipSize = clipSize;
