@@ -34,8 +34,8 @@ public class Controller extends GameObject {
 	void onMouseReleased() {
 		System.out.println("mouse released");
 		for (GameObject g : getScene().getObjects()) {
-			if (g instanceof Character && ((Character) g).getHitbox().collision(selectionRectangle)) {
-				((Character)g).setSelected(true);
+			if (g instanceof Character) {
+				((Character)g).setSelected(((Character) g).getHitbox().collision(selectionRectangle));
 			}
 		}
 	}
