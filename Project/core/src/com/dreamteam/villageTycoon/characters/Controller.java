@@ -31,12 +31,10 @@ public class Controller extends GameObject {
 	}
 	
 	void onMousePressed() {
-		System.out.println("mouse pressed");
 		selectionPoint = new Vector2(getScene().getMouse());
 	}
 	
 	void onMouseReleased() {
-		System.out.println("mouse released");
 		for (GameObject g : getScene().getObjects()) {
 			if (g instanceof Character) {
 				((Character)g).setSelected(((Character) g).getHitbox().collision(selectionRectangle));
