@@ -80,7 +80,7 @@ public abstract class Scene {
 		return new Vector2(Gdx.input.getX(), Gdx.input.getY());
 	}
 	
-	public Vector2 getMouse() {
+	public Vector2 getWorldMouse() {
 		Vector3 mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);
 		return new Vector2(mouse.x, mouse.y);
