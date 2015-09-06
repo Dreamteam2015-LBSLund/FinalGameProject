@@ -5,11 +5,13 @@
    De militära enheterna är spelarens verktyg i strid. De har ett relativt avancerat liv, jämfört med arbetarenheterna.
   ##### Egenskaper
   - Vilka vapen de har. Vapnen produceras av fabriker och läggs i ett simpelt inventory. 
-  - Vilka vapen de är bra på att använda. Styrs av deras klass **och kanske även av nåt erfarenhetssystem**
+  - Vilka vapen de är bra på att använda styrs av deras stats
   - Adrenalinsputor eller liknande som tillfäligt ökar soldatens stats. Exakt vad beror på klassen
   - Klass som bestämmer enhetens stats och abilities
   - Stats för träffsäkerhet, max health, snabbhet. Bestämmer vilken sorts vapen soldaten kan använda
   
+   Soldaternas inventory ska bestå av vilket vapen de bär, vilken sorts sabotagekit de har och adrelinesprutgrejen(?).
+
    För att kunna utföra gerrila taktiker så ska man kunna sätta soldaten/soldaternas betende på aggresive(skjuter direkt    om den ser en fiende) eller stealth(skjuter endast om man säger till soldaten eller om soldaten blir beskjuten).
    Man ska också kunna säga vart en soldat ska gå genom att trycka på marken där den ska gå.
 
