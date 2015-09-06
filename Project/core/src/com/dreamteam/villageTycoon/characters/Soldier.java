@@ -24,7 +24,7 @@ public class Soldier extends Character {
 	
 	private boolean isMoving;
 	private boolean enemy;
-	private boolean showInventroy;
+	private boolean showInventory;
 	
 	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType) {
 		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));
@@ -46,11 +46,19 @@ public class Soldier extends Character {
 	
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
-		if(showInventroy) inventory.drawUi(batch);
+		if(showInventory) inventory.drawUi(batch);
 	}
 	
 	public Weapon getWeapon() {
 		return weapon;
+	}
+	
+	public boolean getShowInventroy() {
+		return showInventory;
+	}
+	
+	public void setShowInventory(boolean showInventory) {
+		this.showInventory = showInventory;
 	}
 	
 	public void setSoldierType() {
