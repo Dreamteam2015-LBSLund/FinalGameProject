@@ -31,7 +31,10 @@ public class TileType {
 
 	public static ArrayList<TileType> loadAll() {
 		ArrayList<TileType> out = new ArrayList<TileType>();
-		FileHandle[] files = Gdx.files.internal("/tileTypes").list();
+		 FileHandle dir = Gdx.files.internal("tiletypes/");
+		 System.out.println(dir.exists() + ", " + dir.isDirectory()); // does not recognize that it's a directory
+		 FileHandle[] files = dir.list();
+		System.out.println(files.length);
 		for (FileHandle f : files) {
 			out.add(new TileType(f));
 			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());

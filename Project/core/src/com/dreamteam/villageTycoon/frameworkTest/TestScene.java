@@ -18,7 +18,6 @@ public class TestScene extends Scene {
 	public TestScene() {
 		super();
 
-		System.out.println(Gdx.files.internal("textures/data.t").readString());
 		AssetManager.load();
 		
 		TileType.loadAll();
