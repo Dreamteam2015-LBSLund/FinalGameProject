@@ -17,6 +17,10 @@ public class ResourceReader {
 	
 	private HashMap<String, String> data;
 	
+	public ResourceReader(FileHandle f) {
+		data = readResource(f);
+	}
+	
 	public ResourceReader(String path) {
 		data = readResource(path);
 	}
@@ -45,12 +49,16 @@ public class ResourceReader {
 		return data.keySet().toArray(new String[data.size()]);
 	}
 	
-	private HashMap<String, String> readResource(String filename) {
+	private HashMap<String, String> readResource(String s) {
+		return readResource(new FileHandle(s));
+	}
+	
+	private HashMap<String, String> readResource(FileHandle f) {
 		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
 		HashMap<String, String> out = new HashMap<String, String>();
-		String read = readFile(filename);
+		String read = readFile(f);
 		if (read == null) {
-			System.out.println("there was an error loading tileType " + filename);
+			System.out.println("there was an error loading tileType " + f + ", absolute path: " + f.file().getAbsolutePath());
 			return null;
 		}
 		String[] in = read.split("\n");
@@ -61,26 +69,29 @@ public class ResourceReader {
 		return out;
 	}
 	
-	private String readFile(String filename)
-	{
-	    String content = null;
-	    File file = new File(filename); //for ex foo.txt
-	    FileReader reader = null;
-	    try {
-	        reader = new FileReader(file);
-	        char[] chars = new char[(int) file.length()];
-	        reader.read(chars);
-	        content = new String(chars);
-	        reader.close();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } finally {
-	        if(reader !=null){try {
+	private String readFile(FileHandle file) {
+		String content = null;
+		FileReader reader = null;
+		try {
+			reader = new FileReader(file.path());
+			char[] chars = new char[(int) file.length()];
+			reader.read(chars);
+			content = new String(chars);
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(reader !=null){try {
 				reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}}
-	    }
-	    return content;
+		}
+		return content;
+	}
+
+	private String readFile(String filename)
+	{
+	    return readFile(new FileHandle(filename)); 	   
 	}
 }

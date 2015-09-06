@@ -11,12 +11,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.map.TileType;
 
 public class TestScene extends Scene {
 	public TestScene() {
 		super();
 
 		AssetManager.load();
+		
+		TileType.loadAll();
 		
 		addObject(new TestObject(AssetManager.getTexture("test")));
 		addObject(new Controller());
