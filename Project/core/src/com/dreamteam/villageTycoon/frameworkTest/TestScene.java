@@ -6,6 +6,7 @@ import com.dreamteam.villageTycoon.characters.SoldierType;
 import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
 import com.dreamteam.villageTycoon.characters.Character;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -17,6 +18,7 @@ public class TestScene extends Scene {
 	public TestScene() {
 		super();
 
+		System.out.println(Gdx.files.internal("textures/data.t").readString());
 		AssetManager.load();
 		
 		TileType.loadAll();
@@ -31,5 +33,6 @@ public class TestScene extends Scene {
 		
 		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("test")), Type.HANDGUN), 
 				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test")))));
+	
 	}
 }

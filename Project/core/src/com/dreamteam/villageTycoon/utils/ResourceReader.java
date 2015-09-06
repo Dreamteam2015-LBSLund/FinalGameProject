@@ -11,10 +11,6 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class ResourceReader {
 	
-	public static String getAssetPath() {
-		return Gdx.files.internal("assets/").file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
-	}
-	
 	private HashMap<String, String> data;
 	
 	public ResourceReader(FileHandle f) {
@@ -54,9 +50,10 @@ public class ResourceReader {
 	}
 	
 	private HashMap<String, String> readResource(FileHandle f) {
+		if (!f.exists()) System.out.println("This file does not exist!");
 		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
 		HashMap<String, String> out = new HashMap<String, String>();
-		String read = readFile(f);
+		String read = f.readString();
 		if (read == null) {
 			System.out.println("there was an error loading tileType " + f + ", absolute path: " + f.file().getAbsolutePath());
 			return null;
@@ -67,31 +64,5 @@ public class ResourceReader {
 			out.put(ss[0], ss[1]);
 		}
 		return out;
-	}
-	
-	private String readFile(FileHandle file) {
-		String content = null;
-		FileReader reader = null;
-		try {
-			reader = new FileReader(file.path());
-			char[] chars = new char[(int) file.length()];
-			reader.read(chars);
-			content = new String(chars);
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(reader !=null){try {
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}}
-		}
-		return content;
-	}
-
-	private String readFile(String filename)
-	{
-	    return readFile(new FileHandle(filename)); 	   
 	}
 }

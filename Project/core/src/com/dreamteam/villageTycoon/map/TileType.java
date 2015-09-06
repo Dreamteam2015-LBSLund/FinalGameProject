@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.map;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
@@ -19,8 +20,8 @@ public class TileType {
 	//ArrayList<Resource> 
 	
 	//should only be called on startup!
-	public TileType(File data) {
-		ResourceReader r = new ResourceReader(data.getAbsolutePath());
+	public TileType(FileHandle f) {
+		ResourceReader r = new ResourceReader(f);
 		isWalkable = r.getBool("isWalkable");
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
@@ -30,8 +31,8 @@ public class TileType {
 
 	public static ArrayList<TileType> loadAll() {
 		ArrayList<TileType> out = new ArrayList<TileType>();
-		File[] files = new FileHandle(ResourceReader.getAssetPath() + "/tileTypes").file().listFiles();
-		for (File f : files) {
+		FileHandle[] files = Gdx.files.internal("/tileTypes").list();
+		for (FileHandle f : files) {
 			out.add(new TileType(f));
 			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
 		}
