@@ -17,7 +17,7 @@ public class TestObject extends GameObject {
 	}
 	
 	public void update(float deltaTime) {
-		//setPosition(getPosition().add(.1f, 0));
+		setPosition(getPosition().add(.1f, 0));
 	}
 	
 	public void drawUi(SpriteBatch batch) {

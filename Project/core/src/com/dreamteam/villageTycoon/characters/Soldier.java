@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.userInterface.Inventory;
 
 public class Soldier extends Character {
 	enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
@@ -12,6 +13,7 @@ public class Soldier extends Character {
 	private AggressionState  aggressionState;
 	private Weapon weapon;
 	private SoldierType soldierType;
+	private Inventory inventory;
 	
 	private float attackDistance;
 	private float shootAngle;
@@ -22,6 +24,7 @@ public class Soldier extends Character {
 	
 	private boolean isMoving;
 	private boolean enemy;
+	private boolean showInventroy;
 	
 	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType) {
 		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));
@@ -29,6 +32,7 @@ public class Soldier extends Character {
 		this.soldierType = soldierType;
 		setSoldierType();
 		getSprite().setSize(1, 1);
+		inventory = new Inventory(this);
 	}
 	
 	public void update(float deltaTime) {
@@ -42,6 +46,11 @@ public class Soldier extends Character {
 	
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
+		if(showInventroy) inventory.drawUi(batch);
+	}
+	
+	public Weapon getWeapon() {
+		return weapon;
 	}
 	
 	public void setSoldierType() {

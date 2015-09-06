@@ -1,6 +1,7 @@
 package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Weapon {
 	private WeaponType type;
@@ -34,6 +35,10 @@ public class Weapon {
 			clipCount = type.getClipSize();
 			reloadCount = 0;
 		}
+	}
+	
+	public Sprite getIcon() {
+		return getType().getIcon();
 	}
 	
 	public boolean canShoot() {

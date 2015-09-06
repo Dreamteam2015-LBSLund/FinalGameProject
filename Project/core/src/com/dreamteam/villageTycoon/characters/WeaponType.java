@@ -27,6 +27,8 @@ public class WeaponType {
 		this.name = name;
 		this.type = type;
 		this.icon = icon;
+		
+		icon.setSize(2, 2);
 	}
 	
 	public int getClipSize() {
@@ -43,6 +45,10 @@ public class WeaponType {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Sprite getIcon() {
+		return icon;
 	}
 	
 	public String getDescription() {

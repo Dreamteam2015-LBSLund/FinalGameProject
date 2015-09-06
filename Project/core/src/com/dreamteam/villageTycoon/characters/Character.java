@@ -34,8 +34,7 @@ public class Character extends GameObject {
 		
 		hitbox = new Rectangle(getPosition(), getSize());
 		
-		if(selected) 
-			selectedSign.setPosition(getPosition().x+getSprite().getWidth()/2-selectedSign.getWidth()/2, getPosition().y+getSprite().getHeight());
+		selectedSign.setPosition(getPosition().x+getSprite().getWidth()/2-selectedSign.getWidth()/2, getPosition().y+getSprite().getHeight());
 		
 		if(health <= 0) {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);
