@@ -64,13 +64,10 @@ public class Controller extends GameObject {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
 					((Soldier)s).setShowInventory(false);
-				}
-			}
-			rightMousePressed = true;
-			for (GameObject s : getScene().getObjects()) {
-				if (s instanceof Soldier) {
-					if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))))
-							((Soldier)s).setShowInventory(true);
+
+					if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)))) {
+						((Soldier)s).setShowInventory(true);
+					}
 				}
 			}
 		}
