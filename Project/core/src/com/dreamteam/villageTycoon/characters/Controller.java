@@ -60,20 +60,17 @@ public class Controller extends GameObject {
 			mousePressed = true;
 		}
 		
-		if (!Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-			rightMousePressed = false;
-		} else {
+		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
-					//if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))))
-							((Soldier)s).setShowInventory(false);
+					((Soldier)s).setShowInventory(false);
 				}
 			}
 			rightMousePressed = true;
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
 					if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))))
-							((Soldier)s).setShowInventory(rightMousePressed);
+							((Soldier)s).setShowInventory(true);
 				}
 			}
 		}
