@@ -21,10 +21,12 @@ public class Soldier extends Character {
 	private float speed;
 	private float accuracy;
 	private float toughness;
+	private float fireDurationTime;
 	
 	private boolean isMoving;
 	private boolean enemy;
 	private boolean showInventory;
+	private boolean isOnFire;
 	
 	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType) {
 		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));

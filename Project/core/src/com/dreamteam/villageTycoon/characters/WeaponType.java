@@ -28,7 +28,7 @@ public class WeaponType {
 		this.type = type;
 		this.icon = icon;
 		
-		icon.setSize(2, 2);
+		this.icon.setSize(2, 2);
 	}
 	
 	public int getClipSize() {
