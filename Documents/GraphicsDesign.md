@@ -6,3 +6,10 @@ Grafiskstil ska påminna om Valient hearts. Sprite:sna ska ha en svartaoutlines 
 Tile storlek 32x32.
 
 Perspektiv, snett ovanifrån: https://upload.wikimedia.org/wikipedia/en/0/02/RedAlertScreenshot.jpg 
+
+64x64 på karaktärerna
+
+Cartoonish-shading på sprite:sna. Referens: http://www.x1sverige.se/wp-content/uploads/2014/06/Valiant-Hearts-Cover.jpg
+
+Två sorters arbetare, en för fienden och en för spelaren. Behöver inte vara stor skillnad. Kan titta åt fyra directions.
+
