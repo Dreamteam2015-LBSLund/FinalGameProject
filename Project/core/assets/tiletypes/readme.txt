@@ -1,0 +1,1 @@
+all tiletypes are added in seperate files in this folder, and their name is added as a new line in the index document.

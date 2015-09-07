@@ -31,12 +31,10 @@ public class TileType {
 
 	public static ArrayList<TileType> loadAll() {
 		ArrayList<TileType> out = new ArrayList<TileType>();
-		 FileHandle dir = Gdx.files.internal("tiletypes/");
-		 System.out.println(dir.exists() + ", " + dir.isDirectory()); // does not recognize that it's a directory
-		 FileHandle[] files = dir.list();
+		String[] files = Gdx.files.internal("tiletypes/index").readString().split("\n");
 		System.out.println(files.length);
-		for (FileHandle f : files) {
-			out.add(new TileType(f));
+		for (String s : files) {
+			out.add(new TileType(Gdx.files.internal("tiletypes/" + s.replaceAll("\\s+",""))));
 			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
 		}
 		return out;
