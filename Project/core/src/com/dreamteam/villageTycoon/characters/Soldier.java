@@ -2,6 +2,8 @@ package com.dreamteam.villageTycoon.characters;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -16,8 +18,6 @@ public class Soldier extends Character {
 	private Weapon weapon;
 	private SoldierType soldierType;
 	private Inventory inventory;
-	
-	private int maxSabotageKits;
 	
 	private float attackDistance;
 	private float shootAngle;
@@ -51,7 +51,13 @@ public class Soldier extends Character {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		attack();
-		System.out.print(showInventory + "\n");
+		
+		for(int i = 0; i < sabotageKits.size(); i++) {
+			if(sabotageKits.get(i).getRemove()) {
+				sabotageKits.remove(i);
+				inventory.setSoldier(this);
+			}
+		}
 	}
 	
 	public void attack() {
