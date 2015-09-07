@@ -24,4 +24,6 @@ Tech | Båda | Minimal
 Menyer | Tom | Normal
 Dag/Natt | Tom | Normal
 Mer Avancerad AI | Johannes | Normal
+Ljudeffekter | Tom | Normal
+Cutscene | Båda | Normal
 VFX | Tom | Bonus
