@@ -13,3 +13,5 @@ Cartoonish-shading på sprite:sna. Referens: http://www.x1sverige.se/wp-content/
 
 Två sorters arbetare, en för fienden och en för spelaren. Behöver inte vara stor skillnad. Kan titta åt fyra directions.
 
+Ett soldatsprite per soldatklass. Heavy, reacon och rifleman. 4 directions. Ska se annorlunda beroende på om det är fiende eller spelare men det räcker med små skillnadner. 
+
