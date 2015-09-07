@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.characters;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +17,8 @@ public class Soldier extends Character {
 	private SoldierType soldierType;
 	private Inventory inventory;
 	
+	private int maxSabotageKits;
+	
 	private float attackDistance;
 	private float shootAngle;
 	
@@ -28,18 +32,26 @@ public class Soldier extends Character {
 	private boolean showInventory;
 	private boolean isOnFire;
 	
-	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType) {
+	private ArrayList<SabotageKit> sabotageKits;
+	private SabotageKit startSabotageKits[];
+	
+	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
 		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));
 		this.weapon = new Weapon(weaponType);
 		this.soldierType = soldierType;
 		setSoldierType();
 		getSprite().setSize(1, 1);
+		sabotageKits = new ArrayList<SabotageKit>();
+		for(SabotageKit s : startSabotageKits) {
+			if(s != null) sabotageKits.add(s);
+		}
 		inventory = new Inventory(this);
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		attack();
+		System.out.print(showInventory + "\n");
 	}
 	
 	public void attack() {
@@ -49,6 +61,10 @@ public class Soldier extends Character {
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
 		if(showInventory) inventory.drawUi(batch);
+	}
+	
+	public ArrayList<SabotageKit> getSabotageKits() {
+		return sabotageKits;
 	}
 	
 	public Weapon getWeapon() {

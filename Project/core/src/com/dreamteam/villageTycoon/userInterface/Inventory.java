@@ -15,7 +15,7 @@ public class Inventory {
 	
 	public Inventory(Soldier soldier) {
 		this.soldier = soldier;
-		soldier.getWeapon().getIcon().setPosition(-1, 0);
+		soldier.getWeapon().getIcon().setPosition(-4, 0);
 	}
 	
 	public void update(float deltaTime) {
@@ -26,6 +26,7 @@ public class Inventory {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
+		// TODO: Draw list of sabotagekits
 		soldier.getWeapon().getIcon().draw(batch);
 	}
 }

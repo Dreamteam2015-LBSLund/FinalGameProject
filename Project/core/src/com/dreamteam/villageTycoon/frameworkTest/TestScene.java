@@ -1,9 +1,13 @@
 package com.dreamteam.villageTycoon.frameworkTest;
 
 import com.dreamteam.villageTycoon.characters.Controller;
+import com.dreamteam.villageTycoon.characters.SabotageKit;
+import com.dreamteam.villageTycoon.characters.SabotageKitType;
 import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.characters.SoldierType;
 import com.dreamteam.villageTycoon.characters.WeaponType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
 import com.dreamteam.villageTycoon.characters.Character;
 import com.badlogic.gdx.Gdx;
@@ -30,8 +34,11 @@ public class TestScene extends Scene {
 		//addObject(new Character(new Vector2(0, -2.5f), new Animation(AssetManager.getTexture("test"))));
 		//addObject(new Character(new Vector2(0, -4.5f), new Animation(AssetManager.getTexture("test"))));
 		
-		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("test")), Type.HANDGUN), 
-				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test")))));
+		// x-types will be pre-defined so it won't look this messy later
+		
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, new Sprite(AssetManager.getTexture("firekit")), ActivationType.INSTANT, EffectType.FIRE)) }));
 	
 	}
 }

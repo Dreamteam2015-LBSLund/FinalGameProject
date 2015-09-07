@@ -3,8 +3,8 @@ package com.dreamteam.villageTycoon.characters;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class SabotageKitType {
-	enum ActivationType { FUSE, REMOTE, INSTANT };
-	enum EffectType { FIRE, EXPLOSION, NAPALM };
+	public enum ActivationType { FUSE, REMOTE, INSTANT };
+	public enum EffectType { FIRE, EXPLOSION, NAPALM };
 	
 	private ActivationType activationType;
 	private EffectType effectType;
@@ -18,7 +18,13 @@ public class SabotageKitType {
 	private float fireDuration; 
 	private float explosionRadius;
 	
-	public SabotageKitType() {
+	public SabotageKitType(String name, float fireDuration, float explosionRadius, Sprite icon, ActivationType activationType, EffectType effectType) {
+		this.name = name;
+		this.fireDuration = fireDuration;
+		this.explosionRadius = explosionRadius;
+		this.activationType = activationType;
+		this.effectType = effectType;
+		this.icon = icon;
 		this.icon.setSize(2, 2);
 	}
 	
