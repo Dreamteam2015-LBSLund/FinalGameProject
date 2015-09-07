@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class TileType {
@@ -26,7 +27,8 @@ public class TileType {
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
 		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
-		//sprite = AssetManager.get(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
+		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
+		if (sprite == null) System.out.println("Sprite " + r.getString("sprite") + " couldnt be found");
 	}
 
 	public static ArrayList<TileType> loadAll() {
@@ -47,6 +49,10 @@ public class TileType {
 
 	public boolean isBuildable() {
 		return isBuildable;
+	}
+	
+	public TextureRegion getSprite() {
+		return sprite;
 	}
 	
 	public String getName() { return name; }
