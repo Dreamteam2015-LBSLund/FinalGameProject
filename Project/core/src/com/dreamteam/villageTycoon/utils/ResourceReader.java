@@ -17,10 +17,6 @@ public class ResourceReader {
 		data = readResource(f);
 	}
 	
-	public ResourceReader(String path) {
-		data = readResource(path);
-	}
-	
 	public String getString(String name) {
 		return data.get(name);
 	}
@@ -38,15 +34,21 @@ public class ResourceReader {
 	}
 	
 	public String[] getList(String name) {
-		return data.get(name).split(", ");
+		return getList(name, false);
+	}
+	
+	public String[] getList(String name, boolean removeWhitespace) {
+		String[] d = data.get(name).split(", ");
+		if (removeWhitespace) {
+			for (int i = 0; i < d.length; i++) {
+				d[i] = d[i].replaceAll("\\s+","");
+			}
+		}
+		return d;
 	}
 	
 	public String[] getAllKeys() {
 		return data.keySet().toArray(new String[data.size()]);
-	}
-	
-	private HashMap<String, String> readResource(String s) {
-		return readResource(new FileHandle(s));
 	}
 	
 	private HashMap<String, String> readResource(FileHandle f) {
