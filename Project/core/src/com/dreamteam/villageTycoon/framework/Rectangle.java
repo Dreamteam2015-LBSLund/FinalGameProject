@@ -54,4 +54,10 @@ public class Rectangle {
 	public float getHeight() {
 		return height;
 	}
+
+	//makes sure width and height is positive (which is necessary for checking collision) without moving the rectangle
+	public void normalize() {
+		if (getWidth() < 0) set(getX() + getWidth(), getY(), -getWidth(), getHeight());
+		if (getHeight() < 0) set(getX(), getY() + getHeight(), getWidth(), -getHeight());
+	}
 }

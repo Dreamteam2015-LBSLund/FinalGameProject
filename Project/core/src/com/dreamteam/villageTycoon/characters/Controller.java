@@ -74,8 +74,7 @@ public class Controller extends GameObject {
 	
 		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
-		if (selectionRectangle.getWidth() < 0) selectionRectangle.set(selectionRectangle.getX() + selectionRectangle.getWidth(), selectionRectangle.getY(), -selectionRectangle.getWidth(), selectionRectangle.getHeight());
-		if (selectionRectangle.getHeight() < 0) selectionRectangle.set(selectionRectangle.getX(), selectionRectangle.getY() + selectionRectangle.getHeight(), selectionRectangle.getWidth(), -selectionRectangle.getHeight());
+		selectionRectangle.normalize();
 	}
 	
 	public void cameraMovment(float deltaTime) {
