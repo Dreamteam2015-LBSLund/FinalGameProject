@@ -45,11 +45,8 @@ public class TestScene extends Scene {
 				new SabotageKit[]{ 
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, new Sprite(AssetManager.getTexture("firekit")), ActivationType.INSTANT, EffectType.FIRE)), 
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, new Sprite(AssetManager.getTexture("firekit")), ActivationType.INSTANT, EffectType.FIRE)) }));
-<<<<<<< HEAD
 	*/
 	}
-=======
->>>>>>> 7beb823ad7e65d8ba109c3a74b9391194a9d3b2f
 	
 	public void draw(SpriteBatch batch) {
 		m.draw(batch);
