@@ -25,6 +25,8 @@ Hus/baracker för folk att bo i borde vara mindre än fabriker.
 
 Tiles vi behöver, gräs, jord, vatten, sand, stenar, buskar. Behövs också transistions tiles mellan tilesna så att det inte blir blockigt. Vet inte om träd ska vara sperata objekt eller bestå av tiles.
 
+Vi behöver explosioner och rökeffekter i varierande skalor. 
+
 Ska vi ha en cool bitmap font eller håller vi oss till en standard font? Exempel: http://www.photonstorm.com/wp-content/uploads/2010/05/bitmapfonts.png
 
 Vi behöver en generisk knapp som går att skalera. Sen kan vi bara rita text över den during runtime.
