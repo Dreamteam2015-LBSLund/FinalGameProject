@@ -11,8 +11,8 @@ Bonus   | Extra godis som inte bör prioriteras
 Feature | Person | Prioritet
 --------|-------|-------------
 Framework | Båda | Minimal
-Map Generation | Tom | Minimal
 Tilesystem | Johannes | Minimal
+Map Generation | Tom | Minimal
 Pathfinding | Johannes | Minimal
 Kontrollsystem | Tom | Minimal
 Soldater | Tom | Minimal
