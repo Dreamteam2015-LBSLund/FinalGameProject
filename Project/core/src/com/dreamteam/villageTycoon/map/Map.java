@@ -18,7 +18,7 @@ public class Map {
 		tiles = new Tile[WIDTH][HEIGHT];
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * HEIGHT), tileTypes.get(MathUtils.random(tileTypes.size() - 1)));
+				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(MathUtils.random(tileTypes.size() - 1)));
 			}
 		}
 	}

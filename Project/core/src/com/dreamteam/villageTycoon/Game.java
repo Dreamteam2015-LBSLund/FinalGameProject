@@ -30,6 +30,11 @@ public class Game extends ApplicationAdapter {
 	public void update() {
 		currentScene.update(Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) Gdx.app.exit();
+		
+		if (Gdx.input.isKeyJustPressed(Keys.F1)) {
+			if (Gdx.graphics.isFullscreen()) Gdx.graphics.setDisplayMode(800, 450, false);
+			else Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+		}
 	}
 
 	@Override
