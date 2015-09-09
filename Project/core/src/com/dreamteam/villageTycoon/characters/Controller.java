@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -63,15 +64,30 @@ public class Controller extends GameObject {
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
-					((Soldier)s).setShowInventory(false);
-
-					if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)))) {
-						((Soldier)s).setShowInventory(true);
+					if(!((Soldier)s).getShowInventroy()) {
+						if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)))) {
+							((Soldier)s).setShowInventory(true);
+						}
+					} 
+					if(((Soldier)s).getShowInventroy()) {
+						if(Gdx.input.isKeyJustPressed(Keys.Q)) {
+							((Soldier)s).setShowInventory(false);
+						}
 					}
 				}
 			}
 		}
 	
+		for (GameObject s : getScene().getObjects()) {
+			if (s instanceof Soldier) {
+				if(((Soldier)s).getShowInventroy()) {
+					if(Gdx.input.isKeyJustPressed(Keys.Q)) {
+						((Soldier)s).setShowInventory(false);
+					}
+				}
+			}
+		}
+		
 		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
 		selectionRectangle.normalize();

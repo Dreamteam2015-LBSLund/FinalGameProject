@@ -46,6 +46,7 @@ public class Soldier extends Character {
 			if(s != null) sabotageKits.add(s);
 		}
 		inventory = new Inventory(this);
+		setDepth(1);
 	}
 	
 	public void update(float deltaTime) {

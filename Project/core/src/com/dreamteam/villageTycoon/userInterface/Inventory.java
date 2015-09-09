@@ -33,7 +33,7 @@ public class Inventory {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		// TODO: Draw list of sabotagekits
+		// TODO: Make the sabotagekits "buttons" so that you can equip the one you want
 		soldier.getWeapon().getIcon().draw(batch);
 		for(SabotageKit s : soldier.getSabotageKits()) {
 			s.getIcon().draw(batch);
