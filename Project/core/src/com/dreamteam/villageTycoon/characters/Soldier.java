@@ -27,6 +27,8 @@ public class Soldier extends Character {
 	private float toughness;
 	private float fireDurationTime;
 	
+	private int equipedSabotageKit;
+	
 	private boolean isMoving;
 	private boolean enemy;
 	private boolean showInventory;
@@ -55,6 +57,10 @@ public class Soldier extends Character {
 		
 		for(int i = 0; i < sabotageKits.size(); i++) {
 			if(sabotageKits.get(i).getRemove()) {
+				if(i == equipedSabotageKit) {
+					equipedSabotageKit = 0;
+				}
+				
 				sabotageKits.remove(i);
 				inventory.setSoldier(this);
 			}
