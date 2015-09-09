@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-09-15" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.7.1" locale="sv_SE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-04-08" view-index="1" gantt-divider-location="353" resource-divider-location="300" version="2.7.1" locale="sv_SE">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Namn" width="56" order="0"/>
@@ -71,7 +71,7 @@
         <task id="81" name="Visual Effects (partiklar och dylikt)" color="#8cb6ce" meeting="false" start="2016-01-20" duration="12" complete="0" expand="true">
             <depend id="94" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="94" name="Polish och dylikt" color="#8cb6ce" meeting="false" start="2016-02-05" duration="52" complete="0" expand="true"/>
+        <task id="94" name="Polish och dylikt" color="#8cb6ce" meeting="false" start="2016-02-05" duration="65" complete="0" expand="true"/>
         <task id="25" name="UI" color="#8cb6ce" meeting="false" start="2015-11-17" duration="14" complete="0" expand="true"/>
         <task id="33" name="Arbetare" color="#8cb6ce" meeting="false" start="2015-11-17" duration="14" complete="0" expand="true">
             <depend id="40" type="2" difference="0" hardness="Strong"/>
@@ -82,7 +82,9 @@
         <task id="43" name="Tech-levels" color="#8cb6ce" meeting="false" start="2015-12-25" duration="6" complete="0" expand="true"/>
     </tasks>
     <resources>
-        <resource id="0" name="Johannes Larsson" function="Default:1" contacts="" phone=""/>
+        <resource id="0" name="Johannes Larsson" function="Default:1" contacts="" phone="">
+            <rate name="standard" value="100"/>
+        </resource>
         <resource id="1" name="Tom Leonardsson" function="Default:1" contacts="" phone=""/>
         <resource id="2" name="Carolina Mårtensson " function="Default:1" contacts="" phone=""/>
     </resources>
@@ -109,11 +111,14 @@
         <allocation task-id="73" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="79" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="81" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="94" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="65" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="94" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
-    <vacations/>
+    <vacations>
+        <vacation start="2016-05-01" end="2016-05-02" resourceid="1"/>
+    </vacations>
     <taskdisplaycolumns>
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
