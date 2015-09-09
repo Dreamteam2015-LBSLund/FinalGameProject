@@ -20,7 +20,7 @@ public class Tile {
 	}
 	
 	public boolean isWalkable() {
-		return type.isWalkable() && hasBuilding;
+		return type.isWalkable() && !hasBuilding;
 	}
 	
 	public void draw(SpriteBatch batch) {
