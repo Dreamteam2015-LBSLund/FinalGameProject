@@ -3,3 +3,4 @@ isWalkable: true
 isBuildable: true
 resources: wood, iron, diamond
 sprite: grassTile
+fCost: 0.8

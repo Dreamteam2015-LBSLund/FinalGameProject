@@ -17,6 +17,7 @@ public class TileType {
 	private String name;
 	private String[] resources;
 	private TextureRegion sprite; // transition tiles?
+	private float fCost; // for pathfinding
 	
 	//ArrayList<Resource> 
 	
@@ -27,8 +28,8 @@ public class TileType {
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
 		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
+		fCost = r.getFloat("fCost");
 		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
-		if (sprite == null) System.out.println("Sprite " + r.getString("sprite") + " couldnt be found");
 	}
 
 	public static ArrayList<TileType> loadAll() {

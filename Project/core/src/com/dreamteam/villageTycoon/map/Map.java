@@ -23,6 +23,10 @@ public class Map {
 		}
 	}
 	
+	public Tile[][] getTiles() {
+		return tiles;
+	}
+	
 	public void draw(SpriteBatch batch) {
 		for (Tile[] ta : tiles) for (Tile t : ta) t.draw(batch);
 	}

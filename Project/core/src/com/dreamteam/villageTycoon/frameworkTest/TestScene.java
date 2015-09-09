@@ -21,14 +21,14 @@ import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.map.TileType;
 
 public class TestScene extends Scene {
-	Map m;
+	private Map map;
 	
 	public TestScene() {
 		super();
 
 		AssetManager.load();
 		
-		m = new Map();
+		map = new Map();
 		
 		addObject(new TestObject(AssetManager.getTexture("test")));
 		addObject(new Controller());
@@ -48,8 +48,12 @@ public class TestScene extends Scene {
 	*/
 	}
 	
+	public Map getMap() {
+		return map;
+	}
+	
 	public void draw(SpriteBatch batch) {
-		m.draw(batch);
+		map.draw(batch);
 		super.draw(batch);
 	}
 }

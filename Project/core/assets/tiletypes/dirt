@@ -3,3 +3,4 @@ isWalkable: true
 isBuildable: true
 resources: 
 sprite: dirtTile
+fCost: 1

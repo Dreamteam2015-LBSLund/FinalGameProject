@@ -9,7 +9,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.utils.PathFinder;
 
 public class Character extends GameObject {
 	private boolean selected;
@@ -70,5 +74,9 @@ public class Character extends GameObject {
 	
 	public boolean getSelected() {
 		return selected;
+	}
+	
+	protected Vector2[] getPath(Vector2 target) {
+		return new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath();
 	}
 }
