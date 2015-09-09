@@ -33,6 +33,7 @@ public class Soldier extends Character {
 	private boolean enemy;
 	private boolean showInventory;
 	private boolean isOnFire;
+	private boolean useSabotageKit;
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private SabotageKit startSabotageKits[];
@@ -68,7 +69,11 @@ public class Soldier extends Character {
 	}
 	
 	public void attack() {
-		
+		if(useSabotageKit) {
+			if(sabotageKits.get(equipedSabotageKit) != null) {
+				sabotageKits.get(equipedSabotageKit).use();
+			}
+		}
 	}
 	
 	public void drawUi(SpriteBatch batch) {
