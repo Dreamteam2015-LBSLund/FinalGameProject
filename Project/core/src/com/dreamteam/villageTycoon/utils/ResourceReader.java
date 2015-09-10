@@ -12,25 +12,31 @@ import com.badlogic.gdx.files.FileHandle;
 public class ResourceReader {
 	
 	private HashMap<String, String> data;
+	private String filename;
 	
 	public ResourceReader(FileHandle f) {
+		filename = f.name();
 		data = readResource(f);
 	}
 	
 	public String getString(String name) {
-		return data.get(name);
+		if (!data.containsKey(name)) {
+			System.out.println("WARNING: Value " + name + " not found in " + filename + "\nExisting keys are:");
+			for (String s : getAllKeys()) System.out.println(s);
+		}
+		return data.get(name).replaceAll("\\s+$", "");
 	}
 	
 	public float getFloat(String name) {
-		return Float.parseFloat(data.get(name).replaceAll("\\s+",""));
+		return Float.parseFloat(getString(name).replaceAll("\\s+",""));
 	}
 	
 	public int getInt(String name) {
-		return Integer.parseInt(data.get(name).replaceAll("\\s+",""));
+		return Integer.parseInt(getString(name).replaceAll("\\s+",""));
 	}
 	
 	public boolean getBool(String name) {
-		return Boolean.parseBoolean(data.get(name).replaceAll("\\s+",""));
+		return Boolean.parseBoolean(getString(name).replaceAll("\\s+",""));
 	}
 	
 	public String[] getList(String name) {
@@ -38,7 +44,7 @@ public class ResourceReader {
 	}
 	
 	public String[] getList(String name, boolean removeWhitespace) {
-		String[] d = data.get(name).split(", ");
+		String[] d = getString(name).split(", ");
 		if (removeWhitespace) {
 			for (int i = 0; i < d.length; i++) {
 				d[i] = d[i].replaceAll("\\s+","");

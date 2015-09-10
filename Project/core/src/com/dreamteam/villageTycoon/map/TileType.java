@@ -28,7 +28,7 @@ public class TileType {
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
 		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
-		fCost = r.getFloat("fCost");
+		if (isWalkable) fCost = r.getFloat("fCost");
 		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
 
