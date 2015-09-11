@@ -1,6 +1,5 @@
 package com.dreamteam.villageTycoon.map;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -17,7 +16,7 @@ public class TileType {
 	private String name;
 	private String[] resources;
 	private TextureRegion sprite; // transition tiles?
-	private float fCost; // for pathfinding
+	private float gCost; // for pathfinding
 	
 	//ArrayList<Resource> 
 	
@@ -28,7 +27,7 @@ public class TileType {
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
 		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
-		if (isWalkable) fCost = r.getFloat("fCost");
+		if (isWalkable) gCost = r.getFloat("fCost");
 		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
 
@@ -41,6 +40,10 @@ public class TileType {
 			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
 		}
 		return out;
+	}
+	
+	public float getG() {
+		return gCost;
 	}
 
 	//Tile.isWalkable should probably be used since this does not take buildings into account

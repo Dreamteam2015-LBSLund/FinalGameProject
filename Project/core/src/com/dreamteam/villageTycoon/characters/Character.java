@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.characters;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -76,7 +78,7 @@ public class Character extends GameObject {
 		return selected;
 	}
 	
-	protected Vector2[] getPath(Vector2 target) {
+	protected ArrayList<Vector2> getPath(Vector2 target) {
 		return new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath();
 	}
 }
