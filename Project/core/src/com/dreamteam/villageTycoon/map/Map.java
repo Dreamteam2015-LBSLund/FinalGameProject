@@ -49,7 +49,25 @@ public class Map {
 		return map;
 	}
 	
-	public int[][] circle(int x, int y, int diameter, int tile, int[][] mapToEdit){
+	public int[][] field(int x, int y, int size, int amountOfPlots, int tile, int[][] mapToEdit) {
+		int[][] map = mapToEdit;
+		
+		Random random = new Random();
+		
+		map = circle(x, y, size, tile, map);
+		
+		for(int i = 0; i < amountOfPlots; i++) {
+			int offsetX = random.nextInt(size/4);
+			int offsetY = random.nextInt(size/4);
+			
+			if(offsetX >= 0 && offsetX <= WIDTH && offsetY >= 0 && offsetY <= HEIGHT)
+			map = circle(x+(size/2)+offsetX, y+(size/2)+offsetY, size, tile, map);
+		}
+		
+		return map;
+	}
+	
+	public int[][] circle(int x, int y, int diameter, int tile, int[][] mapToEdit) {
 		int[][] map = mapToEdit;
 		
 		for(int y2 = 0; y2 < diameter*2; y2++){
