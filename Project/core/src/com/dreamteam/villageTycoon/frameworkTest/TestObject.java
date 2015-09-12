@@ -20,7 +20,7 @@ public class TestObject extends GameObject {
 	ArrayList<Vector2> path;
 	
 	public TestObject(TextureRegion region) {
-		super(new Vector2(0, 0), new Vector2(3, 3), new Animation(region));
+		super(new Vector2(.25f, .25f), new Vector2(.5f, .5f), new Animation(region));
 		setDepth(10);
 	}
 	

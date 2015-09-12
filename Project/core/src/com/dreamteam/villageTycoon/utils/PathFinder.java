@@ -8,6 +8,8 @@ import com.dreamteam.villageTycoon.map.Tile;
 
 public class PathFinder {
 	
+	private final static boolean PRINT = true;
+	
 	private Point startTile, endTile;
 	private Tile[][] map;
 	private Vector2[] path;
@@ -35,15 +37,31 @@ public class PathFinder {
 	public ArrayList<Vector2> getPath() {
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
+		
+		if (start == end) return null;
+		
+		if (!start.getTile(map).isWalkable() || !end.getTile(map).isWalkable()) {
+			print("tried to find unwalkable path");
+			return null;
+		}
+		
 		ArrayList<Node>  openList  = new ArrayList<Node>();
 		ArrayList<Node> closedList = new ArrayList<Node>();
 		
 		closedList.add(start);
 		start.addNeighbors(openList, closedList);
+		print("open list length: " + openList.size());
 		
 		while (!openList.contains(end)) {
 			// get cheapest node from open list, add it to closed, and add its neighbors to openList
-			openList.get(0).addNeighbors(openList, closedList);
+			if (openList.size() > 0) {
+				openList.get(0).addNeighbors(openList, closedList);
+				print("added neighbours, open list lenght is " + openList.size());
+			}
+			else {
+				print("starttile had no neighbors");
+				return null; // starttile had no neighbors
+			}
 		}
 		return reconstruct(start, end);
 	}
@@ -59,6 +77,10 @@ public class PathFinder {
 			v.add(new Vector2(nodes.get(i).index.x * Tile.WIDTH, nodes.get(i).index.y * Tile.HEIGHT));
 		}
 		return v;
+	}
+	
+	private void print(String s) {
+		if (PRINT) System.out.println(s);
 	}
 	
 	private class Node
@@ -93,23 +115,37 @@ public class PathFinder {
 		// adds all walkable neighbors of the tile to the first list, if it's not already in there or in the second list, in order.
 		// returns true if nothing was added
 		public boolean addNeighbors(ArrayList<Node> addTo, ArrayList<Node> ignore) {
+			addTo.remove(this);
+			ignore.add(this);
 			Point p = new Point(0, 0);
 			int added = 0;
 			// step through all neighbors
-			for (p.x = index.x - 1; p.x < index.x + 1; p.x++) {
-				for (p.y = index.y - 1; p.y < index.y + 1; p.y++) {
+			for (p.x = index.x - 1; p.x <= index.x + 1; p.x++) {
+				for (p.y = index.y - 1; p.y <= index.y + 1; p.y++) {
 					//check its not outside map or the center
-					if ((p.x == index.x && p.y == index.y) || !p.isOnArray(map)) continue;
+					if ((p.x == index.x && p.y == index.y) || !p.isOnArray(map)) {
+						print("tile at " + p.x + ", " + p.y + " is not valid");
+						continue;
+					}
 					//check that it's walkable and not in a list already
-					if (getNode(p).getTile(map).isWalkable() && !addTo.contains(getNode(p)) && !ignore.contains(getNode(p))) {
+					if (getNode(p).getTile(map) != null && getNode(p).getTile(map).isWalkable() && !addTo.contains(getNode(p)) && !ignore.contains(getNode(p))) {
 						added++;
+						print("adding tile at " + p.x + ", " + p.y);
+						getNode(p).parent = this;
 						// find its position in the list and add it there
-						for (int i = 0; i < addTo.size(); i++) {
-							if (addTo.get(i).getF() >= getNode(p).getF()) {
-								addTo.add(i, getNode(p));
-								break;
-							} else if (i == addTo.size() -1) addTo.add(getNode(p));
-						}
+						if (addTo.size() == 0) addTo.add(getNode(p));
+						else {
+							for (int i = 0; i < addTo.size(); i++) {
+								if (addTo.get(i).getF() >= getNode(p).getF()) {
+									addTo.add(i, getNode(p));
+									print("added at " + i);
+									break;
+								} else if (i == addTo.size() - 1) {
+									print("added at end");
+									addTo.add(getNode(p));
+								}
+							}
+						}	
 					}
 				}
 			}
