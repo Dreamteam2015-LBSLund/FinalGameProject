@@ -1,0 +1,5 @@
+name: Tree
+isWalkable: false
+isBuildable: false
+resources: tree
+sprite: treeTrunkTile
