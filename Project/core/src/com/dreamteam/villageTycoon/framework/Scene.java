@@ -76,6 +76,12 @@ public abstract class Scene {
 		for (GameObject g : objects) g.draw(batch);
 	}
 	
+	public Vector2 getUiMouse() {
+		Vector3 mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+		uiCamera.unproject(mouse);
+		return new Vector2(mouse.x, mouse.y);
+	}
+	
 	public Vector2 getScreenMouse() {
 		return new Vector2(Gdx.input.getX(), Gdx.input.getY());
 	}
