@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-04-08" view-index="1" gantt-divider-location="353" resource-divider-location="300" version="2.7.1" locale="sv_SE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-12-20" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.7.1" locale="sv">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Namn" width="56" order="0"/>
@@ -59,8 +59,24 @@
             <depend id="30" type="2" difference="0" hardness="Strong"/>
             <depend id="33" type="2" difference="0" hardness="Strong"/>
         </task>
+        <task id="110" name="byggnader [grafiker]" color="#8cb6ce" meeting="false" start="2015-09-17" duration="14" complete="0" expand="true">
+            <depend id="113" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="113" name="Karaktärer [grafiker]" color="#8cb6ce" meeting="false" start="2015-10-07" duration="10" complete="0" expand="true">
+            <depend id="116" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="116" name="Miljö, map [grafiker]" color="#8cb6ce" meeting="false" start="2015-10-21" duration="21" complete="0" expand="true">
+            <depend id="119" type="2" difference="0" hardness="Strong"/>
+        </task>
         <task id="109" name="Starta devlog på tigsource" color="#8cb6ce" meeting="true" start="2016-01-01" duration="0" complete="0" expand="true"/>
         <task id="92" name="Slut" color="#8cb6ce" meeting="true" start="2016-05-06" duration="0" complete="0" expand="true"/>
+        <task id="119" name="UI element [grafiker]" color="#8cb6ce" meeting="false" start="2015-11-19" duration="10" complete="0" expand="true">
+            <depend id="125" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="125" name="Animation och cutscene [grafiker]" color="#8cb6ce" meeting="false" start="2015-12-03" duration="21" complete="0" expand="true">
+            <depend id="128" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="128" name="Effekteroch små pill  [grafiker]" color="#8cb6ce" meeting="false" start="2016-01-01" duration="28" complete="0" expand="true"/>
         <task id="65" name="Ljudeffekter och musik" color="#8cb6ce" meeting="false" start="2015-12-07" duration="6" complete="0" expand="true"/>
         <task id="68" name="Dag/Natt" color="#8cb6ce" meeting="false" start="2015-12-15" duration="8" complete="0" expand="true"/>
         <task id="76" name="Mer avancerad AI" color="#8cb6ce" meeting="false" start="2016-01-01" duration="25" complete="0" expand="true"/>
@@ -115,6 +131,12 @@
         <allocation task-id="0" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="65" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="94" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="110" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="113" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="116" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="119" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="125" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="128" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
         <vacation start="2016-05-01" end="2016-05-02" resourceid="1"/>
