@@ -32,22 +32,24 @@ public class TestObject extends GameObject {
 		 
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
-			System.out.println("stepping towards " + next);
-			stepTowards(next);
-			if (distanceTo(next) < .1f) path.remove(next);
+			stepTowards(next, .05f);
+			if (distanceTo(next) < .1f) {
+				path.remove(0);
+			}
 		}
 	}
 	
-	private void stepTowards(Vector2 v) {
-		Vector2 delta = v.sub(getPosition().cpy());
-		delta.nor();
-		delta.scl(.01f);
+	private void stepTowards(Vector2 v, float speed) {
+		Vector2 delta = v.cpy().sub(getPosition().cpy());
+		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
 	}
 	
 	private float distanceTo(Vector2 v) {
-		Vector2 delta = v.sub(getPosition());
-		return delta.len();
+		Vector2 delta = v.cpy().sub(getPosition().cpy());
+		float f = delta.len();
+		System.out.println("distance to " + v + ": " + f);
+		return f;
 	}
 	
 	public void draw(SpriteBatch batch) {
