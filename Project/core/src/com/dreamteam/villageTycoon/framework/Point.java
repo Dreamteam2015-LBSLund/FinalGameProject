@@ -9,7 +9,7 @@ public class Point {
 	}
 	
 	public boolean isOnArray(Object[][] o) {
-		return x >= 0 && x < o.length && y >= 0 && y <= o[x].length;
+		return x >= 0 && x < o.length && y >= 0 && y < o[x].length;
 	}
 		
 	public String toString() {

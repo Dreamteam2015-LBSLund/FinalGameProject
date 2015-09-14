@@ -24,9 +24,14 @@ public class PathFinder {
 	// keeps ONE set of nodes, since it's all references.
 	Node[][] nodes;
 	
+	private Node getNode(int x, int y) {
+		if (x < 0 || x >= map.length || y < 0 || y > map[x].length) return null;
+		if (nodes[x][y] == null) nodes[x][y] = new Node(new Point(x, y));
+		return nodes[x][y];
+	}
+	
 	private Node getNode(Point tile) {
-		if (nodes[tile.x][tile.y] == null) nodes[tile.x][tile.y] = new Node(tile);
-		return nodes[tile.x][tile.y];
+		return getNode(tile.x, tile.y);
 	}
 	
 	private Node getNode(Point tile, Node parent) {
@@ -38,9 +43,9 @@ public class PathFinder {
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
 		
-		if (start == end) return null;
+		if (start == end || start == null || end == null) return null;
 		
-		if (!start.getTile(map).isWalkable() || !end.getTile(map).isWalkable()) {
+		if (start.getTile(map) == null || !start.getTile(map).isWalkable() || !end.getTile(map).isWalkable()) {
 			print("tried to find unwalkable path");
 			return null;
 		}
@@ -55,12 +60,12 @@ public class PathFinder {
 		while (!openList.contains(end)) {
 			// get cheapest node from open list, add it to closed, and add its neighbors to openList
 			if (openList.size() > 0) {
+				print("adding neighbours from node with fcost " + openList.get(0).getF());
 				openList.get(0).addNeighbors(openList, closedList);
-				print("added neighbours, open list lenght is " + openList.size());
 			}
 			else {
-				print("starttile had no neighbors");
-				return null; // starttile had no neighbors
+				print("couldn't find a path");
+				return null; // startTile had no neighbors
 			}
 		}
 		return reconstruct(start, end);
@@ -74,8 +79,9 @@ public class PathFinder {
 		}
 		ArrayList<Vector2> v = new ArrayList<Vector2>();
 		for (int i = 0; i < nodes.size(); i++) {
-			v.add(new Vector2(nodes.get(i).index.x * Tile.WIDTH, nodes.get(i).index.y * Tile.HEIGHT));
+			v.add(0, new Vector2((nodes.get(i).index.x + .5f) * Tile.WIDTH, (nodes.get(i).index.y + .5f) * Tile.HEIGHT));
 		}
+		v.remove(start);
 		return v;
 	}
 	
@@ -87,7 +93,6 @@ public class PathFinder {
 	{
 		private float h; // distance to target
 		private float g; // move cost
-		private float f; // = g + h
 		private Point index;
 		
 		public Node parent;
@@ -113,43 +118,43 @@ public class PathFinder {
 		}
 		
 		// adds all walkable neighbors of the tile to the first list, if it's not already in there or in the second list, in order.
-		// returns true if nothing was added
-		public boolean addNeighbors(ArrayList<Node> addTo, ArrayList<Node> ignore) {
+		public void addNeighbors(ArrayList<Node> addTo, ArrayList<Node> ignore) {
 			addTo.remove(this);
 			ignore.add(this);
-			Point p = new Point(0, 0);
-			int added = 0;
-			// step through all neighbors
-			for (p.x = index.x - 1; p.x <= index.x + 1; p.x++) {
-				for (p.y = index.y - 1; p.y <= index.y + 1; p.y++) {
-					//check its not outside map or the center
-					if ((p.x == index.x && p.y == index.y) || !p.isOnArray(map)) {
-						print("tile at " + p.x + ", " + p.y + " is not valid");
-						continue;
-					}
-					//check that it's walkable and not in a list already
-					if (getNode(p).getTile(map) != null && getNode(p).getTile(map).isWalkable() && !addTo.contains(getNode(p)) && !ignore.contains(getNode(p))) {
-						added++;
-						print("adding tile at " + p.x + ", " + p.y);
-						getNode(p).parent = this;
-						// find its position in the list and add it there
-						if (addTo.size() == 0) addTo.add(getNode(p));
-						else {
-							for (int i = 0; i < addTo.size(); i++) {
-								if (addTo.get(i).getF() >= getNode(p).getF()) {
-									addTo.add(i, getNode(p));
-									print("added at " + i);
-									break;
-								} else if (i == addTo.size() - 1) {
-									print("added at end");
-									addTo.add(getNode(p));
-								}
-							}
-						}	
+			//tryTile(index.x - 1, index.y - 1, addTo, ignore, this);
+			tryTile(index.x,     index.y - 1, addTo, ignore, this);
+			//tryTile(index.x + 1, index.y - 1, addTo, ignore, this);
+			
+			tryTile(index.x - 1, index.y,     addTo, ignore, this);
+			tryTile(index.x + 1, index.y,     addTo, ignore, this);
+			
+			//tryTile(index.x - 1, index.y + 1, addTo, ignore, this);
+			tryTile(index.x,     index.y + 1, addTo, ignore, this);
+			//tryTile(index.x + 1, index.y + 1, addTo, ignore, this);
+		}
+		
+		private void tryTile(int x, int y, ArrayList<Node> openList, ArrayList<Node> closedList, Node parent) {
+			if (x >= 0 && x < map.length && y >= 0 && y < map[x].length) {
+				if (map[x][y].isWalkable() && !openList.contains(getNode(x, y)) && !closedList.contains(getNode(x, y))) {
+					addSorted(getNode(x, y), openList);
+					getNode(x, y).parent = parent;
+				}
+			}
+		}
+		
+		private void addSorted(Node n, ArrayList<Node> list) {
+			if (list.size() == 0) {
+				list.add(n);
+				return;
+			} else { 
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getF() >= n.getF()) {
+						list.add(i, n);
+						return;
 					}
 				}
 			}
-			return added == 0;
+			list.add(n);
 		}
 	}
 }

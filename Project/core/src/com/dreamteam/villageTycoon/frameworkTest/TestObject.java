@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -30,23 +31,32 @@ public class TestObject extends GameObject {
 		}
 		 
 		if (path != null && !path.isEmpty()) {
-			stepTowards(path.get(0));
-			if (distanceTo(path.get(0)) < .1f) path.remove(0);
+			Vector2 next = path.get(0);
+			System.out.println("stepping towards " + next);
+			stepTowards(next);
+			if (distanceTo(next) < .1f) path.remove(next);
 		}
 	}
 	
 	private void stepTowards(Vector2 v) {
-		Vector2 delta = v.sub(getPosition());
+		Vector2 delta = v.sub(getPosition().cpy());
 		delta.nor();
+		delta.scl(.01f);
 		setPosition(getPosition().add(delta));
 	}
 	
 	private float distanceTo(Vector2 v) {
 		Vector2 delta = v.sub(getPosition());
-		return delta.len2();
+		return delta.len();
 	}
 	
-	public void drawUi(SpriteBatch batch) {
-		batch.draw(getSprite().getTexture(), 5, 0, 1, 1);
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
+		if (path != null) { 
+			for (Vector2 v : path) {
+				batch.draw(AssetManager.getTexture("test"), v.x, v.y, .2f, .2f);
+			}
+			//if (path.size() > 0) batch.draw(AssetManager.getTexture("test"), path.get(0).x, path.get(0).y, .2f, .2f);
+		}
 	}
 }
