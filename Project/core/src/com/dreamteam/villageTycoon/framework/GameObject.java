@@ -21,8 +21,9 @@ public abstract class GameObject {
 	
 	public void setPosition(Vector2 p) { 
 		position = p;
-		if (sprite != null) sprite.setPosition(p.x, p.y); 
+		if (sprite != null) sprite.setPosition(position.x - sprite.getOriginX() / sprite.getRegionWidth(), position.y - sprite.getOriginY() / sprite.getRegionHeight());
 	}
+	
 	public Vector2 getPosition() { return position; }
 	
 	public void setSize(Vector2 s) { 
@@ -40,6 +41,14 @@ public abstract class GameObject {
 
 	public Scene getScene() { return scene; }
 	
+	protected void setOrigin(Vector2 origin) {
+		sprite.setOrigin(origin.x, origin.y);
+	}
+	
+	protected Vector2 getOrigin() {
+		return new Vector2(sprite.getOriginX(), sprite.getOriginY());
+	}
+	
 	public float getDepth() {
 		return depth;
 	}
@@ -55,6 +64,7 @@ public abstract class GameObject {
 	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
 		this.sprite = sprite;
+		sprite.setOriginCenter();
 		setPosition(position);
 		setSize(size);
 	}
