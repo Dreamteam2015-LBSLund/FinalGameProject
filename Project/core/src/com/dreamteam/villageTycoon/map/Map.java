@@ -46,6 +46,8 @@ public class Map {
 			map[plotX][plotY] = 0;
 		}
 		
+		map = field(20, 30, 2, 10, 1, map);
+		
 		return map;
 	}
 	
@@ -57,8 +59,8 @@ public class Map {
 		map = circle(x, y, size, tile, map);
 		
 		for(int i = 0; i < amountOfPlots; i++) {
-			int offsetX = random.nextInt(size/4);
-			int offsetY = random.nextInt(size/4);
+			int offsetX = random.nextInt(size/2);
+			int offsetY = random.nextInt(size/2);
 			
 			if(offsetX >= 0 && offsetX <= WIDTH && offsetY >= 0 && offsetY <= HEIGHT)
 			map = circle(x+(size/2)+offsetX, y+(size/2)+offsetY, size, tile, map);

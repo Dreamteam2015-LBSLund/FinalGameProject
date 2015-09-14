@@ -56,6 +56,11 @@ public class Soldier extends Character {
 		super.update(deltaTime);
 		attack();
 		
+		if(showInventory) {
+			inventory.update(deltaTime);
+			equipedSabotageKit = inventory.getEquipedSabotageKit();
+		}
+		
 		for(int i = 0; i < sabotageKits.size(); i++) {
 			if(sabotageKits.get(i).getRemove()) {
 				if(i == equipedSabotageKit) {
