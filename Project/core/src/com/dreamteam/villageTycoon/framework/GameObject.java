@@ -69,6 +69,13 @@ public abstract class GameObject {
 	
 	public void onRemove() { };
 	
+	public float distanceTo(Vector2 v) {
+		Vector2 delta = v.cpy().sub(getPosition().cpy());
+		float f = delta.len();
+		System.out.println("distance to " + v + ": " + f);
+		return f;
+	}
+	
 	public void update(float deltaTime) { }
 	
 	public void draw(SpriteBatch batch) {

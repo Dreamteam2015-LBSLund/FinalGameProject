@@ -23,6 +23,8 @@ public class Character extends GameObject {
 	private int health;
 	private Animation deathAnimation;
 	
+	private ArrayList<Vector2> path;
+	
 	private Rectangle hitbox = new Rectangle(0, 0, 0, 0);
 	
 	private Animation selectedSign;
@@ -77,8 +79,28 @@ public class Character extends GameObject {
 	public boolean getSelected() {
 		return selected;
 	}
+
+	protected void followPath() {
+		if (path != null && !path.isEmpty()) {
+			Vector2 next = path.get(0);
+			stepTowards(next, .05f);
+			if (distanceTo(next) < .1f) {
+				path.remove(0);
+			}
+		}
+	}
 	
-	protected ArrayList<Vector2> getPath(Vector2 target) {
-		return new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath();
+	protected void stepTowards(Vector2 v, float speed) {
+		Vector2 delta = v.cpy().sub(getPosition().cpy());
+		delta.clamp(0, speed);
+		setPosition(getPosition().add(delta));
+	}
+	
+	protected ArrayList<Vector2> getPath() {
+		return path;
+	}
+	
+	protected void setPath(Vector2 target) {
+		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath();
 	}
 }
