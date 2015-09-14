@@ -1,6 +1,6 @@
 name: Dirt
 isWalkable: true
 isBuildable: true
-resources: 
+resources: rocks
 sprite: dirtTile
 gCost: 1
