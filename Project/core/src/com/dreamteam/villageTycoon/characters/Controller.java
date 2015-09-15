@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.characters;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
@@ -24,12 +26,16 @@ public class Controller extends GameObject {
 	private float cameraSpeed;
 	final float MOVE_CAMERA_FIELD = 16;
 	
+	ArrayList<Character> selectedCharacters;
+	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(new Texture("badlogic.jpg")));
 		setColor(new Color(0, 1, 0, 0.3f));
 		setDepth(1000);
 		selectionPoint = new Vector2();
 		cameraSpeed = 5;
+		
+		selectedCharacters = new ArrayList<Character>();
 	}
 	
 	void onMousePressed() {
@@ -66,6 +72,7 @@ public class Controller extends GameObject {
 				for (GameObject c : getScene().getObjects()) {
 					if (c instanceof Character) {
 						if(((Character)c).getSelected()) {
+							selectedCharacters.add((Character) c);
 							((Character)c).setPath(getScene().getWorldMouse());
 						}
 					}
@@ -84,11 +91,6 @@ public class Controller extends GameObject {
 							((Soldier)s).setShowInventory(true);
 						}
 					} 
-					if(((Soldier)s).getShowInventroy()) {
-						if(Gdx.input.isKeyJustPressed(Keys.Q)) {
-							((Soldier)s).setShowInventory(false);
-						}
-					}
 				}
 			}
 		}
@@ -106,6 +108,8 @@ public class Controller extends GameObject {
 		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
 		selectionRectangle.normalize();
+		
+		selectedCharacters.clear();
 	}
 	
 	public void cameraMovment(float deltaTime) {
