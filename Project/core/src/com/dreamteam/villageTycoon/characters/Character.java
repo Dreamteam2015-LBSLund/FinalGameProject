@@ -40,9 +40,9 @@ public class Character extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		hitbox = new Rectangle(getPosition(), getSize());
-		
-		selectedSign.setPosition(getPosition().x+getSprite().getWidth()/2-selectedSign.getWidth()/2, getPosition().y+getSprite().getHeight());
+		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
+
+		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
 		
 		if(health <= 0) {
 			if(getSprite() != deathAnimation) setSprite(deathAnimation);

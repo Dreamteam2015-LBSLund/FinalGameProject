@@ -22,7 +22,8 @@ public class Controller extends GameObject {
 	
 	private boolean mousePressed;
 	private boolean rightMouseIsPressed;
-
+	private boolean canMoveUnits;
+	
 	private float cameraSpeed;
 	final float MOVE_CAMERA_FIELD = 16;
 	
@@ -67,12 +68,21 @@ public class Controller extends GameObject {
 			mousePressed = true;
 		}
 		
+		for (GameObject c : getScene().getObjects()) {
+			if (c instanceof Character) {
+				selectedCharacters.add((Character) c);
+			}
+		}
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
 				for (GameObject c : getScene().getObjects()) {
 					if (c instanceof Character) {
-						if(((Character)c).getSelected()) {
-							selectedCharacters.add((Character) c);
+						if (c instanceof Soldier) {
+							canMoveUnits = !((Soldier)c).getShowInventroy();
+						}
+						if(((Character)c).getSelected() && canMoveUnits) {
+							// TODO: Make cluster of waypoints so that the charachters don't cluster
 							((Character)c).setPath(getScene().getWorldMouse());
 						}
 					}
