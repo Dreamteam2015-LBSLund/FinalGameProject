@@ -13,6 +13,7 @@ public class PathFinder {
 	private Point startTile, endTile;
 	private Tile[][] map;
 	private Vector2[] path;
+	private Node[][] nodes;
 	
 	public PathFinder(Vector2 start, Vector2 end, Tile[][] map) { // put the search in a new thread and add a callback for when it's done
 		startTile  = new Point((int)(start.x / Tile.WIDTH), (int)(start.y / Tile.HEIGHT));
@@ -20,9 +21,6 @@ public class PathFinder {
 		this.map = map;
 		nodes = new Node[map.length][map[0].length];
 	}
-	
-	// keeps ONE set of nodes, since it's all references.
-	Node[][] nodes;
 	
 	private Node getNode(int x, int y) {
 		if (x < 0 || x >= map.length || y < 0 || y > map[x].length) return null;
