@@ -30,7 +30,7 @@ public class TestScene extends Scene {
 		
 		map = new Map();
 		
-		addObject(new TestObject(AssetManager.getTexture("test")));
+		//addObject(new TestObject(AssetManager.getTexture("test")));
 		addObject(new Controller());
 		//addObject(new TestObject(AssetManager.getTexture("test")));
 		//addObject(new Character(new Vector2(0, 0), new Animation(AssetManager.getTexture("test"))));

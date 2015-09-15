@@ -49,6 +49,8 @@ public class Character extends GameObject {
 			if(getSprite().animationDone()) getScene().removeObject(this);
 			getSprite().animate(deltaTime);
 		}
+		
+		followPath();
 	}
 	
 	public Rectangle getHitbox() {

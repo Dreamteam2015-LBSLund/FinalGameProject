@@ -31,9 +31,7 @@ public class Inventory {
 	
 	public void update(float deltaTime) {
 		mouse = soldier.getScene().getUiMouse();
-		
-		System.out.print(equipedSabotageKit + "\n");
-		
+
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			Rectangle hitbox = new Rectangle(new Vector2(4, -2*i), new Vector2(2, 2));
 			

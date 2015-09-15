@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
@@ -11,7 +12,11 @@ public abstract class AssetManager {
 	
 	private static HashMap<String, TextureRegion> regions;
 	
+	public static BitmapFont font;
+	
 	public static void load() {
+		font = new BitmapFont();
+		
 		regions = new HashMap<String, TextureRegion>();
 		Texture spriteSheet = new Texture("textures/spritesheet.png");
 		

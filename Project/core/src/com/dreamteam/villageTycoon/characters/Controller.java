@@ -19,7 +19,7 @@ public class Controller extends GameObject {
 	private Vector2 selectionPoint;
 	
 	private boolean mousePressed;
-	private boolean rightMousePressed;
+	private boolean rightMouseIsPressed;
 
 	private float cameraSpeed;
 	final float MOVE_CAMERA_FIELD = 16;
@@ -59,6 +59,21 @@ public class Controller extends GameObject {
 				onMousePressed();
 			}
 			mousePressed = true;
+		}
+		
+		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
+			if(!rightMouseIsPressed) {
+				for (GameObject c : getScene().getObjects()) {
+					if (c instanceof Character) {
+						if(((Character)c).getSelected()) {
+							((Character)c).setPath(getScene().getWorldMouse());
+						}
+					}
+				}
+			}
+			rightMouseIsPressed = true;
+		} else {
+			rightMouseIsPressed = false;
 		}
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {

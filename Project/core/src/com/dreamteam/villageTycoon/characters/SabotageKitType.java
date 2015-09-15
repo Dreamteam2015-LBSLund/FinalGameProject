@@ -53,6 +53,6 @@ public class SabotageKitType {
 	}
 	
 	public String getDescription() {
-		return "";
+		return name + "\n Activation Type: " + activationType;
 	}
 }
