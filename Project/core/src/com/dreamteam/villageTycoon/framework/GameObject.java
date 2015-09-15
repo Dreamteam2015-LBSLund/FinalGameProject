@@ -41,12 +41,17 @@ public abstract class GameObject {
 
 	public Scene getScene() { return scene; }
 	
+	//note that origin is in pixels on the texture region, not world coordinates
 	protected void setOrigin(Vector2 origin) {
 		sprite.setOrigin(origin.x, origin.y);
 	}
 	
 	protected Vector2 getOrigin() {
 		return new Vector2(sprite.getOriginX(), sprite.getOriginY());
+	}
+	
+	protected void setOriginCenter() {
+		getSprite().setOriginCenter();
 	}
 	
 	public float getDepth() {
