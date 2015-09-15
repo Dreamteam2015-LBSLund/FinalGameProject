@@ -69,7 +69,7 @@ public abstract class GameObject {
 	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
 		this.sprite = sprite;
-		sprite.setOriginCenter();
+		setOriginCenter();
 		setPosition(position);
 		setSize(size);
 	}
