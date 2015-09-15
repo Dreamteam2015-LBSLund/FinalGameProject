@@ -23,6 +23,7 @@ public class ResourceReader {
 		if (!data.containsKey(name)) {
 			System.out.println("WARNING: Value " + name + " not found in " + filename + "\nExisting keys are:");
 			for (String s : getAllKeys()) System.out.println(s);
+			return null;
 		}
 		return data.get(name).replaceAll("\\s+$", "");
 	}
@@ -44,6 +45,10 @@ public class ResourceReader {
 	}
 	
 	public String[] getList(String name, boolean removeWhitespace) {
+		if (!data.containsKey(name)) {
+			System.out.println("WARNING: couldn't find list " + name);
+			return null;
+		}
 		String[] d = getString(name).split(", ");
 		if (removeWhitespace) {
 			for (int i = 0; i < d.length; i++) {

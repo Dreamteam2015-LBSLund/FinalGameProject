@@ -8,7 +8,7 @@ import com.dreamteam.villageTycoon.map.Tile;
 
 public class PathFinder {
 	
-	private final static boolean PRINT = true;
+	private final static boolean PRINT = false;
 	
 	private Point startTile, endTile;
 	private Tile[][] map;
@@ -40,6 +40,7 @@ public class PathFinder {
 	}
 	
 	public ArrayList<Vector2> getPath() {
+		long time = System.nanoTime();
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
 		
@@ -68,6 +69,7 @@ public class PathFinder {
 				return null; // startTile had no neighbors
 			}
 		}
+		//System.out.println("time to find path: " + (System.nanoTime() - time) / 1E6f + " ms before reconstruction");
 		return reconstruct(start, end);
 	}
 	
