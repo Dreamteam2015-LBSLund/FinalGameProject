@@ -23,7 +23,7 @@ public class PathFinder {
 	}
 	
 	private Node getNode(int x, int y) {
-		if (x < 0 || x >= map.length || y < 0 || y > map[x].length) return null;
+		if (x < 0 || x >= map.length || y < 0 || y >= map[x].length) return null;
 		if (nodes[x][y] == null) nodes[x][y] = new Node(new Point(x, y));
 		return nodes[x][y];
 	}
