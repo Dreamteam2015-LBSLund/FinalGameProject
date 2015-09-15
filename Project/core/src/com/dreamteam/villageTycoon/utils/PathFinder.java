@@ -121,19 +121,27 @@ public class PathFinder {
 		public void addNeighbors(ArrayList<Node> addTo, ArrayList<Node> ignore) {
 			addTo.remove(this);
 			ignore.add(this);
-			//tryTile(index.x - 1, index.y - 1, addTo, ignore, this);
+			tryTile(index.x - 1, index.y - 1, addTo, ignore, this, new Node[] { getNode(index.x, index.y - 1), getNode(index.x - 1, index.y) });
 			tryTile(index.x,     index.y - 1, addTo, ignore, this);
-			//tryTile(index.x + 1, index.y - 1, addTo, ignore, this);
+			tryTile(index.x + 1, index.y - 1, addTo, ignore, this, new Node[] { getNode(index.x, index.y - 1), getNode(index.x + 1, index.y) });
 			
 			tryTile(index.x - 1, index.y,     addTo, ignore, this);
 			tryTile(index.x + 1, index.y,     addTo, ignore, this);
 			
-			//tryTile(index.x - 1, index.y + 1, addTo, ignore, this);
+			tryTile(index.x - 1, index.y + 1, addTo, ignore, this, new Node[] { getNode(index.x - 1, index.y), getNode(index.x, index.y + 1) });
 			tryTile(index.x,     index.y + 1, addTo, ignore, this);
-			//tryTile(index.x + 1, index.y + 1, addTo, ignore, this);
+			tryTile(index.x + 1, index.y + 1, addTo, ignore, this, new Node[] { getNode(index.x + 1, index.y), getNode(index.x, index.y + 1) });
 		}
 		
 		private void tryTile(int x, int y, ArrayList<Node> openList, ArrayList<Node> closedList, Node parent) {
+			tryTile(x, y, openList, closedList, parent, new Node[0]);
+		}
+		
+		private void tryTile(int x, int y, ArrayList<Node> openList, ArrayList<Node> closedList, Node parent, Node[] mustBeEmpty) {
+			for (Node n : mustBeEmpty) {
+				if (n == null || n.getTile(map) == null 
+						|| !n.getTile(map).isWalkable()) return;
+			}
 			if (x >= 0 && x < map.length && y >= 0 && y < map[x].length) {
 				if (map[x][y].isWalkable() && !openList.contains(getNode(x, y)) && !closedList.contains(getNode(x, y))) {
 					addSorted(getNode(x, y), openList);
