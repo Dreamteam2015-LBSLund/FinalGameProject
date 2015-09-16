@@ -6,6 +6,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.framework.Point;
 
 public class Map {
 	final static int WIDTH = 100, HEIGHT = 100;
@@ -31,6 +32,9 @@ public class Map {
 		
 		int[][] map = new int[WIDTH][HEIGHT];
 		
+		Point[] lakes = new Point[3];
+		Point[] villages = new Point[4];
+		
 		int treeSparseness = 21100;
 		
 		for (int x = 0; x < WIDTH; x++) {
@@ -39,14 +43,33 @@ public class Map {
 			}
 		}
 		
-		for(int i = 0; i < treeSparseness; i++) {
+		for (int i = 0; i < treeSparseness; i++) {
 			int plotX = random.nextInt(WIDTH);
 			int plotY = random.nextInt(HEIGHT);
 			
 			map[plotX][plotY] = 0;
 		}
 		
-		map = field(20, 30, 2, 10, 1, map);
+		for (int i = 0; i < lakes.length; i++) {
+			lakes[i] = new Point(random.nextInt(WIDTH), random.nextInt(HEIGHT));
+			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, 1, map);
+		}
+		
+		for (int i = 0; i < villages.length; i++) {
+			boolean canPlace = false;
+			
+			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
+			
+			while (!canPlace) {
+				for(int j = 0; j < lakes.length; j++) {
+					villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
+					canPlace = getDistance((float)villages[i].x, (float)villages[i].y, (float)lakes[j].x, (float)lakes[j].y) >= 10;
+					if(i > 0) canPlace = getDistance((float)villages[i].x, (float)villages[i].y, (float)villages[i-1].x, (float)villages[i-1].y) >= 20;
+				}
+			}
+			
+			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), 2, map);
+		}
 		
 		return map;
 	}
@@ -59,8 +82,8 @@ public class Map {
 		map = circle(x, y, size, tile, map);
 		
 		for(int i = 0; i < amountOfPlots; i++) {
-			int offsetX = random.nextInt(size/2);
-			int offsetY = random.nextInt(size/2);
+			int offsetX = random.nextInt(size);
+			int offsetY = random.nextInt(size);
 			
 			if(offsetX >= 0 && offsetX <= WIDTH && offsetY >= 0 && offsetY <= HEIGHT)
 			map = circle(x+(size/2)+offsetX, y+(size/2)+offsetY, size, tile, map);
@@ -75,7 +98,9 @@ public class Map {
 		for(int y2 = 0; y2 < diameter*2; y2++){
 			for(int x2 = 0; x2 < diameter*2; x2++){
 				if(y + x2 >= 0 && y + x2 <= map.length && x + y2 >= 0 &&  x + y2 <= map[0].length-1)  
-					if(getDistance(x+diameter, y+diameter, x + y2, y + x2) <= diameter) map[y + x2][x + y2] = tile;
+					if(getDistance(x+diameter, y+diameter, x + y2, y + x2) <= diameter) {
+						if(y + x2 >= 0 && y + x2 <= WIDTH-1 && x + y2 >= x + y2 && x + y2 <= HEIGHT) map[y + x2][x + y2] = tile;
+					}
 			}
 		}
 		
