@@ -1,22 +1,55 @@
 package com.dreamteam.villageTycoon.utils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 public class ResourceReader {
 	
 	private HashMap<String, String> data;
 	private String filename;
+	private String name;
 	
+	//if there's only one object in the file
 	public ResourceReader(FileHandle f) {
-		filename = f.name();
-		data = readResource(f);
+		this(removeWhitespace(f.readString()));
+	}
+	
+	//for a string of one object
+	private ResourceReader(String data) {
+		if (data.endsWith("}")) data = data.substring(0, data.length() - 2);
+		String[] s = data.split("\\:\\{");
+		if (s.length != 2) System.out.println("Failed to split the string " + data);
+		this.name = s[0];
+		this.data = readData(s[1]);
+	}
+	
+	// read a file of one or more objects
+	public static ResourceReader[] readObjectList(FileHandle f) {
+		if (f == null || !f.exists()) {
+			System.out.println("WARNING: couldn't find file " + f.name());
+			return new ResourceReader[0];
+		} else {
+			String data = f.readString();
+			if (data.endsWith("}")) data = data.substring(0, data.length() - 2);
+			
+			String[]     objects = removeWhitespace(data).split("}");
+			ResourceReader[] out = new ResourceReader[objects.length];
+			
+			for (int i = 0; i < objects.length; i++) {
+				out[i] = new ResourceReader(objects[i]);
+			}
+			
+			return out;
+		}
+	}
+	
+	private static String removeWhitespace(String s) {
+		return s.replaceAll("\\s+","");
+	}
+	
+	public String getObjectName() {
+		return name;
 	}
 	
 	public String getString(String name) {
@@ -47,9 +80,9 @@ public class ResourceReader {
 	public String[] getList(String name, boolean removeWhitespace) {
 		if (!data.containsKey(name)) {
 			System.out.println("WARNING: couldn't find list " + name);
-			return null;
+			return new String[0];
 		}
-		String[] d = getString(name).split(", ");
+		String[] d = getString(name).split(",");
 		if (removeWhitespace) {
 			for (int i = 0; i < d.length; i++) {
 				d[i] = d[i].replaceAll("\\s+","");
@@ -62,20 +95,18 @@ public class ResourceReader {
 		return data.keySet().toArray(new String[data.size()]);
 	}
 	
-	private HashMap<String, String> readResource(FileHandle f) {
-		if (!f.exists()) System.out.println("This file does not exist!");
-		//filename = Gdx.files.internal("assets/" + filename).file().getAbsolutePath().replace("desktop",  "core"); //TODO: test this thoroughly
+	// if the object is a string already
+	private static HashMap<String, String> readData(String data) {
 		HashMap<String, String> out = new HashMap<String, String>();
-		String read = f.readString();
-		if (read == null) {
-			System.out.println("there was an error loading tileType " + f + ", absolute path: " + f.file().getAbsolutePath());
-			return null;
+		
+		if (data.endsWith(";")) data = data.substring(0, data.length() - 1);
+		
+		String[] properties = data.split(";");
+		for (String s : properties) {
+			String[] ss = s.split(":");
+			out.put(removeWhitespace(ss[0]), removeWhitespace(ss[1]));
 		}
-		String[] in = read.split("\n");
-		for (String s : in) {
-			String[] ss = s.split(": ");
-			out.put(ss[0], ss[1]);
-		}
+		
 		return out;
 	}
 }

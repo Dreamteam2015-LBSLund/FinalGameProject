@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.frameworkTest;
 
+import java.util.HashMap;
+
 import com.dreamteam.villageTycoon.characters.Controller;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
 import com.dreamteam.villageTycoon.characters.SabotageKitType;
@@ -18,6 +20,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
+import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.TileType;
 
 public class TestScene extends Scene {
@@ -30,7 +33,9 @@ public class TestScene extends Scene {
 		
 		map = new Map();
 		
-		//addObject(new TestObject(AssetManager.getTexture("test")));
+		HashMap<String, PropType> propTypes = PropType.loadAll();
+		
+		addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
 		//addObject(new TestObject(AssetManager.getTexture("test")));
 		//addObject(new Character(new Vector2(0, 0), new Animation(AssetManager.getTexture("test"))));

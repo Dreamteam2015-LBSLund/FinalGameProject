@@ -22,8 +22,7 @@ public class TileType {
 	//ArrayList<Resource> 
 	
 	//should only be called on startup!
-	public TileType(FileHandle f) {
-		ResourceReader r = new ResourceReader(f);
+	public TileType(ResourceReader r) {
 		isWalkable = r.getBool("isWalkable");
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
@@ -35,11 +34,8 @@ public class TileType {
 
 	public static ArrayList<TileType> loadAll() {
 		ArrayList<TileType> out = new ArrayList<TileType>();
-		String[] files = Gdx.files.internal("tiletypes/index").readString().split("\n");
-		System.out.println(files.length);
-		for (String s : files) {
-			out.add(new TileType(Gdx.files.internal("tiletypes/" + s.replaceAll("\\s+",""))));
-			System.out.println("Loaded tile type " + out.get(out.size() - 1).getName());
+		for (ResourceReader r : ResourceReader.readObjectList(Gdx.files.internal("tiletypes.gd"))) {
+			out.add(new TileType(r));
 		}
 		return out;
 	}

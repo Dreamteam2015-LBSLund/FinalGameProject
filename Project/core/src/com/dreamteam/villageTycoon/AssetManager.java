@@ -20,7 +20,7 @@ public abstract class AssetManager {
 		regions = new HashMap<String, TextureRegion>();
 		Texture spriteSheet = new Texture("textures/spritesheet.png");
 		
-		ResourceReader r = new ResourceReader(Gdx.files.internal("textures/data.t"));
+		ResourceReader r = new ResourceReader(Gdx.files.internal("textures/data.gd"));
 		for (String s : r.getAllKeys()) {
 			String[] c = r.getList(s, true);
 			regions.put(s, new TextureRegion(spriteSheet, Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3])));
