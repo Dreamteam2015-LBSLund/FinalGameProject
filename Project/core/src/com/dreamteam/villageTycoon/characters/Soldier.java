@@ -80,7 +80,7 @@ public class Soldier extends Character {
 			}
 		}
 	}
-	
+
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
 		if(showInventory) inventory.drawUi(batch);

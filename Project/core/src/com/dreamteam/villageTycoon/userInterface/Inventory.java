@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
 import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.framework.Animation;
@@ -54,6 +55,7 @@ public class Inventory {
 		for(SabotageKit s : soldier.getSabotageKits()) {
 			s.getIcon().draw(batch);
 		}
+		AssetManager.font.draw(batch, "AYYasdasdLAMO", 0, 0);
 	}
 	
 	public int getEquipedSabotageKit() {

@@ -20,19 +20,26 @@ public class Map {
 		propTypes = PropType.loadAll();
 
 		tiles = new Tile[WIDTH][HEIGHT];
-		int[][] map = generateMap();
+		String[][] map = generateMap();
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(tileTypes.keySet().toArray()[map[x][y]])); // tileType is null since keys are strings, not ints
+				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(map[x][y])); // tileType is null since keys are strings, not ints
 			}
 		}
 	}
 	
-	public int[][] generateMap() {
+	public String[][] generateMap() {
 		// I'll start by doing something somewhat simple so that the project progesses towards the minimal viable product and then I can make it more advanced later
 		Random random = new Random();
 		
+		final int TREE = 3;
+		final int WATER = 1;
+		final int DIRT = 2;
+		final int GRASS = 0;
+		
 		int[][] map = new int[WIDTH][HEIGHT];
+		
+		String[][] mapString = new String[WIDTH][HEIGHT];
 		
 		Point[] lakes = new Point[3];
 		Point[] villages = new Point[4];
@@ -41,7 +48,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = 3; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead.
+				map[x][y] = 3; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Så kallat strings eller
 			}
 		}
 		
@@ -73,7 +80,23 @@ public class Map {
 			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), 2, map);
 		}
 		
-		return map;
+		for (int x = 0; x < WIDTH; x++) {
+			for (int y = 0; y < HEIGHT; y++) {
+				if (map[x][y] == TREE) {
+					mapString[x][y] = "treeTrunk";
+				} else if (map[x][y] == WATER) {
+					mapString[x][y] = "Water";
+				}	else if (map[x][y] == DIRT) {
+					mapString[x][y] = "Dirt";
+				}	else if (map[x][y] == GRASS) {
+					mapString[x][y] = "Grass";
+				} else {
+					mapString[x][y] = "Grass";
+				}
+			}
+		}
+
+		return mapString;
 	}
 	
 	public int[][] field(int x, int y, int size, int amountOfPlots, int tile, int[][] mapToEdit) {
