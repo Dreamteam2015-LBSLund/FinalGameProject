@@ -1,6 +1,6 @@
 # Tech Levels
 
-### Nivå 1
+## Nivå 1
 #### Byggnader:
 - Litet bostadshus
 - Farm
@@ -16,7 +16,7 @@
 - Fackla (eld) 
 
 
-### Nivå 2
+## Nivå 2
 #### Byggnader:
 - Större, säkrare hus
 - Bättre farm (Mer mat)
@@ -31,7 +31,7 @@
 - Molotov
 
 
-### Nivå 3
+## Nivå 3
 #### Byggnader:
 - Stort hus
 - Mjölkvarn
