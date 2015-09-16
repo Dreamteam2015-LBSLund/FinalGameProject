@@ -33,7 +33,7 @@ public class TestScene extends Scene {
 		
 		map = new Map();
 		
-		HashMap<String, PropType> propTypes = PropType.loadAll();
+		
 		
 		addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());

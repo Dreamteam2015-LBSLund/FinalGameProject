@@ -1,6 +1,7 @@
 package com.dreamteam.villageTycoon.map;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,17 +12,18 @@ import com.dreamteam.villageTycoon.framework.Point;
 public class Map {
 	final static int WIDTH = 100, HEIGHT = 100;
 	private Tile[][] tiles;
-	
-	private ArrayList<TileType> tileTypes;
+	private HashMap<String, PropType> propTypes;
+	private HashMap<String, TileType> tileTypes;
 	
 	public Map() {
 		tileTypes = TileType.loadAll();
-		//TODO: Tom's map generation goes here
+		propTypes = PropType.loadAll();
+
 		tiles = new Tile[WIDTH][HEIGHT];
 		int[][] map = generateMap();
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(map[x][y]));
+				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(tileTypes.keySet().toArray()[map[x][y]])); // tileType is null since keys are strings, not ints
 			}
 		}
 	}

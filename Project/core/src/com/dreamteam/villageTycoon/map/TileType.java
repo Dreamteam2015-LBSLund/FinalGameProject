@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.map;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -32,10 +33,11 @@ public class TileType {
 		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
 
-	public static ArrayList<TileType> loadAll() {
-		ArrayList<TileType> out = new ArrayList<TileType>();
+	public static HashMap<String, TileType> loadAll() {
+		HashMap<String, TileType> out = new HashMap<String, TileType>();
 		for (ResourceReader r : ResourceReader.readObjectList(Gdx.files.internal("tiletypes.gd"))) {
-			out.add(new TileType(r));
+			out.put(r.getObjectName(), new TileType(r));
+			System.out.println("loaded tileType " + r.getObjectName());
 		}
 		return out;
 	}
