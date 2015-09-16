@@ -6,6 +6,8 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class ResourceReader {
 	
+	// Wiki (in swedish): https://github.com/Dreamteam2015-LBSLund/Village-Tycoon-RTS/wiki/ResourceReader
+	
 	private HashMap<String, String> data;
 	private String filename;
 	private String name;
