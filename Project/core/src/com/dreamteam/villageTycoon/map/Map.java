@@ -39,7 +39,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = 3;
+				map[x][y] = 3; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead.
 			}
 		}
 		
