@@ -5,26 +5,31 @@
 - Litet bostadshus
 - Farm
 - Gruva (järn)
-- Woodshop
+- Woodshop  
+
 #### Vapen:
 - Pilbågar
 - Armborst
 - Svärd
+
 #### Sabotagekit:
-- Fackla (eld)
-- 
+- Fackla (eld) 
+
 
 ### Nivå 2
 #### Byggnader:
 - Större, säkrare hus
 - Bättre farm (Mer mat)
 - "Exploding Powder"-Gruva
+
 #### Vapen:
 - Musköter
 - Bättre svärd
+
 #### Sabotage:
 - Bomber (stubin)
 - Molotov
+
 
 ### Nivå 3
 #### Byggnader:
@@ -32,11 +37,13 @@
 - Mjölkvarn
 - Bageri
 - Diamantgruva
+
 #### Vapen:
 - Automatvapen
 - Riotshields och batonger
 - Krypskyttegevär
 - Raketgevär
+
 #### Sabotage:
 - Bomb (fjärravlöst)
 - Napalm
