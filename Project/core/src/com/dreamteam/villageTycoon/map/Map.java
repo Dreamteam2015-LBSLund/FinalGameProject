@@ -30,19 +30,10 @@ public class Map {
 	
 	public String[][] generateMap() {
 		// I'll start by doing something somewhat simple so that the project progesses towards the minimal viable product and then I can make it more advanced later
-		Random random = new Random();
-		
-		final int TREE = 3;
-		final int WATER = 1;
-		final int DIRT = 2;
-		final int GRASS = 0;
-		
-		String[] tileTypes = new String[] { "Grass", "Water", "Dirt", "treeTrunk" };
-		
-		int[][] map = new int[WIDTH][HEIGHT];
-		
-		String[][] mapString = new String[WIDTH][HEIGHT];
-		
+		Random random = new Random();	
+
+		String[][] map = new String[WIDTH][HEIGHT];
+
 		Point[] lakes = new Point[3];
 		Point[] villages = new Point[4];
 		
@@ -50,7 +41,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = 3; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Så kallat strings eller
+				map[x][y] = "treeTrunk"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Så kallat strings eller
 			}
 		}
 		
@@ -58,12 +49,12 @@ public class Map {
 			int plotX = random.nextInt(WIDTH);
 			int plotY = random.nextInt(HEIGHT);
 			
-			map[plotX][plotY] = 0;
+			map[plotX][plotY] = "Grass";
 		}
 		
 		for (int i = 0; i < lakes.length; i++) {
 			lakes[i] = new Point(random.nextInt(WIDTH), random.nextInt(HEIGHT));
-			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, 1, map);
+			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);
 		}
 		
 		for (int i = 0; i < villages.length; i++) {
@@ -79,20 +70,14 @@ public class Map {
 				}
 			}
 			
-			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), 2, map);
+			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
 		}
 		
-		for (int x = 0; x < WIDTH; x++) {
-			for (int y = 0; y < HEIGHT; y++) {
-				mapString[x][y] = tileTypes[map[x][y]];
-			}
-		}
-
-		return mapString;
+		return map;
 	}
 	
-	public int[][] field(int x, int y, int size, int amountOfPlots, int tile, int[][] mapToEdit) {
-		int[][] map = mapToEdit;
+	public String[][] field(int x, int y, int size, int amountOfPlots, String tile, String[][] mapToEdit) {
+		String[][] map = mapToEdit;
 		
 		Random random = new Random();
 		
@@ -109,8 +94,8 @@ public class Map {
 		return map;
 	}
 	
-	public int[][] circle(int x, int y, int diameter, int tile, int[][] mapToEdit) {
-		int[][] map = mapToEdit;
+	public String[][] circle(int x, int y, int diameter, String tile, String[][] mapToEdit) {
+		String[][] map = mapToEdit;
 		
 		for(int y2 = 0; y2 < diameter*2; y2++){
 			for(int x2 = 0; x2 < diameter*2; x2++){
