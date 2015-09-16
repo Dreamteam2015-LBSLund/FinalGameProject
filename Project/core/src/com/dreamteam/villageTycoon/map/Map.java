@@ -37,6 +37,8 @@ public class Map {
 		final int DIRT = 2;
 		final int GRASS = 0;
 		
+		String[] tileTypes = new String[] { "Grass", "Water", "Dirt", "treeTrunk" };
+		
 		int[][] map = new int[WIDTH][HEIGHT];
 		
 		String[][] mapString = new String[WIDTH][HEIGHT];
@@ -82,17 +84,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				if (map[x][y] == TREE) {
-					mapString[x][y] = "treeTrunk";
-				} else if (map[x][y] == WATER) {
-					mapString[x][y] = "Water";
-				}	else if (map[x][y] == DIRT) {
-					mapString[x][y] = "Dirt";
-				}	else if (map[x][y] == GRASS) {
-					mapString[x][y] = "Grass";
-				} else {
-					mapString[x][y] = "Grass";
-				}
+				mapString[x][y] = tileTypes[map[x][y]];
 			}
 		}
 
