@@ -1,6 +1,8 @@
 package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.framework.Animation;
 
 public class SabotageKitType {
 	public enum ActivationType { FUSE, REMOTE, INSTANT };
@@ -12,20 +14,23 @@ public class SabotageKitType {
 	// TODO: Add list of what type of resources is need to build it
 	
 	private Sprite icon;
+	private Animation inGameSprite;
 	
 	private String name;
 	
 	private float fireDuration; 
 	private float explosionRadius;
 	
-	public SabotageKitType(String name, float fireDuration, float explosionRadius, Sprite icon, ActivationType activationType, EffectType effectType) {
+	public SabotageKitType(String name, float fireDuration, float explosionRadius, String icon, ActivationType activationType, EffectType effectType) {
 		this.name = name;
 		this.fireDuration = fireDuration;
 		this.explosionRadius = explosionRadius;
 		this.activationType = activationType;
 		this.effectType = effectType;
-		this.icon = icon;
+		this.icon = new Sprite(AssetManager.getTexture(icon));
 		this.icon.setSize(2, 2);
+		
+		this.inGameSprite = new Animation(AssetManager.getTexture(icon+"inGame"));
 	}
 	
 	public ActivationType getActivationType() {

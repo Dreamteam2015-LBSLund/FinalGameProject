@@ -19,6 +19,7 @@ public class Controller extends GameObject {
 	private Rectangle selectionRectangle = new Rectangle(0, 0, 0, 0);
 
 	private Vector2 selectionPoint;
+	private Vector2[] waypoints;
 	
 	private boolean mousePressed;
 	private boolean rightMouseIsPressed;
@@ -74,8 +75,12 @@ public class Controller extends GameObject {
 			}
 		}
 		
+		waypoints = new Vector2[selectedCharacters.size()];
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
+				int currentUnit = 0;
+				
 				for (GameObject c : getScene().getObjects()) {
 					if (c instanceof Character) {
 						if (c instanceof Soldier) {
@@ -86,6 +91,7 @@ public class Controller extends GameObject {
 							((Character)c).setPath(getScene().getWorldMouse());
 						}
 					}
+					currentUnit += 1;
 				}
 			}
 			rightMouseIsPressed = true;
