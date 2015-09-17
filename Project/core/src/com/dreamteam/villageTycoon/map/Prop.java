@@ -13,5 +13,8 @@ public class Prop extends GameObject {
 	public Prop(Vector2 position, PropType type) {
 		super(position, new Animation(type.getTexture()));
 		this.type = type;
+		setSize(new Vector2(type.getTexture().getRegionWidth() / 32f, type.getTexture().getRegionHeight() / 32f));
+		setOriginCenter();
+		setPosition(getPosition());
 	}
 }

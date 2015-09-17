@@ -31,7 +31,7 @@ public class TestScene extends Scene {
 
 		AssetManager.load();
 		
-		map = new Map();
+		map = new Map(this);
 		
 		
 		

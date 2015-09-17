@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.framework.Point;
+import com.dreamteam.villageTycoon.framework.Scene;
 
 public class Map {
 	final static int WIDTH = 100, HEIGHT = 100;
@@ -15,15 +16,15 @@ public class Map {
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
 	
-	public Map() {
+	public Map(Scene scene) {
 		tileTypes = TileType.loadAll();
-		propTypes = PropType.loadAll();
+		propTypes = PropType.getTypes();
 
 		tiles = new Tile[WIDTH][HEIGHT];
 		String[][] map = generateMap();
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(map[x][y])); // tileType is null since keys are strings, not ints
+				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(map[x][y]), scene); // tileType is null since keys are strings, not ints
 			}
 		}
 	}

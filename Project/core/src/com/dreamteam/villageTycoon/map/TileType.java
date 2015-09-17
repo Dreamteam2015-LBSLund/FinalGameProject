@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
@@ -17,6 +18,7 @@ public class TileType {
 	private boolean isWalkable, isBuildable;
 	private String name;
 	private String[] resources;
+	private String[] props;
 	private TextureRegion sprite; // transition tiles?
 	private float gCost; // for pathfinding
 	
@@ -27,8 +29,8 @@ public class TileType {
 		isWalkable = r.getBool("isWalkable");
 		isBuildable = r.getBool("isBuildable");
 		name = r.getString("name");
-		resources = r.getList("resources"); // should be a list of resources, which means they should be loaded before
-		if (resources == null) resources = new String[0];
+		resources = r.getList("resources"); 
+		props = r.getList("props");
 		if (isWalkable) gCost = r.getFloat("gCost");
 		sprite = AssetManager.getTexture(r.getString("sprite")); // assets maste alltsa laddas innan tiles (forst antagligen)
 	}
@@ -40,6 +42,22 @@ public class TileType {
 			System.out.println("loaded tileType " + r.getObjectName());
 		}
 		return out;
+	}
+	
+	//does the randomization and returns a set of props that should be spawned
+	public String[] getProps() {
+		ArrayList<String> out = new ArrayList<String>();
+		for (int i = 0; i < props.length; i += 2) {
+			try {
+				if (MathUtils.randomBoolean(Float.parseFloat(props[i + 1]))) {
+					out.add(props[i]);
+				}	
+			} 
+			catch (Exception e) {
+				System.out.println("WARNING: there's an error in props for tileType " + name);
+			}
+		}
+		return out.toArray(new String[out.size()]);
 	}
 	
 	public float getG() {
