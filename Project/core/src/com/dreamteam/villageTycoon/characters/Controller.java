@@ -71,28 +71,20 @@ public class Controller extends GameObject {
 		
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
-				selectedCharacters.add((Character) c);
+				if(((Character)c).getSelected())
+						selectedCharacters.add((Character) c);
 			}
 		}
 		
 		waypoints = new Vector2[selectedCharacters.size()];
 		
+		for(int i = 0; i < waypoints.length; i++) {
+			waypoints[i] = new Vector2(i, 0);
+		}
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
-				int currentUnit = 0;
-				
-				for (GameObject c : getScene().getObjects()) {
-					if (c instanceof Character) {
-						if (c instanceof Soldier) {
-							canMoveUnits = !((Soldier)c).getShowInventroy();
-						}
-						if(((Character)c).getSelected() && canMoveUnits) {
-							// TODO: Make cluster of waypoints so that the charachters don't cluster
-							((Character)c).setPath(getScene().getWorldMouse());
-						}
-					}
-					currentUnit += 1;
-				}
+				addWaypoints();
 			}
 			rightMouseIsPressed = true;
 		} else {
@@ -126,6 +118,32 @@ public class Controller extends GameObject {
 		selectionRectangle.normalize();
 		
 		selectedCharacters.clear();
+	}
+	
+	public void addWaypoints() {
+		int currentUnit = 0;
+		int newLineCount = 0;
+		int currentLine = 0;
+		
+		for (GameObject c : getScene().getObjects()) {
+			if (c instanceof Character) {
+				if (c instanceof Soldier) {
+					canMoveUnits = !((Soldier)c).getShowInventroy();
+				}
+				if(((Character)c).getSelected() && canMoveUnits) {
+					// TODO: Make cluster of waypoints so that the charachters don't cluster
+					((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x-currentLine, waypoints[currentUnit].y+currentLine)));
+				}
+				
+				if (newLineCount >= waypoints.length/2) {
+					currentLine += 1;
+					newLineCount = 0;
+				}
+				
+				newLineCount += 1;
+				currentUnit += 1;
+			}
+		}
 	}
 	
 	public void cameraMovment(float deltaTime) {
