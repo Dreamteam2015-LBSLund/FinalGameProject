@@ -14,12 +14,19 @@ public class PathFinder {
 	private Tile[][] map;
 	private Vector2[] path;
 	private Node[][] nodes;
+	private Vector2 target;
 	
-	public PathFinder(Vector2 start, Vector2 end, Tile[][] map) { // put the search in a new thread and add a callback for when it's done
+	public PathFinder(Vector2 start, Vector2 end, Tile[][] map) {
+		this(start, end, map, true);
+	}
+	
+	public PathFinder(Vector2 start, Vector2 end, Tile[][] map, boolean align) { // put the search in a new thread and add a callback for when it's done
 		startTile  = new Point((int)(start.x / Tile.WIDTH), (int)(start.y / Tile.HEIGHT));
 		endTile  = new Point((int)(end.x / Tile.WIDTH), (int)(end.y / Tile.HEIGHT));
 		this.map = map;
 		nodes = new Node[map.length][map[0].length];
+		
+		if (align) target = end;
 	}
 	
 	private Node getNode(int x, int y) {
@@ -68,7 +75,9 @@ public class PathFinder {
 			}
 		}
 		//System.out.println("time to find path: " + (System.nanoTime() - time) / 1E6f + " ms before reconstruction");
-		return reconstruct(start, end);
+		ArrayList<Vector2> out = reconstruct(start, end);
+		if (target != null) out.add(target);
+		return out;
 	}
 	
 	private ArrayList<Vector2> reconstruct(Node start, Node end) {
@@ -82,6 +91,7 @@ public class PathFinder {
 			v.add(0, new Vector2((nodes.get(i).index.x + .5f) * Tile.WIDTH, (nodes.get(i).index.y + .5f) * Tile.HEIGHT));
 		}
 		v.remove(start);
+		if (target != null) v.remove(end);
 		return v;
 	}
 	
