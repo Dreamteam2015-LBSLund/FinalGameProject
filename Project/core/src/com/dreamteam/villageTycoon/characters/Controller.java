@@ -82,6 +82,8 @@ public class Controller extends GameObject {
 			waypoints[i] = new Vector2(i, 0);
 		}
 		
+		System.out.println(selectedCharacters.size());
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
 				addWaypoints();
@@ -129,21 +131,23 @@ public class Controller extends GameObject {
 		
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
-				if (c instanceof Soldier) {
-					canMoveUnits = !((Soldier)c).getShowInventroy();
-				}
-				if(((Character)c).getSelected() && canMoveUnits) {
-					// TODO: Make cluster of waypoints so that the charachters don't cluster
-					((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x-currentLine, waypoints[currentUnit].y+currentLine)));
-				}
+				if(((Character)c).getSelected()) {
+					if (c instanceof Soldier) {
+						canMoveUnits = !((Soldier)c).getShowInventroy();
+					}
+					if(canMoveUnits) {
+						// TODO: Make cluster of waypoints so that the charachters don't cluster
+						((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x-currentLine, waypoints[currentUnit].y+currentLine)));
+					}
 				
-				if (newLineCount >= selectedCharacters.size()/2) {
-					currentLine += 1;
-					newLineCount = 0;
+					if (newLineCount >= selectedCharacters.size()/2) {
+						currentLine += 1;
+						newLineCount = 0;
+					}
+					
+					newLineCount += 1;
+					currentUnit += 1;
 				}
-				
-				newLineCount += 1;
-				currentUnit += 1;
 			}
 		}
 	}
