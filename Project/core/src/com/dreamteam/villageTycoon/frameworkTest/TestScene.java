@@ -65,6 +65,26 @@ public class TestScene extends Scene {
 				new SabotageKit[]{ 
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
 	
 	}
 	

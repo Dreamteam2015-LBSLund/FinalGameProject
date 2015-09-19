@@ -121,6 +121,8 @@ public class Controller extends GameObject {
 	}
 	
 	public void addWaypoints() {
+		// TODO: Move a waypoint if it lands on a unwalkable tile
+		
 		int currentUnit = 0;
 		int newLineCount = 0;
 		int currentLine = 0;
@@ -135,7 +137,7 @@ public class Controller extends GameObject {
 					((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x-currentLine, waypoints[currentUnit].y+currentLine)));
 				}
 				
-				if (newLineCount >= waypoints.length/2) {
+				if (newLineCount >= selectedCharacters.size()/2) {
 					currentLine += 1;
 					newLineCount = 0;
 				}
