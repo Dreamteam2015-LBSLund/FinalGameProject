@@ -143,6 +143,8 @@ public class Controller extends GameObject {
 				if(((Character)c).getSelected()) {
 					if (c instanceof Soldier) {
 						canMoveUnits = !((Soldier)c).getShowInventroy();
+						
+						if(!canMoveUnits) break;
 					}
 					if(canMoveUnits) {
 						((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x, waypoints[currentUnit].y)));
