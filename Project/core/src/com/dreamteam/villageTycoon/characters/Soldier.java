@@ -57,6 +57,12 @@ public class Soldier extends Character {
 		attack();
 		
 		if(showInventory) {
+			for (GameObject c : getScene().getObjects()) {
+				if (c instanceof Character) {
+					((Character) c).setSelected(false);
+				}
+			}
+			
 			inventory.update(deltaTime);
 			equipedSabotageKit = inventory.getEquipedSabotageKit();
 		}
