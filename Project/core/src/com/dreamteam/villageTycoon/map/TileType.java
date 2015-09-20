@@ -1,11 +1,9 @@
 package com.dreamteam.villageTycoon.map;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.dreamteam.villageTycoon.AssetManager;
