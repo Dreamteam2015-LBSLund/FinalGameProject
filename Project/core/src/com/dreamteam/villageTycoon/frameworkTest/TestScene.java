@@ -35,7 +35,7 @@ public class TestScene extends Scene {
 		
 		
 		
-		addObject(new TestObject(AssetManager.getTexture("grassTile")));
+		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
 		//addObject(new TestObject(AssetManager.getTexture("test")));
 		//addObject(new Character(new Vector2(0, 0), new Animation(AssetManager.getTexture("test"))));
@@ -45,6 +45,41 @@ public class TestScene extends Scene {
 		
 		// x-types will be pre-defined so it won't look this messy later
 		
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
 		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 				new SabotageKit[]{ 

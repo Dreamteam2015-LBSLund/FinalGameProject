@@ -71,28 +71,18 @@ public class Controller extends GameObject {
 		
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
-				selectedCharacters.add((Character) c);
+				if(((Character)c).getSelected())
+						selectedCharacters.add((Character) c);
 			}
 		}
 		
 		waypoints = new Vector2[selectedCharacters.size()];
 		
+		System.out.println(selectedCharacters.size());
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
-				int currentUnit = 0;
-				
-				for (GameObject c : getScene().getObjects()) {
-					if (c instanceof Character) {
-						if (c instanceof Soldier) {
-							canMoveUnits = !((Soldier)c).getShowInventroy();
-						}
-						if(((Character)c).getSelected() && canMoveUnits) {
-							// TODO: Make cluster of waypoints so that the charachters don't cluster
-							((Character)c).setPath(getScene().getWorldMouse());
-						}
-					}
-					currentUnit += 1;
-				}
+				addWaypoints();
 			}
 			rightMouseIsPressed = true;
 		} else {
@@ -126,6 +116,48 @@ public class Controller extends GameObject {
 		selectionRectangle.normalize();
 		
 		selectedCharacters.clear();
+	}
+	
+	public void addWaypoints() {
+		// TODO: Move a waypoint if it lands on a unwalkable tile
+		
+		int currentUnit = 0;
+		int newLineCount = 0;
+		int currentLine = 0;
+		int lineOffset = 0;
+		
+		for(int i = 0; i < waypoints.length; i++) {
+			waypoints[i] = new Vector2(i-lineOffset, currentLine);
+			
+			if(newLineCount >= waypoints.length/2) {
+				currentLine += 1;
+				lineOffset = currentLine * waypoints.length/2; 
+				newLineCount = 0;
+			}
+			
+			newLineCount += 1;
+		}
+		
+		for (GameObject c : getScene().getObjects()) {
+			if (c instanceof Character) {
+				if(((Character)c).getSelected()) {
+					if (c instanceof Soldier) {
+						canMoveUnits = !((Soldier)c).getShowInventroy();
+					}
+					if(canMoveUnits) {
+						((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x, waypoints[currentUnit].y)));
+					}
+				
+					//if (newLineCount >= selectedCharacters.size()/2) {
+					//	currentLine += 1;
+					//	newLineCount = 0;
+					//}
+					
+					//newLineCount += 1;
+					currentUnit += 1;
+				}
+			}
+		}
 	}
 	
 	public void cameraMovment(float deltaTime) {

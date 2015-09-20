@@ -38,7 +38,7 @@ public class Map {
 		Point[] lakes = new Point[3];
 		Point[] villages = new Point[4];
 		
-		int treeSparseness = 21100;
+		int treeSparseness = 2110000;
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
