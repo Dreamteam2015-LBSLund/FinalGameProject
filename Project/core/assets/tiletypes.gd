@@ -3,7 +3,7 @@ Dirt: {
 	isWalkable: true;
 	isBuildable: true;
 	sprite: dirtTile;
-	props: stone, .4;
+	props: stone, .2;
 	gCost: 1;
 }
 
@@ -12,7 +12,7 @@ Grass: {
 	isWalkable: true;
 	isBuildable: true;
 	resources: wood, iron, diamond;
-	props: tree, .3, stone, .1;
+	props: tree, .7, stone, .7;
 	sprite: grassTile;
 	gCost: 0.8;
 }

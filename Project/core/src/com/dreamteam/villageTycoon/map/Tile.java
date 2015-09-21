@@ -16,9 +16,9 @@ public class Tile {
 		this.type = type;
 		this.position = position;
 
-		String[] props = type.getProps();
-		for (int i = 0; i < props.length; i++) {
-			scene.addObject(new Prop(position.cpy().add(new Vector2(WIDTH / 2, HEIGHT / 2).add(new Vector2(MathUtils.random(-.2f, .2f), MathUtils.random(-.2f, .2f)))), PropType.getType(props[i])));
+		String prop = type.getProps();
+		if (prop != null) {
+			scene.addObject(new Prop(position.cpy().add(new Vector2(WIDTH / 2, HEIGHT / 2).add(new Vector2(MathUtils.random(-.2f, .2f), MathUtils.random(-.2f, .2f)))), PropType.getType(prop)));
 		}
 	}
 	

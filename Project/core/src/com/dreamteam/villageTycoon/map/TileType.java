@@ -43,19 +43,32 @@ public class TileType {
 	}
 	
 	//does the randomization and returns a set of props that should be spawned
-	public String[] getProps() {
-		ArrayList<String> out = new ArrayList<String>();
-		for (int i = 0; i < props.length; i += 2) {
+	public String getProps() {
+		float chanceSum = 0;
+		for (int i = 1; i < props.length; i += 2) {
 			try {
-				if (MathUtils.randomBoolean(Float.parseFloat(props[i + 1]))) {
-					out.add(props[i]);
-				}	
+				chanceSum += Float.parseFloat(props[i]);
 			} 
 			catch (Exception e) {
 				System.out.println("WARNING: there's an error in props for tileType " + name);
 			}
 		}
-		return out.toArray(new String[out.size()]);
+		if (MathUtils.randomBoolean(chanceSum)) {
+			for (int t = 0; t < 10; t++) {
+				for (int i = 0; i < props.length; i += 2) {
+					try {
+						if (MathUtils.randomBoolean(Float.parseFloat(props[i + 1]) / (chanceSum))) {
+							return props[i];
+						}	
+					} 
+					catch (Exception e) {
+						System.out.println("WARNING: there's an error in props for tileType " + name);
+					}
+				}
+			}
+			System.out.println("for some reason a prop couln't be selected, tiletype: " + name);
+		}
+		return null;
 	}
 	
 	public float getG() {
