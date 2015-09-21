@@ -1,4 +1,4 @@
-package buildings;
+package com.dreamteam.villageTycoon.buildings;
 
 import java.util.HashMap;
 
