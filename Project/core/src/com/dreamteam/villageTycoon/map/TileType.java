@@ -26,7 +26,7 @@ public class TileType {
 	public TileType(ResourceReader r) {
 		isWalkable = r.getBool("isWalkable");
 		isBuildable = r.getBool("isBuildable");
-		name = r.getString("name");
+		name = r.getObjectName();
 		resources = r.getList("resources"); 
 		props = r.getList("props");
 		if (isWalkable) gCost = r.getFloat("gCost");

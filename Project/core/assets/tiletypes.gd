@@ -1,5 +1,4 @@
 Dirt: {
-	name: Dirt;
 	isWalkable: true;
 	isBuildable: true;
 	sprite: dirtTile;
@@ -8,17 +7,15 @@ Dirt: {
 }
 
 Grass: {
-	name: Grass;
 	isWalkable: true;
 	isBuildable: true;
 	resources: wood, iron, diamond;
-	props: tree, .7, stone, .7;
+	props: tree, .3, stone, .1;
 	sprite: grassTile;
 	gCost: 0.8;
 }
 
 treeTrunk: {
-	name: Tree;
 	isWalkable: false;
 	isBuildable: false;
 	resources: tree;
@@ -26,7 +23,6 @@ treeTrunk: {
 }
 
 Water: {
-	name: Water;
 	isWalkable: false;
 	isBuildable: false;
 	resources: water;
