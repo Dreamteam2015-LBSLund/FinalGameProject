@@ -78,17 +78,6 @@ public class Controller extends GameObject {
 		
 		waypoints = new Vector2[selectedCharacters.size()];
 		
-		System.out.println(selectedCharacters.size());
-		
-		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
-			if(!rightMouseIsPressed) {
-				addWaypoints();
-			}
-			rightMouseIsPressed = true;
-		} else {
-			rightMouseIsPressed = false;
-		}
-		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
@@ -99,6 +88,27 @@ public class Controller extends GameObject {
 					} 
 				}
 			}
+		}
+		
+		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
+			if(!rightMouseIsPressed) {
+				canMoveUnits = true;
+				
+				for (GameObject c : getScene().getObjects()) {
+						if (c instanceof Soldier) {
+							canMoveUnits = !((Soldier)c).getShowInventroy();
+							
+							if(!canMoveUnits) {
+								break;
+					    }
+					}
+				}
+				
+				if(canMoveUnits) addWaypoints();
+			}
+			rightMouseIsPressed = true;
+		} else {
+			rightMouseIsPressed = false;
 		}
 	
 		for (GameObject s : getScene().getObjects()) {
@@ -141,11 +151,6 @@ public class Controller extends GameObject {
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
 				if(((Character)c).getSelected()) {
-					if (c instanceof Soldier) {
-						canMoveUnits = !((Soldier)c).getShowInventroy();
-						
-						if(!canMoveUnits) break;
-					}
 					if(canMoveUnits) {
 						((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x, waypoints[currentUnit].y)));
 					}
