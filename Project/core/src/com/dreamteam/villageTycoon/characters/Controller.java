@@ -82,7 +82,7 @@ public class Controller extends GameObject {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
 					if(!((Soldier)s).getShowInventroy()) {
-						if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)))) {
+						if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
 							((Soldier)s).setShowInventory(true);
 						}
 					} 
@@ -90,19 +90,18 @@ public class Controller extends GameObject {
 			}
 		}
 		
+		for (GameObject c : getScene().getObjects()) {
+			if (c instanceof Soldier) {
+				canMoveUnits = !((Soldier)c).getShowInventroy();
+			
+				if(!canMoveUnits) {
+					break;
+				}
+			}
+		}		
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
-				canMoveUnits = true;
-				
-				for (GameObject c : getScene().getObjects()) {
-						if (c instanceof Soldier) {
-							canMoveUnits = !((Soldier)c).getShowInventroy();
-							
-							if(!canMoveUnits) {
-								break;
-					    }
-					}
-				}
 				
 				if(canMoveUnits) addWaypoints();
 			}
@@ -137,7 +136,7 @@ public class Controller extends GameObject {
 		int lineOffset = 0;
 		
 		for(int i = 0; i < waypoints.length; i++) {
-			waypoints[i] = new Vector2(i-lineOffset, currentLine);
+			waypoints[i] = new Vector2(i-lineOffset, currentLine).add(getScene().getWorldMouse());
 			
 			if(newLineCount >= waypoints.length/2) {
 				currentLine += 1;
@@ -152,15 +151,9 @@ public class Controller extends GameObject {
 			if (c instanceof Character) {
 				if(((Character)c).getSelected()) {
 					if(canMoveUnits) {
-						((Character)c).setPath(getScene().getWorldMouse().add(new Vector2(waypoints[currentUnit].x, waypoints[currentUnit].y)));
+						((Character)c).setPath(waypoints[currentUnit]);
 					}
-				
-					//if (newLineCount >= selectedCharacters.size()/2) {
-					//	currentLine += 1;
-					//	newLineCount = 0;
-					//}
 					
-					//newLineCount += 1;
 					currentUnit += 1;
 				}
 			}
