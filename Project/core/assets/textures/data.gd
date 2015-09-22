@@ -9,5 +9,6 @@ Textures: {
 	treeTrunkTile: 103, 101, 32, 32;
 	stoneProp: 4, 139, 23, 17;
 	treeProp: 44, 138, 13, 17;
-	grassProp: 61, 140, 12, 15
+	grassProp: 61, 140, 12, 15;
+	error: 353, 24, 79, 42;
 }
