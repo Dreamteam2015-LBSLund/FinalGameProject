@@ -79,6 +79,17 @@ public class ResourceReader {
 		return getList(name, false);
 	}
 	
+	public int[] getIntList(String name) {
+		String[] s = getList(name);
+		int[] ints = new int[s.length];
+		try {
+			for (int i = 0; i < s.length; i++) ints[i] = Integer.parseInt(s[i]); 
+		} catch (Exception e) {
+			System.out.println("ERROR: formatting error in list " + name + ", couldn't parse to ints");
+		}
+		return ints;
+	}
+	
 	public String[] getList(String name, boolean removeWhitespace) {
 		if (!data.containsKey(name)) {
 			System.out.println("WARNING: couldn't find list " + name);
