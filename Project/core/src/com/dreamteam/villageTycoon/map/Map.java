@@ -7,6 +7,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Scene;
 
@@ -15,10 +16,12 @@ public class Map {
 	private Tile[][] tiles;
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
+	private HashMap<String, BuildingType> buildingTypes;
 	
 	public Map(Scene scene) {
 		tileTypes = TileType.loadAll();
 		propTypes = PropType.getTypes();
+		buildingTypes = BuildingType.getTypes();
 
 		tiles = new Tile[WIDTH][HEIGHT];
 		String[][] map = generateMap();
@@ -42,7 +45,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = "treeTrunk"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Så kallat strings eller
+				map[x][y] = "treeTrunk"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Sï¿½ kallat strings eller
 			}
 		}
 		
@@ -110,7 +113,7 @@ public class Map {
 		return map;
 	}
 	
-	// Visste inte vart jag skulle lägga den
+	// Visste inte vart jag skulle lï¿½gga den
 	public float getDistance(float x1, float y1, float x2, float y2){
 		float x = (x1 - x2);
 		float y = (y1 - y2);

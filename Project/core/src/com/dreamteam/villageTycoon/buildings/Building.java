@@ -5,8 +5,14 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 
 public class Building extends GameObject {
 
-	public Building(Vector2 position, BuildingType type) {
-		super(position, type.getSprite());
-	}
-	
+    private BuildingType type;
+    
+    public Building(Vector2 position, BuildingType type) {
+	super(position, type.getSprite());
+	this.type = type;
+    }
+    
+    public BuildingType getType() {
+	return type;
+    }
 }
