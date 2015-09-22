@@ -102,7 +102,6 @@ public class Controller extends GameObject {
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
-				
 				if(canMoveUnits) addWaypoints();
 			}
 			rightMouseIsPressed = true;
