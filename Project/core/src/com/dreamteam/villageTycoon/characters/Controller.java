@@ -31,7 +31,7 @@ public class Controller extends GameObject {
 	ArrayList<Character> selectedCharacters;
 	
 	public Controller() {
-		super(new Vector2(0, 0), new Animation(new Texture("badlogic.jpg")));
+		super(new Vector2(0, 0), new Animation(AssetManager.getTexture("selectionRectangle")));
 		setColor(new Color(0, 1, 0, 0.3f));
 		setDepth(1000);
 		selectionPoint = new Vector2();

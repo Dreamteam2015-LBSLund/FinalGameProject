@@ -11,4 +11,5 @@ Textures: {
 	treeProp: 44, 138, 13, 17;
 	grassProp: 61, 140, 12, 15;
 	error: 353, 24, 79, 42;
+	selectionRectangle: 0, 166, 291, 290;
 }
