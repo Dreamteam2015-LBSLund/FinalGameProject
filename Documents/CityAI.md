@@ -1,5 +1,8 @@
 # Fiendestäders AI
 
+Har det slutgiltiga målet att besegra spelaren (eller andra fiender?) genom att förstöra deras enheter och byggnader.  
+Behöver alltså veta hur detta ska gå till och hur den ska gå tillväga.
+
 - Bestämma vilka byggnader som ska byggas
   - När en resurs saknas
   - Finns det tillräckligt med resurser för att bygga?
