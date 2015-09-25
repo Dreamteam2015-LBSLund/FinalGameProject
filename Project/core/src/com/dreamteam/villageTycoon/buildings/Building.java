@@ -8,11 +8,11 @@ public class Building extends GameObject {
     private BuildingType type;
     
     public Building(Vector2 position, BuildingType type) {
-	super(position, type.getSprite());
-	this.type = type;
+    	super(position, type.getSprite());
+		this.type = type;
     }
     
     public BuildingType getType() {
-	return type;
+    	return type;
     }
 }
