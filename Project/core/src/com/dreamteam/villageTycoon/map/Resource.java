@@ -11,8 +11,9 @@ public class Resource {
 	private String name;
 	
 	public Resource(String name) {
-		if (!resources.contains(name)) {
-			System.out.println("ERROR: Resource " + name + " not recognized"); 
+		name = name.toLowerCase();
+		if (resources == null || !resources.contains(name)) {
+			System.out.println("ERROR: Resource " + name + " not recognized (or the list is null)"); 
 			this.name = "error";
 		} else {
 			this.name = name;

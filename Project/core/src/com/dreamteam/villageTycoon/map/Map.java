@@ -17,11 +17,14 @@ public class Map {
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
 	private HashMap<String, BuildingType> buildingTypes;
+
 	
 	public Map(Scene scene) {
+		Resource.getAll();
 		tileTypes = TileType.loadAll();
 		propTypes = PropType.getTypes();
 		buildingTypes = BuildingType.getTypes();
+		
 
 		tiles = new Tile[WIDTH][HEIGHT];
 		String[][] map = generateMap();
