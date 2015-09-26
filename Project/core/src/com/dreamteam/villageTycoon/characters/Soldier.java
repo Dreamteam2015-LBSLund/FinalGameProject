@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
-import com.dreamteam.villageTycoon.userInterface.Inventory;
+import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
 	enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
@@ -17,7 +17,7 @@ public class Soldier extends Character {
 	private AggressionState  aggressionState;
 	private Weapon weapon;
 	private SoldierType soldierType;
-	private Inventory inventory;
+	private SoldierInventory inventory;
 	
 	private float attackDistance;
 	private float shootAngle;
@@ -48,7 +48,7 @@ public class Soldier extends Character {
 		for(SabotageKit s : startSabotageKits) {
 			if(s != null) sabotageKits.add(s);
 		}
-		inventory = new Inventory(this);
+		inventory = new SoldierInventory(this);
 		setDepth(1);
 	}
 	
