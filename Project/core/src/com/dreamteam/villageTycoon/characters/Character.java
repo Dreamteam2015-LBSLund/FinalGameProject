@@ -103,6 +103,6 @@ public class Character extends GameObject {
 	}
 	
 	protected void setPath(Vector2 target) {
-		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath();
+		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);
 	}
 }

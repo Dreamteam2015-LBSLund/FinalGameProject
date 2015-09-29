@@ -45,13 +45,18 @@ public class PathFinder {
 	}
 	
 	public ArrayList<Vector2> getPath() {
-		long time = System.nanoTime();
+		return getPath(false);
+	}
+	
+	public ArrayList<Vector2> getPath(boolean findClosest) {
+		print("path requested");
+		//long time = System.nanoTime();
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
 		
 		if (start == end || start == null || end == null) return null;
 		
-		if (start.getTile(map) == null || !start.getTile(map).isWalkable() || !end.getTile(map).isWalkable()) {
+		if (start.getTile(map) == null || !start.getTile(map).isWalkable() || (!end.getTile(map).isWalkable() && false)) {
 			print("tried to find unwalkable path");
 			return null;
 		}
@@ -71,7 +76,11 @@ public class PathFinder {
 			}
 			else {
 				print("couldn't find a path");
-				return null; // startTile had no neighbors
+				if (findClosest) {
+					print("couldnt find a path, going to " );
+					return reconstruct(start, smallestCostNode(closedList));
+				}
+				else return null; 
 			}
 		}
 		//System.out.println("time to find path: " + (System.nanoTime() - time) / 1E6f + " ms before reconstruction");
@@ -79,7 +88,13 @@ public class PathFinder {
 		if (target != null) out.add(target);
 		return out;
 	}
-	
+
+	private Node smallestCostNode(ArrayList<Node> nodes) {
+		if (nodes.size() < 1) return null;
+		Node smallest = nodes.get(0);
+		for (Node n : nodes) if (n.getF() < smallest.getF()) smallest = n;
+		return smallest;
+	}
 	private ArrayList<Vector2> reconstruct(Node start, Node end) {
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		nodes.add(end);
@@ -149,8 +164,10 @@ public class PathFinder {
 		
 		private void tryTile(int x, int y, ArrayList<Node> openList, ArrayList<Node> closedList, Node parent, Node[] mustBeEmpty) {
 			for (Node n : mustBeEmpty) {
-				if (n == null || n.getTile(map) == null 
-						|| !n.getTile(map).isWalkable()) return;
+				if (n == null 
+					|| n.getTile(map) == null 
+					|| !n.getTile(map).isWalkable())
+						return;
 			}
 			if (x >= 0 && x < map.length && y >= 0 && y < map[x].length) {
 				if (map[x][y].isWalkable() && !openList.contains(getNode(x, y)) && !closedList.contains(getNode(x, y))) {
