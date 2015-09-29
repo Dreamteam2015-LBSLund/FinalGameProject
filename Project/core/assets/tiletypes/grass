@@ -1,6 +1,0 @@
-name: Grass
-isWalkable: true
-isBuildable: true
-resources: wood, iron, diamond
-sprite: grassTile
-gCost: 0.8

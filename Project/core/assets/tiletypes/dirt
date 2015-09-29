@@ -1,5 +1,0 @@
-name: Dirt
-isWalkable: true
-isBuildable: true
-sprite: dirtTile
-gCost: 1
