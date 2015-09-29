@@ -10,15 +10,15 @@ import com.dreamteam.villageTycoon.utils.ResourceReader;
 public class PropType {
 	private static HashMap<String, PropType> types;
 	
-	private String resource;
+	private Resource resource;
 	private TextureRegion texture;
 	
 	public PropType(ResourceReader r) {
-		resource = r.getString("resource");
+		resource = new Resource(r.getString("resource"));
 		texture = AssetManager.getTexture(r.getString("texture"));
 	}
 	
-	public String getResource() {
+	public Resource getResource() {
 		return resource;
 	}
 	

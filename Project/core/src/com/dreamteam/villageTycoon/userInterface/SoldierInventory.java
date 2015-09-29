@@ -13,7 +13,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 
-public class Inventory {
+public class SoldierInventory {
 	// TODO: add actual UI graphics like frames and dropdown description when the user hovers the mouse over a cell
 	
 	private Soldier soldier;
@@ -22,7 +22,7 @@ public class Inventory {
 	
 	private int equipedSabotageKit;
 	
-	public Inventory(Soldier soldier) {
+	public SoldierInventory(Soldier soldier) {
 		this.soldier = soldier;
 		soldier.getWeapon().getIcon().setPosition(-4, 0);
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
