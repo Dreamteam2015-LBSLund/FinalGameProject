@@ -21,6 +21,7 @@ public class Character extends GameObject {
 	private boolean selected;
 	
 	private int health;
+	
 	private Animation deathAnimation;
 	
 	private ArrayList<Vector2> path;
