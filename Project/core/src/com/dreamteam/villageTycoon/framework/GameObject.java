@@ -14,7 +14,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
  *
  */
 public abstract class GameObject {
-	private Vector2 position, size;
+	private Vector2 position, size, origin;
 	private Animation sprite;
 	private Scene scene;
 	private float depth;
@@ -43,15 +43,17 @@ public abstract class GameObject {
 	
 	//note that origin is in pixels on the texture region, not world coordinates
 	protected void setOrigin(Vector2 origin) {
-		sprite.setOrigin(origin.x, origin.y);
+		this.origin = origin;
+		if (sprite != null) sprite.setOrigin(origin.x, origin.y);
 	}
 	
 	protected Vector2 getOrigin() {
-		return new Vector2(sprite.getOriginX(), sprite.getOriginY());
+		return origin;
 	}
 	
 	protected void setOriginCenter() {
 		getSprite().setOriginCenter();
+		origin = new Vector2(sprite.getOriginX(), sprite.getOriginY());
 	}
 	
 	public float getDepth() {
@@ -64,7 +66,16 @@ public abstract class GameObject {
 	}
 	
 	public void setSprite(Animation sprite) {
+		this.setSprite(sprite, false);
+	}
+	
+	public void setSprite(Animation sprite, boolean discardInfo) {
 		this.sprite = sprite;
+		if (!discardInfo) {
+			setPosition(position);
+			setSize(size);
+			setOrigin(origin);
+		}
 	}
 	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
