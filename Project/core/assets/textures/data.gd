@@ -12,4 +12,5 @@ Textures: {
 	grassProp: 61, 140, 12, 15;
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;
+	factory1: 330, 93, 78, 103;
 }

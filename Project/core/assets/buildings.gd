@@ -15,7 +15,7 @@ factory1: {
 	materials: wood, stone;
 	material-amount: 10, 5;
 
-	sprite: test;
+	sprite: factory1;
 	
 	max-workers: 4;
 	product: steel;
