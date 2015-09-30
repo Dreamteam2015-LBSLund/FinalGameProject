@@ -17,6 +17,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
@@ -46,6 +48,7 @@ public class TestScene extends Scene {
 		
 		// x-types will be pre-defined so it won't look this messy later
 		
+		// gör en fucking for loop tom din jävla sosse
 		addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 				new SabotageKit[]{ 
@@ -72,6 +75,8 @@ public class TestScene extends Scene {
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
 	
+	
+		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1")));
 	}
 	
 	public Map getMap() {

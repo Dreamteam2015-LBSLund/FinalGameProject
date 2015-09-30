@@ -4,7 +4,7 @@ house1: {
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
-	sprite: test;
+	sprite-finished: test;
 	
 	inhabitants: 4;
 }
@@ -12,14 +12,15 @@ house1: {
 factory1: {
 	type: factory;
 	
-	materials: wood, stone;
+	materials:     wood, stone;
 	material-amount: 10, 5;
 
-	sprite: test;
+	sprite-finished: factory;
+	sprite-building: factoryProgress;
 	
 	max-workers: 4;
-	product: steel;
+	product:         steel;
 	product-per-run: 5;
-	resources: coal, iron;
-	resource-per-run: 1, 4;
+	resources:        coal, iron;
+	resource-per-run: 1,    4;
 }
