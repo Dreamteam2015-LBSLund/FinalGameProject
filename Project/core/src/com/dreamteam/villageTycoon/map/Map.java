@@ -12,7 +12,7 @@ import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Scene;
 
 public class Map {
-	final static int WIDTH = 100, HEIGHT = 100;
+	public final static int WIDTH = 100, HEIGHT = 100;
 	private Tile[][] tiles;
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
