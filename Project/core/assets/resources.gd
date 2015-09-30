@@ -2,5 +2,8 @@ resources: {
 resources: 
 	wood,
 	stone,
-	water
+	water,
+	steel,
+	coal,
+	grass,
 }

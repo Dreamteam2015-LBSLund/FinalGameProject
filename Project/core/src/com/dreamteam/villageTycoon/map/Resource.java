@@ -33,4 +33,12 @@ public class Resource {
 		}
 		return resources;
 	}
+	
+	public static Resource[] fromStringArray(String[] s) {
+		Resource[] r = new Resource[s.length];
+		for (int i = 0; i < r.length; i++) {
+			r[i] = new Resource(s[i]);
+		}
+		return r;
+	}
 }

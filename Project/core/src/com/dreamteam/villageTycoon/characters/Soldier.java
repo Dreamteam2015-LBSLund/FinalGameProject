@@ -56,6 +56,8 @@ public class Soldier extends Character {
 		super.update(deltaTime);
 		attack();
 		
+		weapon.update(deltaTime);
+		
 		if(showInventory) {
 			for (GameObject c : getScene().getObjects()) {
 				if (c instanceof Character) {

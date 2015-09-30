@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
+import com.dreamteam.villageTycoon.map.Resource;
 
 public class BuildingType {
 	private static HashMap<String, BuildingType> types;
@@ -17,24 +18,29 @@ public class BuildingType {
 		Factory
 	}
 	
-	private String[] buildResources;
+	private Resource[] buildResources;
 	private int[] buildAmount;
 	
 	private String name;
-	private Animation sprite;
+	private Animation sprite; //when the building is done
+	private Animation buildSprite; // when it's being built
 
 	private Type type;
 	
 	private int inhabitants;
 	
 	private int maxWorkers;
-	private String[] products;
+	private Resource[] products;
 	private int[] productPerRun;
-	private String[] productionResources;
+	private Resource[] productionResources;
 	private int[] resourcePerRun;
 	
 	public Animation getSprite() {
 		return sprite;
+	}
+	
+	public Animation getBuildSprite() {
+		return buildSprite;
 	}
 	
 	public String getName() {
@@ -42,21 +48,21 @@ public class BuildingType {
 	}
 	
 	public BuildingType(ResourceReader r) {
-		sprite = new Animation(AssetManager.getTexture(r.getString("sprite")));
+		sprite      = new Animation(AssetManager.getTexture(r.getString("sprite-finished")));
+		buildSprite = new Animation(AssetManager.getTexture(r.getString("sprite-building")));
 		name = r.getObjectName();
 		
-		buildResources = r.getList("materials");
+		buildResources = Resource.fromStringArray(r.getList("materials"));
 		buildAmount = r.getIntList("material-amount");
 		
 		if (r.getString("type").equals("home")) {
 			type = Type.Home;
 			inhabitants = r.getInt("inhabitants");
-		}
-		else if (r.getString("type").equals("factory")) {
+		} else if (r.getString("type").equals("factory")) {
 			type = Type.Factory;
-			products = r.getList("product");
+			products = Resource.fromStringArray(r.getList("product"));
 			productPerRun = r.getIntList("product-per-run");
-			productionResources = r.getList("production-resources");
+			productionResources = Resource.fromStringArray(r.getList("production-resources"));
 			resourcePerRun = r.getIntList("resource-per-run");
 			maxWorkers = r.getInt("max-workers");
 		} else {
@@ -64,7 +70,7 @@ public class BuildingType {
 		}
 	}
 	
-	public String[] getBuildResources() {
+	public Resource[] getBuildResources() {
 		return buildResources;
 	}
 
@@ -84,7 +90,7 @@ public class BuildingType {
 		return maxWorkers;
 	}
 
-	public String[] getProducts() {
+	public Resource[] getProducts() {
 		return products;
 	}
 
@@ -92,7 +98,7 @@ public class BuildingType {
 		return productPerRun;
 	}
 
-	public String[] getProductionResources() {
+	public Resource[] getProductionResources() {
 		return productionResources;
 	}
 

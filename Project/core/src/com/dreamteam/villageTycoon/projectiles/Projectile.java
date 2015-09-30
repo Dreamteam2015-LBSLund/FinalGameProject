@@ -13,10 +13,17 @@ public class Projectile extends GameObject {
 	
 	private float angle;
 	
-	public Projectile(Vector2 position, ProjectileType projectileType) {
+	private Vector2 target;
+	private Vector2 velocity;
+	
+	public Projectile(Vector2 position, Vector2 target, ProjectileType projectileType) {
 		super(position, projectileType.getSprite());
 		
 		this.projectileType = projectileType;
+		this.target = target;
+		
+		angle = (float)Math.atan2(this.getPosition().y - target.y, this.getPosition().x - target.x);
+		
 		alpha = 1;
 	}
 	

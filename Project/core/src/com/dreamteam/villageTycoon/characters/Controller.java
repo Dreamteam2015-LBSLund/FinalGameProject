@@ -14,6 +14,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.map.Map;
 
 public class Controller extends GameObject {
 	private Rectangle selectionRectangle = new Rectangle(0, 0, 0, 0);
@@ -162,19 +163,20 @@ public class Controller extends GameObject {
 	public void cameraMovment(float deltaTime) {
 		// I tried to replicate the camera movment from red alert.
 		// TODO: Make the camera not when the mouse is over UI
-		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD) {
+		
+		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD  && getScene().getCamera().position.x <= Map.WIDTH - getScene().getCamera().viewportWidth/2 - deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(deltaTime*cameraSpeed, 0));
 		}
 		
-		if(getScene().getScreenMouse().x <= MOVE_CAMERA_FIELD) {
+		if(getScene().getScreenMouse().x <= MOVE_CAMERA_FIELD && getScene().getCamera().position.x >= getScene().getCamera().viewportWidth/2 - -deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(-deltaTime*cameraSpeed, 0));
 		}
 		
-		if(getScene().getScreenMouse().y >= Gdx.graphics.getHeight()-MOVE_CAMERA_FIELD) {
+		if(getScene().getScreenMouse().y >= Gdx.graphics.getHeight()-MOVE_CAMERA_FIELD && getScene().getCamera().position.y >= getScene().getCamera().viewportHeight/2 - -deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(0, -deltaTime*cameraSpeed));
 		}
 		
-		if(getScene().getScreenMouse().y <= MOVE_CAMERA_FIELD) {
+		if(getScene().getScreenMouse().y <= MOVE_CAMERA_FIELD && getScene().getCamera().position.y <= Map.HEIGHT - getScene().getCamera().viewportHeight/2 - deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(0, deltaTime*cameraSpeed));
 		}
 	}
