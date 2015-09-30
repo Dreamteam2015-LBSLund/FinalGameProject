@@ -37,8 +37,6 @@ public class Projectile extends GameObject {
 		}
 		
 		this.getPosition().add(getVelocity(deltaTime));
-		
-		velocity = new Vector2((float)Math.cos(angle)*currentSpeed, (float)Math.sin(angle)*currentSpeed);
 	}
 	
 	public Vector2 getVelocity(float deltaTime) {

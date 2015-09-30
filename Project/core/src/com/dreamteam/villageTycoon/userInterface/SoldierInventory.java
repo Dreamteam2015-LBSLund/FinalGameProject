@@ -55,7 +55,7 @@ public class SoldierInventory {
 		for(SabotageKit s : soldier.getSabotageKits()) {
 			s.getIcon().draw(batch);
 		}
-		AssetManager.font.draw(batch, "AYYasdasdLAMO", 0, 0);
+		AssetManager.font.draw(batch, "B", 0, 0);
 	}
 	
 	public int getEquipedSabotageKit() {
