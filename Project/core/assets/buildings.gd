@@ -16,7 +16,7 @@ factory1: {
 	material-amount: 10, 5;
 	
 	sprite-finished: factory1;
-	sprite-building: factoryProgress;
+	sprite-building: factoryProgress1;
 	
 	max-workers: 4;
 	product:         steel;

@@ -29,6 +29,7 @@ public class Inventory <T> {
 	}
 	
 	public int count(T thing) {
+		if (!things.containsKey(thing)) return 0;
 		return things.get(thing).intValue();
 	}
 	

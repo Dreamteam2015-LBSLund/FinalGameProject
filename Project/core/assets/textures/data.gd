@@ -13,4 +13,5 @@ Textures: {
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;
 	factory1: 330, 93, 78, 103;
+	factoryProgress1: 421, 103, 57, 94;
 }
