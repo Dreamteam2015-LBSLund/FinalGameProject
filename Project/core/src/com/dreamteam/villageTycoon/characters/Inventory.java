@@ -2,8 +2,6 @@ package com.dreamteam.villageTycoon.characters;
 
 import java.util.HashMap;
 
-import com.dreamteam.villageTycoon.map.Resource;
-
 public class Inventory <T> {
 	private HashMap<T, Integer> things;
 	
