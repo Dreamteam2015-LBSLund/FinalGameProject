@@ -70,6 +70,7 @@ public class Controller extends GameObject {
 			mousePressed = true;
 		}
 		
+		// gör detta när de selectas istället
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
 				if(((Character)c).getSelected())
@@ -82,6 +83,7 @@ public class Controller extends GameObject {
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
 			for (GameObject s : getScene().getObjects()) {
 				if (s instanceof Soldier) {
+					// skicka nåt event till alla istället eftersom olika enhetstyper ska göra olika saker
 					if(!((Soldier)s).getShowInventroy()) {
 						if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
 							((Soldier)s).setShowInventory(true);
@@ -113,7 +115,7 @@ public class Controller extends GameObject {
 		for (GameObject s : getScene().getObjects()) {
 			if (s instanceof Soldier) {
 				if(((Soldier)s).getShowInventroy()) {
-					if(Gdx.input.isKeyJustPressed(Keys.Q)) {
+					if(Gdx.input.isKeyJustPressed(Keys.Q)) { // varför är inte forloopen i här istället för tvärtom?
 						((Soldier)s).setShowInventory(false);
 					}
 				}

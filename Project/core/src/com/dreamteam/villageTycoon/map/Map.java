@@ -131,4 +131,12 @@ public class Map {
 	public void draw(SpriteBatch batch) {
 		for (Tile[] ta : tiles) for (Tile t : ta) t.draw(batch);
 	}
+
+	public Tile tileAt(Vector2 target) {
+		Point p = new Point((int)(target.x / Tile.WIDTH), (int)(target.y / Tile.HEIGHT));
+		if (p.isOnArray(tiles)) {
+			return tiles[p.x][p.y];
+		}
+		return null;
+	}
 }
