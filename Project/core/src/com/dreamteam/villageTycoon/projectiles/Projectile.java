@@ -24,6 +24,8 @@ public class Projectile extends GameObject {
 		
 		angle = (float)Math.atan2(this.getPosition().y - target.y, this.getPosition().x - target.x);
 		
+		setDepth(1);
+		
 		alpha = 1;
 	}
 	
