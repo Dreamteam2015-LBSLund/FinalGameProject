@@ -48,7 +48,12 @@ public class Controller extends GameObject {
 	void onMouseReleased() {
 		for (GameObject g : getScene().getObjects()) {
 			if (g instanceof Character) {
-				((Character)g).setSelected(((Character) g).getHitbox().collision(selectionRectangle));
+				//((Character)g).setSelected();
+				
+				if(((Character) g).getHitbox().collision(selectionRectangle)){
+					((Character)g).setSelected(true);
+					selectedCharacters.add(((Character)g));
+				}
 			}
 		}
 	}
@@ -74,7 +79,7 @@ public class Controller extends GameObject {
 		for (GameObject c : getScene().getObjects()) {
 			if (c instanceof Character) {
 				if(((Character)c).getSelected())
-						selectedCharacters.add((Character) c);
+
 			}
 		}
 		
@@ -111,11 +116,11 @@ public class Controller extends GameObject {
 		} else {
 			rightMouseIsPressed = false;
 		}
-	
-		for (GameObject s : getScene().getObjects()) {
-			if (s instanceof Soldier) {
-				if(((Soldier)s).getShowInventroy()) {
-					if(Gdx.input.isKeyJustPressed(Keys.Q)) { // varför är inte forloopen i här istället för tvärtom?
+		
+		if(Gdx.input.isKeyJustPressed(Keys.Q)) {
+			for (GameObject s : getScene().getObjects()) {
+				if (s instanceof Soldier) {
+					if(((Soldier)s).getShowInventroy()) {
 						((Soldier)s).setShowInventory(false);
 					}
 				}
