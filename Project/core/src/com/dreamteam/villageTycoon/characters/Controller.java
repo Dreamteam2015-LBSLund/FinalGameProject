@@ -43,6 +43,7 @@ public class Controller extends GameObject {
 	
 	void onMousePressed() {
 		selectionPoint = new Vector2(getScene().getWorldMouse());
+		selectedCharacters.clear();
 	}
 	
 	void onMouseReleased() {
@@ -122,8 +123,6 @@ public class Controller extends GameObject {
 		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
 		selectionRectangle.normalize();
-		
-		selectedCharacters.clear();
 	}
 	
 	public void addWaypoints() {
