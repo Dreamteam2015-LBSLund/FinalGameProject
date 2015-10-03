@@ -74,15 +74,7 @@ public class Controller extends GameObject {
 			}
 			mousePressed = true;
 		}
-		
-		// gör detta när de selectas istället
-		for (GameObject c : getScene().getObjects()) {
-			if (c instanceof Character) {
-				if(((Character)c).getSelected())
 
-			}
-		}
-		
 		waypoints = new Vector2[selectedCharacters.size()];
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
