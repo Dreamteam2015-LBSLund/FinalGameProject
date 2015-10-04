@@ -47,15 +47,32 @@ public class Controller extends GameObject {
 	}
 	
 	void onMouseReleased() {
+		deselectAll();
+		
+		Character c = null;
 		for (GameObject g : getScene().getObjects()) {
 			if (g instanceof Character) {
-				//((Character)g).setSelected();
-				
-				if(((Character) g).getHitbox().collision(selectionRectangle)){
-					((Character)g).setSelected(true);
-					selectedCharacters.add(((Character)g));
+				c = (Character)g;
+				if (c.getHitbox().collision(selectionRectangle)){
+					select(c);
 				}
 			}
+		}
+	}
+	
+	private void select(Character c) {
+		if (!selectedCharacters.contains(c)) selectedCharacters.add(c);
+		c.setSelected(true);
+	}
+	
+	private void deselect(Character c) {
+		selectedCharacters.remove(c);
+		c.setSelected(false);
+	}
+	
+	private void deselectAll() {
+		for (int i = selectedCharacters.size() - 1; i >= 0; i--) {
+			deselect(selectedCharacters.get(i));
 		}
 	}
 	
@@ -103,7 +120,9 @@ public class Controller extends GameObject {
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
-				if(canMoveUnits) addWaypoints();
+				if(canMoveUnits) {
+					addWaypoints();
+				}
 			}
 			rightMouseIsPressed = true;
 		} else {
@@ -145,16 +164,9 @@ public class Controller extends GameObject {
 			newLineCount += 1;
 		}
 		
-		for (GameObject c : getScene().getObjects()) {
-			if (c instanceof Character) {
-				if(((Character)c).getSelected()) {
-					if(canMoveUnits) {
-						((Character)c).setPath(waypoints[currentUnit]);
-					}
-					
-					currentUnit += 1;
-				}
-			}
+		for (Character c : selectedCharacters) {
+			((Character)c).setPath(waypoints[currentUnit]);
+			currentUnit += 1;
 		}
 	}
 	
