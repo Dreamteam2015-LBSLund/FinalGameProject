@@ -43,7 +43,6 @@ public class Controller extends GameObject {
 	
 	void onMousePressed() {
 		selectionPoint = new Vector2(getScene().getWorldMouse());
-		selectedCharacters.clear();
 	}
 	
 	void onMouseReleased() {
@@ -67,10 +66,15 @@ public class Controller extends GameObject {
 	
 	private void deselect(Character c) {
 		selectedCharacters.remove(c);
-		c.setSelected(false);
 	}
 	
 	private void deselectAll() {
+		for (Character c : selectedCharacters) {
+			c.setSelected(false);
+		}
+		
+		selectedCharacters.clear();
+		
 		for (int i = selectedCharacters.size() - 1; i >= 0; i--) {
 			deselect(selectedCharacters.get(i));
 		}
@@ -96,25 +100,21 @@ public class Controller extends GameObject {
 		waypoints = new Vector2[selectedCharacters.size()];
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-			for (GameObject s : getScene().getObjects()) {
-				if (s instanceof Soldier) {
-					// skicka nåt event till alla istället eftersom olika enhetstyper ska göra olika saker
-					if(!((Soldier)s).getShowInventroy()) {
-						if(((Soldier)s).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
-							((Soldier)s).setShowInventory(true);
+			for (GameObject c : getScene().getObjects()) {
+				if (c instanceof Character) {
+					if(!((Character)c).getShowInventroy()) {
+						if(((Character)c).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
+							((Character)c).setShowInventory(true);
 						}
 					} 
 				}
 			}
 		}
 		
-		for (GameObject c : getScene().getObjects()) {
-			if (c instanceof Soldier) {
-				canMoveUnits = !((Soldier)c).getShowInventroy();
-			
-				if(!canMoveUnits) {
-					break;
-				}
+		for (Character c : selectedCharacters) {
+			canMoveUnits = !((Character)c).getShowInventroy();
+			if(!canMoveUnits) {
+				break;
 			}
 		}		
 		
@@ -130,10 +130,10 @@ public class Controller extends GameObject {
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Keys.Q)) {
-			for (GameObject s : getScene().getObjects()) {
-				if (s instanceof Soldier) {
-					if(((Soldier)s).getShowInventroy()) {
-						((Soldier)s).setShowInventory(false);
+			for (GameObject c : getScene().getObjects()) {
+				if (c instanceof Character) {
+					if(((Character)c).getShowInventroy()) {
+						((Character)c).setShowInventory(false);
 					}
 				}
 			}
@@ -145,8 +145,6 @@ public class Controller extends GameObject {
 	}
 	
 	public void addWaypoints() {
-		// TODO: Move a waypoint if it lands on a unwalkable tile
-		
 		int currentUnit = 0;
 		int newLineCount = 0;
 		int currentLine = 0;

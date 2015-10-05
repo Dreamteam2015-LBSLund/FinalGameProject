@@ -31,7 +31,6 @@ public class Soldier extends Character {
 	
 	private boolean isMoving;
 	private boolean enemy;
-	private boolean showInventory;
 	private boolean isOnFire;
 	private boolean useSabotageKit;
 	
@@ -58,7 +57,7 @@ public class Soldier extends Character {
 		
 		weapon.update(deltaTime);
 		
-		if(showInventory) {
+		if(getShowInventroy()) {
 			for (GameObject c : getScene().getObjects()) {
 				if (c instanceof Character) {
 					((Character) c).setSelected(false);
@@ -91,7 +90,7 @@ public class Soldier extends Character {
 
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
-		if(showInventory) inventory.drawUi(batch);
+		if(getShowInventroy()) inventory.drawUi(batch);
 	}
 	
 	public ArrayList<SabotageKit> getSabotageKits() {
@@ -101,15 +100,7 @@ public class Soldier extends Character {
 	public Weapon getWeapon() {
 		return weapon;
 	}
-	
-	public boolean getShowInventroy() {
-		return showInventory;
-	}
-	
-	public void setShowInventory(boolean showInventory) {
-		this.showInventory = showInventory;
-	}
-	
+
 	public void setSoldierType() {
 		this.setSprite(soldierType.getTypeSprite());
 		this.setHealth(soldierType.getStartHealth());

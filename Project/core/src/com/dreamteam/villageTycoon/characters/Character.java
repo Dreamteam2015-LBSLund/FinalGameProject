@@ -30,6 +30,8 @@ public class Character extends GameObject {
 	
 	private Animation selectedSign;
 	
+	private boolean showInventory;
+	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation) {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
@@ -43,9 +45,6 @@ public class Character extends GameObject {
 		
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
 
-		System.out.println(getPosition());
-		System.out.println(getSprite().getX() + " - " + getSprite().getY());
-		
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
 		
 		if(health <= 0) {
@@ -85,7 +84,17 @@ public class Character extends GameObject {
 	public boolean getSelected() {
 		return selected;
 	}
-
+	
+	
+	public boolean getShowInventroy() {
+		return showInventory;
+	}
+	
+	public void setShowInventory(boolean showInventory) {
+		this.showInventory = showInventory;
+	}
+	
+	
 	protected void followPath() {
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
