@@ -8,20 +8,25 @@ import com.dreamteam.villageTycoon.map.Tile;
 
 public class Worker extends Character {
 
+	private Building workplace;
+	
 	public Worker(Vector2 position, Animation sprite, Animation deathAnimation) {
 		super(position, sprite, deathAnimation);
 	}
 	
-	
-	// @Tom låt Controller skicka ett event till alla markerade Characters. 
-	// De hanterar det själva (till viss del iaf) eftersom olika enhetstyper ska tolka samma input olika.
-	public void onControllInput(Vector2 target) {
-		Tile t = ((TestScene)getScene()).getMap().tileAt(target);
-		Building b = t.getBuilding();
-		if ( b!= null) workAt(b);
+	public void update(float deltaTime) {
+		if (getTile().getBuilding() != null) {
+			workplace = getTile().getBuilding();
+		} else {
+			workplace = null;
+		}
 	}
 	
-	private void workAt(Building b) {
-		
+	private void onStartWork() {
+		workplace.addWorker(this);
+	}
+	
+	private void onEndWork() {
+		workplace.removeWorker(this);
 	}
 }

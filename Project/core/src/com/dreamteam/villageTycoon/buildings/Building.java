@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.buildings;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.characters.Inventory;
+import com.dreamteam.villageTycoon.characters.Worker;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.map.Resource;
 
@@ -17,6 +20,7 @@ public class Building extends GameObject {
     private BuildingType type;
     private BuildState buildState;
     private Inventory<Resource> inventory;
+    private ArrayList<Worker> workers;
     
     public Building(Vector2 position, BuildingType type) {
     	super(position, new Vector2(4, 3), type.getBuildSprite());
@@ -46,6 +50,14 @@ public class Building extends GameObject {
     	} else {
     		// regular production
     	}
+    }
+    
+    public void addWorker(Worker w) {
+    	if (!workers.contains(w)) workers.add(w);
+    }
+    
+    public void removeWorker(Worker w) {
+    	workers.remove(w);
     }
     
     private boolean isBuildingDone() {
