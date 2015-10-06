@@ -1,12 +1,12 @@
 tree: {
-resource: Wood;
+resource: wood;
 texture: treeProp;
 }
 stone: {
-resource: Stone;
+resource: stone;
 texture: stoneProp;
 }
 grass: {
-resource: Grass;
+resource: grass;
 texture: grassProp;
 }

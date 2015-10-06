@@ -92,7 +92,7 @@ public class ResourceReader {
 	
 	public String[] getList(String name, boolean removeWhitespace) {
 		if (!data.containsKey(name)) {
-			System.out.println("WARNING: couldn't find list " + name);
+			System.out.println("WARNING: couldn't find list " + name + " in object " + this.name);
 			return new String[0];
 		}
 		String[] d = getString(name).split(",");
@@ -115,6 +115,7 @@ public class ResourceReader {
 		if (data.endsWith(";")) data = data.substring(0, data.length() - 1);
 		
 		String[] properties = data.split(";");
+		
 		for (String s : properties) {
 			String[] ss = s.split(":");
 			out.put(removeWhitespace(ss[0]), removeWhitespace(ss[1]));

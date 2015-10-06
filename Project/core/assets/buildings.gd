@@ -4,6 +4,7 @@ house1: {
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
+	sprite-building: test;
 	sprite-finished: test;
 	
 	inhabitants: 4;
@@ -21,6 +22,6 @@ factory1: {
 	max-workers: 4;
 	product:         steel;
 	product-per-run: 5;
-	resources:        coal, iron;
+	production-resources:        coal, iron;
 	resource-per-run: 1,    4;
 }

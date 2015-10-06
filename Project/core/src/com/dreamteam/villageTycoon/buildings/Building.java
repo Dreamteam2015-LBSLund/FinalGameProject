@@ -27,7 +27,6 @@ public class Building extends GameObject {
     	inventory = new Inventory<Resource>();
 		this.type = type;
 		buildState = BuildState.InProgress;
-		System.out.println("a building is here");
 		setDepth(1);
     }
     
@@ -44,7 +43,6 @@ public class Building extends GameObject {
     			for (int i = 0; i < type.getBuildResources().length; i++) {
     	    		inventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
     	    	}
-    			System.out.println("building has resources, switching texture..");
     			setSprite(type.getSprite());
     		}
     	} else {

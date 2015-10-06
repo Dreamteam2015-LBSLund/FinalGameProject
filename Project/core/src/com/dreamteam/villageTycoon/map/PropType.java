@@ -14,7 +14,7 @@ public class PropType {
 	private TextureRegion texture;
 	
 	public PropType(ResourceReader r) {
-		resource = new Resource(r.getString("resource"));
+		resource = Resource.get(r.getString("resource"));
 		texture = AssetManager.getTexture(r.getString("texture"));
 	}
 	

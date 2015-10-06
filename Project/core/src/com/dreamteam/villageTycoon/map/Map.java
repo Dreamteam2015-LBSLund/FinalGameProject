@@ -20,7 +20,7 @@ public class Map {
 
 	
 	public Map(Scene scene) {
-		Resource.getAll();
+		Resource.getTypes();
 		tileTypes = TileType.loadAll();
 		propTypes = PropType.getTypes();
 		buildingTypes = BuildingType.getTypes();
