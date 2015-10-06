@@ -4,10 +4,10 @@
 package com.dreamteam.villageTycoon.framework;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.map.Tile;
 
 /**
  * @author Johannes
@@ -76,6 +76,13 @@ public abstract class GameObject {
 			setSize(size);
 			setOrigin(origin);
 		}
+	}
+	
+	public Tile getTile() {
+		if (getScene() instanceof TestScene) {
+			return ((TestScene)getScene()).getMap().tileAt(position);
+		}
+		return null;
 	}
 	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
