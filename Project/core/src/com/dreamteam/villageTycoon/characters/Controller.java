@@ -26,11 +26,14 @@ public class Controller extends GameObject {
 	private boolean mousePressed;
 	private boolean rightMouseIsPressed;
 	private boolean canMoveUnits;
+	// keeps track if units are moving into a building
 	private boolean sentToBuilding;
 	
+	// building the units are moving into
 	private Building building;
 	
 	private float cameraSpeed;
+	// if mouse is 16 units within the border of the screen the camera moves
 	final float MOVE_CAMERA_FIELD = 16;
 	
 	ArrayList<Character> selectedCharacters;
@@ -127,6 +130,7 @@ public class Controller extends GameObject {
 				if(canMoveUnits) {
 					for (GameObject b : getScene().getObjects()) {
 						if (b instanceof Building) {
+							// if the player presses on a building then the units are sent to that building
 							if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
 								this.sentToBuilding = true;
 								this.building = ((Building)b);
@@ -167,11 +171,13 @@ public class Controller extends GameObject {
 		int lineOffset = 0;
 		
 		for(int i = 0; i < waypoints.length; i++) {
+			// either send units to a bulding or to their waypoints
 			if(!sentToBuilding) waypoints[i] = new Vector2(i-lineOffset, currentLine).add(getScene().getWorldMouse());
 			else {
 				waypoints[i] = building.getPosition();
 			}
 			
+			// put waypoints in a formation
 			if(newLineCount >= waypoints.length/2) {
 				currentLine += 1;
 				lineOffset = currentLine * waypoints.length/2; 
