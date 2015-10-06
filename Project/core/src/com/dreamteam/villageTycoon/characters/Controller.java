@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
@@ -25,6 +26,9 @@ public class Controller extends GameObject {
 	private boolean mousePressed;
 	private boolean rightMouseIsPressed;
 	private boolean canMoveUnits;
+	private boolean sentToBuilding;
+	
+	private Building building;
 	
 	private float cameraSpeed;
 	final float MOVE_CAMERA_FIELD = 16;
@@ -121,6 +125,18 @@ public class Controller extends GameObject {
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
 				if(canMoveUnits) {
+					for (GameObject b : getScene().getObjects()) {
+						if (b instanceof Building) {
+							if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
+								this.sentToBuilding = true;
+								this.building = ((Building)b);
+							}
+							else
+							{
+								this.sentToBuilding = false;
+							}
+						}
+					}
 					addWaypoints();
 				}
 			}
@@ -151,7 +167,10 @@ public class Controller extends GameObject {
 		int lineOffset = 0;
 		
 		for(int i = 0; i < waypoints.length; i++) {
-			waypoints[i] = new Vector2(i-lineOffset, currentLine).add(getScene().getWorldMouse());
+			if(!sentToBuilding) waypoints[i] = new Vector2(i-lineOffset, currentLine).add(getScene().getWorldMouse());
+			else {
+				waypoints[i] = building.getPosition();
+			}
 			
 			if(newLineCount >= waypoints.length/2) {
 				currentLine += 1;

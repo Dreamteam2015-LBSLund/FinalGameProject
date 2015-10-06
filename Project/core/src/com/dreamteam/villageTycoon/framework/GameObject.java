@@ -100,6 +100,10 @@ public abstract class GameObject {
 		this.scene = scene;
 	}
 	
+	public Rectangle getHitbox(){
+		return new Rectangle(this.position, this.size);
+	}
+	
 	public void onRemove() { };
 	
 	public float distanceTo(Vector2 v) {
