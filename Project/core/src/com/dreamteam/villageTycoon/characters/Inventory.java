@@ -2,12 +2,10 @@ package com.dreamteam.villageTycoon.characters;
 
 import java.util.HashMap;
 
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Rectangle;
-import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.InventoryItem;
 
 public class Inventory <T extends InventoryItem> {

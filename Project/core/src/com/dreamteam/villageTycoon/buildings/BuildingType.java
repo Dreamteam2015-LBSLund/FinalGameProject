@@ -2,8 +2,6 @@ package com.dreamteam.villageTycoon.buildings;
 
 import java.util.HashMap;
 
-import sun.security.action.GetIntegerAction;
-
 import com.badlogic.gdx.Gdx;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;

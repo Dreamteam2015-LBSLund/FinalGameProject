@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.characters.Inventory;
 import com.dreamteam.villageTycoon.characters.Worker;
 import com.dreamteam.villageTycoon.framework.GameObject;
