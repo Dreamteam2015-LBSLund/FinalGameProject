@@ -35,6 +35,7 @@ public class Controller extends GameObject {
 	final float MOVE_CAMERA_FIELD = 16;
 	
 	ArrayList<Character> selectedCharacters;
+	ArrayList<Building> selectedBuildings;
 	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(AssetManager.getTexture("selectionRectangle")));
@@ -57,7 +58,7 @@ public class Controller extends GameObject {
 		for (GameObject g : getScene().getObjects()) {
 			if (g instanceof Character) {
 				c = (Character)g;
-				if (c.getHitbox().collision(selectionRectangle)){
+				if (c.getHitbox().collision(selectionRectangle) && !c.getIsInBuilding()){
 					select(c);
 				}
 			}
@@ -187,6 +188,7 @@ public class Controller extends GameObject {
 		
 		for (Character c : selectedCharacters) {
 			((Character)c).setPath(waypoints[currentUnit]);
+			((Character)c).setIsInBuilding(sentToBuilding);
 			currentUnit += 1;
 		}
 	}

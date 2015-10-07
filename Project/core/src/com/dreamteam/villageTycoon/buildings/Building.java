@@ -22,6 +22,8 @@ public class Building extends GameObject {
     private Inventory<Resource> inventory;
     private ArrayList<Worker> workers;
     
+    private boolean selected;
+    
     public Building(Vector2 position, BuildingType type) {
     	super(position, new Vector2(4, 3), type.getBuildSprite());
     	inventory = new Inventory<Resource>();
@@ -75,5 +77,13 @@ public class Building extends GameObject {
     
     public void draw(SpriteBatch batch) {
     	super.draw(batch);
+    }
+    
+    public void setSelected(boolean selected) {
+    	this.selected = selected;
+    }
+    
+    public boolean getSelected() {
+    	return this.selected;
     }
 }

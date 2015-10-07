@@ -31,6 +31,7 @@ public class Character extends GameObject {
 	private Animation selectedSign;
 	
 	private boolean showInventory;
+	private boolean isInBuilding;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation) {
 		super(position, sprite);
@@ -94,6 +95,13 @@ public class Character extends GameObject {
 		this.showInventory = showInventory;
 	}
 	
+	public void setIsInBuilding(boolean isInBuilding) {
+		this.isInBuilding = isInBuilding;
+	}
+	
+	public boolean getIsInBuilding() {
+		return this.isInBuilding;
+	}
 	
 	protected void followPath() {
 		if (path != null && !path.isEmpty()) {
