@@ -30,6 +30,8 @@ public class Building extends GameObject {
 		this.type = type;
 		buildState = BuildState.InProgress;
 		setDepth(1);
+		inventory.add(Resource.get("stone"), 2);
+		inventory.add(Resource.get("wood"),  1);
     }
     
     public void update(float deltaTime) {
@@ -73,6 +75,11 @@ public class Building extends GameObject {
     
     public BuildingType getType() {
     	return type;
+    }
+    
+    public void drawUi(SpriteBatch batch) {
+
+    	inventory.drawList(getPosition(), batch);
     }
     
     public void draw(SpriteBatch batch) {

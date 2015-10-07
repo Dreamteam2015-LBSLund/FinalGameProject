@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public abstract class AssetManager {
@@ -15,7 +17,10 @@ public abstract class AssetManager {
 	public static BitmapFont font;
 	
 	public static void load() {
-		font = new BitmapFont();
+		FreeTypeFontGenerator g = new FreeTypeFontGenerator(Gdx.files.internal("fonts/COMIC.TTF"));
+		FreeTypeFontParameter param = new FreeTypeFontParameter();
+		param.size = 100;
+		font = g.generateFont(param);
 		
 		regions = new HashMap<String, TextureRegion>();
 		Texture spriteSheet = new Texture("textures/spritesheet.png");

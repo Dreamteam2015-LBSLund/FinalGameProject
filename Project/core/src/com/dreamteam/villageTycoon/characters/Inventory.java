@@ -2,7 +2,15 @@ package com.dreamteam.villageTycoon.characters;
 
 import java.util.HashMap;
 
-public class Inventory <T> {
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.InventoryItem;
+
+public class Inventory <T extends InventoryItem> {
 	private HashMap<T, Integer> things;
 	
 	public Inventory() {
@@ -31,7 +39,20 @@ public class Inventory <T> {
 		return things.get(thing).intValue();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T[] getList() {
-		return (T[]) things.keySet().toArray(); // i hope this works :^))
+		return (T[]) things.keySet().toArray(new InventoryItem[things.keySet().size()]);
+	}
+	
+	public void drawList(Vector2 position, SpriteBatch batch) {
+		final float ICON_SIZE = 100f;
+		Rectangle r = null;
+		T[] items = getList();
+		for (int i = 0; i < items.length; i++) {
+			r = new Rectangle(position.cpy().add(new Vector2(0, i * ICON_SIZE)), new Vector2(ICON_SIZE, ICON_SIZE));
+			items[i].draw(r, batch);
+			AssetManager.font.draw(batch, count(items[i]) + "", r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
+		}
 	}
 }
+

@@ -25,7 +25,7 @@ public abstract class Scene {
 		objects = new ArrayList<GameObject>();
 		toAdd = new ArrayList<GameObject>();
 		toRemove = new ArrayList<GameObject>();
-		uiCamera = new OrthographicCamera(16, 9);
+		uiCamera = new OrthographicCamera(1600, 900);
 		camera = new OrthographicCamera(16, 9);
 	}
 	

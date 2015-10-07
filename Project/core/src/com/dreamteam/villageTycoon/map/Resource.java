@@ -3,11 +3,14 @@ package com.dreamteam.villageTycoon.map;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.utils.InventoryItem;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
-public class Resource {
+public class Resource implements InventoryItem {
 	private static HashMap<String, Resource> types;
 	
 	private TextureRegion icon;
@@ -24,6 +27,10 @@ public class Resource {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void draw(Rectangle position, SpriteBatch batch) {
+		batch.draw(icon, position.getX(), position.getY(), position.getWidth(), position.getHeight());
 	}
 
 	public static HashMap<String, Resource> getTypes() {
