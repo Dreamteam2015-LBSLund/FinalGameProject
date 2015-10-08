@@ -92,4 +92,8 @@ public class Building extends GameObject {
     public boolean getSelected() {
     	return this.selected;
     }
+
+	public Inventory<Resource> getInventory() {
+		return inventory;
+	}
 }
