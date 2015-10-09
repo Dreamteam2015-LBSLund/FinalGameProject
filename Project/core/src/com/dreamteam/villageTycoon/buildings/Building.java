@@ -23,8 +23,9 @@ public class Building extends GameObject {
     
     private boolean selected;
     
-    public Building(Vector2 position, BuildingType type) {
+    public Building(Vector2 position, BuildingType type, City owner) {
     	super(position, new Vector2(4, 3), type.getBuildSprite());
+    	owner.addBuilding(this);
     	inventory = new Inventory<Resource>();
 		this.type = type;
 		buildState = BuildState.InProgress;

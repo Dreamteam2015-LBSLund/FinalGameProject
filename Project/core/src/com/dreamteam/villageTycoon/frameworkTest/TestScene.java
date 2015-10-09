@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
@@ -36,7 +37,7 @@ public class TestScene extends Scene {
 		
 		map = new Map(this);
 		
-		
+		City playerCity = new City(this);
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
@@ -58,7 +59,7 @@ public class TestScene extends Scene {
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
 	
 		}
-		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1")));
+		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 	}
 	
 	public Map getMap() {

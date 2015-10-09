@@ -3,6 +3,11 @@ package com.dreamteam.villageTycoon.buildings;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.map.Prop;
+import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
 
 /*
@@ -10,10 +15,11 @@ import com.dreamteam.villageTycoon.map.Resource;
  * 
  */
 public class City {
+	private TestScene scene;
 	private ArrayList<Building> buildings;
 	
-	public City() {
-		
+	public City(Scene scene) {
+		buildings = new ArrayList<Building>();
 	}
 	
 	// register a building that is built and belongs to this city
@@ -31,13 +37,36 @@ public class City {
 		return false;
 	}
 	
-	//find the location of a resource, optionally prioritizing ones close to some place. Returns null if it cant be found. Looks in buildings and on the ground
-	public Vector2 findResource(Resource r, Vector2 closeTo) {
-		if (closeTo != null) {
-			for (Building b : buildings) {
-				
+	//find the location of a resource, optionally prioritizing ones close to some place. Returns null if it can't be found. Looks in buildings and on props on the map
+	public GameObject findResource(Resource r, Vector2 closeTo) {
+		GameObject closest = null;
+		for (Building b : buildings) {
+			if (b.getInventory().count(r) > 0){
+				if (closeTo != null) { if (closest == null || closest.distanceTo(closeTo) > b.distanceTo(closeTo)) closest = b; }
+				else return b;
 			}
 		}
-		return null;
+		
+		// check if there exist a proptype with the resource
+		boolean propExists = false;
+		for (String pt : PropType.getTypes().keySet()) {
+			if (PropType.getType(pt).getResource() == r) {
+				propExists = true;
+				break;
+			}
+		}
+		//if so, look through all props
+		if (propExists) {
+			Prop p = null;
+			for (GameObject g : scene.getObjects()) {
+				if (g instanceof Prop) {
+					p = (Prop)g;
+					if (closeTo != null) { if (closest == null || closest.distanceTo(closeTo) > p.distanceTo(closeTo)) closest = p; }
+					else return p;
+				}
+			}
+		}
+		
+		return closest;
 	}
 }
