@@ -20,7 +20,7 @@ public class Building extends GameObject {
     private BuildState buildState;
     private Inventory<Resource> inventory;
     private ArrayList<Worker> workers;
-    
+    private City city;
     private boolean selected;
     
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -60,6 +60,10 @@ public class Building extends GameObject {
     
     public void removeWorker(Worker w) {
     	workers.remove(w);
+    }
+    
+    public void destroy() {
+    	city.removeBuilding(this);
     }
     
     private boolean isBuildingDone() {
