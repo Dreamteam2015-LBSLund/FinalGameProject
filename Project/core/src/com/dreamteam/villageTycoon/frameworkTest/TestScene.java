@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.frameworkTest;
 
 import java.util.HashMap;
 
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.characters.Controller;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
 import com.dreamteam.villageTycoon.characters.SabotageKitType;
@@ -16,7 +17,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;

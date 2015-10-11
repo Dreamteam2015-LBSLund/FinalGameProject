@@ -3,7 +3,7 @@ apply plugin: "java"
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-project.ext.mainClassName = "com.dreamteam.villageTycoon.desktop.DesktopLauncher"
+project.ext.mainClassName = "com.dreamteam.villagetycoon.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets");
 
 task run(dependsOn: classes, type: JavaExec) {
@@ -44,5 +44,3 @@ task afterEclipseImport(description: "Post processing after project generation",
     printer.print(classpath)
   }
 }
-
-compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
