@@ -1,4 +1,4 @@
-package com.dreamteam.villageTycoon.desktop;
+package com.dreamteam.villagetycoon.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -10,8 +10,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		if (FULLSCREEN) {
-			config.width = config.getDesktopDisplayMode().width;
-			config.height = config.getDesktopDisplayMode().height;
+			config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
+			config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 			config.fullscreen = true;
 		} else {
 			config.width = 800;
