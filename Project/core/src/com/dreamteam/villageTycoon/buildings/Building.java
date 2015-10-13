@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.characters.Inventory;
@@ -15,7 +14,6 @@ import com.dreamteam.villageTycoon.map.Resource;
 public class Building extends GameObject {
 
 	private enum BuildState { InProgress, Done };
-	private Texture inProgressTexture, finishedTexture;
     private BuildingType type;
     private BuildState buildState;
     private Inventory<Resource> inventory;
@@ -82,7 +80,6 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-
     	inventory.drawList(getPosition(), batch);
     }
     

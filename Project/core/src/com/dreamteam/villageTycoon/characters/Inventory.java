@@ -37,7 +37,7 @@ public class Inventory <T extends InventoryItem> {
 		return things.get(thing).intValue();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") // :^)
 	public T[] getList() {
 		return (T[]) things.keySet().toArray(new InventoryItem[things.keySet().size()]);
 	}
