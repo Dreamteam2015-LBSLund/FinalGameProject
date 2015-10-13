@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Point;
@@ -32,6 +33,8 @@ public class Character extends GameObject {
 	
 	private boolean showInventory;
 	private boolean isInBuilding;
+	
+	private Building building;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation) {
 		super(position, sprite);
@@ -101,6 +104,14 @@ public class Character extends GameObject {
 	
 	public boolean getIsInBuilding() {
 		return this.isInBuilding;
+	}
+	
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+	
+	public Building getBuilding() {
+		return this.building;
 	}
 	
 	protected void followPath() {

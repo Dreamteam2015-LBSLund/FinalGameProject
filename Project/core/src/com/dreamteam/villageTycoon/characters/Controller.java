@@ -45,6 +45,7 @@ public class Controller extends GameObject {
 		cameraSpeed = 5;
 		
 		selectedCharacters = new ArrayList<Character>();
+		selectedBuildings = new ArrayList<Building>();
 	}
 	
 	void onMousePressed() {
@@ -55,7 +56,16 @@ public class Controller extends GameObject {
 		deselectAll();
 		
 		Character c = null;
+		Building b = null;
+		
 		for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Building) {
+				b = (Building)g;
+				if (b.getHitbox().collision(selectionRectangle)){
+					selectBuilding(b);
+				}
+			}
+			
 			if (g instanceof Character) {
 				c = (Character)g;
 				if (c.getHitbox().collision(selectionRectangle) && !c.getIsInBuilding()){
@@ -79,11 +89,28 @@ public class Controller extends GameObject {
 			c.setSelected(false);
 		}
 		
+		for(Building b : selectedBuildings) {
+			b.setSelected(false);
+		}
+		
 		selectedCharacters.clear();
 		
 		for (int i = selectedCharacters.size() - 1; i >= 0; i--) {
 			deselect(selectedCharacters.get(i));
 		}
+		
+		for (int i = selectedBuildings.size() - 1; i >= 0; i--) {
+			deselectBuilding(selectedBuildings.get(i));
+		}
+	}
+	
+	private void selectBuilding(Building b) {
+		if(!selectedBuildings.contains(b)) this.selectedBuildings.add(b);
+		b.setSelected(true);
+	}
+	
+	private void deselectBuilding(Building b) {
+		selectedBuildings.remove(b);
 	}
 	
 	public void update(float deltaTime) {
@@ -124,6 +151,16 @@ public class Controller extends GameObject {
 			}
 		}		
 		
+		for(Building b : selectedBuildings) {
+			for (GameObject c : getScene().getObjects()) {
+				if(c instanceof Character) {
+					if(((Character) c).getBuilding() == b) {
+						select((Character)c);
+					}
+				}
+			}
+		}
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
 			if(!rightMouseIsPressed) {
 				if(canMoveUnits) {
@@ -137,6 +174,7 @@ public class Controller extends GameObject {
 							else
 							{
 								this.sentToBuilding = false;
+								this.building = null;
 							}
 						}
 					}
@@ -187,6 +225,7 @@ public class Controller extends GameObject {
 		}
 		
 		for (Character c : selectedCharacters) {
+			if(sentToBuilding) c.setBuilding(building);
 			((Character)c).setPath(waypoints[currentUnit]);
 			((Character)c).setIsInBuilding(sentToBuilding);
 			currentUnit += 1;
