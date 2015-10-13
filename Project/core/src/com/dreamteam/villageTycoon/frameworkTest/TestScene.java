@@ -1,7 +1,5 @@
 package com.dreamteam.villageTycoon.frameworkTest;
 
-import java.util.HashMap;
-
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.characters.Controller;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
@@ -12,8 +10,6 @@ import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
-import com.dreamteam.villageTycoon.characters.Character;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -23,8 +19,6 @@ import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
-import com.dreamteam.villageTycoon.map.PropType;
-import com.dreamteam.villageTycoon.map.TileType;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 
 public class TestScene extends Scene {
@@ -50,13 +44,13 @@ public class TestScene extends Scene {
 		// x-types will be pre-defined so it won't look this messy later
 		
 		// gör en fucking for loop tom din jävla sosse
-		for(int i = 0; i < 5; i++)
-		{
+		for(int i = 0; i < 5; i++) {
 			addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 					new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 					new SabotageKit[]{ 
-							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1,"firekit", ActivationType.INSTANT, EffectType.FIRE)), 
-							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) }));
+							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+			}));
 	
 		}
 		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
