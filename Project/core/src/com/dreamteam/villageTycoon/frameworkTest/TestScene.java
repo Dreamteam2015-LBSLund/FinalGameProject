@@ -23,6 +23,7 @@ import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 
 public class TestScene extends Scene {
 	private Map map;
+	private City playerCity;
 	
 	public TestScene() {
 		super();
@@ -31,7 +32,9 @@ public class TestScene extends Scene {
 		
 		map = new Map(this);
 		
-		City playerCity = new City(this);
+		System.out.println(map == null);
+		
+		playerCity = new City(this);
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
@@ -45,7 +48,7 @@ public class TestScene extends Scene {
 		
 		// gör en fucking for loop tom din jävla sosse
 		for(int i = 0; i < 5; i++) {
-			addObject(new Soldier(new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+			addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 					new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 					new SabotageKit[]{ 
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
@@ -53,10 +56,15 @@ public class TestScene extends Scene {
 			}));
 	
 		}
+		
+	}
+	
+	public void initialize() {
 		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 	}
 	
 	public Map getMap() {
+		System.out.println("map = " + map);
 		return map;
 	}
 	

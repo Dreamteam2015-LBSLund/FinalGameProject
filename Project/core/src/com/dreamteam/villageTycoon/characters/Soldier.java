@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
@@ -37,8 +38,8 @@ public class Soldier extends Character {
 	private ArrayList<SabotageKit> sabotageKits;
 	private SabotageKit startSabotageKits[];
 	
-	public Soldier(Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
-		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")));
+	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
+		super(position, new Animation(new Texture("badlogic.jpg")), new Animation(new Texture("badlogic.jpg")), city);
 		this.weapon = new Weapon(weaponType);
 		this.soldierType = soldierType;
 		setSoldierType();

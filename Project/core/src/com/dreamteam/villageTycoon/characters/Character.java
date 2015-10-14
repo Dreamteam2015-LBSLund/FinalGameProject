@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Point;
@@ -33,15 +34,16 @@ public class Character extends GameObject {
 	
 	private boolean showInventory;
 	private boolean isInBuilding;
-	
+	private City city;
 	private Building building;
 	
-	public Character(Vector2 position, Animation sprite, Animation deathAnimation) {
+	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		this.deathAnimation = deathAnimation;
 		health = 1;
+		this.city = city;
 	}
 	
 	public void update(float deltaTime) {
@@ -58,6 +60,10 @@ public class Character extends GameObject {
 		}
 		
 		followPath();
+	}
+	
+	public City getCity() {
+		return city;
 	}
 	
 	public Rectangle getHitbox() {
@@ -124,6 +130,10 @@ public class Character extends GameObject {
 		}
 	}
 	
+	protected boolean isAtPathEnd() {
+		return path == null || path.isEmpty();
+	}
+	
 	protected void stepTowards(Vector2 v, float speed) {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
@@ -134,7 +144,9 @@ public class Character extends GameObject {
 		return path;
 	}
 	
+	// set path if not already set
 	protected void setPath(Vector2 target) {
-		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);
+		if (path != null && path.get(path.size() - 1).equals(target)) return;
+		else path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);
 	}
 }

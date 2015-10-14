@@ -15,11 +15,12 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.utils.PathFinder;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Character;
 
 public class TestObject extends Character {
-	public TestObject(TextureRegion region) {
-		super(new Vector2(.25f, .25f), new Animation(region), new Animation(region));
+	public TestObject(TextureRegion region, City city) {
+		super(new Vector2(.25f, .25f), new Animation(region), new Animation(region), city);
 		setDepth(10);
 	}
 	

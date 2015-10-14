@@ -25,6 +25,7 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		currentScene = new TestScene();
+		((TestScene)currentScene).initialize();
 	}
 	
 	public void update() {

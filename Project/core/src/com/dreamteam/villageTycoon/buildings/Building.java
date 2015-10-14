@@ -7,9 +7,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.characters.Inventory;
-import com.dreamteam.villageTycoon.characters.Worker;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.workers.Worker;
+import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 
 public class Building extends GameObject {
 
@@ -30,14 +33,36 @@ public class Building extends GameObject {
 		setDepth(1);
 		inventory.add(Resource.get("stone"), 2);
 		inventory.add(Resource.get("wood"),  1);
+		workers = new ArrayList<Worker>();
+		//setTiles();
+    }
+    
+    public void onAdd(Scene scene) {
+    	super.onAdd(scene);
+    	setTiles();
+    }
+    
+    private void setTiles() {
+    	Tile[][] tiles = ((TestScene)getScene()).getMap().getTiles();
+    	for (int x = 0; x < (int)getSize().x; x++) {
+    		for (int y = 0; y < (int)getSize().y; y++) {
+    			tiles[x + (int)getPosition().x][y + (int)getPosition().y].build(this);
+    		}
+    	}
+    }
+    
+    public boolean isBuilt() {
+    	return buildState == BuildState.Done;
     }
     
     public void update(float deltaTime) {
+    	// instant build on Y press
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		for (int i = 0; i < type.getBuildResources().length; i++) {
     			inventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
     		}
     	}
+    	
     	if (buildState == BuildState.InProgress) {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {
@@ -46,6 +71,10 @@ public class Building extends GameObject {
     	    		inventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
     	    	}
     			setSprite(type.getSprite());
+    		} else {
+    			for (Worker w : workers) {
+    				
+    			}
     		}
     	} else {
     		// regular production

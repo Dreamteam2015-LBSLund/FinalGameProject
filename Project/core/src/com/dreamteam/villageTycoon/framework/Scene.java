@@ -65,7 +65,7 @@ public abstract class Scene {
 	public void onPause() { }
 	public void onResume() { }
 	
-	public void addObject(GameObject g) { toAdd.add(g); }
+	public void addObject(GameObject g) { g.onAdd(this); toAdd.add(g); }
 	public void removeObject(GameObject g) { toRemove.add(g); }
 	
 	public void drawUi(SpriteBatch batch) {
