@@ -25,3 +25,20 @@ factory1: {
 	production-resources:        coal, iron;
 	resource-per-run: 1,    4;
 }
+
+mine: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         coal, iron;
+	product-per-run: 5;
+	production-resources:        wood;
+	resource-per-run: 1,    4;
+}
+

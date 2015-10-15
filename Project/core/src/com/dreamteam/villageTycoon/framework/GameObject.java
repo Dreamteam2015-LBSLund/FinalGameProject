@@ -11,7 +11,6 @@ import com.dreamteam.villageTycoon.map.Tile;
 
 /**
  * @author Johannes
- *
  */
 public abstract class GameObject {
 	private Vector2 position, size, origin;
@@ -53,7 +52,7 @@ public abstract class GameObject {
 	
 	protected void setOriginCenter() {
 		getSprite().setOriginCenter();
-		origin = new Vector2(sprite.getOriginX(), sprite.getOriginY());
+		origin = new Vector2(sprite.getOriginX()/2, sprite.getOriginY()/2);
 	}
 	
 	public float getDepth() {

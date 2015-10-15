@@ -7,9 +7,12 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class Map {
 	public final static int WIDTH = 100, HEIGHT = 100;
@@ -114,6 +117,28 @@ public class Map {
 		}
 		
 		return map;
+	}
+	
+	public City generateCity(Vector2 position, int size, Scene scene) {
+		City city = new City(scene);
+		
+		Random random = new Random();
+		
+		// Houses for the workers should be the core of cities
+		city.addBuilding(new Building(position, BuildingType.getTypes().get("house"), city));
+		city.addBuilding(new Building(position.add(new Vector2(-4, random.nextInt(5)-5)), BuildingType.getTypes().get("house"), city));
+		
+		return city;
+	}
+	
+	public boolean canAddBuilding(ArrayList<Building> buildings, Building building) {
+		boolean canPlace = false;
+		
+		for(Building b : buildings) {
+			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) > building.getSize().x);
+		}
+		
+		return canPlace;
 	}
 	
 	// Visste inte vart jag skulle l�gga den
