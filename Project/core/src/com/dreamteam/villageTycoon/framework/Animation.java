@@ -39,6 +39,10 @@ public class Animation extends Sprite {
 		setAnimation(maxAnimationTime, maxFrame, minFrame, vertical);
 	}
 	
+	public Vector2 getSize() {
+		return this.getSize();
+	}
+	
 	public void setAnimation(float maxAnimationTime, int maxFrame, int minFrame, boolean vertical) {
 		this.maxAnimationTime = maxAnimationTime;
 		this.maxFrame = maxFrame;

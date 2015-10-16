@@ -119,14 +119,22 @@ public class Map {
 		return map;
 	}
 	
-	public City generateCity(Vector2 position, int size, Scene scene) {
+	public City generateCity(Vector2 position, int size, int techLevel, Scene scene) {
 		City city = new City(scene);
 		
 		Random random = new Random();
 		
 		// Houses for the workers should be the core of cities
-		city.addBuilding(new Building(position, BuildingType.getTypes().get("house"), city));
-		city.addBuilding(new Building(position.add(new Vector2(-4, random.nextInt(5)-5)), BuildingType.getTypes().get("house"), city));
+		for(int x = 0; x < size/2; x++) {
+			for(int y = 0; y < size/2; y++) {
+				Vector2 buildingSize = BuildingType.getTypes().get("house").getSprite().getSize();
+				Vector2 center = new Vector2(position.x-size/4, position.y-size/4);
+				city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house"), city));
+			}
+		}
+		
+		//Next up is agriculture
+		
 		
 		return city;
 	}

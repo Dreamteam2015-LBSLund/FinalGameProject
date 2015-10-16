@@ -26,7 +26,7 @@ factory1: {
 	resource-per-run: 1,    4;
 }
 
-mine: {
+basicMine: {
 	type: factory;
 	
 	materials:     wood, stone;
@@ -42,3 +42,114 @@ mine: {
 	resource-per-run: 1,    4;
 }
 
+explosivePowderMine: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         explosivePowder;
+	product-per-run: 5;
+	production-resources:        wood;
+	resource-per-run: 1,    4;
+}
+
+diamondPowderMine: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         diamond;
+	product-per-run: 5;
+	production-resources:        wood;
+	resource-per-run: 1,    4;
+}
+
+basicFarm: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         food;
+	product-per-run: 5;
+	production-resources:        water;
+	resource-per-run: 1,    4;
+}
+
+advancedFarm: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         food;
+	product-per-run: 15;
+	production-resources:        water;
+	resource-per-run: 1,    4;
+}
+
+woodShop: {
+ 	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         weapons;
+	product-per-run: 3;
+	production-resources:        wood;
+	resource-per-run: 1,    4;
+ }
+ 
+flourMill: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         flour;
+	product-per-run: 15;
+	production-resources:        wheat;
+	resource-per-run: 1,    4;
+}
+
+bakery: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         food;
+	product-per-run: 15;
+	production-resources:        flour;
+	resource-per-run: 1,    4;
+}
