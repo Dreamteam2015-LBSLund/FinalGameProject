@@ -146,7 +146,7 @@ public class Character extends GameObject {
 	
 	// set path if not already set
 	protected void setPath(Vector2 target) {
-		if (path != null && path.get(path.size() - 1).equals(target)) return;
+		if (path != null && path.size() > 0 && path.get(path.size() - 1).equals(target)) return;
 		else path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);
 	}
 }
