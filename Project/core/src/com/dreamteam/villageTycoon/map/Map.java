@@ -134,7 +134,18 @@ public class Map {
 		}
 		
 		//Next up is agriculture
+		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 		
+		for(int i = 0; i < size/4; i++) {
+			Building buildingToAdd = null;
+			
+			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
+				Vector2 offset = new Vector2(random.nextInt(-size*2)+size*2, random.nextInt(-size*2)+size*2);
+				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get("farmType"), city);
+			}
+			// TODO: flourmills and bakerys, don't really know where to put them
+			city.addBuilding(buildingToAdd);
+		}
 		
 		return city;
 	}

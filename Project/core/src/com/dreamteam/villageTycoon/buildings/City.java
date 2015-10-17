@@ -69,4 +69,8 @@ public class City {
 		
 		return closest;
 	}
+	
+	public ArrayList<Building> getBuildings() {
+		return buildings;
+	}
 }
