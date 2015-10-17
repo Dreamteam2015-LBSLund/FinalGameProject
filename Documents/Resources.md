@@ -9,6 +9,7 @@
 - Mat i nån form? produceras av vissa byggnader
 
 #Buildings
+*We need to write down what resources you need to build the structre and how much of it*
 
 Building | Product | Resource Used
 ---------|----------|-------------
