@@ -135,19 +135,28 @@ public class Map {
 		
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
+
+		addCityPart(size/4, farmType, position, -size*2, size*2, city, random);
 		
-		for(int i = 0; i < size/4; i++) {
-			Building buildingToAdd = null;
-			
-			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-				Vector2 offset = new Vector2(random.nextInt(-size*2)+size*2, random.nextInt(-size*2)+size*2);
-				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get("farmType"), city);
-			}
-			// TODO: flourmills and bakerys, don't really know where to put them
-			city.addBuilding(buildingToAdd);
-		}
+		addCityPart(size/4, "factory1", position, -size*4, size*4, city, random);
 		
 		return city;
+	}
+	
+	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random) {
+		Building buildingToAdd = null;
+		
+		for(int i = 0; i < amount; i++) {
+			Vector2 offset = new Vector2(random.nextInt(min)+max, random.nextInt(min)+max);
+			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+			
+			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
+				offset = new Vector2(random.nextInt(min)+max, random.nextInt(min)+max);
+				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+			}
+			
+			city.addBuilding(buildingToAdd);
+		}
 	}
 	
 	public boolean canAddBuilding(ArrayList<Building> buildings, Building building) {
