@@ -11,6 +11,7 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 
@@ -56,7 +57,7 @@ public class Building extends GameObject {
     }
     
     public void update(float deltaTime) {
-    	// instant build on Y press
+    	// instant build on Y press. remove before realease :^)
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		for (int i = 0; i < type.getBuildResources().length; i++) {
     			inventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
@@ -73,7 +74,7 @@ public class Building extends GameObject {
     			setSprite(type.getSprite());
     		} else {
     			for (Worker w : workers) {
-    				
+    				if (!w.hasTask()) w.setTask(new GatherTask(this, type.getBuildResources()[0]));
     			}
     		}
     	} else {

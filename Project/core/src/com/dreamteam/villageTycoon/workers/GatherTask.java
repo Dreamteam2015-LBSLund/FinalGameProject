@@ -3,7 +3,7 @@ package com.dreamteam.villageTycoon.workers;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.map.Resource;
 
-public class GatherTask {
+public class GatherTask implements Task {
 	
 	private enum State { Finding, Returning }
 	

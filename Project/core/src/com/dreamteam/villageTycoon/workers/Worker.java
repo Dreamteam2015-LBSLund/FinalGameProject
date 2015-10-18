@@ -8,7 +8,9 @@ import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Character;
 import com.dreamteam.villageTycoon.characters.Inventory;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
 
@@ -39,9 +41,36 @@ public class Worker extends Character {
 	public boolean findResource(Resource r) {
 		if (inventory.count(r) > 0) return true;
 		else {
+			GameObject t = getCity().findResource(r, getPosition());
+			Vector2 target = t.getPosition();
+			setPath(target);
 			
+			if (isAtPathEnd()) {
+				if (t instanceof Building) {
+					Building b = (Building)t;
+					if (b.getInventory().count(r) > 0) {
+						b.getInventory().remove(r, 1);
+						inventory.add(r, 1);
+						return true;
+					}
+				} else if (t instanceof Prop) {
+					if (((Prop)t).getType().getResource() == r) {
+						getScene().removeObject(t);
+						inventory.add(r, 1);
+						return true;
+					}
+				}
+			}
 		}
 		return false;
+	}
+	
+	public void setTask(Task task) {
+		this.task = task;
+	}
+	
+	public boolean hasTask() {
+		return task != null;
 	}
 	
 	// if has resource, goes to building and puts it there
