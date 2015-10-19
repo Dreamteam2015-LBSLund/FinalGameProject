@@ -20,6 +20,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.workers.Worker;
 
 public class TestScene extends Scene {
 	private Map map;
@@ -48,13 +49,13 @@ public class TestScene extends Scene {
 		
 		// gör en fucking for loop tom din jävla sosse
 		for(int i = 0; i < 5; i++) {
-			addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+			/*addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 					new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 					new SabotageKit[]{ 
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
-			}));
-	
+			}));*/
+			addObject(new Worker(new Vector2(2, 2), new Animation(AssetManager.getTexture("test")),  new Animation(AssetManager.getTexture("test")), playerCity));
 		}
 		
 	}

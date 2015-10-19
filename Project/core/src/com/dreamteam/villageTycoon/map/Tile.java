@@ -25,6 +25,7 @@ public class Tile {
 	}
 	
 	public void build(Building b) {
+		System.out.println("Building on " + getPosition());
 		this.building = b;
 	}
 	
@@ -34,6 +35,10 @@ public class Tile {
 	
 	public TileType getType() {
 		return type;
+	}
+	
+	public Vector2 getPosition() {
+		return position;
 	}
 	
 	public boolean isWalkable() {

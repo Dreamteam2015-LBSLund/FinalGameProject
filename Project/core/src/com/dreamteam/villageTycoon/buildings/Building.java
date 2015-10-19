@@ -45,9 +45,9 @@ public class Building extends GameObject {
     
     private void setTiles() {
     	Tile[][] tiles = ((TestScene)getScene()).getMap().getTiles();
-    	for (int x = 0; x < (int)getSize().x; x++) {
-    		for (int y = 0; y < (int)getSize().y; y++) {
-    			tiles[x + (int)getPosition().x][y + (int)getPosition().y].build(this);
+    	for (int x = -(int)(getSize().x / Tile.WIDTH) / 2; x < (int)(getSize().x / Tile.WIDTH) / 2; x++) {
+    		for (int y = -(int)(getSize().y / Tile.HEIGHT) / 2; y < (int)(getSize().y / Tile.HEIGHT) / 2; y++) {
+    			tiles[x + (int)(getPosition().x / Tile.WIDTH)][y + (int)(getPosition().y / Tile.HEIGHT)].build(this);
     		}
     	}
     }
@@ -73,8 +73,12 @@ public class Building extends GameObject {
     	    	}
     			setSprite(type.getSprite());
     		} else {
+    			System.out.println(workers.size() + " workers");
     			for (Worker w : workers) {
-    				if (!w.hasTask()) w.setTask(new GatherTask(this, type.getBuildResources()[0]));
+    				if (!w.hasTask()) {
+    					w.setTask(new GatherTask(this, type.getBuildResources()[0]));
+    					System.out.println("giving gathertask to worker");
+    				}
     			}
     		}
     	} else {
