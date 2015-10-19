@@ -17,4 +17,8 @@ public class Prop extends GameObject {
 		setOriginCenter();
 		setPosition(getPosition());
 	}
+
+	public PropType getType() {
+		return type;
+	}
 }
