@@ -117,6 +117,7 @@ public class Controller extends GameObject {
 		super.update(deltaTime);
 		
 		cameraMovment(deltaTime);
+		inventoryUpdate();
 		
 		if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			if (mousePressed) {
@@ -128,20 +129,6 @@ public class Controller extends GameObject {
 				onMousePressed();
 			}
 			mousePressed = true;
-		}
-
-		waypoints = new Vector2[selectedCharacters.size()];
-		
-		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-			for (GameObject c : getScene().getObjects()) {
-				if (c instanceof Character) {
-					if(!((Character)c).getShowInventroy()) {
-						if(((Character)c).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
-							((Character)c).setShowInventory(true);
-						}
-					} 
-				}
-			}
 		}
 		
 		for (Character c : selectedCharacters) {
@@ -162,30 +149,41 @@ public class Controller extends GameObject {
 		}
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
-			if(!rightMouseIsPressed) {
-				if(canMoveUnits) {
-					for (GameObject b : getScene().getObjects()) {
-						if (b instanceof Building) {
-							// if the player presses on a building then the units are sent to that building
-							if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
-								this.sentToBuilding = true;
-								this.building = ((Building)b);
-							}
-							else
-							{
-								this.sentToBuilding = false;
-								this.building = null;
-							}
-						}
-					}
-					addWaypoints();
-				}
-			}
+			moveUnits();
 			rightMouseIsPressed = true;
 		} else {
 			rightMouseIsPressed = false;
 		}
 		
+		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
+		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
+		selectionRectangle.normalize();
+	}
+	
+	public void moveUnits() {
+		waypoints = new Vector2[selectedCharacters.size()];
+		if(!rightMouseIsPressed) {
+			if(canMoveUnits) {
+				for (GameObject b : getScene().getObjects()) {
+					if (b instanceof Building) {
+						// if the player presses on a building then the units are sent to that building
+						if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
+							this.sentToBuilding = true;
+							this.building = ((Building)b);
+						}
+						else
+						{
+							this.sentToBuilding = false;
+							this.building = null;
+						}
+					}
+				}
+				addWaypoints();
+			}
+		}
+	}
+	
+	public void inventoryUpdate() {
 		if(Gdx.input.isKeyJustPressed(Keys.Q)) {
 			for (GameObject c : getScene().getObjects()) {
 				if (c instanceof Character) {
@@ -196,9 +194,17 @@ public class Controller extends GameObject {
 			}
 		}
 		
-		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
-		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
-		selectionRectangle.normalize();
+		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
+			for (GameObject c : getScene().getObjects()) {
+				if (c instanceof Character) {
+					if(!((Character)c).getShowInventroy()) {
+						if(((Character)c).getHitbox().collision(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f))) && canMoveUnits) {
+							((Character)c).setShowInventory(true);
+						}
+					} 
+				}
+			}
+		}
 	}
 	
 	public void addWaypoints() {

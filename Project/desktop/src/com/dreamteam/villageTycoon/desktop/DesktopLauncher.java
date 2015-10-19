@@ -1,4 +1,4 @@
-package com.dreamteam.villagetycoon.desktop;
+package com.dreamteam.villageTycoon.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
