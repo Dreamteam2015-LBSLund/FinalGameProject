@@ -138,8 +138,8 @@ flourMill: {
 	resource-per-run: 1,    4;
 }
 
-bakery: {
-	type: factory;
+armyBarack: {
+	type: home;
 	
 	materials:     wood, stone;
 	material-amount: 10, 5;
@@ -147,9 +147,5 @@ bakery: {
 	sprite-finished: factory1;
 	sprite-building: factoryProgress1;
 	
-	max-workers: 4;
-	product:         food;
-	product-per-run: 15;
-	production-resources:        flour;
-	resource-per-run: 1,    4;
+	inhabitants: 4;
 }

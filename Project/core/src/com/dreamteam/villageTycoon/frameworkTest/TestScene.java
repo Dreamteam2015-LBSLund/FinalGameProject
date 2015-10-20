@@ -25,6 +25,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
+	private City city;
 	
 	public TestScene() {
 		super();
@@ -32,6 +33,8 @@ public class TestScene extends Scene {
 		AssetManager.load();
 		
 		map = new Map(this);
+		
+		//city = map.generateCity(new Vector2(30, 30), 10, 1, this);
 		
 		System.out.println(map == null);
 		

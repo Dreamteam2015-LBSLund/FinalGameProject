@@ -20,7 +20,8 @@ public class Map {
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
 	private HashMap<String, BuildingType> buildingTypes;
-
+	
+	City city;
 	
 	public Map(Scene scene) {
 		Resource.getTypes();
@@ -127,7 +128,7 @@ public class Map {
 		// Houses for the workers should be the core of cities
 		for(int x = 0; x < size/2; x++) {
 			for(int y = 0; y < size/2; y++) {
-				Vector2 buildingSize = BuildingType.getTypes().get("house").getSprite().getSize();
+				Vector2 buildingSize = BuildingType.getTypes().get("home").getSprite().getSize();
 				Vector2 center = new Vector2(position.x-size/4, position.y-size/4);
 				city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house"), city));
 			}
@@ -139,6 +140,12 @@ public class Map {
 		addCityPart(size/4, farmType, position, -size*2, size*2, city, random);
 		
 		addCityPart(size/4, "factory1", position, -size*4, size*4, city, random);
+		
+		addCityPart(size/4, "bakery", position, -size*6, size*6, city, random);
+		addCityPart(size/4, "flourMill", position, -size*6, size*6, city, random);
+		addCityPart(size/4, "wheatFarm", position, -size*8, size*8, city, random);
+		
+		addCityPart(size/4, "armyBarack", position, -size*10, size*10, city, random);
 		
 		return city;
 	}
