@@ -22,3 +22,6 @@ flour mill | flour | wheat
 Bageri | food | flour
 Wheatfarm | wheat | water
 Diamond mine | diamonds | wood
+Army barack | HOUSE | HOUSE
+House | HOUSE | HOUSE
+Guard tower [inte minimal viable] | HOUSE | HOUSE
