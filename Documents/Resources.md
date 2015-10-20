@@ -20,4 +20,5 @@ Better farm | More red | Water
 Exploading poweder Mine | Exploading powder | Wood
 flour mill | flour | wheat
 Bageri | food | flour
+Wheatfarm | wheat | water
 Diamond mine | diamonds | wood
