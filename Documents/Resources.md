@@ -7,6 +7,8 @@
 - Kol
 - Gräs ?
 - Mat i nån form? produceras av vissa byggnader
+- Wheat
+- Mjöl
 
 #Buildings
 *We need to write down what resources you need to build the structre and how much of it*
