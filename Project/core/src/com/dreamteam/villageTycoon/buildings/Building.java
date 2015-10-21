@@ -20,7 +20,7 @@ public class Building extends GameObject {
 	private enum BuildState { InProgress, Done };
     private BuildingType type;
     private BuildState buildState;
-    private Inventory<Resource> inventory;
+    private Inventory<Resource> inputInventory, outputInventory;
     private ArrayList<Worker> workers;
     private City city;
     private boolean selected;
@@ -28,12 +28,11 @@ public class Building extends GameObject {
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position, new Vector2(4, 3), type.getBuildSprite());
     	owner.addBuilding(this);
-    	inventory = new Inventory<Resource>();
+    	inputInventory = new Inventory<Resource>();
+    	outputInventory = new Inventory<Resource>();
 		this.type = type;
 		buildState = BuildState.InProgress;
 		setDepth(1);
-		inventory.add(Resource.get("stone"), 2);
-		inventory.add(Resource.get("wood"),  1);
 		workers = new ArrayList<Worker>();
 		//setTiles();
     }
@@ -60,7 +59,7 @@ public class Building extends GameObject {
     	// instant build on Y press. remove before realease :^)
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		for (int i = 0; i < type.getBuildResources().length; i++) {
-    			inventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
+    			inputInventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
     		}
     	}
     	
@@ -69,7 +68,7 @@ public class Building extends GameObject {
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
     			for (int i = 0; i < type.getBuildResources().length; i++) {
-    	    		inventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
+    				inputInventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
     	    	}
     			setSprite(type.getSprite());
     		} else {
@@ -101,7 +100,7 @@ public class Building extends GameObject {
     private boolean isBuildingDone() {
     	boolean hasAllResources = true;
     	for (int i = 0; i < type.getBuildResources().length; i++) {
-    		if (inventory.count(type.getBuildResources()[i]) < type.getBuildAmount()[i]) {
+    		if (inputInventory.count(type.getBuildResources()[i]) < type.getBuildAmount()[i]) {
     			hasAllResources = false;
     			break;
     		}
@@ -114,7 +113,7 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	inventory.drawList(getPosition(), batch);
+    	inputInventory.drawList(getPosition(), batch);
     }
     
     public void draw(SpriteBatch batch) {
@@ -129,7 +128,11 @@ public class Building extends GameObject {
     	return this.selected;
     }
 
-	public Inventory<Resource> getInventory() {
-		return inventory;
+	public Inventory<Resource> getOutputInventory() {
+		return outputInventory;
+	}
+	
+	public Inventory<Resource> getInputInventory() {
+		return inputInventory;
 	}
 }

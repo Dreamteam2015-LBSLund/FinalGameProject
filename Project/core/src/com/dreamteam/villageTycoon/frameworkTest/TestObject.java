@@ -28,7 +28,7 @@ public class TestObject extends Character {
 		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			setPath(getScene().getWorldMouse());
 		}
-		followPath();
+		//followPath();
 	}
 	
 	public void draw(SpriteBatch batch) {

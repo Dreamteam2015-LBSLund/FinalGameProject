@@ -20,6 +20,7 @@ public class City {
 	
 	public City(Scene scene) {
 		buildings = new ArrayList<Building>();
+		this.scene = (TestScene) scene;
 	}
 	
 	// register a building that is built and belongs to this city
@@ -33,7 +34,7 @@ public class City {
 	}
 	
 	public boolean hasResource(Resource r) {
-		for (Building b : buildings) if (b.getInventory().count(r) > 0) return true;
+		for (Building b : buildings) if (b.getOutputInventory().count(r) > 0) return true;
 		return false;
 	}
 	
@@ -41,7 +42,7 @@ public class City {
 	public GameObject findResource(Resource r, Vector2 closeTo) {
 		GameObject closest = null;
 		for (Building b : buildings) {
-			if (b.getInventory().count(r) > 0){
+			if (b.getOutputInventory().count(r) > 0){
 				if (closeTo != null) { if (closest == null || closest.distanceTo(closeTo) > b.distanceTo(closeTo)) closest = b; }
 				else return b;
 			}
@@ -60,9 +61,11 @@ public class City {
 			Prop p = null;
 			for (GameObject g : scene.getObjects()) {
 				if (g instanceof Prop) {
-					p = (Prop)g;
-					if (closeTo != null) { if (closest == null || closest.distanceTo(closeTo) > p.distanceTo(closeTo)) closest = p; }
-					else return p;
+					if (((Prop)g).getType().getResource() == r) {
+						p = (Prop)g;
+						if (closeTo != null) { if (closest == null || closest.distanceTo(closeTo) > p.distanceTo(closeTo)) closest = p; }
+						else return p;
+					}
 				}
 			}
 		}

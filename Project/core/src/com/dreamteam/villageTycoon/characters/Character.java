@@ -17,6 +17,7 @@ import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.PathFinder;
 
 public class Character extends GameObject {
@@ -36,6 +37,8 @@ public class Character extends GameObject {
 	private boolean isInBuilding;
 	private City city;
 	private Building building;
+	
+	private Vector2 lastPathTarget;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, sprite);
@@ -59,7 +62,7 @@ public class Character extends GameObject {
 			getSprite().animate(deltaTime);
 		}
 		
-		followPath();
+		followPath(deltaTime);
 	}
 	
 	public City getCity() {
@@ -120,24 +123,28 @@ public class Character extends GameObject {
 		return this.building;
 	}
 	
-	protected void followPath() {
+	protected void followPath(float deltaTime) {
+		Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
-			stepTowards(next, .05f);
+			stepTowards(next, 1 * deltaTime);
 			if (distanceTo(next) < .1f) {
 				path.remove(0);
 			}
+		} else {
+			Debug.print(this, "path is null or empty, " + path);
 		}
 	}
 	
 	protected boolean isAtPathEnd() {
-		return path == null || path.isEmpty();
+		return distanceTo(lastPathTarget) < .2f;
 	}
 	
 	protected void stepTowards(Vector2 v, float speed) {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
+		Debug.print(this, "stepping towards " + v);
 	}
 	
 	protected ArrayList<Vector2> getPath() {
@@ -146,7 +153,14 @@ public class Character extends GameObject {
 	
 	// set path if not already set
 	protected void setPath(Vector2 target) {
-		if (path != null && path.size() > 0 && path.get(path.size() - 1).equals(target)) return;
-		else path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);
+		if (lastPathTarget == target && path != null) {
+			if (path.size() == 0 && distanceTo(target) < .3f) {
+				Debug.print(this, "path was already set there, returning");
+				return;
+			}
+		}
+		Debug.print(this, "setting path");
+		lastPathTarget = target;
+		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);		
 	}
 }

@@ -2,8 +2,11 @@ package com.dreamteam.villageTycoon.workers;
 
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.Debug;
 
 public class GatherTask implements Task {
+	
+	final static boolean PRINT = true;
 	
 	private enum State { Finding, Returning }
 	
@@ -15,6 +18,7 @@ public class GatherTask implements Task {
 	public GatherTask(Building building, Resource resource) {
 		this.destination = building;
 		this.resource = resource;
+		state = State.Finding;
 	}
 	
 	public Resource getResource() {
@@ -27,12 +31,18 @@ public class GatherTask implements Task {
 	
 	// returns true if the work is done
 	public boolean work(Worker w) {
+		print("gather task working, state = " + state);
+		
 		if (state == State.Finding) {
 			if (w.findResource(resource)) state = State.Returning;
 		} else {
-			w.putResource(destination, resource);
+			if (w.putResource(destination, resource)) return true;
 		}
 		
 		return false;
+	}
+	
+	private void print(String s) {
+		Debug.print(this, s);
 	}
 }
