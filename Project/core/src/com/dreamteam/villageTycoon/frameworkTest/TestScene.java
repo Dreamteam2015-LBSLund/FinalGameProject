@@ -49,7 +49,7 @@ public class TestScene extends Scene {
 		// x-types will be pre-defined so it won't look this messy later
 		
 		// gör en fucking for loop tom din jävla sosse
-		for(int i = 0; i < 1; i++) {
+		for(int i = 0; i < 5; i++) {
 			/*addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, new Animation(AssetManager.getTexture("test"))), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 					new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("test"))), 
 					new SabotageKit[]{ 
@@ -64,10 +64,11 @@ public class TestScene extends Scene {
 	public void initialize() {
 		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		City city = new City(this);
-		map.generateCity(new Vector2(50, 50), 4, 0, this, city);
+		//map.generateCity(new Vector2(50, 50), 4, 0, this, city);
 	}
 	
 	public Map getMap() {
+		System.out.println("map = " + map);
 		return map;
 	}
 	

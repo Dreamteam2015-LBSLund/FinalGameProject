@@ -20,7 +20,7 @@ Textures: {
 	stoneIcon:  		 490, 0, 16, 16;
 	steelIcon:   		 507, 0, 16, 16;
 	coalIcon:    		 523, 0, 16, 16;
-	foodIcon:   		 538, 0 16, 16;
+	foodIcon:   		 538, 0, 16, 16;
 	diamondIcon: 		 555, 0, 16, 16;
 	explosivePowderIcon: 572, 0, 16, 16;
 	weaponIcon: 		 589, 0, 16, 16;
