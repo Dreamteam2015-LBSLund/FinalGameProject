@@ -76,7 +76,7 @@ public class PathFinder {
 		
 		if (start.getTile(map) == null || !start.getTile(map).isWalkable(asker) || (!end.getTile(map).isWalkable(asker))) {
 			Debug.print(this, "tried to find unwalkable path");
-			if (target != null) {
+			if (target != null && target.cpy().sub(start.getTile(map).getPosition()).len() < .7f) {
 				Debug.print(this, "returning target");
 				ArrayList<Vector2> r = new ArrayList<Vector2>();
 				r.add(target);

@@ -124,13 +124,13 @@ public class Character extends GameObject {
 	}
 	
 	protected void followPath(float deltaTime) {
-		Debug.print(this, "following path");
+		//Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
 			if (stepTowards(next, 1 * deltaTime)) {
-				Debug.print(this, "arrived at node");
+				//Debug.print(this, "arrived at node");
 				path.remove(0);
-				Debug.print(this, path.size() + " nodes left");
+				//Debug.print(this, path.size() + " nodes left");
 			}
 		} else {
 			Debug.print(this, "path is null or empty, " + path);
@@ -139,7 +139,7 @@ public class Character extends GameObject {
 	}
 	
 	protected boolean isAtPathEnd() {
-		Debug.print(this, "distance to path target = " + distanceTo(lastPathTarget));
+		//Debug.print(this, "distance to path target = " + distanceTo(lastPathTarget));
 		return distanceTo(lastPathTarget) < .2f;
 	}
 	
@@ -147,7 +147,7 @@ public class Character extends GameObject {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
-		Debug.print(this, "stepped towards " + v + ", new position = " + getPosition());
+		//Debug.print(this, "stepped towards " + v + ", new position = " + getPosition());
 		return delta.len() < .01f;
 	}
 	
@@ -164,6 +164,7 @@ public class Character extends GameObject {
 		if (lastPathTarget == target && path != null) {
 			Debug.print(this, "lastPath = target, returning"); 
 			if (!path.isEmpty()) {
+				Debug.print(this, "path is not empty, returning");
 				return;
 			} else {
 				Debug.print(this, "path is empty, setting new");

@@ -13,7 +13,7 @@ public class Tile {
 	
 	private TileType type;
 	private Vector2 position;
-	private boolean hasBuilding() { return building != null; } //should be set to true when a building is built on this tile. observer?
+	private boolean hasBuilding() { return building != null; }
 	private Building building;
 	
 	public Tile(Vector2 position, TileType type, Scene scene) {

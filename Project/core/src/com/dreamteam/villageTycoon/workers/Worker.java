@@ -29,7 +29,7 @@ public class Worker extends Character {
 	}
 	
 	public void update(float deltaTime) {
-		Debug.print(this, "tile: " + getTile().getPosition());
+		//Debug.print(this, "tile: " + getTile().getPosition());
 		if (getTile().getBuilding() != null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
