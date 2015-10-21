@@ -106,6 +106,22 @@ advancedFarm: {
 	resource-per-run: 1,    4;
 }
 
+wheatFarm: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         wheat;
+	product-per-run: 15;
+	production-resources:        water;
+	resource-per-run: 1,    4;
+}
+
 woodShop: {
  	type: factory;
 	

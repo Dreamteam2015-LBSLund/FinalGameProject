@@ -119,6 +119,10 @@ public class Controller extends GameObject {
 		cameraMovment(deltaTime);
 		inventoryUpdate();
 		
+		System.out.println(getScene().getCamera().position);
+		
+		getScene().getCamera().zoom = 10.1f;
+		
 		if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			if (mousePressed) {
 				onMouseReleased();
