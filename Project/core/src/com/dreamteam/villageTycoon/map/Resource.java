@@ -38,6 +38,7 @@ public class Resource implements InventoryItem {
 			types = new HashMap<String, Resource>();
 			for (ResourceReader r : ResourceReader.readObjectList(Gdx.files.internal("resources.gd"))) {
 				types.put(r.getObjectName(), new Resource(r));
+				System.out.println(r.getObjectName()); // to make a list of sprites for Carro
 			}	
 		}
 		return types;

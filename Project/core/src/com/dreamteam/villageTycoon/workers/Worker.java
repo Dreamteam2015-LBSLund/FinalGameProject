@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.workers;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -10,6 +12,7 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.Debug;
 
 public class Worker extends Character {
 	final boolean PRINT = true;
@@ -22,11 +25,11 @@ public class Worker extends Character {
 		super(position, sprite, deathAnimation, city);
 		inventory = new Inventory<Resource>();
 		
-		System.out.println("position " + position);
+		Debug.print(this, "position " + position);
 	}
 	
 	public void update(float deltaTime) {
-		System.out.println("tile: " + getTile().getPosition());
+		Debug.print(this, "tile: " + getTile().getPosition());
 		if (getTile().getBuilding() != null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
@@ -50,10 +53,10 @@ public class Worker extends Character {
 			return true;
 		}
 		else {
-			GameObject t = getCity().findResource(r, getPosition());
+			GameObject t = getCity().findResource(r, getPosition()); // this doesn't need to happen every frame
 			if (t != null) {
 				Vector2 target = t.getPosition();
-				print("found resource at " + t + ", setting path");
+				print("found resource at " + target + ", setting path");
 			
 				setPath(target);
 				
@@ -65,6 +68,7 @@ public class Worker extends Character {
 						if (b.getOutputInventory().count(r) > 0) {
 							b.getOutputInventory().remove(r, 1);
 							inventory.add(r, 1);
+							Debug.print(this, "has resource, putting");
 							return true;
 						}
 					} else if (t instanceof Prop) {
@@ -127,7 +131,16 @@ public class Worker extends Character {
 		workplace.removeWorker(this);
 	}
 	
+	protected void setPath(Vector2 target) {
+		setPath(target, workplace);
+	}
+	
 	private void print(String s) {
-		if (PRINT) System.out.println(s);
+		Debug.print(this, s);
+	}
+	
+	public void draw(SpriteBatch batch) {
+		if (lastPathTarget != null) batch.draw(com.dreamteam.villageTycoon.AssetManager.getTexture("error"), lastPathTarget.x, lastPathTarget.y, .3f, .3f);
+		super.draw(batch);
 	}
 }

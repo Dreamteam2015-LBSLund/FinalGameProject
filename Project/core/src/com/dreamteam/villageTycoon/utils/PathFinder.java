@@ -3,8 +3,10 @@ package com.dreamteam.villageTycoon.utils;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.characters.Character;
 
 public class PathFinder {
 	
@@ -15,18 +17,21 @@ public class PathFinder {
 	private Vector2[] path;
 	private Node[][] nodes;
 	private Vector2 target;
+	private Character asker;
 	
 	public PathFinder(Vector2 start, Vector2 end, Tile[][] map) {
-		this(start, end, map, true);
+		this(start, end, map, true, null);
 	}
 	
-	public PathFinder(Vector2 start, Vector2 end, Tile[][] map, boolean align) { // put the search in a new thread and add a callback for when it's done
+	public PathFinder(Vector2 start, Vector2 end, Tile[][] map, boolean align, Character object) { // put the search in a new thread and add a callback for when it's done
 		startTile  = new Point((int)(start.x / Tile.WIDTH), (int)(start.y / Tile.HEIGHT));
 		endTile  = new Point((int)(end.x / Tile.WIDTH), (int)(end.y / Tile.HEIGHT));
+		Debug.print(this, "path requested from " + startTile + " to " + endTile);
 		this.map = map;
+		this.asker = object;
 		nodes = new Node[map.length][map[0].length];
 		
-		if (align) target = end;
+		if (!align) target = end;
 	}
 	
 	private Node getNode(int x, int y) {
@@ -49,16 +54,35 @@ public class PathFinder {
 	}
 	
 	public ArrayList<Vector2> getPath(boolean findClosest) {
-		print("path requested");
+		return getPath(findClosest, null);
+	}
+	
+	public ArrayList<Vector2> getPath(boolean findClosest, Building ignore) {
+		Debug.print(this, "constructing path");
 		//long time = System.nanoTime();
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
 		
-		if (start == end || start == null || end == null) return null;
+		if (start == end || start == null || end == null) {
+			Debug.print(this, "start = end or something's null, (" + start + ", " + end + "), returning null");
+			if (target != null) {
+				Debug.print(this, "returning target");
+				ArrayList<Vector2> r = new ArrayList<Vector2>();
+				r.add(target);
+				return r;
+			}
+			else return null;
+		}
 		
-		if (start.getTile(map) == null || !start.getTile(map).isWalkable() || (!end.getTile(map).isWalkable() && false)) {
-			print("tried to find unwalkable path");
-			return null;
+		if (start.getTile(map) == null || !start.getTile(map).isWalkable(asker) || (!end.getTile(map).isWalkable(asker))) {
+			Debug.print(this, "tried to find unwalkable path");
+			if (target != null) {
+				Debug.print(this, "returning target");
+				ArrayList<Vector2> r = new ArrayList<Vector2>();
+				r.add(target);
+				return r;
+			}
+			else return null;
 		}
 		
 		ArrayList<Node>  openList  = new ArrayList<Node>();
@@ -66,18 +90,18 @@ public class PathFinder {
 		
 		closedList.add(start);
 		start.addNeighbors(openList, closedList);
-		print("open list length: " + openList.size());
+		//print("open list length: " + openList.size());
 		
 		while (!openList.contains(end)) {
 			// get cheapest node from open list, add it to closed, and add its neighbors to openList
 			if (openList.size() > 0) {
-				print("adding neighbours from node with fcost " + openList.get(0).getF());
+				//print("adding neighbours from node with fcost " + openList.get(0).getF());
 				openList.get(0).addNeighbors(openList, closedList);
 			}
 			else {
-				print("couldn't find a path");
+				Debug.print(this, "couldn't find a path");
 				if (findClosest) {
-					print("couldnt find a path, going to " );
+					Debug.print(this, "constructing path to closest");
 					return reconstruct(start, smallestCostNode(closedList));
 				}
 				else return null; 
@@ -86,6 +110,7 @@ public class PathFinder {
 		//System.out.println("time to find path: " + (System.nanoTime() - time) / 1E6f + " ms before reconstruction");
 		ArrayList<Vector2> out = reconstruct(start, end);
 		if (target != null) out.add(target);
+		Debug.print(this, "done");
 		return out;
 	}
 
@@ -111,7 +136,7 @@ public class PathFinder {
 	}
 	
 	private void print(String s) {
-		if (PRINT) System.out.println(s);
+		if (PRINT) Debug.print(this, s);
 	}
 	
 	private class Node
@@ -166,11 +191,11 @@ public class PathFinder {
 			for (Node n : mustBeEmpty) {
 				if (n == null 
 					|| n.getTile(map) == null 
-					|| !n.getTile(map).isWalkable())
+					|| !n.getTile(map).isWalkable(asker))
 						return;
 			}
 			if (x >= 0 && x < map.length && y >= 0 && y < map[x].length) {
-				if (map[x][y].isWalkable() && !openList.contains(getNode(x, y)) && !closedList.contains(getNode(x, y))) {
+				if (map[x][y].isWalkable(asker) && !openList.contains(getNode(x, y)) && !closedList.contains(getNode(x, y))) {
 					addSorted(getNode(x, y), openList);
 					getNode(x, y).parent = parent;
 				}

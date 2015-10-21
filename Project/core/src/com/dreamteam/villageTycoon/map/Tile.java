@@ -3,8 +3,10 @@ package com.dreamteam.villageTycoon.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.characters.Character;
 
 public class Tile {
 	public final static float WIDTH = 1, HEIGHT = 1;
@@ -41,12 +43,13 @@ public class Tile {
 		return position;
 	}
 	
-	public boolean isWalkable() {
-		return type.isWalkable() && !hasBuilding();
+	public boolean isWalkable(Character c) {
+		return type.isWalkable() && (!hasBuilding() || !building.obstructs(c));
 	}
 	
 	public void draw(SpriteBatch batch) {
 		batch.draw(type.getSprite(), position.x, position.y, WIDTH, HEIGHT);
+		if (!isWalkable(null)) batch.draw(AssetManager.getTexture("error"), position.x, position.y, 1, 1);
 	}
 
 	public Building getBuilding() {
