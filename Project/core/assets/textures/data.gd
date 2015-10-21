@@ -15,9 +15,15 @@ Textures: {
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
 	
-	woodIcon:  454, 0, 16, 16;
-	ironIcon:  472, 0, 16, 16;
-	stoneIcon: 490, 0, 16, 16;
-	steelIcon: 507, 0, 16, 16;
-	coalIcon:  523, 0, 16, 16;
+	woodIcon:   	     454, 0, 16, 16;
+	ironIcon:    		 472, 0, 16, 16;
+	stoneIcon:  		 490, 0, 16, 16;
+	steelIcon:   		 507, 0, 16, 16;
+	coalIcon:    		 523, 0, 16, 16;
+	foodIcon:   		 538, 0 16, 16;
+	diamondIcon: 		 555, 0, 16, 16;
+	explosivePowderIcon: 572, 0, 16, 16;
+	weaponIcon: 		 589, 0, 16, 16;
+	flourIcon:			 606, 0, 16, 16;
+	wheatIcon:			 623, 0, 16, 16;
 }

@@ -35,17 +35,17 @@ diamond: {
 }
 
 explosivePowder: {
-	icon: grassIcon;
+	icon: diamondIcon;
 }
 
-weapons: {
-	icon: grassIcon;
+weapon: {
+	icon: weaponIcon;
 }
 
 flour: {
-	icon: grassIcon;
+	icon: flourIcon;
 }
 
 wheat: {
-	icon: grassIcon;
+	icon: wheatIcon;
 }
