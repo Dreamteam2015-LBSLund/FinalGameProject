@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -120,25 +121,25 @@ public class Map {
 		return map;
 	}
 	
-	public City generateCity(Vector2 position, int size, int techLevel, Scene scene) {
-		City city = new City(scene);
-		
+	public void generateCity(Vector2 position, int size, int techLevel, Scene scene, City city) {
 		Random random = new Random();
 		
 		// Houses for the workers should be the core of cities
-		for(int x = 0; x < size/2; x++) {
-			for(int y = 0; y < size/2; y++) {
-				Vector2 buildingSize = BuildingType.getTypes().get("home").getSprite().getSize();
-				Vector2 center = new Vector2(position.x-size/4, position.y-size/4);
-				city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house"), city));
+		for(int x = 0; x < size; x++) {
+			for(int y = 0; y < size; y++) {
+				Vector2 buildingSize = new Vector2(2, 2);
+				Vector2 center = new Vector2(position.x, position.y);
+				scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
+				city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
 			}
 		}
-		
+
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
 		addCityPart(size/4, farmType, position, -size*2, size*2, city, random);
 		
+		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
 		addCityPart(size/4, "factory1", position, -size*4, size*4, city, random);
 		
 		addCityPart(size/4, "bakery", position, -size*6, size*6, city, random);
@@ -146,21 +147,19 @@ public class Map {
 		addCityPart(size/4, "wheatFarm", position, -size*8, size*8, city, random);
 		
 		addCityPart(size/4, "armyBarack", position, -size*10, size*10, city, random);
-		
-		return city;
 	}
 	
 	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random) {
 		Building buildingToAdd = null;
 		
 		for(int i = 0; i < amount; i++) {
-			Vector2 offset = new Vector2(random.nextInt(min)+max, random.nextInt(min)+max);
+			Vector2 offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
 			
-			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-				offset = new Vector2(random.nextInt(min)+max, random.nextInt(min)+max);
-				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
-			}
+			//while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
+			//	offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
+			//	buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+			//}
 			
 			city.addBuilding(buildingToAdd);
 		}
@@ -170,7 +169,7 @@ public class Map {
 		boolean canPlace = false;
 		
 		for(Building b : buildings) {
-			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) > building.getSize().x);
+			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) < building.getSize().x);
 		}
 		
 		return canPlace;

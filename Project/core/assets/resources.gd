@@ -25,3 +25,27 @@ coal: {
 grass: {
 	icon: grassIcon;
 }
+
+food: {
+	icon: grassIcon;
+}
+
+diamond: {
+	icon: grassIcon;
+}
+
+explosivePowder: {
+	icon: diamondIcon;
+}
+
+weapon: {
+	icon: weaponIcon;
+}
+
+flour: {
+	icon: flourIcon;
+}
+
+wheat: {
+	icon: wheatIcon;
+}

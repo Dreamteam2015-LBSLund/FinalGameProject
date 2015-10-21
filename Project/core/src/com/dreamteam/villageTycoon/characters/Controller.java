@@ -119,6 +119,10 @@ public class Controller extends GameObject {
 		cameraMovment(deltaTime);
 		inventoryUpdate();
 		
+		selectUpdate();
+	}
+	
+	public void selectUpdate() {
 		if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			if (mousePressed) {
 				onMouseReleased();

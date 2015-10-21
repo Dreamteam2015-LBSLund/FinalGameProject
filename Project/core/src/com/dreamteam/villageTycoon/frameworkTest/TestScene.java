@@ -20,7 +20,6 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
-import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 public class TestScene extends Scene {
@@ -66,6 +65,8 @@ public class TestScene extends Scene {
 	
 	public void initialize() {
 		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
+		City city = new City(this);
+		//map.generateCity(new Vector2(50, 50), 4, 0, this, city);
 	}
 	
 	public Map getMap() {
