@@ -3,19 +3,19 @@
 
 Resurser | 
 ---------|
-Trä
-Järn
-Sten
-Vatten 
-Stål
-Kol
-Gräs
-Mat
-Vete
-Mjöl
-Diamant
-Explosivt pulver
-Vapen
+Trä |
+Järn |
+Sten |
+Vatten | 
+Stål |
+Kol |
+Gräs |
+Mat |
+Vete |
+Mjöl |
+Diamant |
+Explosivt pulver |
+Vapen |
 
 #Buildings
 *We need to write down what resources you need to build the structre and how much of it*
