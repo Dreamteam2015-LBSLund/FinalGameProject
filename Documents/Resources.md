@@ -1,14 +1,21 @@
 # Resurser
-- Trä
-- Järn
-- Sten
-- Vatten ?
-- Stål
-- Kol
-- Gräs ?
-- Mat i nån form? produceras av vissa byggnader
-- Wheat
-- Mjöl
+
+
+Resurser | 
+---------|
+Trä
+Järn
+Sten
+Vatten 
+Stål
+Kol
+Gräs
+Mat
+Vete
+Mjöl
+Diamant
+Explosivt pulver
+Vapen
 
 #Buildings
 *We need to write down what resources you need to build the structre and how much of it*
