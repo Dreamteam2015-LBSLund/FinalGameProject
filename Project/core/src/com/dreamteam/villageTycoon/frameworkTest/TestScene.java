@@ -20,6 +20,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 public class TestScene extends Scene {
