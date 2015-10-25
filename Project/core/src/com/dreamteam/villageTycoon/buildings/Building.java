@@ -30,6 +30,7 @@ public class Building extends GameObject {
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position, new Vector2(4, 3), type.getBuildSprite());
     	owner.addBuilding(this);
+    	this.city = owner;
     	inputInventory = new Inventory<Resource>();
     	outputInventory = new Inventory<Resource>();
 		this.type = type;
@@ -136,6 +137,10 @@ public class Building extends GameObject {
 	
 	public Inventory<Resource> getInputInventory() {
 		return inputInventory;
+	}
+	
+	public City getCity() {
+		return city;
 	}
 	
 	public boolean obstructs(Character character) {

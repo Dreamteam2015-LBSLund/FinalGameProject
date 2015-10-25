@@ -26,7 +26,6 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
-	private City city;
 	
 	public TestScene() {
 		super();
@@ -66,7 +65,7 @@ public class TestScene extends Scene {
 	
 	public void initialize() {
 		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
-		City city = new City(this);
+		//City city = new City(this);
 		//map.generateCity(new Vector2(50, 50), 4, 0, this, city);
 	}
 	

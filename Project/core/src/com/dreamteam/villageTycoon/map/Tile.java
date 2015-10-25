@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.characters.Character;
 
 public class Tile {
@@ -44,6 +45,9 @@ public class Tile {
 	}
 	
 	public boolean isWalkable(Character c) {
+		if (building != null && c != null) Debug.print(this,
+				c.getCity() + ", "
+		+ building.getCity() + "");
 		return type.isWalkable() && (!hasBuilding() || !building.obstructs(c));
 	}
 	

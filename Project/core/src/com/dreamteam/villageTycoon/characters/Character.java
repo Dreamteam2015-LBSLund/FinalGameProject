@@ -127,9 +127,11 @@ public class Character extends GameObject {
 		//Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
+			Debug.print(this, "next node: " + next + ". distance " + (next.cpy().sub(getPosition()).len()));
 			if (stepTowards(next, 1 * deltaTime)) {
 				//Debug.print(this, "arrived at node");
 				path.remove(0);
+				Debug.print(this, "at node, removing");
 				//Debug.print(this, path.size() + " nodes left");
 			}
 		} else {
@@ -147,8 +149,8 @@ public class Character extends GameObject {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
-		//Debug.print(this, "stepped towards " + v + ", new position = " + getPosition());
-		return delta.len() < .01f;
+		Debug.print(this, "stepped towards " + v + ", new position = " + getPosition() + ", distance " + delta.len());
+		return delta.len() < .01 * speed;
 	}
 	
 	protected ArrayList<Vector2> getPath() {
