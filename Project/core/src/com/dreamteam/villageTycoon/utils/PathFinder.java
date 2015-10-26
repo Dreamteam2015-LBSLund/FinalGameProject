@@ -111,6 +111,7 @@ public class PathFinder {
 		ArrayList<Vector2> out = reconstruct(start, end);
 		if (target != null) out.add(target);
 		Debug.print(this, "done");
+		out.remove(start);
 		return out;
 	}
 

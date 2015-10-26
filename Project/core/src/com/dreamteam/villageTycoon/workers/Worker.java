@@ -1,8 +1,8 @@
 package com.dreamteam.villageTycoon.workers;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Character;
@@ -140,7 +140,9 @@ public class Worker extends Character {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		if (lastPathTarget != null) batch.draw(com.dreamteam.villageTycoon.AssetManager.getTexture("error"), lastPathTarget.x, lastPathTarget.y, .3f, .3f);
+		if (getPath() != null) {
+			for (Vector2 v : getPath()) batch.draw(AssetManager.getTexture("error"), v.x, v.y, .3f, .3f);
+		}
 		super.draw(batch);
 	}
 }
