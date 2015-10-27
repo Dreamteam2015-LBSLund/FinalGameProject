@@ -2,6 +2,8 @@ package com.dreamteam.villageTycoon.utils;
 
 import java.util.ArrayList;
 
+import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.Worker;
 
@@ -11,8 +13,11 @@ public abstract class Debug {
 	
 	public static void init() {
 		whitelist.add(Worker.class);
-		whitelist.add(GatherTask.class);
-		whitelist.add(Character.class);
+		whitelist.add(Tile.class);
+		//whitelist.add(GatherTask.class);
+		//whitelist.add(Character.class);
+		//whitelist.add(Building.class);
+		whitelist.add(PathFinder.class);
 	}
 	
 	public static void print(Object client, String message) {

@@ -3,15 +3,18 @@ package com.dreamteam.villageTycoon.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.utils.Debug;
+import com.dreamteam.villageTycoon.characters.Character;
 
 public class Tile {
 	public final static float WIDTH = 1, HEIGHT = 1;
 	
 	private TileType type;
 	private Vector2 position;
-	private boolean hasBuilding() { return building != null; } //should be set to true when a building is built on this tile. observer?
+	private boolean hasBuilding() { return building != null; }
 	private Building building;
 	
 	public Tile(Vector2 position, TileType type, Scene scene) {
@@ -41,8 +44,11 @@ public class Tile {
 		return position;
 	}
 	
-	public boolean isWalkable() {
-		return type.isWalkable() && !hasBuilding();
+	public boolean isWalkable(Character c) {
+		if (building != null && c != null) Debug.print(this,
+				c.getCity() + ", "
+		+ building.getCity() + "");
+		return type.isWalkable() && (!hasBuilding() || !building.obstructs(c));
 	}
 	
 	public void draw(SpriteBatch batch) {

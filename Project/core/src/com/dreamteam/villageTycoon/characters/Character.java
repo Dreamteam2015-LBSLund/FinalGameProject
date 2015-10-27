@@ -38,7 +38,7 @@ public class Character extends GameObject {
 	private City city;
 	private Building building;
 	
-	private Vector2 lastPathTarget;
+	protected Vector2 lastPathTarget;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, sprite);
@@ -124,43 +124,66 @@ public class Character extends GameObject {
 	}
 	
 	protected void followPath(float deltaTime) {
-		Debug.print(this, "following path");
+		//Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
-			stepTowards(next, 1 * deltaTime);
-			if (distanceTo(next) < .1f) {
+			Debug.print(this, "next node: " + next + ". distance " + (next.cpy().sub(getPosition()).len()));
+			if (stepTowards(next, 1 * deltaTime)) {
+				//Debug.print(this, "arrived at node");
 				path.remove(0);
+				Debug.print(this, "at node, removing");
+				//Debug.print(this, path.size() + " nodes left");
 			}
 		} else {
 			Debug.print(this, "path is null or empty, " + path);
+			if (lastPathTarget != null) Debug.print(this, "distance to target: " + distanceTo(lastPathTarget));
 		}
 	}
 	
 	protected boolean isAtPathEnd() {
+		//Debug.print(this, "distance to path target = " + distanceTo(lastPathTarget));
 		return distanceTo(lastPathTarget) < .2f;
 	}
 	
-	protected void stepTowards(Vector2 v, float speed) {
+	protected boolean stepTowards(Vector2 v, float speed) {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
-		Debug.print(this, "stepping towards " + v);
+		Debug.print(this, "stepped towards " + v + ", new position = " + getPosition() + ", distance " + delta.len());
+		return delta.len() < .01 * speed;
 	}
 	
 	protected ArrayList<Vector2> getPath() {
 		return path;
 	}
 	
-	// set path if not already set
 	protected void setPath(Vector2 target) {
+		setPath(target, null);
+	}
+	
+	// set path if not already set
+	protected void setPath(Vector2 target, Building ignore) {
 		if (lastPathTarget == target && path != null) {
-			if (path.size() == 0 && distanceTo(target) < .3f) {
-				Debug.print(this, "path was already set there, returning");
+			Debug.print(this, "lastPath = target, returning"); 
+			if (!path.isEmpty()) {
+				Debug.print(this, "path is not empty, returning");
 				return;
+			} else {
+				Debug.print(this, "path is empty, setting new");
 			}
+			/*
+			if (path != null) {
+				Debug.print(this, "lastPath != null");
+				if (distanceTo(target) < .3f) {
+					Debug.print(this, "path is empty and target is my location");
+					return;
+				} else {
+					Debug.print(this, "Distance to target > .3, getting new path");
+				}
+			}*/
 		}
-		Debug.print(this, "setting path");
+		Debug.print(this, "setting a new path");
 		lastPathTarget = target;
-		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles()).getPath(true);		
+		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles(), false, this).getPath(true, ignore);		
 	}
 }

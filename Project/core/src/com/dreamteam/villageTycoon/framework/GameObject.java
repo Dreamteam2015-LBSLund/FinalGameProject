@@ -5,6 +5,7 @@ package com.dreamteam.villageTycoon.framework;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Tile;
@@ -62,6 +63,10 @@ public abstract class GameObject {
 	public void setDepth(float depth) {
 		this.depth = depth;
 		if (scene != null) scene.onDepthChange();
+	}
+	
+	public void setSprite(TextureRegion texture) {
+		sprite.setRegion(texture);
 	}
 	
 	public void setSprite(Animation sprite) {
