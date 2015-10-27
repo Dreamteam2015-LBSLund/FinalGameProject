@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.buildings;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
@@ -20,8 +21,8 @@ public class BuildingType {
 	private int[] buildAmount;
 	
 	private String name;
-	private Animation sprite; //when the building is done
-	private Animation buildSprite; // when it's being built
+	private TextureRegion sprite; //when the building is done
+	private TextureRegion buildSprite; // when it's being built
 
 	private Type type;
 	
@@ -33,11 +34,11 @@ public class BuildingType {
 	private Resource[] productionResources;
 	private int[] resourcePerRun;
 	
-	public Animation getSprite() {
+	public TextureRegion getSprite() {
 		return sprite;
 	}
 	
-	public Animation getBuildSprite() {
+	public TextureRegion getBuildSprite() {
 		return buildSprite;
 	}
 	
@@ -46,12 +47,13 @@ public class BuildingType {
 	}
 	
 	public BuildingType(ResourceReader r) {
-		sprite      = new Animation(AssetManager.getTexture(r.getString("sprite-finished")));
-		buildSprite = new Animation(AssetManager.getTexture(r.getString("sprite-building")));
 		name = r.getObjectName();
 		
 		buildResources = Resource.fromStringArray(r.getList("materials"));
 		buildAmount = r.getIntList("material-amount");
+		
+		sprite      = AssetManager.getTexture(r.getString("sprite-finished"));
+		buildSprite = AssetManager.getTexture(r.getString("sprite-building"));
 		
 		if (r.getString("type").equals("home")) {
 			type = Type.Home;

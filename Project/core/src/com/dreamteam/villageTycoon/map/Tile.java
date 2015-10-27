@@ -53,7 +53,6 @@ public class Tile {
 	
 	public void draw(SpriteBatch batch) {
 		batch.draw(type.getSprite(), position.x, position.y, WIDTH, HEIGHT);
-		if (!isWalkable(null)) batch.draw(AssetManager.getTexture("error"), position.x, position.y, 1, 1);
 	}
 
 	public Building getBuilding() {

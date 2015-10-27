@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.characters.Inventory;
+import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Resource;
@@ -27,8 +28,9 @@ public class Building extends GameObject {
     private City city;
     private boolean selected;
     
+    //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
-    	super(position, new Vector2(4, 3), type.getBuildSprite());
+    	super(position.add(new Vector2(.5f, .5f)), new Vector2(4, 3), new Animation(type.getBuildSprite())); // add .5 to position to align properly with tiles
     	owner.addBuilding(this);
     	this.city = owner;
     	inputInventory = new Inventory<Resource>();
@@ -47,8 +49,8 @@ public class Building extends GameObject {
     
     private void setTiles() {
     	Tile[][] tiles = ((TestScene)getScene()).getMap().getTiles();
-    	for (int x = -(int)(getSize().x / Tile.WIDTH) / 2; x < (int)(getSize().x / Tile.WIDTH) / 2; x++) {
-    		for (int y = -(int)(getSize().y / Tile.HEIGHT) / 2; y < (int)(getSize().y / Tile.HEIGHT) / 2; y++) {
+    	for (int x = 0; x < (int)(getSize().x / Tile.WIDTH); x++) {
+    		for (int y = 0; y < (int)(getSize().y / Tile.HEIGHT); y++) {
     			tiles[x + (int)(getPosition().x / Tile.WIDTH)][y + (int)(getPosition().y / Tile.HEIGHT)].build(this);
     		}
     	}
