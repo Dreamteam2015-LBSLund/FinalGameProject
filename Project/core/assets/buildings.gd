@@ -4,8 +4,8 @@ house1: {
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
-	sprite-building: test;
-	sprite-finished: test;
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
 	
 	inhabitants: 4;
 }
@@ -151,6 +151,22 @@ flourMill: {
 	product:         flour;
 	product-per-run: 15;
 	production-resources:        wheat;
+	resource-per-run: 1,    4;
+}
+
+bakery: {
+	type: factory;
+	
+	materials:     wood, stone;
+	material-amount: 10, 5;
+	
+	sprite-finished: factory1;
+	sprite-building: factoryProgress1;
+	
+	max-workers: 4;
+	product:         food;
+	product-per-run: 15;
+	production-resources:        flour;
 	resource-per-run: 1,    4;
 }
 

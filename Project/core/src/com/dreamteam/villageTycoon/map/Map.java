@@ -156,10 +156,10 @@ public class Map {
 			Vector2 offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
 			
-			//while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-			//	offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
-			//	buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
-			//}
+			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
+				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
+				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+			}
 			
 			city.addBuilding(buildingToAdd);
 		}
@@ -169,7 +169,7 @@ public class Map {
 		boolean canPlace = false;
 		
 		for(Building b : buildings) {
-			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) < building.getSize().x);
+			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) > building.getSize().x);
 		}
 		
 		return canPlace;
