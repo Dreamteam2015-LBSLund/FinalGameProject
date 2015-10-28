@@ -129,27 +129,27 @@ public class Map {
 			for(int y = 0; y < size; y++) {
 				Vector2 buildingSize = new Vector2(2, 2);
 				Vector2 center = new Vector2(position.x, position.y);
-				scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
-				city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
+				//scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
+				//city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
 			}
 		}
 
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(size/4, farmType, position, -size*2, size*2, city, random);
+		addCityPart(1, farmType, position, -size*2, size*2, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(size/4, "factory1", position, -size*4, size*4, city, random);
+		//addCityPart(size/2, "factory1", position, -size*4, size*4, city, random, scene);
 		
-		addCityPart(size/4, "bakery", position, -size*6, size*6, city, random);
-		addCityPart(size/4, "flourMill", position, -size*6, size*6, city, random);
-		addCityPart(size/4, "wheatFarm", position, -size*8, size*8, city, random);
+		//addCityPart(size/2, "bakery", position, -size*6, size*6, city, random, scene);
+		//addCityPart(size/2, "flourMill", position, -size*6, size*6, city, random, scene);
+		//addCityPart(size/2, "wheatFarm", position, -size*8, size*8, city, random, scene);
 		
-		addCityPart(size/4, "armyBarack", position, -size*10, size*10, city, random);
+		//addCityPart(size/2, "armyBarack", position, -size*10, size*10, city, random, scene);
 	}
 	
-	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random) {
+	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random, Scene scene) {
 		Building buildingToAdd = null;
 		
 		for(int i = 0; i < amount; i++) {
@@ -159,8 +159,10 @@ public class Map {
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
 				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+				if(!canAddBuilding(city.getBuildings(), buildingToAdd)) break;
 			}
 			
+			scene.addObject(buildingToAdd);
 			city.addBuilding(buildingToAdd);
 		}
 	}

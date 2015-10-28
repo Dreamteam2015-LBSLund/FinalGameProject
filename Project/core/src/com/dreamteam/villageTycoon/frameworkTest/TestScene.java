@@ -27,6 +27,8 @@ public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
 	
+	private City city;
+	
 	public TestScene() {
 		super();
 
@@ -65,12 +67,12 @@ public class TestScene extends Scene {
 	
 	public void initialize() {
 		for(int i = 0; i < 3; i++)
-			addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
-		//city = new City(this);
-		addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
-		addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
+		//	addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
+		city = new City(this);
+		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
+		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//City city = new City(this);
-		//map.generateCity(new Vector2(50, 50), 4, 0, this, city);
+		map.generateCity(new Vector2(50, 50), 4, 0, this, city);
 	}
 	
 	public Map getMap() {
