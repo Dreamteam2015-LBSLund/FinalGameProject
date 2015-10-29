@@ -159,7 +159,8 @@ public class Map {
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
 				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
-				if(!canAddBuilding(city.getBuildings(), buildingToAdd)) break;
+				if(!canAddBuilding(city.getBuildings(), buildingToAdd) && position.add(offset).x >= 0 && position.add(offset).y >= 0) 
+					break;
 			}
 			
 			scene.addObject(buildingToAdd);
