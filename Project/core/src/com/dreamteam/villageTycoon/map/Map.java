@@ -137,7 +137,7 @@ public class Map {
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(1, farmType, position, -size*2, size*2, city, random, scene);
+		addCityPart(3, farmType, position, -size*5, size*5, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
 		//addCityPart(size/2, "factory1", position, -size*4, size*4, city, random, scene);
@@ -154,17 +154,17 @@ public class Map {
 		
 		for(int i = 0; i < amount; i++) {
 			Vector2 offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
+			Vector2 newPosition = position.add(offset);
 			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
 			
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
 				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
-				buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
-				if(!canAddBuilding(city.getBuildings(), buildingToAdd) && position.add(offset).x >= 0 && position.add(offset).y >= 0) 
+				newPosition = new Vector2(position.x + offset.x, position.y + offset.y);
+				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
+				System.out.println(new Vector2(position.x + offset.x, position.y + offset.y));
+				if(!canAddBuilding(city.getBuildings(), buildingToAdd) && newPosition.x >= 0 && newPosition.y >= 0) 
 					break;
 			}
-			
-			scene.addObject(buildingToAdd);
-			city.addBuilding(buildingToAdd);
 		}
 	}
 	
