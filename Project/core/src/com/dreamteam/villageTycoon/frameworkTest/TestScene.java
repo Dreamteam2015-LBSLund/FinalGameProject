@@ -72,7 +72,7 @@ public class TestScene extends Scene {
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//City city = new City(this);
-		map.generateCity(new Vector2(50, 50), 4, 0, this, city);
+		//map.generateCity(new Vector2(50, 50), 4, 0, this, city);
 	}
 	
 	public Map getMap() {
