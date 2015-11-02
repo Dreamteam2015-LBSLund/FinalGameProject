@@ -76,7 +76,7 @@ public class Building extends GameObject {
     			inputInventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
     		}
     	}
-    	
+
     	if (buildState == BuildState.InProgress) {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {

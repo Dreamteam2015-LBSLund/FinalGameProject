@@ -245,7 +245,7 @@ public class Controller extends GameObject {
 	public void cameraMovment(float deltaTime) {
 		// I tried to replicate the camera movment from red alert.
 		// TODO: Make the camera not when the mouse is over UI
-		
+
 		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD  && getScene().getCamera().position.x <= Map.WIDTH - getScene().getCamera().viewportWidth/2 - deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(deltaTime*cameraSpeed, 0));
 		}
