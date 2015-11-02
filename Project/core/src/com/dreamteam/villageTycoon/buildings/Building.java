@@ -27,6 +27,8 @@ public class Building extends GameObject {
     private ArrayList<Worker> workers;
     private City city;
     private boolean selected;
+
+    ArrayList<Resource> constructionResources;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -40,6 +42,13 @@ public class Building extends GameObject {
 		setDepth(1);
 		workers = new ArrayList<Worker>();
 		//setTiles();
+		
+		constructionResources = new ArrayList<Resource>();
+		for (int i = 0; i < type.getBuildResources().length; i++) {
+			for (int j = 0; j < type.getBuildAmount()[i]; j++) {
+				constructionResources.add(type.getBuildResources()[i]);
+			}
+		}
     }
     
     public void onAdd(Scene scene) {
@@ -80,7 +89,7 @@ public class Building extends GameObject {
     			Debug.print(this, workers.size() + " workers");
     			for (Worker w : workers) {
     				if (!w.hasTask()) {
-    					w.setTask(new GatherTask(this, type.getBuildResources()[0]));
+    					if (constructionResources.size() > 0) w.setTask(new GatherTask(this, getNextConstructionResource()));
     					Debug.print(this, "giving gathertask to worker");
     				}
     			}
@@ -88,6 +97,12 @@ public class Building extends GameObject {
     	} else {
     		// regular production
     	}
+    }
+    
+    // returns the next resource workers should get for construction
+    private Resource getNextConstructionResource() {
+    	if (constructionResources.size() > 0) return constructionResources.remove(0);
+    	else return null;
     }
     
     public void addWorker(Worker w) {
