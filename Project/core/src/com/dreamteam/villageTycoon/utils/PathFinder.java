@@ -63,6 +63,7 @@ public class PathFinder {
 		Node start = getNode(startTile);
 		Node  end  = getNode(endTile);
 		
+		// bad request
 		if (start == end || start == null || end == null) {
 			Debug.print(this, "start = end or something's null, (" + start + ", " + end + "), returning null");
 			if (target != null) {
@@ -74,6 +75,7 @@ public class PathFinder {
 			else return null;
 		}
 		
+		// other bad request case
 		if (start.getTile(map) == null || !start.getTile(map).isWalkable(asker) || (!end.getTile(map).isWalkable(asker))) {
 			Debug.print(this, "tried to find unwalkable path, " + start.getTile(map).isWalkable(asker) + ", " + end.getTile(map).isWalkable(asker));
 			if (target != null && target.cpy().sub(start.getTile(map).getPosition()).len() < .7f) {
@@ -85,6 +87,7 @@ public class PathFinder {
 			else return null;
 		}
 		
+		// do the actuall pathfinding
 		ArrayList<Node>  openList  = new ArrayList<Node>();
 		ArrayList<Node> closedList = new ArrayList<Node>();
 		
@@ -109,7 +112,12 @@ public class PathFinder {
 		}
 		//System.out.println("time to find path: " + (System.nanoTime() - time) / 1E6f + " ms before reconstruction");
 		ArrayList<Vector2> out = reconstruct(start, end);
-		if (target != null) out.add(target);
+		if (target != null) {
+			out.add(target);
+			Debug.print(this, "removing end " + out.remove(end.getTile(map)));
+		}
+		Debug.print(this, "removing start " + out.remove(start.getTile(map)));
+		
 		Debug.print(this, "done");
 		out.remove(start);
 		return out;
@@ -127,12 +135,13 @@ public class PathFinder {
 		while (!nodes.contains(start)) {
 			nodes.add(nodes.get(nodes.size() - 1).parent);
 		}
+		
 		ArrayList<Vector2> v = new ArrayList<Vector2>();
 		for (int i = 0; i < nodes.size(); i++) {
+			if (i == 0 || (i == nodes.size() - 1 && target != null)) continue;
 			v.add(0, new Vector2((nodes.get(i).index.x + .5f) * Tile.WIDTH, (nodes.get(i).index.y + .5f) * Tile.HEIGHT));
 		}
-		v.remove(start);
-		if (target != null) v.remove(end);
+		
 		return v;
 	}
 	
