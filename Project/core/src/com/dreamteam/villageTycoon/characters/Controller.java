@@ -21,6 +21,8 @@ public class Controller extends GameObject {
 	private Vector2 selectionPoint;
 	private Vector2[] waypoints;
 	
+	private boolean active;
+	
 	private boolean mousePressed;
 	private boolean rightMouseIsPressed;
 	private boolean canMoveUnits;
@@ -116,10 +118,11 @@ public class Controller extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		cameraMovment(deltaTime);
-		inventoryUpdate();
-		
-		selectUpdate();
+		if(active) {
+			cameraMovment(deltaTime);
+			inventoryUpdate();
+			selectUpdate();
+		}
 	}
 	
 	public void selectUpdate() {
@@ -164,24 +167,29 @@ public class Controller extends GameObject {
 		selectionRectangle.normalize();
 	}
 	
+	public void checkBuildings() {
+		for (GameObject b : getScene().getObjects()) {
+			if (b instanceof Building) {
+				// if the player presses on a building then the units are sent to that building
+				if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
+					this.sentToBuilding = true;
+					this.building = ((Building)b);
+				}
+				else
+				{
+					this.sentToBuilding = false;
+					this.building = null;
+				}
+			}
+		}
+	}
+	
 	public void moveUnits() {
+		// Create array the size of the amount of selected players
 		waypoints = new Vector2[selectedCharacters.size()];
 		if(!rightMouseIsPressed) {
 			if(canMoveUnits) {
-				for (GameObject b : getScene().getObjects()) {
-					if (b instanceof Building) {
-						// if the player presses on a building then the units are sent to that building
-						if(new Rectangle(getScene().getWorldMouse(), new Vector2(0.3f, 0.3f)).collision(b.getHitbox())) {
-							this.sentToBuilding = true;
-							this.building = ((Building)b);
-						}
-						else
-						{
-							this.sentToBuilding = false;
-							this.building = null;
-						}
-					}
-				}
+				checkBuildings();
 				addWaypoints();
 			}
 		}
@@ -217,12 +225,11 @@ public class Controller extends GameObject {
 		int currentLine = 0;
 		int lineOffset = 0;
 		
+		// Populate waypoints with vector2s of where 
 		for(int i = 0; i < waypoints.length; i++) {
 			// either send units to a bulding or to their waypoints
 			if(!sentToBuilding) waypoints[i] = new Vector2(i-lineOffset, currentLine).add(getScene().getWorldMouse());
-			else {
-				waypoints[i] = building.getPosition();
-			}
+			else waypoints[i] = building.getPosition();
 			
 			// put waypoints in a formation
 			if(newLineCount >= waypoints.length/2) {
@@ -271,7 +278,7 @@ public class Controller extends GameObject {
 	}
 	
 	public boolean getActive() {
-		return false;
+		return active;
 	}
 	
 	public Rectangle getSelectionRectangle() {
