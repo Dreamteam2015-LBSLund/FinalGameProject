@@ -48,6 +48,8 @@ public class Controller extends GameObject {
 		
 		selectedCharacters = new ArrayList<Character>();
 		selectedBuildings = new ArrayList<Building>();
+		
+		active = true;
 	}
 	
 	void onMousePressed() {
