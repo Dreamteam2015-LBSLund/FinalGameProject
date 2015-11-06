@@ -30,9 +30,9 @@ public class BuildingType {
 	
 	private int maxWorkers;
 	private Resource[] products;
-	private int[] productPerRun;
+	private int[] outputProductPerRun;
 	private Resource[] productionResources;
-	private int[] resourcePerRun;
+	private int[] inputResourcePerRun;
 	
 	public TextureRegion getSprite() {
 		return sprite;
@@ -61,9 +61,9 @@ public class BuildingType {
 		} else if (r.getString("type").equals("factory")) {
 			type = Type.Factory;
 			products = Resource.fromStringArray(r.getList("product"));
-			productPerRun = r.getIntList("product-per-run");
+			outputProductPerRun = r.getIntList("product-per-run");
 			productionResources = Resource.fromStringArray(r.getList("production-resources"));
-			resourcePerRun = r.getIntList("resource-per-run");
+			inputResourcePerRun = r.getIntList("resource-per-run");
 			maxWorkers = r.getInt("max-workers");
 		} else {
 			System.out.println("ERROR: type of building " + r.getObjectName() + " wasn't recognized (" + r.getString("type") + ")");
@@ -94,16 +94,16 @@ public class BuildingType {
 		return products;
 	}
 
-	public int[] getProductPerRun() {
-		return productPerRun;
+	public int[] getOutputAmountPerRun() {
+		return outputProductPerRun;
 	}
 
 	public Resource[] getProductionResources() {
 		return productionResources;
 	}
 
-	public int[] getResourcePerRun() {
-		return resourcePerRun;
+	public int[] getInputResourceAmount() {
+		return inputResourcePerRun;
 	}
 
 	public static HashMap<String, BuildingType> getTypes() {

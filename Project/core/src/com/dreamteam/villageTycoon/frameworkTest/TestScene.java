@@ -66,8 +66,8 @@ public class TestScene extends Scene {
 	}
 	
 	public void initialize() {
-		for(int i = 0; i < 3; i++)
-		//	addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
+		for(int i = 0; i < 1; i++)
+		addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		city = new City(this);
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));

@@ -13,11 +13,11 @@ public abstract class Debug {
 	
 	public static void init() {
 		whitelist.add(Worker.class);
-		whitelist.add(Tile.class);
-		//whitelist.add(GatherTask.class);
+		//whitelist.add(Tile.class);
+		whitelist.add(GatherTask.class);
 		//whitelist.add(Character.class);
-		//whitelist.add(Building.class);
-		whitelist.add(PathFinder.class);
+		whitelist.add(Building.class);
+		whitelist.add(PathFinder.class);		
 	}
 	
 	public static void print(Object client, String message) {
