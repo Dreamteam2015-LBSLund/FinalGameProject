@@ -137,7 +137,7 @@ public class Map {
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(3, farmType, position, -size*5, size*5, city, random, scene);
+		addCityPart(2, farmType, position, -size, size, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
 		//addCityPart(size/2, "factory1", position, -size*4, size*4, city, random, scene);
@@ -158,13 +158,15 @@ public class Map {
 			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
 			
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
+				offset = new Vector2(random.nextInt(max)-min, random.nextInt(max)-min);
 				newPosition = new Vector2(position.x + offset.x, position.y + offset.y);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
-				System.out.println(new Vector2(position.x + offset.x, position.y + offset.y));
-				if(!canAddBuilding(city.getBuildings(), buildingToAdd) && newPosition.x >= 0 && newPosition.y >= 0) 
+				if(canAddBuilding(city.getBuildings(), buildingToAdd)) 
 					break;
 			}
+			
+			city.addBuilding(buildingToAdd);
+			scene.addObject(buildingToAdd);
 		}
 	}
 	
@@ -172,7 +174,7 @@ public class Map {
 		boolean canPlace = false;
 		
 		for(Building b : buildings) {
-			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) > building.getSize().x);
+			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) < building.getSize().x);
 		}
 		
 		return canPlace;
