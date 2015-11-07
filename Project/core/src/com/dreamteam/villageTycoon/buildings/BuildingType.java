@@ -1,5 +1,6 @@
 package com.dreamteam.villageTycoon.buildings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -104,6 +105,24 @@ public class BuildingType {
 
 	public int[] getInputResourceAmount() {
 		return inputResourcePerRun;
+	}
+	
+	private Resource[] constructResourceArray(Resource[] resources, int[] amounts) {
+		ArrayList<Resource> ret = new ArrayList<Resource>();
+		for (int i = 0; i < resources.length; i++) {
+    		for (int j = 0; j < amounts[i]; j++) ret.add(resources[i]);
+    	}
+		return ret.toArray(new Resource[ret.size()]);
+	}
+	
+	// returns an array of all input resources, with one element per resource instance. 
+	// (for example 3 different refs if three of something is needed)
+	public Resource[] getInputResourcesArray() {
+		return constructResourceArray(getProductionResources(), getInputResourceAmount());
+	}
+	
+	public Resource[] getBuildResourcesArray() {
+		return constructResourceArray(getBuildResources(), getBuildAmount());
 	}
 
 	public static HashMap<String, BuildingType> getTypes() {
