@@ -21,9 +21,9 @@ factory1: {
 	
 	max-workers: 4;
 	product:         steel;
-	product-per-run: 5;
+	product-per-run: 6;
 	production-resources:        coal, iron;
-	resource-per-run: 1,    4;
+	resource-per-run: 1,    5;
 }
 
 basicMine: {

@@ -66,7 +66,7 @@ public class PathFinder {
 		// bad request
 		if (start == end || start == null || end == null) {
 			Debug.print(this, "start = end or something's null, (" + start + ", " + end + "), returning null");
-			if (target != null) {
+			if (target != null && start == end) {
 				Debug.print(this, "returning target");
 				ArrayList<Vector2> r = new ArrayList<Vector2>();
 				r.add(target);

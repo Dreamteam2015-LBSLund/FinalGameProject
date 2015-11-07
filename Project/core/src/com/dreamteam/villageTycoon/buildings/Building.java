@@ -29,6 +29,7 @@ public class Building extends GameObject {
     private boolean selected;
 
     ArrayList<Resource> constructionResources;
+    ArrayList<Resource> productionResources;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -70,7 +71,7 @@ public class Building extends GameObject {
     }
     
     public void update(float deltaTime) {
-    	// instant build on Y press. remove before realease :^)
+    	// TODO: instant build on Y press. remove before realease :^)
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		for (int i = 0; i < type.getBuildResources().length; i++) {
     			inputInventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
@@ -81,6 +82,7 @@ public class Building extends GameObject {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
+    			startProduction();
     			for (int i = 0; i < type.getBuildResources().length; i++) {
     				inputInventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
     	    	}
@@ -96,7 +98,48 @@ public class Building extends GameObject {
     		}
     	} else {
     		// regular production
+    		if (productionGatheringDone()) {
+    			for (int i = 0; i < type.getProductionResources().length; i++) {
+    				inputInventory.remove(type.getProductionResources()[i], type.getInputResourceAmount()[i]);
+    	    	}
+    			for (int i = 0; i < type.getProducts().length; i++) outputInventory.add(type.getProducts()[i], type.getOutputAmountPerRun()[i]);
+    			startProduction();
+    		} else {
+    			for (Worker w : workers) {
+    				if (!w.hasTask()) {
+    					if (productionResources.size() > 0) w.setTask(new GatherTask(this, getNextProductionResource()));
+    					Debug.print(this, "giving gathertask to worker");
+    				}
+    			}
+    		}
     	}
+    }
+    
+    // reset the list of things to gather for production, so workers can get new tasks
+    private void startProduction() {
+    	if (productionResources == null) productionResources = new ArrayList<Resource>();
+    	else productionResources.clear();
+    	for (Resource r : type.getProductionResources()) Debug.print(this, r.getName());
+    	for (int i : type.getInputResourceAmount()) Debug.print(this, i + ", ");
+    	for (int i = 0; i < type.getProductionResources().length; i++) {
+    		for (int j = 0; j < type.getInputResourceAmount()[i]; j++) productionResources.add(type.getProductionResources()[i]);
+    	}
+    }
+    
+    private Resource getNextProductionResource() {
+    	if (productionResources.size() > 0) return productionResources.remove(0);
+    	else return null;
+    }
+    
+    private boolean productionGatheringDone() {
+    	boolean hasAllResources = true;
+    	for (int i = 0; i < type.getProductionResources().length; i++) {
+    		if (inputInventory.count(type.getProductionResources()[i]) < type.getInputResourceAmount()[i]) {
+    			hasAllResources = false;
+    			break;
+    		}
+    	}
+    	return hasAllResources;
     }
     
     // returns the next resource workers should get for construction
@@ -134,6 +177,7 @@ public class Building extends GameObject {
     
     public void drawUi(SpriteBatch batch) {
     	inputInventory.drawList(getPosition(), batch);
+    	outputInventory.drawList(getPosition().cpy().add(new Vector2(100, 0)), batch);
     }
     
     public void draw(SpriteBatch batch) {

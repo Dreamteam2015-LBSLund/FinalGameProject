@@ -111,7 +111,7 @@ public class Worker extends Character {
 			inventory.remove(r, 1);
 			return true;
 		} else {
-			print("setting a path");
+			print("setting a path, target = " + destination + ", postition = " + destination.getPosition());
 			setPath(destination.getPosition());
 			if (isAtPathEnd()) {
 				print("im there, putting");
