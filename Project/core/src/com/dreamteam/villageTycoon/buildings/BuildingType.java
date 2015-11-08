@@ -134,4 +134,8 @@ public class BuildingType {
 		}
 		return types;
 	}
+
+	public Resource[] getOutputResourceArray() {
+		return constructResourceArray(getProducts(), getOutputAmountPerRun());
+	}
 }

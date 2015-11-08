@@ -69,9 +69,7 @@ public class Building extends GameObject {
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
-    		for (int i = 0; i < type.getBuildResources().length; i++) {
-    			inputInventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
-    		}
+    		inputInventory.add(type.getBuildResourcesArray());
     	}
 
     	if (buildState == BuildState.InProgress) {
@@ -79,7 +77,7 @@ public class Building extends GameObject {
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
     			startProduction();
-    			for (Resource r : type.getBuildResourcesArray()) inputInventory.remove(r, 1);
+    			inputInventory.remove(type.getBuildResourcesArray());
     			setSprite(type.getSprite());
     		} else {
     			assignGatherTask(constructionResources);
@@ -87,13 +85,8 @@ public class Building extends GameObject {
     	} else {
     		// regular production
     		if (productionGatheringDone()) {
-    			// remove the input (TODO: make helper method in inventory)
-    			for (int i = 0; i < type.getProductionResources().length; i++) {
-    				inputInventory.remove(type.getProductionResources()[i], type.getInputResourceAmount()[i]);
-    	    	}
-    			// add the output
-    			for (int i = 0; i < type.getProducts().length; i++) outputInventory.add(type.getProducts()[i], type.getOutputAmountPerRun()[i]);
-    			// restart production
+    			inputInventory.remove(type.getInputResourcesArray());
+    			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
     		} else {
     			assignGatherTask(productionResources);
