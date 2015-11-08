@@ -28,6 +28,14 @@ public class Inventory <T extends InventoryItem> {
 		}
 	}
 	
+	public void add(T[] things) {
+		for  (T t : things) add(t, 1);
+	}
+	
+	public void remove(T[] things) {
+		for  (T t : things) remove(t, 1);
+	}
+	
 	public void remove(T thing, int amount) {
 		add(thing, -amount);
 	}

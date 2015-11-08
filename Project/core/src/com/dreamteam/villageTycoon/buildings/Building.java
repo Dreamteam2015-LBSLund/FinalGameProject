@@ -28,7 +28,7 @@ public class Building extends GameObject {
     private City city;
     private boolean selected;
 
-    ArrayList<Resource> constructionResources;
+    ArrayList<Resource> constructionResources; //TODO: make these into one list
     ArrayList<Resource> productionResources;
     
     //  position is tile at lower left corner
@@ -45,11 +45,7 @@ public class Building extends GameObject {
 		//setTiles();
 		
 		constructionResources = new ArrayList<Resource>();
-		for (int i = 0; i < type.getBuildResources().length; i++) {
-			for (int j = 0; j < type.getBuildAmount()[i]; j++) {
-				constructionResources.add(type.getBuildResources()[i]);
-			}
-		}
+		for (Resource r : type.getBuildResourcesArray()) constructionResources.add(r);
     }
     
     public void onAdd(Scene scene) {
@@ -73,9 +69,7 @@ public class Building extends GameObject {
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
-    		for (int i = 0; i < type.getBuildResources().length; i++) {
-    			inputInventory.add(type.getBuildResources()[i], type.getBuildAmount()[i]);
-    		}
+    		inputInventory.add(type.getBuildResourcesArray());
     	}
 
     	if (buildState == BuildState.InProgress) {
@@ -83,47 +77,40 @@ public class Building extends GameObject {
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
     			startProduction();
-    			for (int i = 0; i < type.getBuildResources().length; i++) {
-    				inputInventory.remove(type.getBuildResources()[i], type.getBuildAmount()[i]);
-    	    	}
+    			inputInventory.remove(type.getBuildResourcesArray());
     			setSprite(type.getSprite());
     		} else {
-    			Debug.print(this, workers.size() + " workers");
-    			for (Worker w : workers) {
-    				if (!w.hasTask()) {
-    					if (constructionResources.size() > 0) w.setTask(new GatherTask(this, getNextConstructionResource()));
-    					Debug.print(this, "giving gathertask to worker");
-    				}
-    			}
+    			assignGatherTask(constructionResources);
     		}
     	} else {
     		// regular production
     		if (productionGatheringDone()) {
-    			for (int i = 0; i < type.getProductionResources().length; i++) {
-    				inputInventory.remove(type.getProductionResources()[i], type.getInputResourceAmount()[i]);
-    	    	}
-    			for (int i = 0; i < type.getProducts().length; i++) outputInventory.add(type.getProducts()[i], type.getOutputAmountPerRun()[i]);
+    			inputInventory.remove(type.getInputResourcesArray());
+    			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
     		} else {
-    			for (Worker w : workers) {
-    				if (!w.hasTask()) {
-    					if (productionResources.size() > 0) w.setTask(new GatherTask(this, getNextProductionResource()));
-    					Debug.print(this, "giving gathertask to worker");
-    				}
-    			}
+    			assignGatherTask(productionResources);
     		}
     	}
     }
+    
+    private void assignGatherTask(ArrayList<Resource> toGet) {
+    	Debug.print(this, (toGet == null) + "");
+    	for (Worker w : workers) {
+			if (!w.hasTask()) {
+				if (toGet.size() > 0) w.setTask(new GatherTask(this, toGet.remove(0)));
+				Debug.print(this, "giving gathertask to worker");
+			}
+		}
+    }
+    
     
     // reset the list of things to gather for production, so workers can get new tasks
     private void startProduction() {
     	if (productionResources == null) productionResources = new ArrayList<Resource>();
     	else productionResources.clear();
-    	for (Resource r : type.getProductionResources()) Debug.print(this, r.getName());
-    	for (int i : type.getInputResourceAmount()) Debug.print(this, i + ", ");
-    	for (int i = 0; i < type.getProductionResources().length; i++) {
-    		for (int j = 0; j < type.getInputResourceAmount()[i]; j++) productionResources.add(type.getProductionResources()[i]);
-    	}
+
+    	for (Resource r : type.getInputResourcesArray()) productionResources.add(r); 
     }
     
     private Resource getNextProductionResource() {
