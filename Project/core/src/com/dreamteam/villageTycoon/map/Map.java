@@ -140,7 +140,7 @@ public class Map {
 		addCityPart(2, farmType, position, -size, size, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		//addCityPart(size/2, "factory1", position, -size*4, size*4, city, random, scene);
+		addCityPart(size/2, "factory1", position, -size*2, size*2, city, random, scene);
 		
 		//addCityPart(size/2, "bakery", position, -size*6, size*6, city, random, scene);
 		//addCityPart(size/2, "flourMill", position, -size*6, size*6, city, random, scene);
