@@ -113,11 +113,6 @@ public class Building extends GameObject {
     	for (Resource r : type.getInputResourcesArray()) productionResources.add(r); 
     }
     
-    private Resource getNextProductionResource() {
-    	if (productionResources.size() > 0) return productionResources.remove(0);
-    	else return null;
-    }
-    
     private boolean productionGatheringDone() {
     	boolean hasAllResources = true;
     	for (int i = 0; i < type.getProductionResources().length; i++) {
@@ -127,12 +122,6 @@ public class Building extends GameObject {
     		}
     	}
     	return hasAllResources;
-    }
-    
-    // returns the next resource workers should get for construction
-    private Resource getNextConstructionResource() {
-    	if (constructionResources.size() > 0) return constructionResources.remove(0);
-    	else return null;
     }
     
     public void addWorker(Worker w) {
