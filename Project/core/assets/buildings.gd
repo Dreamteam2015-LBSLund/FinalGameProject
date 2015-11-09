@@ -4,8 +4,8 @@ house1: {
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: house;
+	sprite-building: houseProgress;
 	
 	inhabitants: 4;
 }
@@ -16,8 +16,8 @@ factory1: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: factory;
+	sprite-building: factoryProgress;
 	
 	max-workers: 4;
 	product:         steel;
@@ -32,8 +32,8 @@ basicMine: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: mine;
+	sprite-building: mineProgress;
 	
 	max-workers: 4;
 	product:         coal, iron;
@@ -48,8 +48,8 @@ explosivePowderMine: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: mine;
+	sprite-building: mineProgress;
 	
 	max-workers: 4;
 	product:         explosivePowder;
@@ -64,8 +64,8 @@ diamondPowderMine: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: mine;
+	sprite-building: mineProgress;
 	
 	max-workers: 4;
 	product:         diamond;
@@ -80,8 +80,8 @@ basicFarm: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: farm;
+	sprite-building: farmProgress;
 	
 	max-workers: 4;
 	product:         food;
@@ -96,8 +96,8 @@ advancedFarm: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: farm;
+	sprite-building: farmProgress;
 	
 	max-workers: 4;
 	product:         food;
@@ -112,8 +112,8 @@ wheatFarm: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: farm;
+	sprite-building: farmProgress;
 	
 	max-workers: 4;
 	product:         wheat;
@@ -128,8 +128,8 @@ woodShop: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: woodShop;
+	sprite-building: woodShopProgress;
 	
 	max-workers: 4;
 	product:         weapons;
@@ -144,8 +144,8 @@ flourMill: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: flourMill;
+	sprite-building: flourMillProgress;
 	
 	max-workers: 4;
 	product:         flour;
@@ -160,8 +160,8 @@ bakery: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: backery;
+	sprite-building: backeryProgress;
 	
 	max-workers: 4;
 	product:         food;
@@ -176,8 +176,8 @@ armyBarack: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
-	sprite-finished: factory1;
-	sprite-building: factoryProgress1;
+	sprite-finished: militaryBarrack;
+	sprite-building: militaryBarrackProgress;
 	
 	inhabitants: 4;
 }

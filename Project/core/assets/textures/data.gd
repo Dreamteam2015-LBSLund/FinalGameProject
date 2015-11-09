@@ -26,4 +26,21 @@ Textures: {
 	weaponIcon: 		 589, 0, 16, 16;
 	flourIcon:			 606, 0, 16, 16;
 	wheatIcon:			 623, 0, 16, 16;
+	
+	factory: 				 0, 457, 128, 96;
+	factoryProgress: 		 0, 553, 128, 96;
+	house: 					 0, 651, 128, 96;
+	houseProgress: 			 0, 749, 128, 96;
+	woodShop: 				 0, 847, 128, 96;
+	woodShopProgress: 		 0, 944, 128, 96;
+	mine: 					 0, 1041, 128, 96;
+	mineProgress: 			 0, 1136, 128, 96;
+	farm: 					 0, 1233, 128, 96;
+	farmProgress: 		     0, 1330, 128, 96;
+	militaryBarrack: 		 0, 1427, 128, 96;
+	militaryBarrackProgress: 0, 1523, 128, 96;
+	flourMill: 				 0, 1620, 128, 96;
+	flourMillProgress: 		 0, 1717, 128, 96;
+	backery: 				 0, 1814, 128, 96;
+	backeryProgress: 		 129, 1814, 128, 96;
 }
