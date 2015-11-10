@@ -30,7 +30,6 @@ public class Map {
 		propTypes = PropType.getTypes();
 		buildingTypes = BuildingType.getTypes();
 		
-
 		tiles = new Tile[WIDTH][HEIGHT];
 		String[][] map = generateMap();
 		for (int x = 0; x < WIDTH; x++) {
@@ -49,38 +48,14 @@ public class Map {
 		Point[] lakes = new Point[3];
 		Point[] villages = new Point[4];
 		
-		int treeSparseness = 2110000;
-		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = "treeTrunk"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. S� kallat strings eller
+				map[x][y] = "Grass"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. S� kallat strings eller
 			}
-		}
-		
-		for (int i = 0; i < treeSparseness; i++) {
-			int plotX = random.nextInt(WIDTH);
-			int plotY = random.nextInt(HEIGHT);
-			
-			map[plotX][plotY] = "Grass";
-		}
-		
-		for (int i = 0; i < lakes.length; i++) {
-			lakes[i] = new Point(random.nextInt(WIDTH), random.nextInt(HEIGHT));
-			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);
 		}
 		
 		for (int i = 0; i < villages.length; i++) {
-			boolean canPlace = false;
-			
 			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
-			
-			while (!canPlace) {
-				for(int j = 0; j < lakes.length; j++) {
-					villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
-					canPlace = getDistance((float)villages[i].x, (float)villages[i].y, (float)lakes[j].x, (float)lakes[j].y) >= 10;
-					if(i > 0) canPlace = getDistance((float)villages[i].x, (float)villages[i].y, (float)villages[i-1].x, (float)villages[i-1].y) >= 20;
-				}
-			}
 			
 			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
 		}
@@ -140,13 +115,13 @@ public class Map {
 		addCityPart(2, farmType, position, -size, size, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(size/2, "factory1", position, -size*2, size*2, city, random, scene);
+		addCityPart(size/2, "factory1", position, -size/2, size/2, city, random, scene);
 		
-		//addCityPart(size/2, "bakery", position, -size*6, size*6, city, random, scene);
-		//addCityPart(size/2, "flourMill", position, -size*6, size*6, city, random, scene);
-		//addCityPart(size/2, "wheatFarm", position, -size*8, size*8, city, random, scene);
+		addCityPart(size/2, "bakery", position, -size/2, size/2, city, random, scene);
+		addCityPart(size/2, "flourMill", position, -size/2, size/2, city, random, scene);
+		addCityPart(size/2, "wheatFarm", position, -size/2, size/2, city, random, scene);
 		
-		//addCityPart(size/2, "armyBarack", position, -size*10, size*10, city, random, scene);
+		addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
 	}
 	
 	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random, Scene scene) {
