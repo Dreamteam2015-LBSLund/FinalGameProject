@@ -33,7 +33,7 @@ public class Worker extends Character {
 		if (getTile().getBuilding() != null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
-		} else {
+		} else if (task == null){
 			if (workplace != null) onEndWork();
 			workplace = null;
 		}
@@ -41,8 +41,13 @@ public class Worker extends Character {
 		if (task != null) {
 			if (task.work(this)) task = null;
 		}
-		
+		Debug.print(this, "" + (workplace == null));
 		super.update(deltaTime);
+	}
+	
+	public void onPlayerInput(Vector2 destination) {
+		super.onPlayerInput(destination);
+		task = null;
 	}
 
 	// finds the resource and puts it in the inventory. returns true if done

@@ -1,6 +1,7 @@
 package com.dreamteam.villageTycoon.buildings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -28,8 +29,6 @@ public class Building extends GameObject {
     private City city;
     private boolean selected;
 
-    ArrayList<Resource> constructionResources; //TODO: make these into one list
-    ArrayList<Resource> productionResources;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -43,9 +42,6 @@ public class Building extends GameObject {
 		setDepth(1);
 		workers = new ArrayList<Worker>();
 		//setTiles();
-		
-		constructionResources = new ArrayList<Resource>();
-		for (Resource r : type.getBuildResourcesArray()) constructionResources.add(r);
     }
     
     public void onAdd(Scene scene) {
@@ -80,7 +76,7 @@ public class Building extends GameObject {
     			inputInventory.remove(type.getBuildResourcesArray());
     			setSprite(type.getSprite());
     		} else {
-    			assignGatherTask(constructionResources);
+    			assignGatherTask(getConstructionResources());
     		}
     	} else {
     		// regular production
@@ -89,9 +85,27 @@ public class Building extends GameObject {
     			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
     		} else {
-    			assignGatherTask(productionResources);
+    			assignGatherTask(getProductionResources());
     		}
     	}
+    }
+    
+    private ArrayList<Resource> getConstructionResources() {
+    	return getInputInventoryDifference(type.getBuildResources(), type.getBuildAmount());
+    }
+    
+    private ArrayList<Resource> getProductionResources() {
+    	return getInputInventoryDifference(type.getProducts(), type.getOutputAmountPerRun());
+    }
+    
+    private ArrayList<Resource> getInputInventoryDifference(Resource[] resources, int[] amounts) {
+    	ArrayList<Resource> all = new ArrayList<Resource>();
+    	for (int i = 0; i < resources.length; i++) {
+    		for (int j = 0; j < amounts[i] - inputInventory.count(resources[i]); j++) {
+    			all.add(resources[i]);
+    		}
+    	}
+    	return all;
     }
     
     private void assignGatherTask(ArrayList<Resource> toGet) {
@@ -107,10 +121,6 @@ public class Building extends GameObject {
     
     // reset the list of things to gather for production, so workers can get new tasks
     private void startProduction() {
-    	if (productionResources == null) productionResources = new ArrayList<Resource>();
-    	else productionResources.clear();
-
-    	for (Resource r : type.getInputResourcesArray()) productionResources.add(r); 
     }
     
     private boolean productionGatheringDone() {

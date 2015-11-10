@@ -1,5 +1,6 @@
 package com.dreamteam.villageTycoon.characters;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -45,19 +46,20 @@ public class Inventory <T extends InventoryItem> {
 		return things.get(thing).intValue();
 	}
 	
-	@SuppressWarnings("unchecked") // :^)
-	public T[] getList() {
-		return (T[]) things.keySet().toArray(new InventoryItem[things.keySet().size()]);
+	public InventoryItem[] getList() {
+		ArrayList<T> things = new ArrayList<T>();
+		for (T t : this.things.keySet()) for (int i = 0; i < this.things.get(t).intValue(); i++) things.add(t);
+		return things.toArray(new InventoryItem[things.size()]);
 	}
 	
 	public void drawList(Vector2 position, SpriteBatch batch) {
 		final float ICON_SIZE = 100f;
 		Rectangle r = null;
-		T[] items = getList();
+		InventoryItem[] items = things.keySet().toArray(new InventoryItem[things.keySet().size()]);
 		for (int i = 0; i < items.length; i++) {
 			r = new Rectangle(position.cpy().add(new Vector2(0, i * ICON_SIZE)), new Vector2(ICON_SIZE, ICON_SIZE));
 			items[i].draw(r, batch);
-			AssetManager.font.draw(batch, count(items[i]) + "", r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
+			AssetManager.font.draw(batch, count((T)items[i]) + "", r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
 		}
 	}
 }
