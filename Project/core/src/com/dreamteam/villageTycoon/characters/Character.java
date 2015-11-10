@@ -98,6 +98,10 @@ public class Character extends GameObject {
 		return selected;
 	}
 	
+	// called when the player tells a character to go somewhere
+	public void onPlayerInput(Vector2 destination) {
+		setPath(destination);
+	}
 	
 	public boolean getShowInventroy() {
 		return showInventory;

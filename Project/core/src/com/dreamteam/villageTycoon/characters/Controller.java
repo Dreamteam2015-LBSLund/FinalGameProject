@@ -245,8 +245,8 @@ public class Controller extends GameObject {
 		
 		for (Character c : selectedCharacters) {
 			if(sentToBuilding) c.setBuilding(building);
-			((Character)c).setPath(waypoints[currentUnit]);
-			((Character)c).setIsInBuilding(sentToBuilding);
+			c.onPlayerInput(waypoints[currentUnit]);
+			//c.setIsInBuilding(sentToBuilding);
 			currentUnit += 1;
 		}
 	}
