@@ -22,7 +22,12 @@ public class Map {
 	private HashMap<String, TileType> tileTypes;
 	private HashMap<String, BuildingType> buildingTypes;
 	
+	private int amountOfCities;
+	private Point[] cityPositions;
+	
 	City city;
+	
+	City[] cities;
 	
 	public Map(Scene scene) {
 		Resource.getTypes();
@@ -36,6 +41,13 @@ public class Map {
 			for (int y = 0; y < HEIGHT; y++) {
 				tiles[x][y] = new Tile(new Vector2(x * Tile.WIDTH, y * Tile.HEIGHT), tileTypes.get(map[x][y]), scene); // tileType is null since keys are strings, not ints
 			}
+		}
+		
+		cities = new City[amountOfCities];
+		
+		for(int i = 0; i < amountOfCities; i++) {
+		//	cities[i] =  new City(scene);
+		//	this.generateCity(new Vector2(cityPositions[i].x, cityPositions[i].y), 6, 0, scene, cities[i]);
 		}
 	}
 	
@@ -54,11 +66,15 @@ public class Map {
 			}
 		}
 		
+		cityPositions = new Point[villages.length];
+		
 		for (int i = 0; i < villages.length; i++) {
 			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
-			
+			cityPositions[i] = villages[i];
 			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
 		}
+		
+		amountOfCities = villages.length;
 		
 		return map;
 	}
