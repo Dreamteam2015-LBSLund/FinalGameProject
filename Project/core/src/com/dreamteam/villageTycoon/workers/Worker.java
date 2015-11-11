@@ -47,7 +47,10 @@ public class Worker extends Character {
 	
 	public void onPlayerInput(Vector2 destination) {
 		super.onPlayerInput(destination);
-		task = null;
+		if (task != null) {
+			task.onCancel();
+			task = null;
+		}
 	}
 
 	// finds the resource and puts it in the inventory. returns true if done
