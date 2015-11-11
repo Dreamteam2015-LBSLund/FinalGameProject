@@ -170,8 +170,8 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	inputInventory.drawList(getPosition(), batch);
-    	outputInventory.drawList(getPosition().cpy().add(new Vector2(100, 0)), batch);
+    	inputInventory.drawList(getUiScreenCoords(), batch);
+    	outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     }
     
     public void draw(SpriteBatch batch) {

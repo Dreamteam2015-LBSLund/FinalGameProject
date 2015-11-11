@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public abstract class Scene {
+	public final int UI_W = 1600, UI_H = 900, G_W = 16, G_H = 9; // camera size in game and ui
+	
 	private boolean depthChanged;
 	
 	private ArrayList<GameObject> objects, toAdd, toRemove;
@@ -25,8 +27,8 @@ public abstract class Scene {
 		objects = new ArrayList<GameObject>();
 		toAdd = new ArrayList<GameObject>();
 		toRemove = new ArrayList<GameObject>();
-		uiCamera = new OrthographicCamera(1600, 900);
-		camera = new OrthographicCamera(16, 9);
+		uiCamera = new OrthographicCamera(UI_W, UI_H);
+		camera = new OrthographicCamera(G_W, G_H);
 	}
 	
 	public void update(float deltaTime) {
