@@ -26,6 +26,8 @@ public class Worker extends Character {
 		inventory = new Inventory<Resource>();
 		
 		Debug.print(this, "position " + position);
+		
+		inventory.add(Resource.get("wood"), 1);
 	}
 	
 	public void update(float deltaTime) {
@@ -47,7 +49,11 @@ public class Worker extends Character {
 	
 	public void onPlayerInput(Vector2 destination) {
 		super.onPlayerInput(destination);
-		task = null;
+		Debug.print(this, "recieved input");
+		if (task != null) {
+			task.onCancel();
+			task = null;
+		}
 	}
 
 	// finds the resource and puts it in the inventory. returns true if done
@@ -142,6 +148,12 @@ public class Worker extends Character {
 	
 	private void print(String s) {
 		Debug.print(this, s);
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		if (getShowInventroy()) {
+			inventory.drawList(getUiScreenCoords(), batch);
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {

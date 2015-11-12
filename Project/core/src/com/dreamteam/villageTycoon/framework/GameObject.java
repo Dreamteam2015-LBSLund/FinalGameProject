@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Tile;
 
@@ -25,6 +26,16 @@ public abstract class GameObject {
 	}
 	
 	public Vector2 getPosition() { return position; }
+	
+	// position on the screen, in world space coordinates
+	public Vector2 getScreenCoords() {
+		Vector3 v = scene.getCamera().project(new Vector3(getPosition(), 0));
+		return new Vector2(v.x, v.y);
+	}
+	
+	public Vector2 getUiScreenCoords() {
+		return getScreenCoords().scl(2).sub(new Vector2(scene.UI_W / 2, scene.UI_H / 2));
+	}
 	
 	public void setSize(Vector2 s) { 
 		size = s;

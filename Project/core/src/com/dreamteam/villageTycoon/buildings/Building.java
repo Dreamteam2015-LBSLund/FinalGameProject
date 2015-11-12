@@ -30,7 +30,12 @@ public class Building extends GameObject {
     private ArrayList<Worker> workers;
     private City city;
     private boolean selected;
+<<<<<<< HEAD
     private Animation selectedSign;
+=======
+
+    private ArrayList<Resource> toGather;
+>>>>>>> 3a5b6524689942ac65d8656c79395e1182041796
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -43,6 +48,8 @@ public class Building extends GameObject {
 		buildState = BuildState.InProgress;
 		setDepth(1);
 		workers = new ArrayList<Worker>();
+		
+		toGather = getConstructionResources();
 		//setTiles();
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
@@ -83,7 +90,7 @@ public class Building extends GameObject {
     			inputInventory.remove(type.getBuildResourcesArray());
     			setSprite(type.getSprite());
     		} else {
-    			assignGatherTask(getConstructionResources());
+    			assignGatherTask(toGather);
     		}
     	} else {
     		// regular production
@@ -92,9 +99,13 @@ public class Building extends GameObject {
     			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
     		} else {
-    			assignGatherTask(getProductionResources());
+    			assignGatherTask(toGather);
     		}
     	}
+    }
+    
+    public void cancelGather(Resource r) {
+    	toGather.add(r);
     }
     
     private ArrayList<Resource> getConstructionResources() {
@@ -116,11 +127,11 @@ public class Building extends GameObject {
     }
     
     private void assignGatherTask(ArrayList<Resource> toGet) {
-    	Debug.print(this, (toGet == null) + "");
     	for (Worker w : workers) {
 			if (!w.hasTask()) {
+				Debug.print(this, "resources to get: ");
+				for (Resource r : toGather) Debug.print(this, r.getName());
 				if (toGet.size() > 0) w.setTask(new GatherTask(this, toGet.remove(0)));
-				Debug.print(this, "giving gathertask to worker");
 			}
 		}
     }
@@ -128,6 +139,7 @@ public class Building extends GameObject {
     
     // reset the list of things to gather for production, so workers can get new tasks
     private void startProduction() {
+    	toGather = getProductionResources();
     }
     
     private boolean productionGatheringDone() {
@@ -169,8 +181,8 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	inputInventory.drawList(getPosition(), batch);
-    	outputInventory.drawList(getPosition().cpy().add(new Vector2(100, 0)), batch);
+    	inputInventory.drawList(getUiScreenCoords(), batch);
+    	outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     }
     
     public void draw(SpriteBatch batch) {

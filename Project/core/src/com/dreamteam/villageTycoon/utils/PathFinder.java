@@ -145,10 +145,6 @@ public class PathFinder {
 		return v;
 	}
 	
-	private void print(String s) {
-		if (PRINT) Debug.print(this, s);
-	}
-	
 	private class Node
 	{
 		private float h; // distance to target

@@ -42,6 +42,10 @@ public class GatherTask implements Task {
 		return false;
 	}
 	
+	public void onCancel() {
+		destination.cancelGather(resource);
+	}
+	
 	private void print(String s) {
 		Debug.print(this, s);
 	}
