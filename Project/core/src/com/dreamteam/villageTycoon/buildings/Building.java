@@ -30,12 +30,8 @@ public class Building extends GameObject {
     private ArrayList<Worker> workers;
     private City city;
     private boolean selected;
-<<<<<<< HEAD
     private Animation selectedSign;
-=======
-
     private ArrayList<Resource> toGather;
->>>>>>> 3a5b6524689942ac65d8656c79395e1182041796
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
