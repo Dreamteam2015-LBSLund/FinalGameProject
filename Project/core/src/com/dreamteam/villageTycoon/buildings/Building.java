@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.characters.Inventory;
@@ -17,6 +18,7 @@ import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.characters.Character;
 
 public class Building extends GameObject {
@@ -28,7 +30,7 @@ public class Building extends GameObject {
     private ArrayList<Worker> workers;
     private City city;
     private boolean selected;
-
+    private Animation selectedSign;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -42,6 +44,8 @@ public class Building extends GameObject {
 		setDepth(1);
 		workers = new ArrayList<Worker>();
 		//setTiles();
+		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
+		selectedSign.setSize(this.getSize().x, this.getSize().y);
     }
     
     public void onAdd(Scene scene) {
@@ -64,6 +68,9 @@ public class Building extends GameObject {
     
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
+    	
+    	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
+    	
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		inputInventory.add(type.getBuildResourcesArray());
     	}
@@ -168,6 +175,9 @@ public class Building extends GameObject {
     
     public void draw(SpriteBatch batch) {
     	super.draw(batch);
+    	if (selected) {
+    		selectedSign.draw(batch);
+    	}
     }
     
     public void setSelected(boolean selected) {

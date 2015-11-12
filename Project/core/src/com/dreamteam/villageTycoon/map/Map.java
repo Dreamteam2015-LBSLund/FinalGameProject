@@ -46,8 +46,7 @@ public class Map {
 		cities = new City[amountOfCities];
 		
 		for(int i = 0; i < amountOfCities; i++) {
-		//	cities[i] =  new City(scene);
-		//	this.generateCity(new Vector2(cityPositions[i].x, cityPositions[i].y), 6, 0, scene, cities[i]);
+			cities[i] =  new City(scene);
 		}
 	}
 	
@@ -146,10 +145,10 @@ public class Map {
 		for(int i = 0; i < amount; i++) {
 			Vector2 offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 			Vector2 newPosition = position.add(offset);
-			buildingToAdd = new Building(position.add(offset), BuildingType.getTypes().get(type), city);
+			buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 			
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-				offset = new Vector2(random.nextInt(max)-min, random.nextInt(max)-min);
+				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
 				newPosition = new Vector2(position.x + offset.x, position.y + offset.y);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 				if(canAddBuilding(city.getBuildings(), buildingToAdd)) 
@@ -159,6 +158,8 @@ public class Map {
 			city.addBuilding(buildingToAdd);
 			scene.addObject(buildingToAdd);
 		}
+		
+		//Gdx.app.exit();
 	}
 	
 	public boolean canAddBuilding(ArrayList<Building> buildings, Building building) {
