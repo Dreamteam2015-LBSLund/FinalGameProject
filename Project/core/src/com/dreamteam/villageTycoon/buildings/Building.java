@@ -177,15 +177,17 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	inputInventory.drawList(getUiScreenCoords(), batch);
-    	outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
+    	if (selected) {
+    		inputInventory.drawList(getUiScreenCoords(), batch);
+    		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
+    	}
     }
     
     public void draw(SpriteBatch batch) {
-    	super.draw(batch);
     	if (selected) {
     		selectedSign.draw(batch);
     	}
+    	super.draw(batch);
     }
     
     public void setSelected(boolean selected) {
