@@ -83,7 +83,13 @@ public class TestScene extends Scene {
 	}
 	
 	public void update(float dt) {
-		if (placer != null) placer.update(playerCity);
+		if (placer != null) {
+			if (placer.done) {
+				placer = null;
+			} else {
+				placer.update(playerCity);
+			}
+		}
 		
 		super.update(dt);
 	}

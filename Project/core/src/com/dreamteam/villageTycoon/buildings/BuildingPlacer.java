@@ -23,9 +23,11 @@ public class BuildingPlacer {
 	private State state;
 	private TestScene scene;
 	private BuildingType building;
-	private boolean canPlace;
+	private boolean canPlace, clicked;
 	private Point placePosition;
 	private Sprite buildingSprite;
+	
+	public boolean done;
 	
 	public BuildingPlacer(Scene scene) {
 		state = State.CHOOSING;
@@ -57,14 +59,16 @@ public class BuildingPlacer {
 			if (canPlace(placePosition)) {
 				canPlace = true;
 				buildingSprite.setColor(Color.GREEN);
-				if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+				if (Gdx.input.isButtonPressed(Buttons.LEFT) && !clicked) {
 					scene.addObject(new Building(placePosition.toVector(Tile.WIDTH, Tile.HEIGHT), building, owner));
+					done = true;
 				}
 			} else {
 				buildingSprite.setColor(Color.RED);
 			}
 			buildingSprite.setPosition(scene.getUiMouse().x, scene.getUiMouse().y);
 		}
+		clicked = Gdx.input.isButtonPressed(Buttons.LEFT);
 	}
 	
 	private boolean canPlace(Point corner) {
