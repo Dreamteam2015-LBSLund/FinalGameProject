@@ -84,6 +84,8 @@ public class TestScene extends Scene {
 	
 	public void update(float dt) {
 		if (placer != null) placer.update(playerCity);
+		
+		super.update(dt);
 	}
 	
 	public void draw(SpriteBatch batch) {
