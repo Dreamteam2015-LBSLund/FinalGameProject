@@ -58,4 +58,8 @@ public class Tile {
 	public Building getBuilding() {
 		return building;
 	}
+
+	public boolean isBuildable() {
+		return type.isBuildable() && !hasBuilding();
+	}
 }

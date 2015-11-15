@@ -60,4 +60,8 @@ public class Rectangle {
 		if (getWidth() < 0) set(getX() + getWidth(), getY(), -getWidth(), getHeight());
 		if (getHeight() < 0) set(getX(), getY() + getHeight(), getWidth(), -getHeight());
 	}
+
+	public boolean collision(Vector2 point) {
+		return overlap(x, point.x, width, 1) && overlap(y, point.y, height, 1);
+	}
 }

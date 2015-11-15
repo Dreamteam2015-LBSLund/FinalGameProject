@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
@@ -26,7 +27,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
-	
+	private BuildingPlacer placer;
 	private City city;
 	
 	public TestScene() {
@@ -37,6 +38,8 @@ public class TestScene extends Scene {
 		map = new Map(this);
 		
 		//city = map.generateCity(new Vector2(30, 30), 10, 1, this);
+		
+		placer = new BuildingPlacer(this);
 		
 		Debug.print(this, "map == null =  " + (map == null));
 		
@@ -79,8 +82,18 @@ public class TestScene extends Scene {
 		return map;
 	}
 	
+	public void update(float dt) {
+		if (placer != null) placer.update(playerCity);
+	}
+	
 	public void draw(SpriteBatch batch) {
 		map.draw(batch);
 		super.draw(batch);
+	}
+	
+	public void drawUi(SpriteBatch uiBatch) {
+		if (placer != null) placer.draw(uiBatch);
+		
+		uiBatch.draw(AssetManager.getTexture("error"), getUiMouse().x, getUiMouse().y);
 	}
 }
