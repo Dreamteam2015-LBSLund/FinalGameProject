@@ -143,13 +143,14 @@ public class Map {
 		Building buildingToAdd = null;
 		
 		for(int i = 0; i < amount; i++) {
-			Vector2 offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
-			Vector2 newPosition = position.add(offset);
+			int offset = random.nextInt(max)+min;
+			int angle = random.nextInt(360);
+			Vector2 newPosition = new Vector2(position.x + (float)Math.cos(angle)*offset, position.y + (float)Math.sin(angle)*offset);
 			buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 			
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
-				offset = new Vector2(random.nextInt(max)+min, random.nextInt(max)+min);
-				newPosition = new Vector2(position.x + offset.x, position.y + offset.y);
+				offset = random.nextInt(max)+min;
+				newPosition = new Vector2(position.x + (float)Math.cos(angle)*offset, position.y + (float)Math.sin(angle)*offset);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 				if(canAddBuilding(city.getBuildings(), buildingToAdd)) 
 					break;
