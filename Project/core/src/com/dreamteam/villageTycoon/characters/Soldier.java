@@ -1,4 +1,4 @@
-package com.dreamteam.villageTycoon.characters;
+ package com.dreamteam.villageTycoon.characters;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
@@ -55,7 +56,6 @@ public class Soldier extends Character {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		attack();
-		
 		weapon.update(deltaTime);
 		
 		if(getShowInventroy()) {
@@ -102,6 +102,11 @@ public class Soldier extends Character {
 		return weapon;
 	}
 
+	public void shoot(Vector2 target, float speed) {
+		getScene().addObject(new Projectile(getPosition(), target, speed, weapon.getType().getProjectileType()));
+		weapon.onShoot();
+	}
+	
 	public void setSoldierType() {
 		this.setSprite(soldierType.getTypeSprite());
 		this.setHealth(soldierType.getStartHealth());

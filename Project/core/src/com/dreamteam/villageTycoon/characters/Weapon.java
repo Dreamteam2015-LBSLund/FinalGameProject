@@ -28,13 +28,18 @@ public class Weapon {
 			currentFireRate = 0;
 		}
 	}
-	
+
 	public void reload(float deltaTime) {
 		reloadCount += deltaTime;
 		if(reloadCount >= type.getReloadTime()) {
 			clipCount = type.getClipSize();
 			reloadCount = 0;
 		}
+	}
+	
+	public void onShoot() {
+		clipCount -= 1;
+		currentFireRate = 0.1f;
 	}
 	
 	public Sprite getIcon() {

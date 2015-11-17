@@ -55,6 +55,10 @@ public class WeaponType {
 		return icon;
 	}
 	
+	public ProjectileType getProjectileType() {
+		return projectileType;
+	}
+	
 	public String getDescription() {
 		return name + "\nType: " + type + "\n Damege: " + damege + "\n Firerate: " + maxFireRate
 				+ "\n Clip Size: " + clipSize + "\n Recoil: " + recoil;
