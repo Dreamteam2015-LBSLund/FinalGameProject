@@ -46,8 +46,8 @@ public class BuildingPlacer {
 	public void update(City owner) {
 		if (state == State.CHOOSING) {
 			for (BuildingButton b : buttons) {
-				b.update(scene);
-				if (b.clicked) {
+				b.update();
+				if (b.isPressed()) {
 					building = b.getType();
 					buildingSprite = new Sprite(new TextureRegion(building.getSprite()));
 					buildingSprite.setSize(400, 300);

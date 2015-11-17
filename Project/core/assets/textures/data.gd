@@ -43,4 +43,6 @@ Textures: {
 	flourMillProgress: 		 0, 1717, 128, 96;
 	backery: 				 0, 1814, 128, 96;
 	backeryProgress: 		 129, 1814, 128, 96;
+	
+	button: 659, 0, 216, 108;
 }
