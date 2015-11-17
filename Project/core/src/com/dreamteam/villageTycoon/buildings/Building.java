@@ -12,10 +12,12 @@ import com.dreamteam.villageTycoon.characters.Inventory;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
+import com.dreamteam.villageTycoon.workers.GetPropTask;
 import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -23,7 +25,7 @@ import com.dreamteam.villageTycoon.characters.Character;
 
 public class Building extends GameObject {
 
-	private enum BuildState { InProgress, Done };
+	private enum BuildState { Clearing, InProgress, Done };
     private BuildingType type;
     private BuildState buildState;
     private Inventory<Resource> inputInventory, outputInventory;
@@ -32,6 +34,7 @@ public class Building extends GameObject {
     private boolean selected;
     private Animation selectedSign;
     private ArrayList<Resource> toGather;
+    private ArrayList<Prop> toClear;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -41,7 +44,7 @@ public class Building extends GameObject {
     	inputInventory = new Inventory<Resource>();
     	outputInventory = new Inventory<Resource>();
 		this.type = type;
-		buildState = BuildState.InProgress;
+		buildState = BuildState.Clearing;
 		setDepth(1);
 		workers = new ArrayList<Worker>();
 		
@@ -49,6 +52,8 @@ public class Building extends GameObject {
 		//setTiles();
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
+		
+		toClear = new ArrayList<Prop>();
     }
     
     public void onAdd(Scene scene) {
@@ -58,9 +63,23 @@ public class Building extends GameObject {
     
     private void setTiles() {
     	Tile[][] tiles = ((TestScene)getScene()).getMap().getTiles();
+    	
+    	ArrayList<Prop> props = new ArrayList<Prop>();
+    	for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Prop) {
+				props.add((Prop)g);
+			}
+		}    	
+    	
     	for (int x = 0; x < (int)(getSize().x / Tile.WIDTH); x++) {
     		for (int y = 0; y < (int)(getSize().y / Tile.HEIGHT); y++) {
-    			tiles[x + (int)(getPosition().x / Tile.WIDTH)][y + (int)(getPosition().y / Tile.HEIGHT)].build(this);
+    			Tile t = tiles[x + (int)(getPosition().x / Tile.WIDTH)][y + (int)(getPosition().y / Tile.HEIGHT)];
+    			t.build(this);
+
+				for (Prop p : props) if (p.getTile() == t) {
+					toClear.add(p);
+					Debug.print(this, "prop to clear added");
+				}
     		}
     	}
     }
@@ -78,7 +97,10 @@ public class Building extends GameObject {
     		inputInventory.add(type.getBuildResourcesArray());
     	}
 
-    	if (buildState == BuildState.InProgress) {
+    	if (buildState == BuildState.Clearing) {
+    		if (toClear.size() > 0) assignGetPropTask(toClear);
+    		else buildState = BuildState.InProgress;
+    	} else if (buildState == BuildState.InProgress) {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
@@ -120,6 +142,17 @@ public class Building extends GameObject {
     		}
     	}
     	return all;
+    }
+    
+    private void assignGetPropTask(ArrayList<Prop> props) {
+    	for (Worker w : workers) {
+			if (!w.hasTask()) {
+				if (props.size() > 0) {
+					w.setTask(new GetPropTask(this, props.remove(0)));
+					Debug.print(this, "setting new task");
+				}
+			}
+		}
     }
     
     private void assignGatherTask(ArrayList<Resource> toGet) {
@@ -187,6 +220,9 @@ public class Building extends GameObject {
     	if (selected) {
     		selectedSign.draw(batch);
     	}
+    	
+    	for (Prop p : toClear) batch.draw(AssetManager.getTexture("error"), p.getPosition().x, p.getPosition().y, .5f, .5f);
+    	
     	super.draw(batch);
     }
     

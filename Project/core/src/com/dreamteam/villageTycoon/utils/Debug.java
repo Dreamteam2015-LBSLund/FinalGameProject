@@ -18,10 +18,10 @@ public abstract class Debug {
 		//whitelist.add(Tile.class);
 		//whitelist.add(GatherTask.class);
 		//whitelist.add(Character.class);
-		//whitelist.add(Building.class);
+		whitelist.add(Building.class);
 		//whitelist.add(PathFinder.class);		
-		whitelist.add(BuildingPlacer.class);
-		whitelist.add(BuildingButton.class);
+		//whitelist.add(BuildingPlacer.class);
+		//whitelist.add(BuildingButton.class);
 	}
 	
 	public static void print(Object client, String message) {

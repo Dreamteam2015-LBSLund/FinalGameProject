@@ -10,12 +10,19 @@ public class Prop extends GameObject {
 
 	private PropType type;
 	
-	public Prop(Vector2 position, PropType type) {
+	private Tile tile;
+	
+	public Prop(Vector2 position, PropType type, Tile tile) {
 		super(position, new Animation(type.getTexture()));
 		this.type = type;
 		setSize(new Vector2(type.getTexture().getRegionWidth() / 32f, type.getTexture().getRegionHeight() / 32f));
 		setOriginCenter();
 		setPosition(getPosition());
+		this.tile = tile;
+	}
+	
+	public Tile getTile() {
+		return tile;
 	}
 
 	public PropType getType() {
