@@ -15,8 +15,7 @@ public class GetPropTask implements Task {
 	
 	@Override
 	public boolean work(Worker w) {
-		w.getScene().removeObject(prop);
-		return true;
+		return w.getProp(prop);
 	}
 
 	@Override

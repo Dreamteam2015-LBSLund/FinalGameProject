@@ -109,6 +109,18 @@ public class Worker extends Character {
 		return task != null;
 	}
 	
+	public boolean getProp(Prop p) {
+		if (distanceTo(p.getPosition()) < .1f) {
+			inventory.add(p.getType().getResource(), 1);
+			getScene().removeObject(p);
+			print("done with get prop");
+			return true;
+		} else {
+			setPath(p.getPosition());
+			return false;
+		}
+	}
+	
 	// if has resource, goes to building and puts it there
 	public boolean putResource(Building destination, Resource r) {
 		print("putting resource " + r + " in building at " + destination.getPosition());

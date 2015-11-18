@@ -77,8 +77,8 @@ public class Building extends GameObject {
     			t.build(this);
 
 				for (Prop p : props) if (p.getTile() == t) {
-					toClear.add(p);
-					Debug.print(this, "prop to clear added");
+					if (!toClear.contains(p)) toClear.add(p);
+					Debug.print(this, "prop to clear added at tile " + p.getTile().getPosition());
 				}
     		}
     	}
@@ -149,7 +149,7 @@ public class Building extends GameObject {
 			if (!w.hasTask()) {
 				if (props.size() > 0) {
 					w.setTask(new GetPropTask(this, props.remove(0)));
-					Debug.print(this, "setting new task");
+					Debug.print(this, "setting new get prop task, left = " + props.size());
 				}
 			}
 		}
