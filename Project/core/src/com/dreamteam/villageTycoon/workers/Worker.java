@@ -32,7 +32,7 @@ public class Worker extends Character {
 	
 	public void update(float deltaTime) {
 		//Debug.print(this, "tile: " + getTile().getPosition());
-		if (getTile().getBuilding() != null) {
+		if (getTile().getBuilding() != null && task == null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
 		} else if (task == null){
@@ -43,7 +43,7 @@ public class Worker extends Character {
 		if (task != null) {
 			if (task.work(this)) task = null;
 		}
-		Debug.print(this, "" + (workplace == null));
+
 		super.update(deltaTime);
 	}
 	

@@ -103,5 +103,7 @@ public class TestScene extends Scene {
 		if (placer != null) placer.draw(uiBatch);
 		
 		uiBatch.draw(AssetManager.getTexture("error"), getUiMouse().x, getUiMouse().y);
+		
+		super.drawUi(uiBatch);
 	}
 }
