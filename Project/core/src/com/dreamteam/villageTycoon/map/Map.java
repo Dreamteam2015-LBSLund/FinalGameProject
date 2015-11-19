@@ -127,16 +127,16 @@ public class Map {
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(2, farmType, position, -size, size, city, random, scene);
+		addCityPart(3, farmType, position, 0, 10, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(size/2, "factory1", position, -size/2, size/2, city, random, scene);
+		addCityPart(3, "factory1", position, 0, 7, city, random, scene);
 		
-		addCityPart(size/2, "bakery", position, -size/2, size/2, city, random, scene);
-		addCityPart(size/2, "flourMill", position, -size/2, size/2, city, random, scene);
-		addCityPart(size/2, "wheatFarm", position, -size/2, size/2, city, random, scene);
+		//addCityPart(2, "bakery", position, 0, 12, city, random, scene);
+		//addCityPart(2, "flourMill", position, 0, 9, city, random, scene);
+		//addCityPart(size/2, "wheatFarm", position, -size/2, size/2, city, random, scene);
 		
-		addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
+		//addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
 	}
 	
 	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random, Scene scene) {
@@ -152,10 +152,9 @@ public class Map {
 				offset = random.nextInt(max)+min;
 				newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
-				if(canAddBuilding(city.getBuildings(), buildingToAdd)) 
-					break;
+				System.out.println(canAddBuilding(city.getBuildings(), buildingToAdd));	
 			}
-			
+			//Gdx.app.exit();
 			city.addBuilding(buildingToAdd);
 			scene.addObject(buildingToAdd);
 		}
@@ -166,8 +165,9 @@ public class Map {
 	public boolean canAddBuilding(ArrayList<Building> buildings, Building building) {
 		boolean canPlace = false;
 		
-		for(Building b : buildings) {
-			canPlace = (getDistance(b.getPosition().x, b.getPosition().y, building.getPosition().x, building.getPosition().y) < building.getSize().x);
+		for(int i = 0; i < buildings.size(); i++) {
+			if(buildings.get(i) != building)
+				canPlace = (getDistance(buildings.get(i).getPosition().x, buildings.get(i).getPosition().y, building.getPosition().x, building.getPosition().y) > 5f);
 		}
 		
 		return canPlace;

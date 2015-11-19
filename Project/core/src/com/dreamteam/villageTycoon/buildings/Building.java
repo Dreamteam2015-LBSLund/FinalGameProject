@@ -159,7 +159,7 @@ public class Building extends GameObject {
     	for (Worker w : workers) {
 			if (!w.hasTask()) {
 				Debug.print(this, "resources to get: ");
-				for (Resource r : toGather) Debug.print(this, r.getName());
+				//for (Resource r : toGather) Debug.print(this, r.getName());
 				if (toGet.size() > 0) w.setTask(new GatherTask(this, toGet.remove(0)));
 			}
 		}

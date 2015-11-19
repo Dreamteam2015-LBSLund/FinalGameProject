@@ -15,7 +15,8 @@ public class Projectile extends GameObject {
 	private float angle;
 	
 	private Vector2 target;
-	private Vector2 velocity;
+	
+	private Character owner;
 	
 	public Projectile(Vector2 position, Vector2 target, float speed, ProjectileType projectileType) {
 		super(position, projectileType.getSprite());
@@ -40,7 +41,7 @@ public class Projectile extends GameObject {
 			alpha -= deltaTime/10;
 		}
 		
-		this.getPosition().add(getVelocity(deltaTime));
+		setPosition(getPosition().cpy().add(new Vector2(getVelocity(deltaTime).x*deltaTime, getVelocity(deltaTime).y*deltaTime)));
 	}
 	
 	public Vector2 getVelocity(float deltaTime) {

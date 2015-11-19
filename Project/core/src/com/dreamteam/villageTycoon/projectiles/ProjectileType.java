@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.projectiles;
 
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.Scene;
 
 public class ProjectileType {
 	public enum Type { SHOT, TRHOWABLE }; 
