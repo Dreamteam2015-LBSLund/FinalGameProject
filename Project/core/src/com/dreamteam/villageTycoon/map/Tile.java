@@ -28,7 +28,7 @@ public class Tile {
 	}
 	
 	public void build(Building b) {
-		System.out.println("Building on " + getPosition());
+//		//System.out.println("Building on " + getPosition());
 		this.building = b;
 	}
 	

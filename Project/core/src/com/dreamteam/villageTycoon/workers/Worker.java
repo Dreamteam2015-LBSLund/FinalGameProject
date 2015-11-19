@@ -32,7 +32,7 @@ public class Worker extends Character {
 	
 	public void update(float deltaTime) {
 		//Debug.print(this, "tile: " + getTile().getPosition());
-		if (getTile().getBuilding() != null) {
+		if (getTile().getBuilding() != null && task == null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
 		} else if (task == null){
@@ -43,7 +43,7 @@ public class Worker extends Character {
 		if (task != null) {
 			if (task.work(this)) task = null;
 		}
-		Debug.print(this, "" + (workplace == null));
+
 		super.update(deltaTime);
 	}
 	
@@ -107,6 +107,18 @@ public class Worker extends Character {
 	
 	public boolean hasTask() {
 		return task != null;
+	}
+	
+	public boolean getProp(Prop p) {
+		if (distanceTo(p.getPosition()) < .1f) {
+			inventory.add(p.getType().getResource(), 1);
+			getScene().removeObject(p);
+			print("done with get prop");
+			return true;
+		} else {
+			setPath(p.getPosition());
+			return false;
+		}
 	}
 	
 	// if has resource, goes to building and puts it there
