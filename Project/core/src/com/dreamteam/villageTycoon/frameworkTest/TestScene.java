@@ -10,6 +10,8 @@ import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -38,8 +40,6 @@ public class TestScene extends Scene {
 		map = new Map(this);
 		
 		//city = map.generateCity(new Vector2(30, 30), 10, 1, this);
-		
-		placer = new BuildingPlacer(this);
 		
 		Debug.print(this, "map == null =  " + (map == null));
 		
@@ -83,6 +83,11 @@ public class TestScene extends Scene {
 	}
 	
 	public void update(float dt) {
+		if (Gdx.input.isKeyJustPressed(Keys.B)) {
+			if (placer == null) placer = new BuildingPlacer(this);
+			else placer = null;
+		}
+		
 		if (placer != null) {
 			if (placer.done) {
 				placer = null;
