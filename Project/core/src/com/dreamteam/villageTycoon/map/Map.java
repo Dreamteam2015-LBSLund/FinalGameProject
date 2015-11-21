@@ -115,22 +115,22 @@ public class Map {
 		Random random = new Random();
 		
 		// Houses for the workers should be the core of cities
-		for(int x = 0; x < size; x++) {
-			for(int y = 0; y < size; y++) {
-				Vector2 buildingSize = new Vector2(2, 2);
+		for(int x = 0; x < size/2; x++) {
+			for(int y = 0; y < size/2; y++) {
+				Vector2 buildingSize = new Vector2(4, 4);
 				Vector2 center = new Vector2(position.x, position.y);
-				//scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
-				//city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("factory1"), city));
+				//scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house1"), city));
+				//city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house1"), city));
 			}
 		}
 
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(3, farmType, position, 0, 10, city, random, scene);
+		addCityPart(3, farmType, position, 0, 5, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(3, "factory1", position, 0, 7, city, random, scene);
+		addCityPart(3, "factory1", position, 0, 10, city, random, scene);
 		
 		//addCityPart(2, "bakery", position, 0, 12, city, random, scene);
 		//addCityPart(2, "flourMill", position, 0, 9, city, random, scene);
@@ -147,27 +147,24 @@ public class Map {
 			int angle = random.nextInt(360);
 			Vector2 newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 			buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
-			
+
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
 				offset = random.nextInt(max)+min;
 				newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
-				System.out.println(canAddBuilding(city.getBuildings(), buildingToAdd));	
 			}
-			//Gdx.app.exit();
+			
 			city.addBuilding(buildingToAdd);
 			scene.addObject(buildingToAdd);
 		}
-		
-		//Gdx.app.exit();
 	}
 	
 	public boolean canAddBuilding(ArrayList<Building> buildings, Building building) {
 		boolean canPlace = false;
 		
-		for(int i = 0; i < buildings.size(); i++) {
-			if(buildings.get(i) != building)
-				canPlace = (getDistance(buildings.get(i).getPosition().x, buildings.get(i).getPosition().y, building.getPosition().x, building.getPosition().y) > 5f);
+		for(Building b : buildings) {
+			if(b != building)
+				canPlace = (b.getHitbox().collision(building.getHitbox()));
 		}
 		
 		return canPlace;
