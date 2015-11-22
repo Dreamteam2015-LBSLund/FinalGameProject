@@ -54,10 +54,10 @@ public class Animation extends Sprite {
 		animationTime += deltaTime;
 		
 		if(!vertical)
-			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth(), 
+			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth() + 1 + currentFrame, 
 					this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		else
-			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight()+ currentFrame*this.getRegionWidth(), 
+			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight() + 1 + currentFrame*this.getRegionHeight(), 
 					this.getRegionWidth(), this.getRegionHeight());
 		
 		if(animationDone()) 
