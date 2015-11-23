@@ -127,14 +127,14 @@ public class Map {
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
 
-		addCityPart(3, farmType, position, 0, 5, city, random, scene);
+		addCityPart(size/2, farmType, position, 0, 5, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(3, "factory1", position, 0, 10, city, random, scene);
+		addCityPart(size/2, "factory1", position, 6, 10, city, random, scene);
 		
-		//addCityPart(2, "bakery", position, 0, 12, city, random, scene);
-		//addCityPart(2, "flourMill", position, 0, 9, city, random, scene);
-		//addCityPart(size/2, "wheatFarm", position, -size/2, size/2, city, random, scene);
+		addCityPart(size/2, "bakery", position, 11, 20, city, random, scene);
+		addCityPart(size/2, "flourMill", position, 21, 25, city, random, scene);
+		addCityPart(size/2, "wheatFarm", position, 26, 30, city, random, scene);
 		
 		//addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
 	}
@@ -142,18 +142,27 @@ public class Map {
 	public void addCityPart(int amount, String type, Vector2 position, int min, int max, City city, Random random, Scene scene) {
 		Building buildingToAdd = null;
 		
+		ArrayList<Building> buildingsAdded = new ArrayList<Building>();
+		
 		for(int i = 0; i < amount; i++) {
 			int offset = random.nextInt(max)+min;
 			int angle = random.nextInt(360);
 			Vector2 newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 			buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 
-			while(!canAddBuilding(city.getBuildings(), buildingToAdd)) {
+			while(!canAddBuilding(city.getBuildings(), buildingToAdd) || !canAddBuilding(buildingsAdded , buildingToAdd)) {
 				offset = random.nextInt(max)+min;
+				angle = random.nextInt(360);
+
 				newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
+				buildingsAdded.add(buildingToAdd);
+				
+				if(canAddBuilding(city.getBuildings(), buildingToAdd) )
+					break;
 			}
 			
+			buildingsAdded.add(buildingToAdd);
 			city.addBuilding(buildingToAdd);
 			scene.addObject(buildingToAdd);
 		}

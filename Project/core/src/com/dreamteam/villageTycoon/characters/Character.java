@@ -65,6 +65,10 @@ public class Character extends GameObject {
 		followPath(deltaTime);
 	}
 	
+	public void onHit(int damege) {
+		health -= damege;
+	}
+	
 	public City getCity() {
 		return city;
 	}
