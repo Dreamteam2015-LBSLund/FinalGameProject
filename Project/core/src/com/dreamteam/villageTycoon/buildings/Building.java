@@ -220,9 +220,7 @@ public class Building extends GameObject {
     	if (selected) {
     		selectedSign.draw(batch);
     	}
-    	
-    	for (Prop p : toClear) batch.draw(AssetManager.getTexture("error"), p.getPosition().x, p.getPosition().y, .5f, .5f);
-    	
+    	    	
     	super.draw(batch);
     }
     

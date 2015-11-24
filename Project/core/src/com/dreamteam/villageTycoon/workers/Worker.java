@@ -165,13 +165,13 @@ public class Worker extends Character {
 	public void drawUi(SpriteBatch batch) {
 		if (getShowInventroy()) {
 			inventory.drawList(getUiScreenCoords(), batch);
+			if (task != null) {
+				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
+			}
 		}
 	}
 	
 	public void draw(SpriteBatch batch) {
-		if (getPath() != null) {
-			for (Vector2 v : getPath()) batch.draw(AssetManager.getTexture("error"), v.x, v.y, .3f, .3f);
-		}
 		super.draw(batch);
 	}
 }

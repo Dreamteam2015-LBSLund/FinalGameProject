@@ -49,4 +49,9 @@ public class GatherTask implements Task {
 	private void print(String s) {
 		Debug.print(this, s);
 	}
+
+	@Override
+	public String getString() {
+		return "gathering " + resource.getName();
+	}
 }

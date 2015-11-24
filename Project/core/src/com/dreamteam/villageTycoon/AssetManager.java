@@ -19,7 +19,7 @@ public abstract class AssetManager {
 	public static void load() {
 		FreeTypeFontGenerator g = new FreeTypeFontGenerator(Gdx.files.internal("fonts/COMIC.TTF"));
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
-		param.size = 100;
+		param.size = 50;
 		font = g.generateFont(param);
 		
 		regions = new HashMap<String, TextureRegion>();

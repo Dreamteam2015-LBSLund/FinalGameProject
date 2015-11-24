@@ -5,4 +5,6 @@ public interface Task {
 	public boolean work(Worker w);
 	
 	public void onCancel();
+
+	public String getString();
 }

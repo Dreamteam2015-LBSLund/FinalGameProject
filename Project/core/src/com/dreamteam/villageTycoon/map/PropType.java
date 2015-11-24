@@ -12,10 +12,12 @@ public class PropType {
 	
 	private Resource resource;
 	private TextureRegion texture;
+	private String name;
 	
 	public PropType(ResourceReader r) {
 		resource = Resource.get(r.getString("resource"));
 		texture = AssetManager.getTexture(r.getString("texture"));
+		name = r.getObjectName();
 	}
 	
 	public Resource getResource() {
@@ -44,5 +46,9 @@ public class PropType {
 			System.out.println("WARNING: Prop " + name + " couln't be found");
 		}
 		return p;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

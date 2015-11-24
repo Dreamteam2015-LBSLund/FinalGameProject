@@ -24,4 +24,9 @@ public class GetPropTask implements Task {
 		
 	}
 
+	@Override
+	public String getString() {
+		return "getting prop " + prop.getType().getName();
+	}
+
 }
