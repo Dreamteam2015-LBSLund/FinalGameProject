@@ -17,6 +17,7 @@ import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.PathFinder;
 
@@ -65,8 +66,8 @@ public class Character extends GameObject {
 		followPath(deltaTime);
 	}
 	
-	public void onHit(int damege) {
-		health -= damege;
+	public void onHit(Projectile projectile) {
+		health -= projectile.getDamege();
 	}
 	
 	public City getCity() {

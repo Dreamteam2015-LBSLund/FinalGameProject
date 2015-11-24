@@ -64,7 +64,10 @@ public class Map {
 				map[x][y] = "Grass"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. S� kallat strings eller
 			}
 		}
-		
+		for (int i = 0; i < lakes.length; i++) {		
+			lakes[i] = new Point(random.nextInt(WIDTH), random.nextInt(HEIGHT));		
+			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);		
+		}
 		cityPositions = new Point[villages.length];
 		
 		for (int i = 0; i < villages.length; i++) {

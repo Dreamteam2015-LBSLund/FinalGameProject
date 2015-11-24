@@ -15,8 +15,10 @@ import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
 	enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
+	enum AlertLevel { ALERT, PASSIVE };
 	
 	private AggressionState  aggressionState;
+	private AlertLevel alertLevel;
 	private Weapon weapon;
 	private SoldierType soldierType;
 	private SoldierInventory inventory;
@@ -37,6 +39,7 @@ public class Soldier extends Character {
 	private boolean useSabotageKit;
 	
 	private ArrayList<SabotageKit> sabotageKits;
+	private ArrayList<Character> spottedEnemies;
 	private SabotageKit startSabotageKits[];
 	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
@@ -89,6 +92,20 @@ public class Soldier extends Character {
 		}
 	}
 
+	public void onHit(Projectile projectile) {
+		super.onHit(projectile);
+		alertLevel = AlertLevel.ALERT;
+		for (Character c : spottedEnemies) {
+			if(c != projectile.getOwner()) {
+				addSpottedEnemies(projectile.getOwner());
+			}
+		}
+	}
+	
+	public void addSpottedEnemies(Character c) {
+		spottedEnemies.add(c);
+	}
+	
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
 		if(getShowInventroy()) inventory.drawUi(batch);
