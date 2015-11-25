@@ -64,6 +64,17 @@ public class Character extends GameObject {
 		}
 		
 		followPath(deltaTime);
+		
+		for(GameObject g : getScene().getObjects()) {
+			if(g instanceof Projectile) {
+				if(this != ((Projectile)g).getOwner() && this.city != ((Projectile)g).getOwner().getCity()) {
+					if(g.getHitbox().collision(getHitbox())) {
+						onHit(((Projectile)g));
+						getScene().removeObject(g);
+					}
+				}
+			}
+		}
 	}
 	
 	public void onHit(Projectile projectile) {

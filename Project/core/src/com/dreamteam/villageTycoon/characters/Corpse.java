@@ -19,7 +19,7 @@ public class Corpse extends GameObject {
 	public void upate(float deltaTime) {
 		super.update(deltaTime);
 		
-		deteriorateTime += deltaTime;
+		deteriorateTime += deltaTime*10;
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
 			alpha -= deltaTime;
