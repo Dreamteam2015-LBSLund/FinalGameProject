@@ -27,7 +27,6 @@ public class Worker extends Character {
 		
 		Debug.print(this, "position " + position);
 		
-		inventory.add(Resource.get("wood"), 1);
 	}
 	
 	public void update(float deltaTime) {
@@ -52,8 +51,8 @@ public class Worker extends Character {
 		Debug.print(this, "recieved input");
 		if (task != null) {
 			task.onCancel();
-			task = null;
 		}
+		task = null;
 	}
 
 	// finds the resource and puts it in the inventory. returns true if done

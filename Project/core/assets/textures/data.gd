@@ -12,8 +12,12 @@ Textures: {
 	grassProp: 61, 140, 12, 15;
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;
+	
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
+	
+	worker: 879, 3, 64, 61;
+	soldier: 950, 3, 64, 61;
 	
 	woodIcon:   	     454, 0, 16, 16;
 	ironIcon:    		 472, 0, 16, 16;

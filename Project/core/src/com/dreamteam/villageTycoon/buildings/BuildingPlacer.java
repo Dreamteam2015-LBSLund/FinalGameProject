@@ -35,7 +35,7 @@ public class BuildingPlacer {
 		
 		if (buttons == null) {
 			buttons = new ArrayList<BuildingButton>();
-			int y = 0;
+			int y = -400;
 			for (String t : BuildingType.getTypes().keySet()) {
 				buttons.add(new BuildingButton(BuildingType.getTypes().get(t), new Rectangle(0, y, 300, 50)));
 				y += 50;
