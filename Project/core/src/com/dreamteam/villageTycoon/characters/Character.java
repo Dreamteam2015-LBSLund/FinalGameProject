@@ -42,8 +42,8 @@ public class Character extends GameObject {
 	protected Vector2 lastPathTarget;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
-		super(position, sprite);
-		this.setSize(new Vector2(1, 1));
+		super(position, new Vector2(1, 1), sprite);
+		
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		this.deathAnimation = deathAnimation;
 		health = 1;
