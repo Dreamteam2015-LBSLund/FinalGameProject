@@ -13,12 +13,15 @@ public class Explosion extends GameObject {
 	private float radius;
 	private float fireDuration;
 	
-	public Explosion(Vector2 position, Type type, float radius, float fireDuration) {
+	private int maxDamege;
+	
+	public Explosion(Vector2 position, Type type, float radius, float fireDuration, int maxDamege) {
 		super(position, new Animation(AssetManager.getTexture("explosion")));
 		this.type = type;
 		this.radius = radius;
 		this.getSprite().setAnimation(0.1f, 7, 0, true);
-		getSprite().setSize(radius, radius);
+		this.getSprite().setSize(radius, radius);
+		this.maxDamege = maxDamege;
 	}
 	
 	public void update(float deltaTime) {
@@ -29,5 +32,13 @@ public class Explosion extends GameObject {
 		if(getSprite().animationDone()) {
 			getScene().removeObject(this);
 		}
+	}
+	
+	public int getMaxDamege() {
+		return maxDamege;
+	}
+	
+	public float getRadius() {
+		return radius;
 	}
 }

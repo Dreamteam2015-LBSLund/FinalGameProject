@@ -69,6 +69,10 @@ public class Animation extends Sprite {
 		}
 	}
 	
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
+	
 	public boolean animationDone() {
 		return currentFrame == maxFrame;
 	}
@@ -79,5 +83,9 @@ public class Animation extends Sprite {
 	
 	public void setAnimationTime(float animationTime) {
 		this.animationTime = animationTime;
+	}
+	
+	public float getAnimationTime() {
+		return animationTime;
 	}
 }

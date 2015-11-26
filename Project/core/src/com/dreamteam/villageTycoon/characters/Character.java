@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Point;
@@ -72,6 +73,12 @@ public class Character extends GameObject {
 						onHit(((Projectile)g));
 						getScene().removeObject(g);
 					}
+				}
+			}
+			
+			if(g instanceof Explosion) {
+				if(getPosition().sub(g.getPosition()).len() <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0 && g.getSprite().getAnimationTime() <= 0) {
+					health -= ((Explosion) g).getMaxDamege();
 				}
 			}
 		}
