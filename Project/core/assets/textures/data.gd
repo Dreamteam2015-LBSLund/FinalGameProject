@@ -49,6 +49,7 @@ Textures: {
 	backeryProgress: 		 129, 1814, 128, 96;
 	
 	explosion: 301, 213, 128, 128;
+	flame: 325, 378, 47, 64;
 	
 	button: 659, 0, 216, 108;
 }

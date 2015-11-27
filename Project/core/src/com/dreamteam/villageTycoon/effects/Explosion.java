@@ -34,6 +34,10 @@ public class Explosion extends GameObject {
 		}
 	}
 	
+	public Type getType() {
+		return type;
+	}
+	
 	public int getMaxDamege() {
 		return maxDamege;
 	}

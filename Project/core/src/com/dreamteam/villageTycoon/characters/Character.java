@@ -12,6 +12,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.effects.Explosion;
+import com.dreamteam.villageTycoon.effects.Explosion.Type;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Point;
@@ -83,13 +84,16 @@ public class Character extends GameObject {
 			}
 			
 			if(g instanceof Explosion) {
-				if(getPosition().sub(g.getPosition()).len() <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0 && g.getSprite().getAnimationTime() <= 0) {
+				if(this.distanceTo(g.getPosition()) <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0 && g.getSprite().getAnimationTime() <= 0) {
 					health -= ((Explosion) g).getMaxDamege();
+					if(((Explosion)g).getType() == Type.NAPALM) {
+						countFireDamegeTime = 1;
+					}
 				}
 			}
 		}
 		
-		if(this.countFireDamegeTime >= 1) onFire(deltaTime);
+		if(this.countFireDamegeTime > 0) onFire(deltaTime);
 	}
 	
 	public void onFire(float deltaTime) {
@@ -171,6 +175,39 @@ public class Character extends GameObject {
 	public Building getBuilding() {
 		return this.building;
 	}
+	
+	public float getOnFireTime() {
+		return onFireTime;
+	}
+
+	public float getOnFireIntervall() {
+		return onFireIntervall;
+	}
+
+	public int getCountFireDamegeTime() {
+		return countFireDamegeTime;
+	}
+
+	public int getMaxCountFireDamegeTime() {
+		return maxCountFireDamegeTime;
+	}
+
+	public void setOnFireTime(float onFireTime) {
+		this.onFireTime = onFireTime;
+	}
+
+	public void setOnFireIntervall(float onFireIntervall) {
+		this.onFireIntervall = onFireIntervall;
+	}
+
+	public void setCountFireDamegeTime(int countFireDamegeTime) {
+		this.countFireDamegeTime = countFireDamegeTime;
+	}
+
+	public void setMaxCountFireDamegeTime(int maxCountFireDamegeTime) {
+		this.maxCountFireDamegeTime = maxCountFireDamegeTime;
+	}
+
 	
 	protected void followPath(float deltaTime) {
 		//Debug.print(this, "following path");
