@@ -10,3 +10,4 @@ Soldater | Fallout Tactics | Soldater har ett inventory där de lagrar sitt vape
 Combat UI | Fallout Tactics | Runt soldater och deras inventory.
 Cutscene | Mulan (film) | Bilder som glider runt och nån slags berättare. 
 Grafiskstil | Valient Hearts | Svartoutline på sprite:sna och väldigt tecknat
+Ta över fiende by systemet | Fallout 4 | När man har dödat all i ett fiende fäste så kan man plocka ner strukturer och få resurserna
