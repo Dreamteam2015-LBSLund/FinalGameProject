@@ -42,6 +42,12 @@ public class Character extends GameObject {
 	
 	protected Vector2 lastPathTarget;
 	
+	private float onFireTime;
+	private float onFireIntervall;
+	
+	private int countFireDamegeTime;
+	private int maxCountFireDamegeTime;
+	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, new Vector2(1, 1), sprite);
 		
@@ -81,6 +87,22 @@ public class Character extends GameObject {
 					health -= ((Explosion) g).getMaxDamege();
 				}
 			}
+		}
+		
+		if(this.countFireDamegeTime >= 1) onFire(deltaTime);
+	}
+	
+	public void onFire(float deltaTime) {
+		onFireTime += 1 * deltaTime;
+		
+		if(onFireTime >= onFireIntervall) {
+			health -= 1;
+			countFireDamegeTime += 1;
+			onFireTime = 0;
+		}
+		
+		if(countFireDamegeTime >= maxCountFireDamegeTime) {
+			countFireDamegeTime = 0;
 		}
 	}
 	
