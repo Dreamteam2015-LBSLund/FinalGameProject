@@ -36,6 +36,8 @@ public class Building extends GameObject {
     private ArrayList<Resource> toGather;
     private ArrayList<Prop> toClear;
     
+    private int health;
+    
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position.add(new Vector2(.5f, .5f)), new Vector2(4, 3), new Animation(type.getBuildSprite())); // add .5 to position to align properly with tiles
@@ -230,6 +232,10 @@ public class Building extends GameObject {
     
     public boolean getSelected() {
     	return this.selected;
+    }
+    
+    public int getHealth() { 
+    	return health;
     }
 
 	public Inventory<Resource> getOutputInventory() {

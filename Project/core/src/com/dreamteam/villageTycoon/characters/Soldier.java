@@ -1,6 +1,7 @@
  package com.dreamteam.villageTycoon.characters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.DistanceComparator;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
@@ -41,6 +43,9 @@ public class Soldier extends Character {
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
+	
+	private Character currentTarget;
+	
 	private SabotageKit startSabotageKits[];
 	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
@@ -81,6 +86,11 @@ public class Soldier extends Character {
 				sabotageKits.remove(i);
 				inventory.setSoldier(this);
 			}
+		}
+		
+		if(spottedEnemies.size() > 0) {
+			Collections.sort(this.spottedEnemies, new DistanceComparator());
+			this.currentTarget = spottedEnemies.get(0);
 		}
 	}
 	
