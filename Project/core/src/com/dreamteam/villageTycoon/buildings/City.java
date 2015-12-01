@@ -2,7 +2,11 @@ package com.dreamteam.villageTycoon.buildings;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.CityController;
+import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
@@ -14,13 +18,17 @@ import com.dreamteam.villageTycoon.map.Resource;
  * Keeps track of a city's resources and provides methods to find stuff
  * 
  */
-public class City {
+public class City extends GameObject {
 	private TestScene scene;
 	private ArrayList<Building> buildings;
+	private CityController controller;
 	
-	public City(Scene scene) {
+	public City(Scene scene, CityController controller) {
+		super(new Vector2(), new Animation(AssetManager.getTexture("error")));
 		buildings = new ArrayList<Building>();
 		this.scene = (TestScene) scene;
+		controller.setCity(this);
+		this.controller = controller;
 	}
 	
 	// register a building that is built and belongs to this city
@@ -73,7 +81,21 @@ public class City {
 		return closest;
 	}
 	
+	public void update(float dt) {
+		controller.update();
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		controller.drawUi(batch);
+	}
+	
+	public void draw(SpriteBatch batch) {}
+	
 	public ArrayList<Building> getBuildings() {
 		return buildings;
+	}
+
+	public Scene getScene() {
+		return scene;
 	}
 }

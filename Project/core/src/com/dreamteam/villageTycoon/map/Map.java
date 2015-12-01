@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -46,7 +47,7 @@ public class Map {
 		cities = new City[amountOfCities];
 		
 		for(int i = 0; i < amountOfCities; i++) {
-			cities[i] =  new City(scene);
+			cities[i] =  new City(scene, new AIController());
 		}
 	}
 	

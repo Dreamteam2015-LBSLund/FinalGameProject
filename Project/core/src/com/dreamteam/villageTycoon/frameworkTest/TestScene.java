@@ -15,6 +15,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.ai.AIController;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
@@ -29,7 +31,6 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
-	private BuildingPlacer placer;
 	private City city;
 	
 	public TestScene() {
@@ -43,7 +44,7 @@ public class TestScene extends Scene {
 		
 		Debug.print(this, "map == null =  " + (map == null));
 		
-		playerCity = new City(this);
+		addObject(playerCity = new City(this, new PlayerController()));
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
@@ -71,7 +72,7 @@ public class TestScene extends Scene {
 	public void initialize() {
 		for(int i = 0; i < 1; i++)
 		addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
-		city = new City(this);
+		city = new City(this, new AIController());
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//City city = new City(this);
@@ -83,18 +84,7 @@ public class TestScene extends Scene {
 	}
 	
 	public void update(float dt) {
-		if (Gdx.input.isKeyJustPressed(Keys.B)) {
-			if (placer == null) placer = new BuildingPlacer(this);
-			else placer = null;
-		}
 		
-		if (placer != null) {
-			if (placer.done) {
-				placer = null;
-			} else {
-				placer.update(playerCity);
-			}
-		}
 		
 		super.update(dt);
 	}
@@ -105,7 +95,6 @@ public class TestScene extends Scene {
 	}
 	
 	public void drawUi(SpriteBatch uiBatch) {
-		if (placer != null) placer.draw(uiBatch);
 		
 		super.drawUi(uiBatch);
 	}
