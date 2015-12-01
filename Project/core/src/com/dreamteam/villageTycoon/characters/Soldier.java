@@ -91,15 +91,20 @@ public class Soldier extends Character {
 		}
 		
 		if(spottedEnemies.size() > 0) {
-			float shortestRange = 100;
+			float shortestRange = -1;
 			float currentRange = 0;
+			
+			Character tempTarget = new Character(Vector2.Zero, new Animation(AssetManager.getTexture("error")), new Animation(AssetManager.getTexture("error")), this.getCity());
 			
 			for(Character c : spottedEnemies) {
 				currentRange = c.distanceTo(this.getPosition());
-				if(shortestRange < currentRange) {
+				if(shortestRange > currentRange && shortestRange != -1) {
+					tempTarget = c;
 					shortestRange = currentRange;
 				}
 			}
+			
+			this.currentTarget = tempTarget;
 		}
 	}
 	
