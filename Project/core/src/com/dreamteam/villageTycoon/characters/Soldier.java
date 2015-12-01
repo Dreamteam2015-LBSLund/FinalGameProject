@@ -57,6 +57,8 @@ public class Soldier extends Character {
 		for(SabotageKit s : startSabotageKits) {
 			if(s != null) sabotageKits.add(s);
 		}
+		
+		spottedEnemies = new ArrayList<Character>();
 		inventory = new SoldierInventory(this);
 		setDepth(1);
 	}
@@ -89,7 +91,15 @@ public class Soldier extends Character {
 		}
 		
 		if(spottedEnemies.size() > 0) {
+			float shortestRange = 100;
+			float currentRange = 0;
 			
+			for(Character c : spottedEnemies) {
+				currentRange = c.distanceTo(this.getPosition());
+				if(shortestRange < currentRange) {
+					shortestRange = currentRange;
+				}
+			}
 		}
 	}
 	
