@@ -108,6 +108,14 @@ public class Character extends GameObject {
 		if(countFireDamegeTime >= maxCountFireDamegeTime) {
 			countFireDamegeTime = 0;
 		}
+		
+		for(GameObject g : getScene().getObjects()) {
+			if(g instanceof Character) {
+				if(g.getHitbox().collision(this.getHitbox())) {
+					((Character) g).setCountFireDamegeTime(1);
+				}
+			}
+		}
 	}
 	
 	public void onHit(Projectile projectile) {
