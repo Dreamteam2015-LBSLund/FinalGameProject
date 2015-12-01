@@ -89,8 +89,7 @@ public class Soldier extends Character {
 		}
 		
 		if(spottedEnemies.size() > 0) {
-			Collections.sort(this.spottedEnemies, new DistanceComparator());
-			this.currentTarget = spottedEnemies.get(0);
+			
 		}
 	}
 	
