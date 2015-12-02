@@ -23,7 +23,7 @@ public class City extends GameObject {
 	private ArrayList<Building> buildings;
 	private CityController controller;
 	
-	public City(Scene scene, CityController controller) {
+	public City(Scene scene, CityController controller, Vector2 position) {
 		super(new Vector2(), new Animation(AssetManager.getTexture("error")));
 		buildings = new ArrayList<Building>();
 		this.scene = (TestScene) scene;
