@@ -98,4 +98,13 @@ public class TestScene extends Scene {
 		
 		super.drawUi(uiBatch);
 	}
+
+	public boolean canBuild(Vector2 position) {
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 3; y++) {
+				if (!map.getTiles()[x + (int)position.x][y + (int)position.y].isBuildable()) return false;
+			}
+		}
+		return true;
+	}
 }
