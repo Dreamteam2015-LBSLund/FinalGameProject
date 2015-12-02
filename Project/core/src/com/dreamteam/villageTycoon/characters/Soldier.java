@@ -34,6 +34,8 @@ public class Soldier extends Character {
 	private float toughness;
 	private float fireDurationTime;
 	
+	private float maxAttackDistance;
+	
 	private int equipedSabotageKit;
 	
 	private boolean isMoving;
@@ -90,6 +92,12 @@ public class Soldier extends Character {
 			}
 		}
 		
+		for(GameObject g : getScene().getObjects()) {
+			if(g instanceof Character && g.distanceTo(this.getPosition()) <= this.maxAttackDistance) {
+				this.addSpottedEnemies(((Character)g));
+			}
+		}
+		
 		if(spottedEnemies.size() > 0) {
 			float shortestRange = -1;
 			float currentRange = 0;
@@ -103,8 +111,14 @@ public class Soldier extends Character {
 					shortestRange = currentRange;
 				}
 			}
-			
 			this.currentTarget = tempTarget;
+		}
+	}
+	
+	public void moveToTarget() {
+		if(currentTarget.distanceTo(this.getPosition()) >= this.maxAttackDistance) {
+			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
+			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 		}
 	}
 	
@@ -127,7 +141,16 @@ public class Soldier extends Character {
 	}
 	
 	public void addSpottedEnemies(Character c) {
-		spottedEnemies.add(c);
+		boolean aldreadyExists = false;
+		
+		for(Character g : spottedEnemies) {
+			if(c == g) {
+				aldreadyExists = true;
+				break;
+			}
+		}
+		
+		if(!aldreadyExists) spottedEnemies.add(c);
 	}
 	
 	public void drawUi(SpriteBatch batch) {
