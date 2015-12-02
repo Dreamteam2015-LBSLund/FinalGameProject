@@ -24,11 +24,19 @@ public class City extends GameObject {
 	private CityController controller;
 	
 	public City(Scene scene, CityController controller, Vector2 position) {
-		super(new Vector2(), new Animation(AssetManager.getTexture("error")));
+		super(position, new Animation(AssetManager.getTexture("error")));
 		buildings = new ArrayList<Building>();
 		this.scene = (TestScene) scene;
 		controller.setCity(this);
 		this.controller = controller;
+	}
+	
+	// register a building that is built and belongs to this city
+	public void addBuilding(Building b, boolean addToGameObjects) {
+		if (!buildings.contains(b)) {
+			buildings.add(b);
+			if (addToGameObjects) scene.addObject(b);
+		}
 	}
 	
 	// register a building that is built and belongs to this city
@@ -95,7 +103,7 @@ public class City extends GameObject {
 		return buildings;
 	}
 
-	public Scene getScene() {
+	public TestScene getScene() {
 		return scene;
 	}
 }
