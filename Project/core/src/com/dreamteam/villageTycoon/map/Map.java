@@ -47,7 +47,7 @@ public class Map {
 		cities = new City[amountOfCities];
 		
 		for(int i = 0; i < amountOfCities; i++) {
-			cities[i] =  new City(scene, new AIController());
+			cities[i] =  new City(scene, new AIController(), new Vector2()); //TODO: cities need to get a position
 		}
 	}
 	
