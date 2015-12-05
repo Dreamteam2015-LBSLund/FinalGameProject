@@ -2,6 +2,8 @@ package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 
 public class Weapon {
 	private WeaponType type;
@@ -42,12 +44,16 @@ public class Weapon {
 		currentFireRate = 0.1f;
 	}
 	
+	public WeaponType getWeaponType() {
+		return type;
+	}
+	
 	public Sprite getIcon() {
 		return getType().getIcon();
 	}
 	
 	public boolean canShoot() {
-		return clipCount < 1 && currentFireRate <= 0;
+		return clipCount > 0 && currentFireRate <= 0;
 	}
 	
 	public float getCurrentFireRate() {

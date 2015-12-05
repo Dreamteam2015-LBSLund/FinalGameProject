@@ -14,6 +14,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.DistanceComparator;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
@@ -93,7 +94,7 @@ public class Soldier extends Character {
 		}
 		
 		for(GameObject g : getScene().getObjects()) {
-			if(g instanceof Character && g.distanceTo(this.getPosition()) <= this.maxAttackDistance) {
+			if(g instanceof Character && g.distanceTo(this.getPosition()) <= this.maxAttackDistance && ((Character) g).getCity() != getCity()) {
 				this.addSpottedEnemies(((Character)g));
 			}
 		}
@@ -116,9 +117,14 @@ public class Soldier extends Character {
 	}
 	
 	public void moveToTarget() {
-		if(currentTarget.distanceTo(this.getPosition()) >= this.maxAttackDistance) {
+		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance) {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
 			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
+		} else {
+			if(weapon.canShoot()) {
+				getScene().addObject(new Projectile(getPosition(), currentTarget.getPosition(), 8, weapon.getWeaponType().getProjectileType()));
+				weapon.onShoot();
+			}
 		}
 	}
 	
