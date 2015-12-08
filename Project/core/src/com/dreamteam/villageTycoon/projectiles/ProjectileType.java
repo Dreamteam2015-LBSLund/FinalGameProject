@@ -1,5 +1,6 @@
 package com.dreamteam.villageTycoon.projectiles;
 
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -11,12 +12,12 @@ public class ProjectileType {
 	
 	private Explosion explosion;
 	
-	private Animation sprite;
+	private String sprite;
 	
 	private float maxRange;
 	private float speed;
 	
-	public ProjectileType(Type type, float maxRange, float speed, Animation sprite) {
+	public ProjectileType(Type type, float maxRange, float speed, String sprite) {
 		this.type = type;
 		this.maxRange = maxRange;
 		this.speed = speed;
@@ -27,7 +28,7 @@ public class ProjectileType {
 		return speed;
 	}
 	
-	public Animation getSprite() {
+	public String getSprite() {
 		return sprite;
 	}
 	
