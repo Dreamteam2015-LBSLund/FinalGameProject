@@ -51,5 +51,7 @@ Textures: {
 	explosion: 301, 213, 128, 128;
 	flame: 325, 378, 47, 64;
 	
+	projectile: 876, 92, 16, 16;
+	
 	button: 659, 0, 216, 108;
 }
