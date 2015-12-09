@@ -117,6 +117,7 @@ public class Map {
 	
 	public void generateCity(Vector2 position, int size, int techLevel, Scene scene, City city) {
 		Random random = new Random();
+		scene.addObject(city);
 		
 		// Houses for the workers should be the core of cities
 		for(int x = 0; x < size/2; x++) {
