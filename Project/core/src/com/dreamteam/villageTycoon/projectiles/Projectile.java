@@ -25,12 +25,14 @@ public class Projectile extends GameObject {
 	public Projectile(Vector2 position, Vector2 target, float speed, ProjectileType projectileType, Character owner) {
 		super(position, new Animation(AssetManager.getTexture(projectileType.getSprite())));
 		
-		getSprite().setSize(0.3f, 0.3f);
+		this.setSize(new Vector2(0.3f, 0.3f));
+		
+		System.out.println(this.getSize());
 		
 		this.projectileType = projectileType;
 		this.target = target;
 		
-		angle = (float)Math.atan2(this.getPosition().y - target.y, this.getPosition().x - target.x);
+		angle = (float)Math.atan2(target.y - this.getPosition().y, target.x - this.getPosition().x);
 		this.speed = speed;
 		
 		this.owner = owner;

@@ -61,6 +61,10 @@ public class Soldier extends Character {
 			if(s != null) sabotageKits.add(s);
 		}
 		
+		maxAttackDistance = 5;
+		
+		this.aggressionState = AggressionState.ATTACKING_AND_MOVING;
+		
 		spottedEnemies = new ArrayList<Character>();
 		inventory = new SoldierInventory(this);
 		setDepth(1);
@@ -107,7 +111,7 @@ public class Soldier extends Character {
 			float shortestRange = -1;
 			float currentRange = 0;
 			
-			Character tempTarget = new Character(Vector2.Zero, new Animation(AssetManager.getTexture("error")), new Animation(AssetManager.getTexture("error")), this.getCity());
+			Character tempTarget = new Character(new Vector2(-1, -1), new Animation(AssetManager.getTexture("error")), new Animation(AssetManager.getTexture("error")), this.getCity());
 			
 			for(Character c : spottedEnemies) {
 				currentRange = c.distanceTo(this.getPosition());
@@ -116,11 +120,14 @@ public class Soldier extends Character {
 					shortestRange = currentRange;
 				}
 			}
-			this.currentTarget = tempTarget;
-		}
-		
-		if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
-			moveToTarget();
+			
+			this.currentTarget = this.spottedEnemies.get(0);
+			
+			System.out.println(this.currentTarget.getPosition());
+			
+			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
+				moveToTarget();
+			}
 		}
 	}
 	
@@ -128,7 +135,8 @@ public class Soldier extends Character {
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance) {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
 			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
-		} else {
+		}
+		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
 				getScene().addObject(new Projectile(getPosition(), currentTarget.getPosition(), 8, weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
