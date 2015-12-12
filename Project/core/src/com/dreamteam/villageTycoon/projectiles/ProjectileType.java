@@ -16,16 +16,22 @@ public class ProjectileType {
 	
 	private float maxRange;
 	private float speed;
+	private int damege;
 	
-	public ProjectileType(Type type, float maxRange, float speed, String sprite) {
+	public ProjectileType(Type type, float maxRange, float speed, int damege, String sprite) {
 		this.type = type;
 		this.maxRange = maxRange;
 		this.speed = speed;
 		this.sprite = sprite;
+		this.damege = damege;
 	}
 	
 	public float getSpeed() {
 		return speed;
+	}
+	
+	public int getDamege() {
+		return damege;
 	}
 	
 	public String getSprite() {

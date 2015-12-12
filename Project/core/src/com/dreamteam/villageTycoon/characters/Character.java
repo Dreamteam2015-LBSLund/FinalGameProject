@@ -66,9 +66,10 @@ public class Character extends GameObject {
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
 		
 		if(health <= 0) {
-			if(getSprite() != deathAnimation) setSprite(deathAnimation);
-			if(getSprite().animationDone()) getScene().removeObject(this);
-			getSprite().animate(deltaTime);
+			//if(getSprite() != deathAnimation) setSprite(deathAnimation);
+			//if(getSprite().animationDone()) getScene().removeObject(this);
+			//getSprite().animate(deltaTime);
+			getScene().removeObject(this);
 		}
 		
 		followPath(deltaTime);
@@ -77,7 +78,7 @@ public class Character extends GameObject {
 			if(g instanceof Projectile) {
 				if(this != ((Projectile)g).getOwner() && this.city != ((Projectile)g).getOwner().getCity()) {
 					if(g.getHitbox().collision(getHitbox())) {
-						System.out.println(this.getPosition());
+						System.out.println(this.health + " AYYLMAO HELATH");
 						onHit(((Projectile)g));
 						getScene().removeObject(g);
 					}
@@ -121,6 +122,7 @@ public class Character extends GameObject {
 	
 	public void onHit(Projectile projectile) {
 		health -= projectile.getDamege();
+		System.out.println("DAMEGE: " + projectile.getDamege());
 	}
 	
 	public City getCity() {

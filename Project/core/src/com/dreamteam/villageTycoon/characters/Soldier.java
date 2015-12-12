@@ -76,7 +76,7 @@ public class Soldier extends Character {
 		weapon.update(deltaTime);
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-			getScene().addObject(new Projectile(getPosition(), new Vector2(0, 0), 8, weapon.getWeaponType().getProjectileType(), this));
+			getScene().addObject(new Projectile(getPosition(), new Vector2(0, 0), weapon.getWeaponType().getProjectileType(), this));
 		}
 		
 		if(getShowInventroy()) {
@@ -123,7 +123,7 @@ public class Soldier extends Character {
 			
 			this.currentTarget = this.spottedEnemies.get(0);
 			
-			System.out.println(this.currentTarget.getPosition());
+			//System.out.println(this.currentTarget.getPosition());
 			
 			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
 				moveToTarget();
@@ -138,7 +138,7 @@ public class Soldier extends Character {
 		}
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
-				getScene().addObject(new Projectile(getPosition(), currentTarget.getPosition(), 8, weapon.getWeaponType().getProjectileType(), this));
+				getScene().addObject(new Projectile(getPosition(), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
 			}
 		}
@@ -188,11 +188,6 @@ public class Soldier extends Character {
 		return weapon;
 	}
 
-	public void shoot(Vector2 target, float speed) {
-		getScene().addObject(new Projectile(getPosition(), target, speed, weapon.getType().getProjectileType(), this));
-		weapon.onShoot();
-	}
-	
 	public void setSoldierType() {
 		this.setSprite(soldierType.getTypeSprite());
 		this.setHealth(soldierType.getStartHealth());
