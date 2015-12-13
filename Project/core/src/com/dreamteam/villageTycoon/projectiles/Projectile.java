@@ -47,10 +47,8 @@ public class Projectile extends GameObject {
 		distanceTraveled += speed * deltaTime;
 		
 		if(distanceTraveled >= projectileType.getMaxRange()) {
-			//getScene().removeObject(this);
+			getScene().removeObject(this);
 		}
-		
-		System.out.println(currentSpeed);
 		
 		setPosition(getPosition().cpy().add(new Vector2(getVelocity().x*deltaTime, getVelocity().y*deltaTime)));
 	}
