@@ -18,6 +18,7 @@ Textures: {
 	
 	worker: 879, 3, 64, 61;
 	soldier: 950, 3, 64, 61;
+	soldierCorpse: 949, 82, 67, 65;
 	
 	woodIcon:   	     454, 0, 16, 16;
 	ironIcon:    		 472, 0, 16, 16;

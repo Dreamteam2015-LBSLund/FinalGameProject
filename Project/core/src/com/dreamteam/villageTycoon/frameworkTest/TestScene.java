@@ -60,7 +60,7 @@ public class TestScene extends Scene {
 		
 		// gör en fucking for loop Tom din jävla sosse
 		for(int i = 0; i < 1; i++) {
-			addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, "soldier"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+			addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, "soldier"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 					new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
 					new SabotageKit[]{ 
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 

@@ -44,10 +44,10 @@ public class Projectile extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		distanceTraveled += currentSpeed * deltaTime;
+		distanceTraveled += speed * deltaTime;
 		
 		if(distanceTraveled >= projectileType.getMaxRange()) {
-			alpha -= deltaTime/10;
+			//getScene().removeObject(this);
 		}
 		
 		System.out.println(currentSpeed);

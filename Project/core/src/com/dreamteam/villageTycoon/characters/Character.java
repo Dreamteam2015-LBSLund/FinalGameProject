@@ -69,6 +69,7 @@ public class Character extends GameObject {
 			//if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			//if(getSprite().animationDone()) getScene().removeObject(this);
 			//getSprite().animate(deltaTime);
+			getScene().addObject(new Corpse(this.getPosition(), new Animation(AssetManager.getTexture("soldierCorpse"))));
 			getScene().removeObject(this);
 		}
 		

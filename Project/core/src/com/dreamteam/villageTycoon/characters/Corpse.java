@@ -13,6 +13,7 @@ public class Corpse extends GameObject {
 	
 	public Corpse(Vector2 position, Animation sprite) {
 		super(position, sprite);
+		this.setSize(new Vector2(1, 1));
 		alpha = 1;
 	}
 
@@ -22,7 +23,7 @@ public class Corpse extends GameObject {
 		deteriorateTime += deltaTime*10;
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
-			alpha -= deltaTime;
+			alpha -= deltaTime*5;
 		}
 		
 		setColor(new Color(1, 1, 1, alpha));

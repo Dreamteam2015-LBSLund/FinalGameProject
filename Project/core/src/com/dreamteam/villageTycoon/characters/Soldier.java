@@ -123,6 +123,10 @@ public class Soldier extends Character {
 			
 			this.currentTarget = this.spottedEnemies.get(0);
 			
+			if(currentTarget.getHealth() <= 0) {
+				spottedEnemies.remove(currentTarget);
+			}
+			
 			//System.out.println(this.currentTarget.getPosition());
 			
 			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {

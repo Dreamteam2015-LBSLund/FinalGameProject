@@ -24,7 +24,7 @@ public class Weapon {
 	}
 	
 	public void coolDown(float deltaTime) {
-		currentFireRate += deltaTime * 10;
+		currentFireRate += deltaTime * 1;
 
 		if(currentFireRate >= type.getMaxFireRate()) {
 			currentFireRate = 0;
@@ -32,7 +32,7 @@ public class Weapon {
 	}
 
 	public void reload(float deltaTime) {
-		reloadCount += deltaTime * 10;
+		reloadCount += deltaTime * 1;
 		if(reloadCount >= type.getReloadTime()) {
 			clipCount = type.getClipSize();
 			reloadCount = 0;
