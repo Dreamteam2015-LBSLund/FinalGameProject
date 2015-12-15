@@ -142,7 +142,7 @@ public class Soldier extends Character {
 		}
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
-				getScene().addObject(new Projectile(getPosition(), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
+				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
 			}
 		}
