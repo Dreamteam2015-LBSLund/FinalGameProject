@@ -79,7 +79,6 @@ public class Character extends GameObject {
 			if(g instanceof Projectile) {
 				if(this != ((Projectile)g).getOwner() && this.city != ((Projectile)g).getOwner().getCity()) {
 					if(g.getHitbox().collision(getHitbox())) {
-						System.out.println(this.health + " AYYLMAO HELATH");
 						onHit(((Projectile)g));
 						getScene().removeObject(g);
 					}

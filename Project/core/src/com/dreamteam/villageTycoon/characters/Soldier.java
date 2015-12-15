@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.DistanceComparator;
@@ -46,6 +47,8 @@ public class Soldier extends Character {
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
+	
+	private Building targetBuilding;
 	
 	private Character currentTarget;
 	
@@ -144,6 +147,19 @@ public class Soldier extends Character {
 			if(weapon.canShoot()) {
 				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
+			}
+		}
+		
+		if(this.spottedEnemies.size() <= 0 && this.targetBuilding != null) {
+			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance) {
+				float angle = (float)Math.atan2(targetBuilding.getPosition().y - this.getPosition().y, targetBuilding.getPosition().x - this.getPosition().x);
+				this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
+			}
+			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
+				if(weapon.canShoot()) {
+					getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), targetBuilding.getPosition(), weapon.getWeaponType().getProjectileType(), this));
+					weapon.onShoot();
+				}
 			}
 		}
 	}

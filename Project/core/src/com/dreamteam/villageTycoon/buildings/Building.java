@@ -15,6 +15,7 @@ import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
+import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
@@ -49,6 +50,8 @@ public class Building extends GameObject {
 		buildState = BuildState.Clearing;
 		setDepth(1);
 		workers = new ArrayList<Worker>();
+		
+		health = 10;
 		
 		toGather = getConstructionResources();
 		//setTiles();
@@ -95,6 +98,20 @@ public class Building extends GameObject {
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
     	
+    	if(health <= 0) getScene().removeObject(this);
+    	
+    	for(GameObject g : getScene().getObjects()) {
+			if(g instanceof Projectile) {
+				if(this.city != ((Projectile)g).getOwner().getCity()) {
+					if(g.getHitbox().collision(getHitbox())) {
+						System.out.println(this.health + " AYYLMAO HELATH");
+						onHit(((Projectile)g));
+						getScene().removeObject(g);
+					}
+				}
+			}
+    	}
+    	
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		inputInventory.add(type.getBuildResourcesArray());
     	}
@@ -122,6 +139,10 @@ public class Building extends GameObject {
     			assignGatherTask(toGather);
     		}
     	}
+    }
+    
+    public void onHit(Projectile projectile) {
+    	health -= projectile.getDamege();
     }
     
     public void cancelGather(Resource r) {
