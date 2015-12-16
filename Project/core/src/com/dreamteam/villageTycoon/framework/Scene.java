@@ -93,4 +93,11 @@ public abstract class Scene {
 		camera.unproject(mouse);
 		return new Vector2(mouse.x, mouse.y);
 	}
+	
+	public Vector2 worldToUiCoords(Vector2 position) {
+		//return getScreenCoords().scl(2).sub(new Vector2(scene.UI_W / 2, scene.UI_H / 2));
+		Vector3 v = getUiCamera().unproject(getCamera().project(new Vector3(position, 0)));
+		v.y *= -1;
+		return new Vector2(v.x, v.y);
+	}
 }

@@ -34,7 +34,7 @@ public abstract class GameObject {
 	}
 	
 	public Vector2 getUiScreenCoords() {
-		return getScreenCoords().scl(2).sub(new Vector2(scene.UI_W / 2, scene.UI_H / 2));
+		return getScene().worldToUiCoords(getPosition());
 	}
 	
 	public void setSize(Vector2 s) { 
