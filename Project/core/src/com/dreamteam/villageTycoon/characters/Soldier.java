@@ -162,6 +162,8 @@ public class Soldier extends Character {
 				}
 			}
 		}
+		
+		if(getBuilding() != null && getBuilding().getCity() == getCity()) targetBuilding = getBuilding();
 	}
 	
 	public void attack() {
