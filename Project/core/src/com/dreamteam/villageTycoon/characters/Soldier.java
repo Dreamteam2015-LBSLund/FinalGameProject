@@ -135,11 +135,21 @@ public class Soldier extends Character {
 			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
 				moveToTarget();
 			}
+			
+			if(this.aggressionState == AggressionState.STEALTH) {
+				for(Character c : spottedEnemies) {
+					if(c instanceof Soldier) {
+						for(Character c2 : ((Soldier)c).getSpottedEnemies()) {
+							if(c2 == this) this.aggressionState = AggressionState.ATTACKING_AND_MOVING;
+						}
+					}
+				}
+			}
 		}
 	}
 	
 	public void moveToTarget() {
-		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance) {
+		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE) {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
 			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 		}
@@ -151,7 +161,7 @@ public class Soldier extends Character {
 		}
 		
 		if(this.spottedEnemies.size() <= 0 && this.targetBuilding != null) {
-			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance) {
+			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE) {
 				float angle = (float)Math.atan2(targetBuilding.getPosition().y - this.getPosition().y, targetBuilding.getPosition().x - this.getPosition().x);
 				this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 			}
@@ -204,6 +214,10 @@ public class Soldier extends Character {
 	
 	public ArrayList<SabotageKit> getSabotageKits() {
 		return sabotageKits;
+	}
+	
+	public ArrayList<Character> getSpottedEnemies() {
+		return spottedEnemies;
 	}
 	
 	public Weapon getWeapon() {

@@ -122,7 +122,6 @@ public class Character extends GameObject {
 	
 	public void onHit(Projectile projectile) {
 		health -= projectile.getDamege();
-		System.out.println("DAMEGE: " + projectile.getDamege());
 	}
 	
 	public City getCity() {
@@ -135,7 +134,9 @@ public class Character extends GameObject {
 	
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
-		if(selected) selectedSign.draw(batch);
+		if(selected) { 
+			selectedSign.draw(batch);
+		}
 	}
 	
 	public void setHealth(int health) {
