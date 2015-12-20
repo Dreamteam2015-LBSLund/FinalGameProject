@@ -1,7 +1,7 @@
 # Soldat-AI
 ## Lägen
 - Attack
-  - Går emot fiender och skjuter fiender som är inom attack distansen 
+  - Går emot fiender och skjuter fiender som är inom attack distansen, *borde soldater fokusera på specefika mål när de har fått ett mål och inte distraheras av fiender?*
 - Defensive
   - Står stilla och skjuter fiender inom attack distansen, *längre attack distans?*
 - Stealth
