@@ -51,6 +51,23 @@ public class Map {
 		}
 	}
 	
+	public void setupGame(City[] cities, Scene scene) {
+		Vector2 midPoint = new Vector2(WIDTH/2, HEIGHT/2);
+		
+		float angleInterval = ((float)Math.PI*2)/cities.length;
+		
+		for(int i = 0; i < cities.length; i++) {
+			float distance = this.randomInt((int)midPoint.x/2, (int)midPoint.x);
+			
+			if(i == 0) {
+				// Player city does not need generateCity() function
+				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
+			} else {
+				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 5, 2, scene, cities[i]);
+			}
+		}
+	}
+	
 	public String[][] generateMap() {
 		// I'll start by doing something somewhat simple so that the project progesses towards the minimal viable product and then I can make it more advanced later
 		Random random = new Random();	
@@ -62,7 +79,7 @@ public class Map {
 		
 		for (int x = 0; x < WIDTH; x++) {
 			for (int y = 0; y < HEIGHT; y++) {
-				map[x][y] = "Grass"; //TODO: the order might change. The list of tileTypes should probably be a HashMap instead. Sï¿½ kallat strings eller
+				map[x][y] = "Grass"; 
 			}
 		}
 		for (int i = 0; i < lakes.length; i++) {		
@@ -206,5 +223,14 @@ public class Map {
 			return tiles[p.x][p.y];
 		}
 		return null;
+	}
+	
+	// VIsste inte vart jag skulle lägga denna
+	public int randomInt(int min, int max) {
+	    Random random = new Random();
+
+	    int randomNumber = random.nextInt((max - min) + 1) + min;
+
+	    return randomNumber;
 	}
 }
