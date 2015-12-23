@@ -50,7 +50,7 @@ public class Map {
 			cities[i] =  new City(scene, new AIController(), new Vector2()); //TODO: cities need to get a position
 		}
 	}
-	
+
 	public void setupGame(City[] cities, Scene scene) {
 		Vector2 midPoint = new Vector2(WIDTH/2, HEIGHT/2);
 		
@@ -60,8 +60,8 @@ public class Map {
 			float distance = this.randomInt((int)midPoint.x/2, (int)midPoint.x);
 			
 			if(i == 0) {
-				// Player city does not need generateCity() function
 				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
+				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
 			} else {
 				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 5, 2, scene, cities[i]);
 			}
