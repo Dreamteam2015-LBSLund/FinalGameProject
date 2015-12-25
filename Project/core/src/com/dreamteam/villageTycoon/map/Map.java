@@ -167,14 +167,14 @@ public class Map {
 		ArrayList<Building> buildingsAdded = new ArrayList<Building>();
 		
 		for(int i = 0; i < amount; i++) {
-			int offset = random.nextInt(max)+min;
-			int angle = random.nextInt(360);
+			int offset = randomInt(min, max);
+			int angle = randomInt(0, 360);
 			Vector2 newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 			buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
 
 			while(!canAddBuilding(city.getBuildings(), buildingToAdd) || !canAddBuilding(buildingsAdded , buildingToAdd)) {
-				offset = random.nextInt(max)+min;
-				angle = random.nextInt(360);
+				offset = randomInt(min, max);
+				angle = randomInt(0, 360);
 
 				newPosition = new Vector2(position.x + (float)Math.cos(angle * ((float)Math.PI/180))*offset, position.y + (float)Math.sin(angle * ((float)Math.PI/180))*offset);
 				buildingToAdd = new Building(newPosition, BuildingType.getTypes().get(type), city);
