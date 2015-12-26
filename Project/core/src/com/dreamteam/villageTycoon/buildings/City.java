@@ -19,6 +19,7 @@ import com.dreamteam.villageTycoon.map.Resource;
  * 
  */
 public class City extends GameObject {
+	// well then
 	private TestScene scene;
 	private ArrayList<Building> buildings;
 	private CityController controller;
@@ -98,6 +99,10 @@ public class City extends GameObject {
 	}
 	
 	public void draw(SpriteBatch batch) {}
+	
+	public CityController getController() {
+		return controller;
+	}
 	
 	public ArrayList<Building> getBuildings() {
 		return buildings;

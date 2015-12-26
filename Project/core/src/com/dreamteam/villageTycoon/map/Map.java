@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.ai.AIController;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -59,7 +60,7 @@ public class Map {
 		for(int i = 0; i < cities.length; i++) {
 			float distance = this.randomInt((int)midPoint.x/2, (int)midPoint.x);
 			
-			if(i == 0) {
+			if(cities[i].getController() instanceof PlayerController) {
 				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
 				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
 			} else {
