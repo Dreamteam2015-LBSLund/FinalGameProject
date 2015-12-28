@@ -15,15 +15,15 @@ public abstract class Debug {
 	static boolean isInit;
 	
 	public static void init() {
-		//whitelist.add(Worker.class);
+		whitelist.add(Worker.class);
 		//whitelist.add(Tile.class);
 		//whitelist.add(GatherTask.class);
 		//whitelist.add(Character.class);
-		//whitelist.add(Building.class);
+		whitelist.add(Building.class);
 		//whitelist.add(PathFinder.class);		
 		//whitelist.add(BuildingPlacer.class);
 		//whitelist.add(BuildingButton.class);
-		whitelist.add(City.class);
+		//whitelist.add(City.class);
 	}
 	
 	public static void print(Object client, String message) {

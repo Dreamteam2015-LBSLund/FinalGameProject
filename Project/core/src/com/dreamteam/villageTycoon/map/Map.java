@@ -148,12 +148,12 @@ public class Map {
 		}
 
 		//Next up is agriculture
-		String farmType = (techLevel >= 2) ? "advancedFarm" : "basicFarm";
+		String farmType = (techLevel >= 2) ? "advancedFarm" : "farm";
 
 		addCityPart(size/2, farmType, position, 0, 5, city, random, scene);
 		
-		String industryType = (techLevel >= 1) ? "factory1" : "woodshop";
-		addCityPart(size/2, "factory1", position, 6, 10, city, random, scene);
+		String industryType = (techLevel >= 1) ? "mine" : "woodshop";
+		addCityPart(size/2, "mine", position, 6, 10, city, random, scene);
 		
 		addCityPart(size/2, "bakery", position, 11, 20, city, random, scene);
 		addCityPart(size/2, "flourMill", position, 21, 25, city, random, scene);

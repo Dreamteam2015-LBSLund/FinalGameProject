@@ -11,7 +11,7 @@ import com.dreamteam.villageTycoon.utils.Debug;
 public class AIController extends CityController {
 	
 	private static BuildingType[] buildOrder = new BuildingType[] {
-		BuildingType.getTypes().get("basicMine")
+		BuildingType.getTypes().get("mine")
 	};
 	
 	private int buildOrderIndex;

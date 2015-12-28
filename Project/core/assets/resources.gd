@@ -34,11 +34,15 @@ diamond: {
 	icon: grassIcon;
 }
 
-explosivePowder: {
+explosive-powder: {
 	icon: diamondIcon;
 }
 
-weapon: {
+wooden-sword: {
+	icon: weaponIcon;
+}
+
+iron-sword: {
 	icon: weaponIcon;
 }
 
