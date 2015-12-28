@@ -130,7 +130,7 @@ public class Building extends GameObject {
     		}
     	} else {
     		// regular production
-    		if (productionGatheringDone()) {
+    		if (isProductionGatheringDone() || toGather.size() == 0) {
     			inputInventory.remove(type.getInputResourcesArray());
     			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
@@ -153,7 +153,10 @@ public class Building extends GameObject {
     }
     
     private ArrayList<Resource> getProductionResources() {
-    	return getInputInventoryDifference(type.getProducts(), type.getOutputAmountPerRun());
+    	for (int i = 0; i < type.getProductionResources().length; i++) {
+    		Debug.print(this, type.getProductionResources()[i].getName() + ": " + type.getInputResourceAmount()[i]);
+    	}
+    	return getInputInventoryDifference(type.getProductionResources(), type.getInputResourceAmount());
     }
     
     private ArrayList<Resource> getInputInventoryDifference(Resource[] resources, int[] amounts) {
@@ -181,7 +184,7 @@ public class Building extends GameObject {
     	for (Worker w : workers) {
 			if (!w.hasTask()) {
 				Debug.print(this, "resources to get: ");
-				//for (Resource r : toGather) Debug.print(this, r.getName());
+				for (Resource r : toGather) Debug.print(this, r.getName());
 				if (toGet.size() > 0) w.setTask(new GatherTask(this, toGet.remove(0)));
 			}
 		}
@@ -193,7 +196,7 @@ public class Building extends GameObject {
     	toGather = getProductionResources();
     }
     
-    private boolean productionGatheringDone() {
+    private boolean isProductionGatheringDone() {
     	boolean hasAllResources = true;
     	for (int i = 0; i < type.getProductionResources().length; i++) {
     		if (inputInventory.count(type.getProductionResources()[i]) < type.getInputResourceAmount()[i]) {
