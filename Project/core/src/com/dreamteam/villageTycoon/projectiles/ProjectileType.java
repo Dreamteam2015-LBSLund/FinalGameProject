@@ -42,6 +42,10 @@ public class ProjectileType {
 		return type;
 	}
 	
+	public void setExplosion(Explosion explosion) {
+		this.explosion = explosion;
+	}
+	
 	public Explosion getExplosion() {
 		return explosion;
 	}

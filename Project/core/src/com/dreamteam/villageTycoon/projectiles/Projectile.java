@@ -53,6 +53,15 @@ public class Projectile extends GameObject {
 		setPosition(getPosition().cpy().add(new Vector2(getVelocity().x*deltaTime, getVelocity().y*deltaTime)));
 	}
 	
+	public void onHit() {
+		getScene().removeObject(this);
+		
+		if(projectileType.getExplosion() != null) {
+			projectileType.getExplosion().setPosition(this.getPosition());
+			getScene().addObject(projectileType.getExplosion());
+		}
+	}
+	
 	public Character getOwner() {
 		return owner;
 	}

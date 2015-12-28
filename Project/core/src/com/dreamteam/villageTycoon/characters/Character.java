@@ -80,7 +80,7 @@ public class Character extends GameObject {
 				if(this != ((Projectile)g).getOwner() && this.city != ((Projectile)g).getOwner().getCity()) {
 					if(g.getHitbox().collision(getHitbox())) {
 						onHit(((Projectile)g));
-						getScene().removeObject(g);
+						((Projectile)g).onHit();
 					}
 				}
 			}

@@ -105,7 +105,7 @@ public class Building extends GameObject {
 				if(this.city != ((Projectile)g).getOwner().getCity()) {
 					if(g.getHitbox().collision(getHitbox())) {
 						onHit(((Projectile)g));
-						getScene().removeObject(g);
+						((Projectile)g).onHit();
 					}
 				}
 			}
