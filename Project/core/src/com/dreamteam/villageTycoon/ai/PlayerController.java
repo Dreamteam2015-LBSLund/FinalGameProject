@@ -14,7 +14,7 @@ public class PlayerController extends CityController {
 		
 	}
 	
-	public void update() {
+	public void update(float dt) {
 		if (Gdx.input.isKeyJustPressed(Keys.B)) {
 			if (placer == null) placer = new BuildingPlacer(getCity().getScene());
 			else placer = null;

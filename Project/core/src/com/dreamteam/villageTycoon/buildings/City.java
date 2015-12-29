@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.CityController;
+import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -13,6 +14,7 @@ import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.workers.Worker;
 
 /*
  * Keeps track of a city's resources and provides methods to find stuff
@@ -22,6 +24,9 @@ public class City extends GameObject {
 	// well then
 	private TestScene scene;
 	private ArrayList<Building> buildings;
+	private ArrayList<Worker> workers;
+	private ArrayList<Soldier> soldiers;
+
 	private CityController controller;
 	
 	public City(Scene scene, CityController controller, Vector2 position) {
@@ -30,6 +35,9 @@ public class City extends GameObject {
 		this.scene = (TestScene) scene;
 		controller.setCity(this);
 		this.controller = controller;
+		
+		workers  = new ArrayList<Worker>();
+		soldiers = new ArrayList<Soldier>();
 	}
 	
 	// register a building that is built and belongs to this city
@@ -90,8 +98,15 @@ public class City extends GameObject {
 		return closest;
 	}
 	
+	public boolean hasBuildingType(BuildingType type) {
+		for (Building b : buildings) {
+			if (b.getType() == type) return true;
+		}
+		return false;
+	}
+	
 	public void update(float dt) {
-		controller.update();
+		controller.update(dt);
 	}
 	
 	public void drawUi(SpriteBatch batch) {
@@ -110,5 +125,29 @@ public class City extends GameObject {
 
 	public TestScene getScene() {
 		return scene;
+	}
+
+	public ArrayList<Worker> getWorkers() {
+		return workers;
+	}
+
+	public ArrayList<Soldier> getSoldiers() {
+		return soldiers;
+	}
+	
+	public void addWorker(Worker w) {
+		workers.add(w);
+	}
+	
+	public void removeWorker(Worker w) {
+		workers.remove(w);
+	}
+	
+	public void addSoldier(Soldier s) {
+		soldiers.add(s);
+	}
+	
+	public void removeSoldier(Soldier s) {
+		soldiers.remove(s);
 	}
 }

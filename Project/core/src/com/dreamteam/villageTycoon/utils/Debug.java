@@ -15,7 +15,7 @@ public abstract class Debug {
 	static boolean isInit;
 	
 	public static void init() {
-		whitelist.add(Worker.class);
+		//whitelist.add(Worker.class);
 		//whitelist.add(Tile.class);
 		//whitelist.add(GatherTask.class);
 		//whitelist.add(Character.class);

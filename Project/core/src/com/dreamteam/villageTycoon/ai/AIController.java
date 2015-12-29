@@ -11,6 +11,11 @@ import com.dreamteam.villageTycoon.utils.Debug;
 public class AIController extends CityController {
 	
 	private static BuildingType[] buildOrder = new BuildingType[] {
+		BuildingType.getTypes().get("mine"),
+		BuildingType.getTypes().get("mine"),
+		BuildingType.getTypes().get("mine"),
+		BuildingType.getTypes().get("mine"),
+		BuildingType.getTypes().get("mine"),
 		BuildingType.getTypes().get("mine")
 	};
 	
@@ -24,14 +29,40 @@ public class AIController extends CityController {
 		buildOrderIndex = 0;
 	}
 	
-	public void update() {
-		if (playerCity != null) {
+	private boolean canAttack() {
+		return getCity().getSoldiers().size() > 3;
+	}
+	
+	private void makeSoldiers() {
+		if (canMakeSoldiers()) {
+			makeSoldiers();
+		}
+	}
+	
+	private boolean canMakeSoldiers() {
+		return getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"));
+	}
+
+	public void aiUpdate() {
+		if (canAttack()) {
+			
+		} else {
+			makeSoldiers();
+		}
+		
+		
+		
+		/*if (playerCity != null) {
 			attackPlayer();
 		} else {
 			scout();
 		}
 		
 		build();
+	*/}
+	
+	public void update(float dt)  {
+		aiUpdate();
 	}
 	
 	private boolean build(BuildingType type, Vector2 position) {
