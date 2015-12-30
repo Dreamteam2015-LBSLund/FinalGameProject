@@ -27,6 +27,8 @@ public class Worker extends Character {
 		
 		Debug.print(this, "position " + position);
 		
+		city.addWorker(this);
+		
 	}
 	
 	public void update(float deltaTime) {

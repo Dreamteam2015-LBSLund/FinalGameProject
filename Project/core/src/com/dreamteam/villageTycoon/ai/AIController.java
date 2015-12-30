@@ -20,7 +20,8 @@ public class AIController extends CityController {
 	};
 	
 	private int buildOrderIndex;
-	Building building;
+	private int buildingIndex;
+	private Building building;
 	
 	
 	City playerCity; // in the future it should have other ai's as enemies too?
@@ -35,10 +36,24 @@ public class AIController extends CityController {
 	
 	private void makeSoldiers() {
 		if (canMakeSoldiers()) {
-			makeSoldiers();
+			
+		} else {
+			makeSoldierFactory();
 		}
 	}
 	
+	private void makeSoldierFactory() {
+		BuildingType armyBarack = BuildingType.getTypes().get("armyBarack");
+		if (haveMaterialsFor(armyBarack)) {
+			build(armyBarack, getNextBuildingPosition());
+		}
+	}
+
+	private boolean haveMaterialsFor(BuildingType armyBarack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	private boolean canMakeSoldiers() {
 		return getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"));
 	}
@@ -77,6 +92,8 @@ public class AIController extends CityController {
 		}
 	}
 	
+	
+	
 	private void build() {
 		if (building == null || building.isBuilt()) {
 			if (buildOrderIndex < buildOrder.length) {
@@ -86,7 +103,7 @@ public class AIController extends CityController {
 	}
 	
 	private Vector2 getNextBuildingPosition() {
-		return getCity().getPosition();
+		return getCity().getPosition().cpy().add(new Vector2(buildingIndex++ * 5, 0));
 	}
 	
 	private void scout() {

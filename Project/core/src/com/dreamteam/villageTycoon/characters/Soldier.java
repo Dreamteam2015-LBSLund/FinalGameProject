@@ -64,6 +64,8 @@ public class Soldier extends Character {
 			if(s != null) sabotageKits.add(s);
 		}
 		
+		city.addSoldier(this);
+		
 		maxAttackDistance = 5;
 		
 		this.aggressionState = AggressionState.ATTACKING_AND_MOVING;
