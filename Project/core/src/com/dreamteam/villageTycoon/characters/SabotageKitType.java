@@ -1,12 +1,17 @@
 package com.dreamteam.villageTycoon.characters;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.projectiles.Projectile;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType.Type;
 
 public class SabotageKitType {
 	public enum ActivationType { FUSE, REMOTE, INSTANT };
-	public enum EffectType { FIRE, EXPLOSION, NAPALM };
+	public enum EffectType { FIRE, EXPLOSION };
 	
 	private ActivationType activationType;
 	private EffectType effectType;
@@ -21,6 +26,11 @@ public class SabotageKitType {
 	private float fireDuration; 
 	private float explosionRadius;
 	
+	private Projectile projectile;
+	private Explosion explosion;
+	
+	//public Explosion(Vector2 position, Type type, float radius, float fireDuration, int maxDamege) {
+	
 	public SabotageKitType(String name, float fireDuration, float explosionRadius, String icon, ActivationType activationType, EffectType effectType) {
 		this.name = name;
 		this.fireDuration = fireDuration;
@@ -30,7 +40,19 @@ public class SabotageKitType {
 		this.icon = new Sprite(AssetManager.getTexture(icon));
 		this.icon.setSize(2, 2);
 		
+		this.projectile = constructProjectile();
+		
 		this.inGameSprite = new Animation(AssetManager.getTexture(icon+"inGame"));
+	}
+	
+	public Projectile constructProjectile() {		
+		Explosion.Type type = (effectType == EffectType.FIRE) ? Explosion.Type.FIRE : Explosion.Type.EXPLOSION;
+		ProjectileType projectileType = new ProjectileType(ProjectileType.Type.TRHOWABLE, 32, 2, 0, new Explosion(new Vector2(0, 0), type, this.explosionRadius, this.getExplosionRaduis(), 1), "test");
+		return new Projectile(Vector2.Zero, Vector2.Zero, projectileType, null);
+	}
+	
+	public Projectile getProjectile() {
+		return projectile;
 	}
 	
 	public ActivationType getActivationType() {

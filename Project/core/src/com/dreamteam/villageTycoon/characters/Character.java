@@ -88,7 +88,7 @@ public class Character extends GameObject {
 			if(g instanceof Explosion) {
 				if(this.distanceTo(g.getPosition()) <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0 && g.getSprite().getAnimationTime() <= 0) {
 					health -= ((Explosion) g).getMaxDamege();
-					if(((Explosion)g).getType() == Type.NAPALM) {
+					if(((Explosion)g).getType() == Type.FIRE) {
 						countFireDamegeTime = 1;
 					}
 				}

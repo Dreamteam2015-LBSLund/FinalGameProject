@@ -6,7 +6,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 
 public class Explosion extends GameObject {
-	public enum Type { NAPALM, EXPLOSION };
+	public enum Type { FIRE, EXPLOSION };
 	
 	private Type type;
 	
