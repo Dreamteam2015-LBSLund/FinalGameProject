@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType.Type;
@@ -49,6 +50,13 @@ public class SabotageKitType {
 		Explosion.Type type = (effectType == EffectType.FIRE) ? Explosion.Type.FIRE : Explosion.Type.EXPLOSION;
 		ProjectileType projectileType = new ProjectileType(ProjectileType.Type.TRHOWABLE, 32, 2, 0, new Explosion(new Vector2(0, 0), type, this.explosionRadius, this.getExplosionRaduis(), 1), "test");
 		return new Projectile(Vector2.Zero, Vector2.Zero, projectileType, null);
+	}
+	
+	public void createProjectile(Vector2 position, Character owner, Scene scene) {
+		projectile.setPosition(position);
+		projectile.setOwner(owner);
+		
+		scene.addObject(projectile);
 	}
 	
 	public Projectile getProjectile() {

@@ -62,8 +62,16 @@ public class Projectile extends GameObject {
 		}
 	}
 	
+	public void setOwner(Character owner) {
+		this.owner = owner;
+	}
+	
 	public Character getOwner() {
 		return owner;
+	}
+	
+	public ProjectileType getProjectileType() {
+		return projectileType;
 	}
 	
 	public Vector2 getVelocity() {
