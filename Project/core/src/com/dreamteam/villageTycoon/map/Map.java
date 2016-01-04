@@ -150,14 +150,14 @@ public class Map {
 		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "farm";
 
-		addCityPart(size/2, farmType, position, 0, 5, city, random, scene);
+		addCityPart(size/2, farmType, position, 0, 3, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "mine" : "woodshop";
-		addCityPart(size/2, "mine", position, 6, 10, city, random, scene);
+		addCityPart(size/2, "mine", position, 4, 6, city, random, scene);
 		
-		addCityPart(size/2, "bakery", position, 11, 20, city, random, scene);
-		addCityPart(size/2, "flourMill", position, 21, 25, city, random, scene);
-		addCityPart(size/2, "wheatFarm", position, 26, 30, city, random, scene);
+		addCityPart(size/2, "bakery", position, 5, 8, city, random, scene);
+		addCityPart(size/2, "flourMill", position, 10, 12, city, random, scene);
+		addCityPart(size/2, "wheatFarm", position, 13, 15, city, random, scene);
 		
 		//addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
 	}
