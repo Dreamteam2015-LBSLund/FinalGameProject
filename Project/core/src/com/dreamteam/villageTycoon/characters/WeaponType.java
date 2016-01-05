@@ -55,6 +55,10 @@ public class WeaponType {
 		return icon;
 	}
 	
+	public Type getWeaponType() {
+		return type;
+	}
+	
 	public ProjectileType getProjectileType() {
 		return projectileType;
 	}

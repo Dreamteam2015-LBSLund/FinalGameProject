@@ -15,12 +15,13 @@ public class Weapon {
 	
 	public Weapon(WeaponType type) {
 		this.type = type;
+		clipCount = (type.getWeaponType() == WeaponType.Type.MELEE) ? 1 : 0;
 	}
 	
 	public void update(float deltaTime) {
 		if(currentFireRate > 0) coolDown(deltaTime);
 		
-		if(clipCount < 1) reload(deltaTime); 
+		if(clipCount < 1 && type.getWeaponType() != WeaponType.Type.MELEE) reload(deltaTime); 
 	}
 	
 	public void coolDown(float deltaTime) {
@@ -40,7 +41,7 @@ public class Weapon {
 	}
 	
 	public void onShoot() {
-		clipCount -= 1;
+		if(type.getWeaponType() != WeaponType.Type.MELEE) clipCount -= 1;
 		currentFireRate = 0.1f;
 	}
 	
