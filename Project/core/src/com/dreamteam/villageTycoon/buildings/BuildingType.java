@@ -138,4 +138,8 @@ public class BuildingType {
 	public Resource[] getOutputResourceArray() {
 		return constructResourceArray(getProducts(), getOutputAmountPerRun());
 	}
+
+	public boolean isFactory() {
+		return type == Type.Factory;
+	}
 }

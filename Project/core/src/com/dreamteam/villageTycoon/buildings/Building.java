@@ -122,13 +122,13 @@ public class Building extends GameObject {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {
     			buildState = BuildState.Done;
-    			startProduction();
+    			if (type.isFactory()) startProduction();
     			inputInventory.remove(type.getBuildResourcesArray());
     			setSprite(type.getSprite());
     		} else {
     			assignGatherTask(toGather);
     		}
-    	} else {
+    	} else if (type.isFactory()) {
     		// regular production
     		if (isProductionGatheringDone() || toGather.size() == 0) {
     			inputInventory.remove(type.getInputResourcesArray());
@@ -197,6 +197,7 @@ public class Building extends GameObject {
     }
     
     private boolean isProductionGatheringDone() {
+    	if (!type.isFactory())  return true;
     	boolean hasAllResources = true;
     	for (int i = 0; i < type.getProductionResources().length; i++) {
     		if (inputInventory.count(type.getProductionResources()[i]) < type.getInputResourceAmount()[i]) {
