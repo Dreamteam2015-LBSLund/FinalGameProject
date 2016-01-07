@@ -70,16 +70,17 @@ public class TestScene extends Scene {
 			addObject(new Worker(new Vector2(15, 10), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), enemyCity));
 		}
 		
+		map.setupGame(new City[]{ playerCity, enemyCity}, this);
 	}
 	
 	public void initialize() {
-		for(int i = 0; i < 1; i++)
+		for(int i = 0; i < 1; i++) // varför finns denna loopen?
 		//addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		city = new City(this, new AIController(), new Vector2(50, 50));
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//City city = new City(this);
-		map.generateCity(city.getPosition(), 4, 0, this, city);
+		//map.generateCity(city.getPosition(), 4, 0, this, city);
 	}
 	
 	public Map getMap() {
@@ -88,6 +89,7 @@ public class TestScene extends Scene {
 	
 	public void update(float dt) {
 		super.update(dt);
+		this.getCamera().zoom = 7.1f;
 	}
 	
 	public void draw(SpriteBatch batch) {

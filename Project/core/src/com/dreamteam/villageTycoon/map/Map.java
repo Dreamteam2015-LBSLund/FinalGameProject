@@ -58,11 +58,11 @@ public class Map {
 		float angleInterval = ((float)Math.PI*2)/cities.length;
 		
 		for(int i = 0; i < cities.length; i++) {
-			float distance = this.randomInt((int)midPoint.x/2, (int)midPoint.x);
+			float distance = 35;//this.randomInt(10, 10);
 			
 			if(cities[i].getController() instanceof PlayerController) {
-				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
-				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house1"), cities[i]));
+				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
+				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
 			} else {
 				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 5, 2, scene, cities[i]);
 			}

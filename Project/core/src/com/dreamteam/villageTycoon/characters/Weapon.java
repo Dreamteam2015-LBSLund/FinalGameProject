@@ -33,7 +33,7 @@ public class Weapon {
 	}
 
 	public void reload(float deltaTime) {
-		reloadCount += deltaTime * 1;
+		reloadCount += deltaTime;
 		if(reloadCount >= type.getReloadTime()) {
 			clipCount = type.getClipSize();
 			reloadCount = 0;
