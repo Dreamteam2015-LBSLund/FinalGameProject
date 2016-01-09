@@ -58,7 +58,7 @@ public class Map {
 		float angleInterval = ((float)Math.PI*2)/cities.length;
 		
 		for(int i = 0; i < cities.length; i++) {
-			float distance = 35;//this.randomInt(10, 10);
+			float distance = (WIDTH/2)-15;
 			
 			if(cities[i].getController() instanceof PlayerController) {
 				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
@@ -142,12 +142,9 @@ public class Map {
 			for(int y = 0; y < size/2; y++) {
 				Vector2 buildingSize = new Vector2(4, 4);
 				Vector2 center = new Vector2(position.x, position.y);
-				//scene.addObject(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house1"), city));
-				//city.addBuilding(new Building(center.add(new Vector2(x*buildingSize.x, y*buildingSize.y)), BuildingType.getTypes().get("house1"), city));
 			}
 		}
 
-		//Next up is agriculture
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "farm";
 
 		addCityPart(size/2, farmType, position, 0, 3, city, random, scene);
