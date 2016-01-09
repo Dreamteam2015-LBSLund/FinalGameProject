@@ -1,5 +1,6 @@
 package com.dreamteam.villageTycoon.map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -56,5 +57,24 @@ public class Resource implements InventoryItem {
 			out[i] = get(r[i]);
 		}
 		return out;
+	}
+	
+	public static boolean isEnough(ArrayList<Resource> have, ArrayList<Resource> take) {
+		ArrayList<Resource> h = (ArrayList<Resource>) have.clone();
+		for (Resource r : take) {
+			if (!h.remove(r)) return false;
+		}
+		return true;
+	}
+	
+	public static ArrayList<Resource> constructList(Resource[] resources, int[] amounts) {
+		ArrayList<Resource> ret = new ArrayList<Resource>();
+		int ri = 0;
+		for (Resource r : resources) {
+			for (int i = 0; i < amounts[ri++]; i++) {
+				ret.add(r);
+			}
+		}
+		return ret;
 	}
 }

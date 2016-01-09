@@ -74,7 +74,8 @@ public class TestScene extends Scene {
 	}
 	
 	public void initialize() {
-		for(int i = 0; i < 1; i++) // varför finns denna loopen?
+		for(int i = 0; i < 1; i++) // varför finns denna loopen? 
+			// yolo -johannes
 		//addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		city = new City(this, new AIController(), new Vector2(50, 50));
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
@@ -89,7 +90,7 @@ public class TestScene extends Scene {
 	
 	public void update(float dt) {
 		super.update(dt);
-		this.getCamera().zoom = 7.1f;
+		this.getCamera().zoom = 2f;
 	}
 	
 	public void draw(SpriteBatch batch) {

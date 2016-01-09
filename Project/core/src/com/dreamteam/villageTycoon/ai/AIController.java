@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 
 public class AIController extends CityController {
@@ -49,9 +50,8 @@ public class AIController extends CityController {
 		}
 	}
 
-	private boolean haveMaterialsFor(BuildingType armyBarack) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean haveMaterialsFor(BuildingType building) {
+		return Resource.isEnough(getCity().getMaterials(), Resource.constructList(building.getBuildResources(), building.getBuildAmount()));
 	}
 
 	private boolean canMakeSoldiers() {
@@ -91,8 +91,6 @@ public class AIController extends CityController {
 			return false;
 		}
 	}
-	
-	
 	
 	private void build() {
 		if (building == null || building.isBuilt()) {

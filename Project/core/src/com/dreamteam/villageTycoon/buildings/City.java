@@ -14,6 +14,7 @@ import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.InventoryItem;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 /*
@@ -149,5 +150,15 @@ public class City extends GameObject {
 	
 	public void removeSoldier(Soldier s) {
 		soldiers.remove(s);
+	}
+
+	public ArrayList<Resource> getMaterials() {
+		ArrayList<Resource> ret = new ArrayList<Resource>();
+		for (Building b : buildings) {
+			for (InventoryItem r : b.getOutputInventory().getList()) {
+				ret.add((Resource)r);
+			}
+		}
+		return ret;
 	}
 }

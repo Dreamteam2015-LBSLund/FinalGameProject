@@ -2,6 +2,7 @@ package com.dreamteam.villageTycoon.utils;
 
 import java.util.ArrayList;
 
+import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingButton;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
@@ -19,11 +20,12 @@ public abstract class Debug {
 		//whitelist.add(Tile.class);
 		//whitelist.add(GatherTask.class);
 		//whitelist.add(Character.class);
-		whitelist.add(Building.class);
+		//whitelist.add(Building.class);
 		//whitelist.add(PathFinder.class);		
 		//whitelist.add(BuildingPlacer.class);
 		//whitelist.add(BuildingButton.class);
 		//whitelist.add(City.class);
+		whitelist.add(AIController.class);
 	}
 	
 	public static void print(Object client, String message) {
