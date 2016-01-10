@@ -71,9 +71,10 @@ public class Resource implements InventoryItem {
 		ArrayList<Resource> ret = new ArrayList<Resource>();
 		int ri = 0;
 		for (Resource r : resources) {
-			for (int i = 0; i < amounts[ri++]; i++) {
+			for (int i = 0; i < amounts[ri]; i++) {
 				ret.add(r);
 			}
+			ri++;
 		}
 		return ret;
 	}
