@@ -17,14 +17,16 @@ public class Corpse extends GameObject {
 		alpha = 1;
 	}
 
-	public void upate(float deltaTime) {
+	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		deteriorateTime += deltaTime*10;
+		deteriorateTime += deltaTime*5;
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
-			alpha -= deltaTime*5;
+			alpha -= deltaTime*2;
 		}
+		System.out.println("AYYLMA");
+		System.out.println(alpha);
 		
 		setColor(new Color(1, 1, 1, alpha));
 		
