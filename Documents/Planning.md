@@ -28,7 +28,7 @@ Ljudeffekter | Tom | Normal
 Cutscene | Båda | Normal
 VFX | Tom | Bonus
 
-## SPECEFIK LISTA MED SAKER SOM MÅSTE GÖRAS
+## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
 
 Feature| Status
 -------|-------
