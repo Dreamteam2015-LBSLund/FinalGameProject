@@ -27,3 +27,12 @@ Mer Avancerad AI | Johannes | Normal
 Ljudeffekter | Tom | Normal
 Cutscene | Båda | Normal
 VFX | Tom | Bonus
+
+## SPECEFIK LISTA MED SAKER SOM MÅSTE GÖRAS
+
+Feature| Status
+-------|-------
+Soldater kan attackera grannbyar självständig| ofärdigt
+Ta bort byggander | ofärdigt
+Förståligt UI(framför allt soldater, byggandet) | ofärdigt
+Stads AI | ofärdigt
