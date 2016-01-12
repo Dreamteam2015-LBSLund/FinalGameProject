@@ -18,6 +18,8 @@ public class BuildingType {
 		Factory
 	}
 	
+	private int health;
+	
 	private Resource[] buildResources;
 	private int[] buildAmount;
 	
@@ -47,6 +49,10 @@ public class BuildingType {
 		return name;
 	}
 	
+	public int getHealth() {
+		return health;
+	}
+	
 	public BuildingType(ResourceReader r) {
 		name = r.getObjectName();
 		
@@ -55,6 +61,8 @@ public class BuildingType {
 		
 		sprite      = AssetManager.getTexture(r.getString("sprite-finished"));
 		buildSprite = AssetManager.getTexture(r.getString("sprite-building"));
+		
+		health = r.getInt("health");
 		
 		if (r.getString("type").equals("home")) {
 			type = Type.Home;

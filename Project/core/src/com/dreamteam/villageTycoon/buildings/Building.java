@@ -36,7 +36,6 @@ public class Building extends GameObject {
     private Animation selectedSign;
     private ArrayList<Resource> toGather;
     private ArrayList<Prop> toClear;
-    
     private int health;
     
     //  position is tile at lower left corner
@@ -51,7 +50,7 @@ public class Building extends GameObject {
 		setDepth(1);
 		workers = new ArrayList<Worker>();
 		
-		health = 10;
+		health = type.getHealth();
 		
 		toGather = getConstructionResources();
 		//setTiles();

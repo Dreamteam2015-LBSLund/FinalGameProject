@@ -118,6 +118,7 @@ public class ResourceReader {
 		
 		for (String s : properties) {
 			String[] ss = s.split(":");
+			//System.out.println(ss[0]);
 			out.put(removeWhitespace(ss[0]), removeWhitespace(ss[1]));
 		}
 		

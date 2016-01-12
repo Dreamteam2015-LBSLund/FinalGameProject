@@ -1,6 +1,8 @@
 mine: {
 	type: factory;
 	
+	health: 5;
+	
 	materials:     wood, stone;
 	material-amount: 10, 3;
 	
@@ -16,6 +18,8 @@ mine: {
 
 farm: {
 	type: factory;
+	
+	health: 5;
 	
 	materials:     wood, stone;
 	material-amount: 6, 2;
@@ -34,6 +38,8 @@ farm: {
 woodShop: {
 	type: factory;
 	
+	health: 10;
+	
 	materials: wood, stone;
 	material-amount: 10, 5;
 	
@@ -50,6 +56,8 @@ woodShop: {
 
 advancedFarm: {
 	type: factory;
+	
+	health: 10;
 	
 	materials:     wood, stone, iron;
 	material-amount: 10, 4, 2;
@@ -68,6 +76,8 @@ advancedFarm: {
 explosivePowderMine: {
 	type: factory;
 	
+	health: 12;
+	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
 	
@@ -83,6 +93,8 @@ explosivePowderMine: {
 
 blacksmith: {
 	type: factory;
+	
+	health: 10;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -100,6 +112,8 @@ blacksmith: {
 flourMill: {
 	type: factory;
 	
+	health: 10;
+	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
 	
@@ -115,6 +129,8 @@ flourMill: {
 
 bakery: {
 	type: factory;
+	
+	health: 10;
 	
 	materials:     wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -132,6 +148,8 @@ bakery: {
 wheatFarm: {
 	type: factory;
 	
+	health: 10;
+	
 	materials:     wood, stone, iron;
 	material-amount: 10, 5, 3;
 	
@@ -148,6 +166,8 @@ wheatFarm: {
 house: {
 	type: home;
 	
+	health: 8;	
+	
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
@@ -159,6 +179,8 @@ house: {
 
 armyBarack: {
 	type: home;
+	
+	health: 10;
 	
 	materials:     wood, stone;
 	material-amount: 10, 5;
@@ -180,6 +202,8 @@ armyBarack: {
 
 diamondPowderMine?: {
 	type: factory;
+	
+	health: 15;
 	
 	materials:     wood, stone;
 	material-amount: 10, 5;
