@@ -47,6 +47,8 @@ public class AIController extends CityController {
 		BuildingType armyBarack = BuildingType.getTypes().get("armyBarack");
 		if (haveMaterialsFor(armyBarack)) {
 			build(armyBarack, getNextBuildingPosition());
+		} else {
+			
 		}
 	}
 
