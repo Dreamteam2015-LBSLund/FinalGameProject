@@ -19,7 +19,7 @@ import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
-	enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
+	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
 	enum AlertLevel { ALERT, PASSIVE };
 	
 	private AggressionState  aggressionState;

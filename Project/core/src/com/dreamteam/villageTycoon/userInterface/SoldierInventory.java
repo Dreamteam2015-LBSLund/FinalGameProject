@@ -21,7 +21,7 @@ public class SoldierInventory {
 	private Vector2 mouse;
 	
 	private int equipedSabotageKit;
-	
+
 	public SoldierInventory(Soldier soldier) {
 		this.soldier = soldier;
 		soldier.getWeapon().getIcon().setPosition(-4, 0);
