@@ -11,29 +11,40 @@ public class AggressionStateButton extends UiElement {
 	private AggressionState state;
 	
 	private String text;
+	private String displayText;
 	
 	private Vector2 position;
 	
 	public AggressionStateButton(Vector2 position, AggressionState state) {
-		super(new Rectangle(position.x, position.y, 0, 0));
+		super(new Rectangle(position.x, position.y, 300, 50));
 		this.position = position;
 		this.state = state;
 		
 		switch(state) {
 		case STEALTH:
-			text = "Stealth";
+			this.text = "Stealth";
 			break;
 		case ATTACKING_AND_MOVING:
-			text = "Attack";
+			this.text = "Attack";
 			break;
 		case DEFENSIVE:
-			text = "Defend";
+			this.text = "Defend";
 			break;
 		}
+		
+		this.displayText = this.text;
 	}
-
+	
+	public void Update(Soldier soldier) {
+		super.update();
+		
+		displayText = (soldier.getAggressionState() == state) ? ">"+text : text;
+		
+		if(this.isPressed()) soldier.setAggressionState(state);
+	}
+	
 	public void draw(SpriteBatch batch) {
-		AssetManager.font.draw(batch, text, position.x, position.y);
+		AssetManager.font.draw(batch, displayText, position.x, position.y);
 	}
 	
 	public AggressionState getState() {

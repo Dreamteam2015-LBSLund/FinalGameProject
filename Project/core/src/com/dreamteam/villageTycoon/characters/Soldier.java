@@ -224,8 +224,16 @@ public class Soldier extends Character {
 	
 	public Weapon getWeapon() {
 		return weapon;
+	}	
+	
+	public AggressionState getAggressionState() {
+		return aggressionState;
 	}
-
+	
+	public void setAggressionState(AggressionState aggressionState) {
+		this.aggressionState = aggressionState;
+	}
+	
 	public void setSoldierType() {
 		this.setSprite(soldierType.getTypeSprite());
 		this.setHealth(soldierType.getStartHealth());
