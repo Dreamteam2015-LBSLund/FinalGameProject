@@ -35,7 +35,7 @@ public class AggressionStateButton extends UiElement {
 		this.displayText = this.text;
 	}
 	
-	public void Update(Soldier soldier) {
+	public void update(Soldier soldier) {
 		super.update();
 		
 		displayText = (soldier.getAggressionState() == state) ? ">"+text : text;
@@ -44,7 +44,8 @@ public class AggressionStateButton extends UiElement {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		AssetManager.font.draw(batch, displayText, position.x, position.y);
+		//AssetManager.font.draw(batch, displayText, position.x, position.y);
+		AssetManager.font.draw(batch, displayText, getArea().getX(), getArea().getY() + getArea().getHeight());
 	}
 	
 	public AggressionState getState() {

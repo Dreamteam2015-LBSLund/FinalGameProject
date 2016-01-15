@@ -57,6 +57,10 @@ public class Weapon {
 		return clipCount > 0 && currentFireRate <= 0;
 	}
 	
+	public int getClipCount() {
+		return clipCount;
+	}
+	
 	public float getCurrentFireRate() {
 		return currentFireRate;
 	}

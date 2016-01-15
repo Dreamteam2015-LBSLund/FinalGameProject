@@ -21,18 +21,29 @@ public class SoldierInventory {
 	private Vector2 mouse;
 	
 	private int equipedSabotageKit;
-
+	
+	private AggressionStateButton[] aggressionStateButtons; 
+	
 	public SoldierInventory(Soldier soldier) {
 		this.soldier = soldier;
 		soldier.getWeapon().getIcon().setPosition(-4, 0);
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			soldier.getSabotageKits().get(i).getIcon().setPosition(4, -2*i);
 		}
+		
+		aggressionStateButtons = new AggressionStateButton[3];
+		aggressionStateButtons[0] = new AggressionStateButton(new Vector2(-Gdx.graphics.getWidth()+50, -Gdx.graphics.getHeight()+50), Soldier.AggressionState.ATTACKING_AND_MOVING);
+		aggressionStateButtons[1] = new AggressionStateButton(new Vector2(-Gdx.graphics.getWidth()+50, -Gdx.graphics.getHeight()+100), Soldier.AggressionState.STEALTH);
+		aggressionStateButtons[2] = new AggressionStateButton(new Vector2(-Gdx.graphics.getWidth()+50, -Gdx.graphics.getHeight()+150), Soldier.AggressionState.DEFENSIVE);
 	}
 	
 	public void update(float deltaTime) {
 		mouse = soldier.getScene().getUiMouse();
-
+		
+		for(int i = 0; i < aggressionStateButtons.length; i++) {
+			aggressionStateButtons[i].update(soldier);
+		}
+		
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			Rectangle hitbox = new Rectangle(new Vector2(4, -2*i), new Vector2(2, 2));
 			
@@ -55,7 +66,14 @@ public class SoldierInventory {
 		for(SabotageKit s : soldier.getSabotageKits()) {
 			s.getIcon().draw(batch);
 		}
-		AssetManager.font.draw(batch, "B", 0, 0);
+
+		for(int i = 0; i < aggressionStateButtons.length; i++) {
+			aggressionStateButtons[i].draw(batch);
+		}
+		
+		AssetManager.font.draw(batch, "IN CLIP: " + soldier.getWeapon().getType().getClipSize() + "/" + soldier.getWeapon().getClipCount(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+125);
+		
+		batch.draw(soldier.getWeapon().getIcon(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+225, 100, 100);
 	}
 	
 	public int getEquipedSabotageKit() {
