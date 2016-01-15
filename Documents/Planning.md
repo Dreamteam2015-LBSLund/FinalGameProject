@@ -37,3 +37,4 @@ Ta bort byggander | ofärdigt
 Förståligt UI(framför allt soldater, byggandet) | ofärdigt
 Stads AI | ofärdigt
 Byggnader kan spawna karaktärer | ofärdigt
+UI for spawning charachters | ofärdigt
