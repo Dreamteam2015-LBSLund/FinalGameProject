@@ -6,9 +6,18 @@ import java.util.Arrays;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.characters.Inventory;
+import com.dreamteam.villageTycoon.characters.SabotageKit;
+import com.dreamteam.villageTycoon.characters.SabotageKitType;
+import com.dreamteam.villageTycoon.characters.Soldier;
+import com.dreamteam.villageTycoon.characters.SoldierType;
+import com.dreamteam.villageTycoon.characters.WeaponType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
+import com.dreamteam.villageTycoon.characters.WeaponType.Type;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -16,6 +25,8 @@ import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.userInterface.CreateCharacterButton;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
@@ -38,6 +49,9 @@ public class Building extends GameObject {
     private ArrayList<Prop> toClear;
     private int health;
     
+    private Character characterToSpawn;
+    private CreateCharacterButton createCharacterButton; 
+    
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position.add(new Vector2(.5f, .5f)), new Vector2(4, 3), new Animation(type.getBuildSprite())); // add .5 to position to align properly with tiles
@@ -58,6 +72,22 @@ public class Building extends GameObject {
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
 		
 		toClear = new ArrayList<Prop>();
+		
+		if(this.type.getType() == BuildingType.Type.Home) {
+			if(type.getName() == "house") {
+				this.characterToSpawn = new Soldier(owner, this.getPosition(), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
+						new SabotageKit[]{ 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+				});
+
+			} else {
+				this.characterToSpawn = new Worker(this.getPosition(), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), owner);
+			}
+			// TODO: Fix coords, to ui screen crashed
+			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
+		}
     }
     
     public void onAdd(Scene scene) {
@@ -98,6 +128,10 @@ public class Building extends GameObject {
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
     	
     	if(health <= 0) getScene().removeObject(this);
+    	
+    	if(type.getType() == BuildingType.Type.Home && selected) {
+    		this.createCharacterButton.update(getScene());
+    	}
     	
     	for(GameObject g : getScene().getObjects()) {
 			if(g instanceof Projectile) {
@@ -238,6 +272,10 @@ public class Building extends GameObject {
     	if (selected) {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
+    		
+    		if(type.getType() == BuildingType.Type.Home) {
+        		this.createCharacterButton.draw(batch);
+        	}
     	}
     }
     
@@ -255,6 +293,10 @@ public class Building extends GameObject {
     
     public boolean getSelected() {
     	return this.selected;
+    }
+    
+    public CreateCharacterButton getCreateCharacterButton() {
+    	return this.createCharacterButton;
     }
     
     public int getHealth() { 

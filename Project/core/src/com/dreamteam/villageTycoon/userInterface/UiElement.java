@@ -92,6 +92,10 @@ public abstract class UiElement {
 		
 	}
 	
+	public boolean getIsHover() {
+		return isHover;
+	}
+	
 	// called each frame
 	public void update() {
 		
