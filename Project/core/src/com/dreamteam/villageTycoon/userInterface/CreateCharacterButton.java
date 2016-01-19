@@ -52,14 +52,15 @@ public class CreateCharacterButton extends UiElement {
 					}
 				}
 			}
+			
 			if(canAdd) { 
 				scene.addObject(c); 
-				System.out.println("added");
 			}
 			break;
 		}
 		
 		toAdd.clear();
+		canAdd = true;
 	}
 
 	public void draw(SpriteBatch batch) {

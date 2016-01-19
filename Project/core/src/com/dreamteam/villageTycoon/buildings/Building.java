@@ -82,7 +82,7 @@ public class Building extends GameObject {
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
 				});
 			} else {
-				this.characterToSpawn = new Worker(this.getPosition(), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), this.city);
+				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), this.city);
 			}
 			// TODO: Fix coords, to ui screen crashed
 			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
