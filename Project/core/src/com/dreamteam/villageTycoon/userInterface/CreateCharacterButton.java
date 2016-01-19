@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.userInterface;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -15,7 +17,11 @@ public class CreateCharacterButton extends UiElement {
 	
 	private String text;
 	
+	private boolean canAdd;
+	
 	private Character character;
+	
+	ArrayList<Character> toAdd;
 	
 	public CreateCharacterButton(Vector2 position, Character character) {
 		super(new Rectangle(position.x, position.y, 300, 50));
@@ -23,15 +29,37 @@ public class CreateCharacterButton extends UiElement {
 		this.position = position;
 		this.character = character;
 		
+		toAdd = new ArrayList<Character>();
+		
+		canAdd = true;
+		
 		text = (this.character instanceof Soldier) ? "add soldier" : "add worker";
 	}
 	
 	public void update(Scene scene) {
 		super.update();
 		
-		if(isPressed()) {
-			scene.addObject(character);
+		if(wasPressed()) {
+			toAdd.add(this.character);
 		}
+		
+		for(Character c : toAdd) {
+			for(GameObject o : scene.getObjects()) {
+				if(o instanceof Character) {
+					if(o == c) {
+						canAdd = false;
+						break;
+					}
+				}
+			}
+			if(canAdd) { 
+				scene.addObject(c); 
+				System.out.println("added");
+			}
+			break;
+		}
+		
+		toAdd.clear();
 	}
 
 	public void draw(SpriteBatch batch) {

@@ -114,7 +114,7 @@ public class Controller extends GameObject {
 	}
 	
 	private void deselectBuilding(Building b) {
-		if(!b.getCreateCharacterButton().getIsHover()) selectedBuildings.remove(b);
+		/*if(!b.getCreateCharacterButton().getIsHover())*/ selectedBuildings.remove(b);
 	}
 	
 	public void update(float deltaTime) {
