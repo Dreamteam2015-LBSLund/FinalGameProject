@@ -20,7 +20,7 @@ public class AIController2 extends CityController {
 
 	abstract class State {
 		
-		private State prevState;
+		protected State prevState;
 		
 		public State(State previous) {
 			this.prevState = previous;
@@ -51,20 +51,31 @@ public class AIController2 extends CityController {
 	// use soldier factories to make soldiers
 	class MakeSoldierState extends State {
 		
+		private final int numSoldiers = 5;
+		
 		public MakeSoldierState(State previous) {
 			super(previous);
 		}
 
 		public State update() {
-			if (getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"))) return null;
+			if (getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"))) {
+				// make some soldiers
+				if (getCity().getSoldiers().size() >= numSoldiers) {
+					return prevState; // done
+				}
+				return null;
+			}
 			else return new MakeFactoryState(this, BuildingType.getTypes().get("armyBarack"));
 		}
 	}
 	
 	class MakeFactoryState extends State {
 		
+		BuildingType type;
+		
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
+			this.type = type;
 		}
 
 		public State update() {
@@ -74,8 +85,11 @@ public class AIController2 extends CityController {
 	
 	class GatherResourceState extends State {
 		
+		private Resource resource;
+		
 		public GatherResourceState(State previous, Resource r) {
 			super(previous);
+			this.resource = r;
 		}
 
 		public State update() {
@@ -85,8 +99,11 @@ public class AIController2 extends CityController {
 	
 	class MakeResourceState extends State {
 		
+		private Resource resource;
+		
 		public MakeResourceState(State previous, Resource r) {
 			super(previous);
+			this.resource = r;
 		}
 
 		public State update() {
