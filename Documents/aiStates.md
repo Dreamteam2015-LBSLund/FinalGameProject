@@ -9,17 +9,20 @@ Gör nya soldater.
 - Om ArmyBarrack inte finns: MakeFactoryState
 - Om resurser inte finns: GatherResourceState
 
-### MakeFactoryState (vilken fabrikstyp?)
+### MakeFactoryState 
+vilken fabrikstyp?  
 Konstruera en fabrik.
 - Om fabriken är färdig: Förra tillståndet
 - Om resurser inte finns: GatherResourceState
 
-### GatherResourceState (vilken resurs? till vem?)
+### GatherResourceState 
+vilken resurs? till vem?  
 Samla någon resurs åt staden. (Resurser som finns på kartan eller färdiga i fabriker eller andra inventories.)
 - Om klar: förra tillståndet
 - Om resursen inte finns: MakeResourceState
 
-### MakeResourceState (vilken resurs?)
+### MakeResourceState 
+vilken resurs?  
 Konstruera någon resurs i fabriker. (Resurser som måste konstrueras i en fabrik, som inte finns nån annanstans.)
 - Om klar: förra tillståndet.
 - Om fabrik inte finns: MakeFactoryState
