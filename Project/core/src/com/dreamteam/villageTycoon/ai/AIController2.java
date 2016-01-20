@@ -30,7 +30,7 @@ public class AIController2 extends CityController {
 		public abstract State update();
 	}
 	
-	
+	// se https://github.com/Dreamteam2015-LBSLund/Village-Tycoon-RTS/blob/master/Documents/aiStates.md
 	
 	// send soldiers to attack the player
 	class AttackState extends State {
@@ -57,32 +57,13 @@ public class AIController2 extends CityController {
 
 		public State update() {
 			if (getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"))) return null;
-			else return new MakeSoldierFactoryState(this);
+			else return new MakeFactoryState(this, BuildingType.getTypes().get("armyBarack"));
 		}
 	}
 	
-	// make a soldier factory
-	class MakeSoldierFactoryState extends State {
+	class MakeFactoryState extends State {
 		
-		public MakeSoldierFactoryState(State previous) {
-			super(previous);
-		}
-
-		public State update() {
-			if (getCity().hasResources(BuildingType.getTypes().get("armyBarack").constructBuildResourceList())) {
-				// collect the resources
-				return null;
-			} else if (getCity().canProduceResources(BuildingType.getTypes().get("armyBarack").getBuildResources())) {
-				// produce the resources
-			}
-			return null;
-		}
-	}
-	
-	// use existing factories to construct resources to build another factory
-	class GetFactoryResourceState extends State {
-		
-		public GetFactoryResourceState(State previous) {
+		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
 		}
 
@@ -91,10 +72,20 @@ public class AIController2 extends CityController {
 		}
 	}
 	
-	// make a factory to make resources for another factory
-	class  MakeFactoryResourceFactoryState extends State {
+	class GatherResourceState extends State {
 		
-		public MakeFactoryResourceFactoryState(State previous) {
+		public GatherResourceState(State previous, Resource r) {
+			super(previous);
+		}
+
+		public State update() {
+			return null;
+		}
+	}
+	
+	class MakeResourceState extends State {
+		
+		public MakeResourceState(State previous, Resource r) {
 			super(previous);
 		}
 
