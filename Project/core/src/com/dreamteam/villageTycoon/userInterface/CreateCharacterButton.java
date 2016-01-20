@@ -40,7 +40,9 @@ public class CreateCharacterButton extends UiElement {
 		super.update();
 		
 		if(wasPressed()) {
-			toAdd.add(this.character);
+			Character c = this.character;
+			toAdd.add(c);
+			canAdd = true;
 		}
 		
 		for(Character c : toAdd) {
@@ -54,9 +56,9 @@ public class CreateCharacterButton extends UiElement {
 			}
 			
 			if(canAdd) { 
-				scene.addObject(c); 
+				scene.addObject(c);
+				System.out.println("added");
 			}
-			break;
 		}
 		
 		toAdd.clear();

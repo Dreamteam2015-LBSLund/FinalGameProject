@@ -82,9 +82,9 @@ public class Building extends GameObject {
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
 				});
 			} else {
-				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), this.city);
+				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
 			}
-			// TODO: Fix coords, to ui screen crashed
+
 			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
 		}
     }
@@ -128,7 +128,7 @@ public class Building extends GameObject {
     	
     	if(health <= 0) getScene().removeObject(this);
     	
-    	if(type.getType() == BuildingType.Type.Home && selected) {
+    	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		this.createCharacterButton.update(getScene());
     	}
     	
@@ -272,7 +272,7 @@ public class Building extends GameObject {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		
-    		if(type.getType() == BuildingType.Type.Home) {
+    		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
         		this.createCharacterButton.draw(batch);
         	}
     	}
