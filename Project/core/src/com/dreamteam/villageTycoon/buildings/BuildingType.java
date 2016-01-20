@@ -150,4 +150,8 @@ public class BuildingType {
 	public boolean isFactory() {
 		return type == Type.Factory;
 	}
+
+	public ArrayList<Resource> constructBuildResourceList() {
+		return Resource.constructList(getBuildResources(), getBuildAmount());
+	}
 }

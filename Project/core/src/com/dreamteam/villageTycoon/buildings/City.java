@@ -2,6 +2,8 @@ package com.dreamteam.villageTycoon.buildings;
 
 import java.util.ArrayList;
 
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -160,5 +162,26 @@ public class City extends GameObject {
 			}
 		}
 		return ret;
+	}
+
+	public boolean hasResources(ArrayList<Resource> arg) {
+		ArrayList<Resource> resources = (ArrayList<Resource>) getMaterials().clone();
+		for (Resource r : arg) {
+			if (!resources.remove(r)) return false;
+		}
+		return true;
+	}
+
+	public boolean canProduceResources(Resource[] buildResources) {
+		for (Resource r : buildResources) {
+			boolean good = false;
+			for (Building b : getBuildings()) {
+				Resource[] res = b.getType().getProductionResources();
+				for (Resource r2 : res) 
+					if (r == r2) good = true;
+			}
+			if (good == false) return false;
+		}
+		return true;
 	}
 }
