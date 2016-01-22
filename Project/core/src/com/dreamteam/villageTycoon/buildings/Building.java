@@ -123,15 +123,18 @@ public class Building extends GameObject {
     
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
+
+    	this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
+    	this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
-    	
+
     	if(health <= 0) getScene().removeObject(this);
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		this.createCharacterButton.update(getScene());
     	}
-    	
+
     	for(GameObject g : getScene().getObjects()) {
 			if(g instanceof Projectile) {
 				if(this.city != ((Projectile)g).getOwner().getCity()) {
