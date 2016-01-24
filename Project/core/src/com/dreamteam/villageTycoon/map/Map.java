@@ -8,14 +8,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
+import com.dreamteam.villageTycoon.workers.Worker;
 
 public class Map {
 	public final static int WIDTH = 100, HEIGHT = 100;
@@ -65,6 +68,11 @@ public class Map {
 				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
 			} else {
 				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 5, 2, scene, cities[i]);
+			}
+			
+			for(int j = 0; j < 5; j++) {
+				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
+				scene.addObject(new Worker(buildingPos.add(new Vector2(randomInt(-10, 10), randomInt(-10, 10))), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), cities[i]));
 			}
 		}
 	}
