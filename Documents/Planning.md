@@ -34,7 +34,7 @@ Feature| Status
 -------|-------
 Soldater kan attackera grannbyar självständig| ofärdigt
 Ta bort byggander | ofärdigt
-Förståligt UI(framför allt soldater, byggandet) | ofärdigt
+Förståligt UI(framför allt soldater, byggandet) | färdigt
 Stads AI | ofärdigt
-Byggnader kan spawna karaktärer | ofärdigt
-UI for spawning charachters | ofärdigt
+Byggnader kan spawna karaktärer | färdigt
+UI for spawning charachters | färdigt
