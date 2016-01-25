@@ -38,3 +38,4 @@ Förståligt UI(framför allt soldater, byggandet) | färdigt
 Stads AI | ofärdigt
 Byggnader kan spawna karaktärer | färdigt
 UI for spawning charachters | färdigt
+Gamescene | ofärdigt
