@@ -44,6 +44,7 @@ public class Soldier extends Character {
 	private boolean enemy;
 	private boolean isOnFire;
 	private boolean useSabotageKit;
+	private boolean prepareSabotageKit;
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
@@ -54,12 +55,15 @@ public class Soldier extends Character {
 	
 	private SabotageKit startSabotageKits[];
 	
+	private Vector2 sabotageKitTarget;
+	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
 		super(position, new Animation(AssetManager.getTexture("soldier")), new Animation(AssetManager.getTexture("soldier")), city);
 		this.weapon = new Weapon(weaponType);
 		this.soldierType = soldierType;
 		setSoldierType();
 		sabotageKits = new ArrayList<SabotageKit>();
+		
 		for(SabotageKit s : startSabotageKits) {
 			if(s != null) sabotageKits.add(s);
 		}
@@ -77,7 +81,7 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		attack();
+		if(prepareSabotageKit) attack();
 		weapon.update(deltaTime);
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -92,7 +96,7 @@ public class Soldier extends Character {
 			}
 			
 			inventory.update(deltaTime);
-			equipedSabotageKit = inventory.getEquipedSabotageKit();
+			//equipedSabotageKit = inventory.getEquipedSabotageKit();
 		}
 		
 		for(int i = 0; i < sabotageKits.size(); i++) {
@@ -179,9 +183,14 @@ public class Soldier extends Character {
 	}
 	
 	public void attack() {
-		if(useSabotageKit) {
+		if(useSabotageKit && sabotageKitTarget != null) {
 			if(sabotageKits.get(equipedSabotageKit) != null) {
 				sabotageKits.get(equipedSabotageKit).use();
+				prepareSabotageKit = false;
+			}
+		} else {
+			if(Gdx.app.getInput().isTouched()) {
+				sabotageKitTarget = getScene().getWorldMouse();
 			}
 		}
 	}
@@ -212,6 +221,22 @@ public class Soldier extends Character {
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
 		if(getShowInventroy()) inventory.drawUi(batch);
+		
+		if(prepareSabotageKit) {
+			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);
+		}
+	}
+	
+	public void setEquipedSabotageKit(int equipedSabotageKit) {
+		this.equipedSabotageKit = equipedSabotageKit;
+	}
+	
+	public void setPrepareSabotageKit(boolean prepareSabotageKit) {
+		this.prepareSabotageKit = prepareSabotageKit;
+	}
+	
+	public void setUseSabotageKit(boolean useSabotageKit) {
+		this.useSabotageKit = useSabotageKit;
 	}
 	
 	public ArrayList<SabotageKit> getSabotageKits() {

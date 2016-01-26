@@ -52,9 +52,10 @@ public class SabotageKitType {
 		return new Projectile(Vector2.Zero, Vector2.Zero, projectileType, null);
 	}
 	
-	public void createProjectile(Vector2 position, Character owner, Scene scene) {
+	public void createProjectile(Vector2 position, Vector2 target, Character owner, Scene scene) {
 		projectile.setPosition(position);
 		projectile.setOwner(owner);
+		projectile.setTarget(target);
 		
 		scene.addObject(projectile);
 	}

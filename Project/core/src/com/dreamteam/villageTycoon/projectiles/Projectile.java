@@ -62,6 +62,11 @@ public class Projectile extends GameObject {
 		}
 	}
 	
+	public void setTarget(Vector2 target) {
+		this.target = target;
+		this.angle = (float)Math.atan2(target.y - this.getPosition().y, target.x - this.getPosition().x);
+	}
+	
 	public void setOwner(Character owner) {
 		this.owner = owner;
 	}

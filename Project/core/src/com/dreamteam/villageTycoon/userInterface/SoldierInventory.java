@@ -45,11 +45,7 @@ public class SoldierInventory {
 		}
 		
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
-			Rectangle hitbox = new Rectangle(new Vector2(4, -2*i), new Vector2(2, 2));
-			
-			if(hitbox.collision(new Rectangle(mouse, new Vector2(0.1f, 0.1f))) && Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-				equipedSabotageKit = i;
-			}
+			// När man spaghettiar till det och man ba' :^(
 		}
 	}
 	
