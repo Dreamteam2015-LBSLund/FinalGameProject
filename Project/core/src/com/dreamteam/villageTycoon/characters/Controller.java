@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
@@ -80,8 +81,10 @@ public class Controller extends GameObject {
 	}
 	
 	private void select(Character c) {
-		if (!selectedCharacters.contains(c)) selectedCharacters.add(c);
-		c.setSelected(true);
+		if (!selectedCharacters.contains(c) && c.getCity().getController() instanceof PlayerController) { 
+			selectedCharacters.add(c);
+			c.setSelected(true);
+		}
 	}
 	
 	private void deselect(Character c) {
@@ -109,8 +112,10 @@ public class Controller extends GameObject {
 	}
 	
 	private void selectBuilding(Building b) {
-		if(!selectedBuildings.contains(b)) this.selectedBuildings.add(b);
-		b.setSelected(true);
+		if(!selectedBuildings.contains(b) && b.getCity().getController() instanceof PlayerController) { 
+			this.selectedBuildings.add(b);
+			b.setSelected(true);
+		}
 	}
 	
 	private void deselectBuilding(Building b) {

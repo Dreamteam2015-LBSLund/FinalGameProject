@@ -92,7 +92,7 @@ public class Map {
 			}
 		}
 		for (int i = 0; i < lakes.length; i++) {		
-			lakes[i] = new Point(random.nextInt(WIDTH), random.nextInt(HEIGHT));		
+			lakes[i] = new Point(randomInt(40, WIDTH-40), randomInt(40, HEIGHT-40));		
 			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);		
 		}
 		cityPositions = new Point[villages.length];
