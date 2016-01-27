@@ -175,4 +175,9 @@ public class Worker extends Character {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
+
+	public void workAt(Building building) {
+		task = null;
+		setPath(building.getPosition());
+	}
 }

@@ -108,6 +108,13 @@ public class City extends GameObject {
 		return false;
 	}
 	
+	public Building getBuildingByType(BuildingType type) {
+		for (Building b : buildings) {
+			if (b.getType() == type) return b;
+		}
+		return null;
+	}
+	
 	public void update(float dt) {
 		controller.update(dt);
 	}

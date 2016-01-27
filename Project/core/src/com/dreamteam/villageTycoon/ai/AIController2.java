@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.ai;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController2 extends CityController {
 
@@ -62,8 +63,13 @@ public class AIController2 extends CityController {
 				// make some soldiers
 				if (getCity().getSoldiers().size() >= numSoldiers) {
 					return prevState; // done
+				} else {
+					for (Worker w : getCity().getWorkers()) {
+						w.workAt(getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack")));
+					}
+										
+					return null;	
 				}
-				return null;
 			}
 			else return new MakeFactoryState(this, BuildingType.getTypes().get("armyBarack"));
 		}
