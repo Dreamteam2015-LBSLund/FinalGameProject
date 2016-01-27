@@ -62,6 +62,8 @@ public class Soldier extends Character {
 	
 	private SabotageKitButton sabotageKitButton;
 	
+	private float sabotageKitDelay;
+	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
 		super(position, new Animation(AssetManager.getTexture("soldier")), new Animation(AssetManager.getTexture("soldier")), city);
 		this.weapon = new Weapon(weaponType);
@@ -88,7 +90,7 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		if(prepareSabotageKit) attack();
+		if(prepareSabotageKit) attack(deltaTime);
 		weapon.update(deltaTime);
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -193,14 +195,18 @@ public class Soldier extends Character {
 		if(getBuilding() != null && getBuilding().getCity() == getCity()) targetBuilding = getBuilding();
 	}
 	
-	public void attack() {
-		if(useSabotageKit && sabotageKitTarget != null) {
+	public void attack(float deltaTime) {
+		this.sabotageKitDelay += deltaTime*10;
+
+		if(sabotageKitTarget != null) {
 			if(sabotageKits.get(equipedSabotageKit) != null) {
-				sabotageKits.get(equipedSabotageKit).use();
+				sabotageKits.get(equipedSabotageKit).use(this, sabotageKitTarget, getScene());
 				prepareSabotageKit = false;
+				sabotageKitTarget = null;
+				sabotageKitDelay = 0;
 			}
 		} else {
-			if(Gdx.app.getInput().isTouched()) {
+			if(Gdx.app.getInput().isTouched() && sabotageKitDelay >= 16) {
 				sabotageKitTarget = getScene().getWorldMouse();
 			}
 		}
