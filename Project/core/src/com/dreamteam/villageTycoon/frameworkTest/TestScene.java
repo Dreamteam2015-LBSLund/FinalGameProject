@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.ai.AIController;
+import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
@@ -46,7 +47,7 @@ public class TestScene extends Scene {
 		Debug.print(this, "map == null =  " + (map == null));
 		
 		addObject(playerCity = new City(this, new PlayerController(), new Vector2(3, 3)));
-		addObject(enemyCity = new City(this, new AIController(), new Vector2(25, 3)));
+		addObject(enemyCity = new City(this, new AIController2(), new Vector2(25, 3)));
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());

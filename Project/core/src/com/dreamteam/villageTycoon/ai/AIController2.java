@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.ai;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController2 extends CityController {
@@ -11,11 +12,15 @@ public class AIController2 extends CityController {
 	
 	public AIController2() {
 		state = new AttackState(null);
+		Debug.print(this, "ai controller, city at " + getCity().getPosition());
 	}
 
 	public void update(float dt) {
 		State s = state.update();
-		if (s != null) state = s;
+		if (s != null) {
+			state = s;
+			Debug.print(this, "switching to state " + s);
+		}
 	}
 	
 
@@ -64,10 +69,11 @@ public class AIController2 extends CityController {
 				if (getCity().getSoldiers().size() >= numSoldiers) {
 					return prevState; // done
 				} else {
-					for (Worker w : getCity().getWorkers()) {
+					/*for (Worker w : getCity().getWorkers()) {
 						w.workAt(getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack")));
-					}
-										
+					}*/
+					Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
+					b.spawn();
 					return null;	
 				}
 			}
