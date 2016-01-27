@@ -251,7 +251,7 @@ public class Building extends GameObject {
     	workers.remove(w);
     }
     
-    public void Spawn() {
+    public void spawn() {
     	getScene().addObject(characterToSpawn);
     }
     
