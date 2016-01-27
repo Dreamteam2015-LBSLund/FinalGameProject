@@ -12,7 +12,7 @@ public class AIController2 extends CityController {
 	
 	public AIController2() {
 		state = new AttackState(null);
-		Debug.print(this, "ai controller, city at " + getCity().getPosition());
+		//Debug.print(this, "ai controller, city at " + getCity().getPosition());
 	}
 
 	public void update(float dt) {
