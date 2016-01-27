@@ -6,6 +6,7 @@ import java.util.Collections;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -14,8 +15,10 @@ import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.DistanceComparator;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 
 public class Soldier extends Character {
@@ -57,6 +60,8 @@ public class Soldier extends Character {
 	
 	private Vector2 sabotageKitTarget;
 	
+	private SabotageKitButton sabotageKitButton;
+	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
 		super(position, new Animation(AssetManager.getTexture("soldier")), new Animation(AssetManager.getTexture("soldier")), city);
 		this.weapon = new Weapon(weaponType);
@@ -72,6 +77,8 @@ public class Soldier extends Character {
 		
 		maxAttackDistance = 5;
 		
+		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("soldier")));
+		
 		this.aggressionState = AggressionState.ATTACKING_AND_MOVING;
 		
 		spottedEnemies = new ArrayList<Character>();
@@ -86,6 +93,10 @@ public class Soldier extends Character {
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
 			getScene().addObject(new Projectile(getPosition(), new Vector2(0, 0), weapon.getWeaponType().getProjectileType(), this));
+		}
+		
+		if(getShowInventroy()) {
+			this.sabotageKitButton.update(this);
 		}
 		
 		if(getShowInventroy()) {
@@ -220,7 +231,10 @@ public class Soldier extends Character {
 	
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
-		if(getShowInventroy()) inventory.drawUi(batch);
+		if(getShowInventroy()) {
+			inventory.drawUi(batch);
+			sabotageKitButton.draw(batch);
+		}
 		
 		if(prepareSabotageKit) {
 			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);

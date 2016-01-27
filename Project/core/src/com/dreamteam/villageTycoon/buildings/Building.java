@@ -251,6 +251,10 @@ public class Building extends GameObject {
     	workers.remove(w);
     }
     
+    public void Spawn() {
+    	getScene().addObject(characterToSpawn);
+    }
+    
     public void destroy() {
     	city.removeBuilding(this);
     }
