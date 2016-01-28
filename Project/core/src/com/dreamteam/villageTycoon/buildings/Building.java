@@ -123,9 +123,23 @@ public class Building extends GameObject {
     
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
-
-    	this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
-    	this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
+    	
+    	if(this.type.getType() == BuildingType.Type.Home) {
+    		if(this.selected) System.out.println(type.getName());
+			
+    		if(!type.getName().equals("house")) {
+				this.characterToSpawn = new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
+						new SabotageKit[]{ 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+				});
+			} else {
+				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
+			}
+			
+			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
+		}
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
 
