@@ -47,17 +47,7 @@ public abstract class Scene {
 		
 		for (GameObject g : objects) g.update(deltaTime);
 		
-		for (GameObject g : toAdd) {
-			objects.add(g);
-			g.onAdd(this);
-			onDepthChange();
-		}
-		for (GameObject g : toRemove) {
-			objects.remove(g);
-			g.onRemove();
-		}
-		toAdd.clear();
-		toRemove.clear();
+		updateObjectLists();
 	}
 	
 	public void onDepthChange() {
@@ -99,5 +89,18 @@ public abstract class Scene {
 		Vector3 v = getUiCamera().unproject(getCamera().project(new Vector3(position, 0)));
 		v.y *= -1;
 		return new Vector2(v.x, v.y);
+	}
+	public void updateObjectLists() {
+		for (GameObject g : toAdd) {
+			objects.add(g);
+			g.onAdd(this);
+			onDepthChange();
+		}
+		for (GameObject g : toRemove) {
+			objects.remove(g);
+			g.onRemove();
+		}
+		toAdd.clear();
+		toRemove.clear();
 	}
 }

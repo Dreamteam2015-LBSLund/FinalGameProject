@@ -282,6 +282,14 @@ public class Character extends GameObject {
 		}
 		Debug.print(this, "setting a new path");
 		lastPathTarget = target;
-		path = new PathFinder(getPosition(), target, ((TestScene) (getScene())).getMap().getTiles(), false, this).getPath(true, ignore);		
+		//System.out.println("scene: " + getScene());// + ", map: " + ((TestScene)getScene()).getMap());
+		path = new PathFinder(getPosition(),
+				target,
+				((TestScene) (getScene()))
+				.getMap()
+				.getTiles(), 
+				false, 
+				this).getPath(true, 
+						ignore);		
 	}
 }

@@ -154,6 +154,7 @@ public class City extends GameObject {
 	
 	public void addWorker(Worker w) {
 		workers.add(w);
+		if (!getScene().getObjects().contains(w)) getScene().addObject(w);
 	}
 	
 	public void removeWorker(Worker w) {

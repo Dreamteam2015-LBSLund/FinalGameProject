@@ -9,6 +9,7 @@ import com.dreamteam.villageTycoon.characters.Character;
 import com.dreamteam.villageTycoon.characters.Inventory;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
@@ -25,13 +26,15 @@ public class Worker extends Character {
 		super(position, sprite, deathAnimation, city);
 		inventory = new Inventory<Resource>();
 		
-		Debug.print(this, "position " + position);
+		Debug.print(this, "worker constructed");
 		
 		city.addWorker(this);
 		
 	}
 	
 	public void update(float deltaTime) {
+		if (getScene() == null) Debug.print(this, "SCENE IS NULL");
+		else Debug.print(this, "worker updated");
 		//Debug.print(this, "tile: " + getTile().getPosition());
 		if (getTile().getBuilding() != null && task == null) {
 			workplace = getTile().getBuilding();
@@ -161,6 +164,12 @@ public class Worker extends Character {
 	
 	private void print(String s) {
 		Debug.print(this, s);
+	}
+	
+	public void onAdd(Scene s) {
+		Debug.print(this, "prev scene: " + getScene());
+		super.onAdd(s);
+		Debug.print(this, "added to scene");
 	}
 	
 	public void drawUi(SpriteBatch batch) {

@@ -68,11 +68,12 @@ public class TestScene extends Scene {
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
 							new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
 			}));
-			addObject(new Worker(new Vector2(10, 10), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), playerCity));
-			addObject(new Worker(new Vector2(15, 10), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), enemyCity));
+			//addObject(new Worker(new Vector2(10, 10), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), playerCity));
+			//addObject(new Worker(new Vector2(15, 10), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), enemyCity));
 		}
 		
 		map.setupGame(new City[]{ playerCity, enemyCity}, this);
+		super.updateObjectLists();
 	}
 	
 	public void initialize() {

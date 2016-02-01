@@ -14,13 +14,15 @@ import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController2 extends CityController {
 
-	State state;
+	private State state;
+	private int i;
 	
 	public AIController2(City targetCity) {
 		state = new AttackState(null, targetCity);
 	}
 
 	public void update(float dt) {
+		//if (i++ < 60) return;
 		State s = state.update();
 		if (s != null) {
 			state = s;
@@ -107,7 +109,7 @@ public class AIController2 extends CityController {
 	private Vector2 getNextBuildingPosition() {
 		return 
 				getCity().getBuildings().size() > 0 
-		? getCity().getBuildings().get(getCity().getBuildings().size()).getPosition().cpy().add(5, 0) 
+		? getCity().getBuildings().get(getCity().getBuildings().size() - 1).getPosition().cpy().add(5, 0) 
 		: getCity().getPosition();
 	}
 	
@@ -121,7 +123,19 @@ public class AIController2 extends CityController {
 		}
 
 		public State update() {
-			return null;
+			Building b = getCity().getBuildingByType(type);
+			if (b == null) {
+				getCity().addBuilding(new Building(getNextBuildingPosition(), type, getCity()), true);
+			} else {
+				for (Worker w : getCity().getWorkers()) {
+					w.workAt(b);
+				}
+			}
+			if (b != null && b.isBuilt()) {
+				return prevState;
+			} else {
+				return null;
+			}
 		}
 	}
 	
