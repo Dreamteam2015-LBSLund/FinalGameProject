@@ -16,7 +16,7 @@ Konstruera en fabrik.
 - Om resurser inte finns: MakeResourceState
 
 ### GatherResourceState 
-** överflödig eftersom arbetarna fixar detta själva **
+**överflödig eftersom arbetarna fixar detta själva**  
 vilken resurs? till vem?  
 Samla någon resurs åt staden. (Resurser som finns på kartan, färdiga i fabriker eller andra inventories.)
 - Om klar: förra tillståndet
