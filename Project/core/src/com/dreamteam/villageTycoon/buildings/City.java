@@ -176,6 +176,11 @@ public class City extends GameObject {
 				ret.add((Resource)r);
 			}
 		}
+		for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Prop) {
+				ret.add(((Prop)g).getType().getResource());
+			}
+		}
 		return ret;
 	}
 
@@ -198,5 +203,13 @@ public class City extends GameObject {
 			if (good == false) return false;
 		}
 		return true;
+	}
+
+	public ArrayList<Resource> missingResources(ArrayList<Resource> resources) {
+		ArrayList<Resource> have = (ArrayList<Resource>) getMaterials().clone();
+		for (Resource r : have) {
+			resources.remove(r);
+		}
+		return resources;
 	}
 }

@@ -29,6 +29,7 @@ public abstract class Debug {
 		whitelist.add(City.class);
 		whitelist.add(AIController2.class);
 		whitelist.add(AIController2.MakeFactoryState.class);
+		whitelist.add(AIController2.MakeResourceState.class);
 	}
 	
 	public static void print(Object client, String message) {

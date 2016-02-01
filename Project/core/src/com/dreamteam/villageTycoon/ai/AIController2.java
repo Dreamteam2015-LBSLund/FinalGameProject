@@ -1,5 +1,7 @@
 package com.dreamteam.villageTycoon.ai;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
@@ -115,7 +117,7 @@ public class AIController2 extends CityController {
 	
 	public class MakeFactoryState extends State {
 		
-		BuildingType type;
+		private BuildingType type;
 		
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
@@ -125,18 +127,22 @@ public class AIController2 extends CityController {
 		public State update() {
 			Building b = getCity().getBuildingByType(type);
 			if (b == null) {
-				Debug.print(this, "adding building " + type.getName());
-				getCity().addBuilding(new Building(getNextBuildingPosition(), type, getCity()), true);
-			} else {
+				ArrayList<Resource> missing = getCity().missingResources(type.constructBuildResourceList());
+				if (missing.size() == 0) {
+					Debug.print(this, "adding building " + type.getName());
+					getCity().addBuilding(new Building(getNextBuildingPosition(), type, getCity()), true);
+					return null;
+				} else {
+					return new MakeResourceState(this, missing);
+				}
+			} else if (!b.isBuilt()) {
 				Debug.print(this, "assigning workers");
 				for (Worker w : getCity().getWorkers()) {
 					if (!w.hasTask()) w.workAt(b);
 				}
-			}
-			if (b != null && b.isBuilt()) {
-				return prevState;
-			} else {
 				return null;
+			} else {
+				return prevState;
 			}
 		}
 	}
@@ -155,17 +161,29 @@ public class AIController2 extends CityController {
 		}
 	}
 	
-	class MakeResourceState extends State {
+	public class MakeResourceState extends State {
 		
-		private Resource resource;
+		private ArrayList<Resource> resources;
 		
-		public MakeResourceState(State previous, Resource r) {
+		public MakeResourceState(State previous, ArrayList<Resource> missing) {
 			super(previous);
-			this.resource = r;
+			this.resources = singularize(missing);
+			Debug.print(this, "neeed resources: ");
+			for (Resource r : resources) Debug.print(this, r.getName());
 		}
 
 		public State update() {
 			return null;
+		}
+		
+		private ArrayList singularize(ArrayList l) {
+			ArrayList ret = new ArrayList();
+			for (Object o : l) {
+				if (!ret.contains(o)) {
+					ret.add(o);
+				}
+			}
+			return ret;
 		}
 	}
 }
