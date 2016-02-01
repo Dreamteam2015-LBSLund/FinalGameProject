@@ -1,7 +1,10 @@
 package com.dreamteam.villageTycoon.ai;
 
+import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
+import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
@@ -10,16 +13,15 @@ public class AIController2 extends CityController {
 
 	State state;
 	
-	public AIController2() {
-		state = new AttackState(null);
-		//Debug.print(this, "ai controller, city at " + getCity().getPosition());
+	public AIController2(City targetCity) {
+		state = new AttackState(null, targetCity);
 	}
 
 	public void update(float dt) {
 		State s = state.update();
 		if (s != null) {
 			state = s;
-			Debug.print(this, "switching to state " + s);
+			Debug.print(this, "switching to state " + s.getClass().getSimpleName());
 		}
 	}
 	
@@ -41,14 +43,20 @@ public class AIController2 extends CityController {
 	// send soldiers to attack the player
 	class AttackState extends State {
 		
-		public AttackState(State previous) {
+		private City target;
+		
+		public AttackState(State previous, City target) {
 			super(previous);
+			this.target = target;
 		}
 
 		public State update() {
 			if (getCity().getSoldiers().size() == 0) {
 				return new MakeSoldierState(this);
 			} else {
+				for (Soldier s : getCity().getSoldiers()) {
+					s.setPath(target.getPosition());
+				}
 				return null;
 			}
 		}
@@ -73,12 +81,23 @@ public class AIController2 extends CityController {
 						w.workAt(getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack")));
 					}*/
 					Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
-					b.spawn();
+					if (b != null && b.isBuilt()) {
+						b.spawn();
+					} else {
+						getCity().addBuilding(new Building(getNextBuildingPosition(), BuildingType.getTypes().get("armyBarack"), getCity()), true);
+					}
 					return null;	
 				}
 			}
 			else return new MakeFactoryState(this, BuildingType.getTypes().get("armyBarack"));
 		}
+	}
+	
+	private Vector2 getNextBuildingPosition() {
+		return 
+				getCity().getBuildings().size() > 0 
+		? getCity().getBuildings().get(getCity().getBuildings().size()).getPosition().cpy().add(5, 0) 
+		: getCity().getPosition();
 	}
 	
 	class MakeFactoryState extends State {

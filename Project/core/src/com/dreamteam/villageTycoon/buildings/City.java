@@ -16,6 +16,7 @@ import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.InventoryItem;
 import com.dreamteam.villageTycoon.workers.Worker;
 
@@ -41,6 +42,8 @@ public class City extends GameObject {
 		
 		workers  = new ArrayList<Worker>();
 		soldiers = new ArrayList<Soldier>();
+		
+		Debug.print(this, "city at " + getPosition() + ", controller: " + controller.getClass().getSimpleName());
 	}
 	
 	// register a building that is built and belongs to this city

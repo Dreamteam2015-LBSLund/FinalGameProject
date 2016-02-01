@@ -47,7 +47,7 @@ public class TestScene extends Scene {
 		Debug.print(this, "map == null =  " + (map == null));
 		
 		addObject(playerCity = new City(this, new PlayerController(), new Vector2(3, 3)));
-		addObject(enemyCity = new City(this, new AIController2(), new Vector2(25, 3)));
+		addObject(enemyCity = new City(this, new AIController2(playerCity), new Vector2(25, 3)));
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
