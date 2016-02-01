@@ -79,7 +79,7 @@ public class Soldier extends Character {
 		
 		maxAttackDistance = 5;
 		
-		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("soldier")));
+		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("firekit")));
 		
 		this.aggressionState = AggressionState.ATTACKING_AND_MOVING;
 		
@@ -90,7 +90,7 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		if(prepareSabotageKit) attack(deltaTime);
+		if(prepareSabotageKit && sabotageKits.size() > 0) attack(deltaTime);
 		weapon.update(deltaTime);
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {

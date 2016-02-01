@@ -116,7 +116,7 @@ public abstract class GameObject {
 	}
 	
 	public Rectangle getHitbox(){
-		return new Rectangle(this.position, this.size);
+		return new Rectangle(sprite.getBoundingRectangle().x, sprite.getBoundingRectangle().y, sprite.getBoundingRectangle().width, sprite.getBoundingRectangle().height);
 	}
 	
 	public void onRemove() { };
