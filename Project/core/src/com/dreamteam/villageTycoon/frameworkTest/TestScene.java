@@ -15,6 +15,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
@@ -32,7 +33,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
-	private City city;
+	//private City city;
 	private City enemyCity;
 	
 	public TestScene() {
@@ -75,11 +76,11 @@ public class TestScene extends Scene {
 	}
 	
 	public void initialize() {
-		for(int i = 0; i < 1; i++) // varför finns denna loopen? 
+		//for(int i = 0; i < 1; i++) // varför finns denna loopen? 
 			// yolo -johannes
 			// man blir ju lissen, är det bud på gamescene eller - tom
 		//addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
-		city = new City(this, new AIController(), new Vector2(50, 50));
+		//city = new City(this, new AIController2(), new Vector2(50, 50));
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//addObject(new Building(new Vector2(8, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//City city = new City(this);

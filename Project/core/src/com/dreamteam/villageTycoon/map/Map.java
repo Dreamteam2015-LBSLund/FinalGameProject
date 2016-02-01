@@ -32,7 +32,7 @@ public class Map {
 	
 	City city;
 	
-	City[] cities;
+	//City[] cities;
 	
 	public Map(Scene scene) {
 		Resource.getTypes();
@@ -48,10 +48,10 @@ public class Map {
 			}
 		}
 		
-		cities = new City[amountOfCities];
+		//ities = new City[amountOfCities];
 		
 		for(int i = 0; i < amountOfCities; i++) {
-			cities[i] =  new City(scene, new AIController(), new Vector2()); //TODO: cities need to get a position
+			//cities[i] =  new City(scene, new AIController(), new Vector2()); //TODO: cities need to get a position
 		}
 	}
 
@@ -70,9 +70,13 @@ public class Map {
 				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 3, 2, scene, cities[i]);
 			}
 			
+			cities[i].setPosition(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance));
+			
 			for(int j = 0; j < 5; j++) {
 				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
-				scene.addObject(new Worker(buildingPos.add(new Vector2(randomInt(-10, 10), randomInt(-10, 10))), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), cities[i]));
+				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-10, 10), randomInt(-10, 10))), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), cities[i]);
+				scene.addObject(w);
+				cities[i].addWorker(w);
 			}
 		}
 	}
