@@ -78,6 +78,8 @@ public class Map {
 				scene.addObject(w);
 				cities[i].addWorker(w);
 			}
+			
+			cities[i].init();
 		}
 	}
 	

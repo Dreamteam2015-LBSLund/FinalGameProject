@@ -1,6 +1,9 @@
 package com.dreamteam.villageTycoon.ai;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -23,6 +26,14 @@ public class AIController2 extends CityController {
 			state = s;
 			Debug.print(this, "switching to state " + s.getClass().getSimpleName());
 		}
+		
+		if (Gdx.input.isKeyJustPressed(Keys.O)) {
+			getCity().getScene().getCamera().position.set(new Vector3(getCity().getPosition(), 0));
+		}
+	}
+	
+	public void init() {
+		Debug.print(this, getCity().getWorkers().size() + " workers");
 	}
 	
 

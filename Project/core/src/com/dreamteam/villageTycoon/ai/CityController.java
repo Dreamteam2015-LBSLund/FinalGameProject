@@ -20,6 +20,10 @@ public abstract class CityController {
 		this.city = city;
 	}
 	
+	public void init() {
+		
+	}
+	
 	public abstract void update(float dt);
 	public void drawUi(SpriteBatch batch) {}
 }

@@ -46,6 +46,10 @@ public class City extends GameObject {
 		Debug.print(this, "city at " + getPosition() + ", controller: " + controller.getClass().getSimpleName());
 	}
 	
+	public void init() {
+		controller.init();
+	}
+	
 	// register a building that is built and belongs to this city
 	public void addBuilding(Building b, boolean addToGameObjects) {
 		if (!buildings.contains(b)) {
