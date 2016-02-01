@@ -11,6 +11,7 @@ import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.Worker;
+import com.sun.corba.se.spi.ior.MakeImmutable;
 
 public abstract class Debug {
 	static ArrayList<Class> whitelist = new ArrayList<Class>();
@@ -27,6 +28,7 @@ public abstract class Debug {
 		//whitelist.add(BuildingButton.class);
 		whitelist.add(City.class);
 		whitelist.add(AIController2.class);
+		whitelist.add(AIController2.MakeFactoryState.class);
 	}
 	
 	public static void print(Object client, String message) {
@@ -35,9 +37,10 @@ public abstract class Debug {
 			isInit = true;
 		}
 		if (whitelist.contains(client.getClass())) {
-			String[] s = client.getClass().getName().split("\\.");
-			String cl  = s.length > 0 ? s[s.length - 1] : ""; 
+			String cl = client.getClass().getSimpleName();
 			System.out.println(cl + ": " + message);
+		} else {
+			//System.out.println(client.getClass().getSimpleName());
 		}
 	}
 }

@@ -113,7 +113,7 @@ public class AIController2 extends CityController {
 		: getCity().getPosition();
 	}
 	
-	class MakeFactoryState extends State {
+	public class MakeFactoryState extends State {
 		
 		BuildingType type;
 		
@@ -125,10 +125,12 @@ public class AIController2 extends CityController {
 		public State update() {
 			Building b = getCity().getBuildingByType(type);
 			if (b == null) {
+				Debug.print(this, "adding building " + type.getName());
 				getCity().addBuilding(new Building(getNextBuildingPosition(), type, getCity()), true);
 			} else {
+				Debug.print(this, "assigning workers");
 				for (Worker w : getCity().getWorkers()) {
-					w.workAt(b);
+					if (!w.hasTask()) w.workAt(b);
 				}
 			}
 			if (b != null && b.isBuilt()) {
@@ -139,7 +141,7 @@ public class AIController2 extends CityController {
 		}
 	}
 	
-	class GatherResourceState extends State {
+	public class GatherResourceState extends State {
 		
 		private Resource resource;
 		
