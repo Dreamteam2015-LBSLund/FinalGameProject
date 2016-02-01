@@ -255,7 +255,7 @@ public class Character extends GameObject {
 		return path;
 	}
 	
-	protected void setPath(Vector2 target) {
+	public void setPath(Vector2 target) {
 		setPath(target, null);
 	}
 	

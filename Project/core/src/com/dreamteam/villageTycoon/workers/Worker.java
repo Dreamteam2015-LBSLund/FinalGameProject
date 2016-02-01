@@ -155,7 +155,7 @@ public class Worker extends Character {
 		workplace.removeWorker(this);
 	}
 	
-	protected void setPath(Vector2 target) {
+	public void setPath(Vector2 target) {
 		setPath(target, workplace);
 	}
 	
