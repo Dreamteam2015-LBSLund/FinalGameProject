@@ -48,7 +48,7 @@ woodShop: {
 	sprite-finished: woodShop;
 	sprite-building: woodShopProgress;
 	
-	product: wooden-word;
+	product: wooden-sword;
 	product-per-run: 1;
 	production-resources: wood;
 	resource-per-run: 2;

@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
@@ -97,7 +98,13 @@ public class Controller extends GameObject {
 		}
 		
 		for(Building b : selectedBuildings) {
-			b.setSelected(false);
+			if(b.getType().getType() == BuildingType.Type.Home) {
+				if(!b.getCreateCharacterButton().getIsHover())  {
+					b.setSelected(false);
+				}
+			} else {
+				b.setSelected(false);
+			}
 		}
 		
 		selectedCharacters.clear();
@@ -119,7 +126,13 @@ public class Controller extends GameObject {
 	}
 	
 	private void deselectBuilding(Building b) {
-		/*if(!b.getCreateCharacterButton().getIsHover())*/ selectedBuildings.remove(b);
+		if(b.getType().getType() == BuildingType.Type.Home) {
+			if(!b.getCreateCharacterButton().getIsHover())  {
+				selectedBuildings.remove(b);
+			}
+		} else {
+			selectedBuildings.remove(b);
+		}
 	}
 	
 	public void update(float deltaTime) {
