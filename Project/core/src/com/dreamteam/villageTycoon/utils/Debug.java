@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.utils;
 import java.util.ArrayList;
 
 import com.dreamteam.villageTycoon.ai.AIController;
+import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingButton;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
@@ -24,8 +25,8 @@ public abstract class Debug {
 		//whitelist.add(PathFinder.class);		
 		//whitelist.add(BuildingPlacer.class);
 		//whitelist.add(BuildingButton.class);
-		//whitelist.add(City.class);
-		whitelist.add(AIController.class);
+		whitelist.add(City.class);
+		whitelist.add(AIController2.class);
 	}
 	
 	public static void print(Object client, String message) {

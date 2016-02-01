@@ -76,7 +76,7 @@ public class Map {
 				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
 				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-10, 10), randomInt(-10, 10))), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), cities[i]);
 				scene.addObject(w);
-				cities[i].addWorker(w);
+				//cities[i].addWorker(w);
 			}
 			
 			cities[i].init();
