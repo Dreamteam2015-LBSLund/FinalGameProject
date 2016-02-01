@@ -91,7 +91,7 @@ public class TestScene extends Scene {
 	}
 	
 	public void update(float dt) {
-		super.update(dt);
+		super.update(dt * 3);
 		this.getCamera().zoom = 2f;
 	}
 	

@@ -56,8 +56,15 @@ public class Inventory <T extends InventoryItem> {
 		final float ICON_SIZE = 100f;
 		Rectangle r = null;
 		InventoryItem[] items = things.keySet().toArray(new InventoryItem[things.keySet().size()]);
+		// TODO: remove prints
+		//System.out.println(items);
 		for (int i = 0; i < items.length; i++) {
+			if (items[i] == null) {
+				System.out.println("OOPS ");
+				continue;
+			}
 			r = new Rectangle(position.cpy().add(new Vector2(0, i * ICON_SIZE)), new Vector2(ICON_SIZE, ICON_SIZE));
+			//System.out.println(items[i] + ", " + r + ", " + batch);
 			items[i].draw(r, batch);
 			AssetManager.font.draw(batch, count((T)items[i]) + "", r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
 		}

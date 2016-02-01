@@ -67,7 +67,7 @@ public class Map {
 				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
 				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
 			} else {
-				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 5, 2, scene, cities[i]);
+				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 3, 2, scene, cities[i]);
 			}
 			
 			for(int j = 0; j < 5; j++) {
