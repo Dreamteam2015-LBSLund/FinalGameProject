@@ -10,7 +10,7 @@ public class Map {
 	final int TILE_SIZE = 8;
 	final int WIDTH = 640/TILE_SIZE;
 	final int HEIGHT = 480 /TILE_SIZE;
-	final int LIMIT = 10000/5;
+	final int LIMIT = 5000/2;
 	
 	private int map[][];
 	
@@ -27,7 +27,7 @@ public class Map {
 		
 		Random random = new Random();
 		
-		for(int i = 0; i < 00; i++) {	
+		for(int i = 0; i < 200; i++) {	
 			map[random.nextInt(WIDTH)][random.nextInt(HEIGHT)] = 1;
 		}
 		
