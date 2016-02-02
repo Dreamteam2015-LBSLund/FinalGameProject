@@ -126,22 +126,39 @@ public class AIController2 extends CityController {
 
 		public State update() {
 			Building b = getCity().getBuildingByType(type);
-			if (b == null) {
+			// if the building is not done
+			if (b == null || !b.isBuilt()) {
 				ArrayList<Resource> missing = getCity().missingResources(type.constructBuildResourceList());
+				/*Debug.print(this, "resources for " + type.getName() + ":");
+				for (Object r : singularize(type.constructBuildResourceList())) {
+					Debug.print(this, ((Resource)r).getName());
+				}
+				Debug.print(this, "Missing resources for " + type.getName() + ":");
+				for (Object r : singularize(missing)) {
+					Debug.print(this, ((Resource)r).getName());
+				}*/
+				// if all resources are available
 				if (missing.size() == 0) {
-					Debug.print(this, "adding building " + type.getName());
-					getCity().addBuilding(new Building(getNextBuildingPosition(), type, getCity()), true);
+					// if the building is not placed, place it
+					if (b == null) {
+						Debug.print(this, "adding building " + type.getName());
+						b = new Building(getNextBuildingPosition(), type, getCity());
+						getCity().addBuilding(b, true);
+					}
+					
+					// assign workers to it
+					for (Worker w : getCity().getWorkers()) {
+						w.workAt(b);
+						//Debug.print(this, "assigning worker to " + b.getType().getName());
+					}
+					
 					return null;
 				} else {
+					// resources aren't available; make factories for them
 					return new MakeResourceState(this, missing);
 				}
-			} else if (!b.isBuilt()) {
-				Debug.print(this, "assigning workers");
-				for (Worker w : getCity().getWorkers()) {
-					if (!w.hasTask()) w.workAt(b);
-				}
-				return null;
 			} else {
+				// done
 				return prevState;
 			}
 		}
@@ -176,15 +193,16 @@ public class AIController2 extends CityController {
 			return null;
 		}
 		
-		private ArrayList singularize(ArrayList l) {
-			ArrayList ret = new ArrayList();
-			for (Object o : l) {
-				if (!ret.contains(o)) {
-					ret.add(o);
-				}
+	}
+	
+	public ArrayList singularize(ArrayList l) {
+		ArrayList ret = new ArrayList();
+		for (Object o : l) {
+			if (!ret.contains(o)) {
+				ret.add(o);
 			}
-			return ret;
 		}
+		return ret;
 	}
 }
 

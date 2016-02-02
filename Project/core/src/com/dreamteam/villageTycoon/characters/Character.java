@@ -225,16 +225,16 @@ public class Character extends GameObject {
 		//Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
-			Debug.print(this, "next node: " + next + ". distance " + (next.cpy().sub(getPosition()).len()));
+			//Debug.print(this, "next node: " + next + ". distance " + (next.cpy().sub(getPosition()).len()));
 			if (stepTowards(next, 1 * deltaTime)) {
 				//Debug.print(this, "arrived at node");
 				path.remove(0);
-				Debug.print(this, "at node, removing");
+				//Debug.print(this, "at node, removing");
 				//Debug.print(this, path.size() + " nodes left");
 			}
 		} else {
-			Debug.print(this, "path is null or empty, " + path);
-			if (lastPathTarget != null) Debug.print(this, "distance to target: " + distanceTo(lastPathTarget));
+			//Debug.print(this, "path is null or empty, " + path);
+			//if (lastPathTarget != null) Debug.print(this, "distance to target: " + distanceTo(lastPathTarget));
 		}
 	}
 	
@@ -247,7 +247,7 @@ public class Character extends GameObject {
 		Vector2 delta = v.cpy().sub(getPosition().cpy());
 		delta.clamp(0, speed);
 		setPosition(getPosition().add(delta));
-		Debug.print(this, "stepped towards " + v + ", new position = " + getPosition() + ", distance " + delta.len());
+		//Debug.print(this, "stepped towards " + v + ", new position = " + getPosition() + ", distance " + delta.len());
 		return delta.len() < .01 * speed;
 	}
 	
@@ -262,12 +262,12 @@ public class Character extends GameObject {
 	// set path if not already set
 	protected void setPath(Vector2 target, Building ignore) {
 		if (lastPathTarget == target && path != null) {
-			Debug.print(this, "lastPath = target, returning"); 
+			//Debug.print(this, "lastPath = target, returning"); 
 			if (!path.isEmpty()) {
-				Debug.print(this, "path is not empty, returning");
+				//Debug.print(this, "path is not empty, returning");
 				return;
 			} else {
-				Debug.print(this, "path is empty, setting new");
+				//Debug.print(this, "path is empty, setting new");
 			}
 			/*
 			if (path != null) {
@@ -285,11 +285,9 @@ public class Character extends GameObject {
 		//System.out.println("scene: " + getScene());// + ", map: " + ((TestScene)getScene()).getMap());
 		path = new PathFinder(getPosition(),
 				target,
-				((TestScene) (getScene()))
-				.getMap()
-				.getTiles(), 
+				((TestScene) (getScene())).getMap().getTiles(), 
 				false, 
-				this).getPath(true, 
-						ignore);		
+				this)
+			.getPath(true, ignore);		
 	}
 }

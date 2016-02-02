@@ -25,7 +25,7 @@ public class Inventory <T extends InventoryItem> {
 		
 		if (things.get(thing).intValue() <= 0) {
 			things.remove(thing);
-			System.out.println("WARNING: Negative or 0 amount in inventory");
+			//System.out.println("WARNING: Negative or 0 amount in inventory");
 		}
 	}
 	
