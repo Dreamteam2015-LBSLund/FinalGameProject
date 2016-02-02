@@ -54,7 +54,9 @@ public class City extends GameObject {
 	public void addBuilding(Building b, boolean addToGameObjects) {
 		if (!buildings.contains(b)) {
 			buildings.add(b);
-			if (addToGameObjects) scene.addObject(b);
+		} else {
+			Debug.print(this, "building already exists");
+			if (addToGameObjects && !scene.getObjects().contains(b)) scene.addObject(b);
 		}
 	}
 	
@@ -163,6 +165,7 @@ public class City extends GameObject {
 	
 	public void addSoldier(Soldier s) {
 		soldiers.add(s);
+		if (!getScene().getObjects().contains(s)) getScene().addObject(s);
 	}
 	
 	public void removeSoldier(Soldier s) {

@@ -56,7 +56,7 @@ public class AIController2 extends CityController {
 	// se https://github.com/Dreamteam2015-LBSLund/Village-Tycoon-RTS/blob/master/Documents/aiStates.md
 	
 	// send soldiers to attack the player
-	class AttackState extends State {
+	public class AttackState extends State {
 		
 		private City target;
 		
@@ -70,7 +70,8 @@ public class AIController2 extends CityController {
 				return new MakeSoldierState(this);
 			} else {
 				for (Soldier s : getCity().getSoldiers()) {
-					s.setPath(target.getPosition());
+					if (!s.hasPath()) s.setPath(target.getPosition());
+					Debug.print(this, "sending soldier");
 				}
 				return null;
 			}
@@ -78,7 +79,7 @@ public class AIController2 extends CityController {
 	}
 	
 	// use soldier factories to make soldiers
-	class MakeSoldierState extends State {
+	public class MakeSoldierState extends State {
 		
 		private final int numSoldiers = 5;
 		
@@ -97,6 +98,7 @@ public class AIController2 extends CityController {
 					}*/
 					Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
 					if (b != null && b.isBuilt()) {
+						Debug.print(this, "spawning soldiers");
 						b.spawn();
 					} else {
 						getCity().addBuilding(new Building(getNextBuildingPosition(), BuildingType.getTypes().get("armyBarack"), getCity()), true);
@@ -126,6 +128,7 @@ public class AIController2 extends CityController {
 
 		public State update() {
 			Building b = getCity().getBuildingByType(type);
+			if (b != null) Debug.print(this, "building at " + b.getPosition());
 			// if the building is not done
 			if (b == null || !b.isBuilt()) {
 				ArrayList<Resource> missing = getCity().missingResources(type.constructBuildResourceList());
@@ -143,12 +146,13 @@ public class AIController2 extends CityController {
 					if (b == null) {
 						Debug.print(this, "adding building " + type.getName());
 						b = new Building(getNextBuildingPosition(), type, getCity());
+						Debug.print(this, "new building at " + b.getPosition());
 						getCity().addBuilding(b, true);
 					}
 					
 					// assign workers to it
 					for (Worker w : getCity().getWorkers()) {
-						w.workAt(b);
+						if (w.getWorkplace() != b) w.workAt(b);
 						//Debug.print(this, "assigning worker to " + b.getType().getName());
 					}
 					

@@ -8,7 +8,7 @@ public abstract class CityController {
 	private City city;
 	
 	public CityController() {
-		
+		// todo: move controller here
 	}
 	
 	
