@@ -173,7 +173,7 @@ public class Worker extends Character {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		if (getShowInventroy() || true) {
+		if (getShowInventroy()) {
 			inventory.drawList(getUiScreenCoords(), batch);
 			if (task != null) {
 				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
