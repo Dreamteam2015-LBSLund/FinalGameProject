@@ -16,7 +16,7 @@ import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 
 public class Worker extends Character {
-	final boolean PRINT = true;
+	final boolean PRINT = false;
 
 	private Building workplace;
 	private Inventory<Resource> inventory;
@@ -33,8 +33,8 @@ public class Worker extends Character {
 	}
 	
 	public void update(float deltaTime) {
-		if (getScene() == null) Debug.print(this, "SCENE IS NULL");
-		else Debug.print(this, "worker updated");
+		//if (getScene() == null) Debug.print(this, "SCENE IS NULL");
+		//else Debug.print(this, "worker updated");
 		//Debug.print(this, "tile: " + getTile().getPosition());
 		if (getTile().getBuilding() != null && task == null) {
 			workplace = getTile().getBuilding();
@@ -53,7 +53,7 @@ public class Worker extends Character {
 	
 	public void onPlayerInput(Vector2 destination) {
 		super.onPlayerInput(destination);
-		Debug.print(this, "recieved input");
+		//Debug.print(this, "recieved input");
 		if (task != null) {
 			task.onCancel();
 		}
@@ -62,9 +62,9 @@ public class Worker extends Character {
 
 	// finds the resource and puts it in the inventory. returns true if done
 	public boolean findResource(Resource r) {
-		print("finding resource " + r.getName());
+		//print("finding resource " + r.getName());
 		if (inventory.count(r) > 0) {
-			print("is already in inventory");
+			//print("is already in inventory");
 			return true;
 		}
 		else {
@@ -83,7 +83,7 @@ public class Worker extends Character {
 						if (b.getOutputInventory().count(r) > 0) {
 							b.getOutputInventory().remove(r, 1);
 							inventory.add(r, 1);
-							Debug.print(this, "has resource, putting");
+							//Debug.print(this, "has resource, putting");
 							return true;
 						}
 					} else if (t instanceof Prop) {
@@ -163,22 +163,23 @@ public class Worker extends Character {
 	}
 	
 	private void print(String s) {
-		Debug.print(this, s);
+		if (PRINT) Debug.print(this, s);
 	}
 	
 	public void onAdd(Scene s) {
-		Debug.print(this, "prev scene: " + getScene());
+		//Debug.print(this, "prev scene: " + getScene());
 		super.onAdd(s);
-		Debug.print(this, "added to scene");
+		//Debug.print(this, "added to scene");
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		if (getShowInventroy()) {
+		if (getShowInventroy() || true) {
 			inventory.drawList(getUiScreenCoords(), batch);
 			if (task != null) {
 				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
 			}
 		}
+		//AssetManager.font.draw(batch, getPosition() + "", getUiScreenCoords().x, getUiScreenCoords().y);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -187,6 +188,16 @@ public class Worker extends Character {
 
 	public void workAt(Building building) {
 		task = null;
-		setPath(building.getPosition());
+		setPath(building.getPosition(), building);
+		Debug.print(this, "working at building, pos = " + building.getPosition());
+		Debug.print(this, "path target: " + getPath().get(getPath().size() - 1));
+		//workplace = building;
+		//onStartWork();
+	}
+
+	
+
+	public Building getWorkplace() {
+		return workplace;
 	}
 }
