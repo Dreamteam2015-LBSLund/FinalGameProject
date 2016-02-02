@@ -194,9 +194,7 @@ public class Worker extends Character {
 		//workplace = building;
 		//onStartWork();
 	}
-
 	
-
 	public Building getWorkplace() {
 		return workplace;
 	}

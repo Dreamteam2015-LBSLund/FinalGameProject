@@ -290,4 +290,8 @@ public class Character extends GameObject {
 				this)
 			.getPath(true, ignore);		
 	}
+	
+	public boolean hasPath() {
+		return path != null;
+	}
 }

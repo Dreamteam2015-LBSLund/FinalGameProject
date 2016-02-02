@@ -73,20 +73,7 @@ public class Building extends GameObject {
 		
 		toClear = new ArrayList<Prop>();
 		
-		if(this.type.getType() == BuildingType.Type.Home) {
-			if(type.getName() == "house") {
-				this.characterToSpawn = new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
-						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
-						new SabotageKit[]{ 
-								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
-								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
-				});
-			} else {
-				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
-			}
-
-			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
-		}
+		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
     }
     
     public void onAdd(Scene scene) {
@@ -127,18 +114,8 @@ public class Building extends GameObject {
     	if(this.type.getType() == BuildingType.Type.Home) {
     		if(this.selected) System.out.println(type.getName());
 			
-    		if(!type.getName().equals("house")) {
-				this.characterToSpawn = new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
-						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
-						new SabotageKit[]{ 
-								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
-								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
-				});
-			} else {
-				this.characterToSpawn = new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
-			}
 			
-			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this.characterToSpawn);
+			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		}
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
@@ -266,7 +243,24 @@ public class Building extends GameObject {
     }
     
     public void spawn() {
-    	getScene().addObject(characterToSpawn);
+    	getScene().addObject(getCharacterToSpawn());
+    }
+    
+    public Character getCharacterToSpawn() {
+    	if(this.type.getType() == BuildingType.Type.Home) {
+			if(type.getName() == "house") {
+				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
+						new SabotageKit[]{ 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+				});
+			} else {
+				return new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
+			}
+
+		}
+    	else return null;
     }
     
     public void destroy() {
