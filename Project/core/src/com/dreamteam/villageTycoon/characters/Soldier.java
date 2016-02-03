@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.framework.Animation;
@@ -20,7 +21,6 @@ import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
-import com.dreamteam.villageTycoon.utils.Debug;
 
 public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
@@ -77,7 +77,6 @@ public class Soldier extends Character {
 		}
 		
 		city.addSoldier(this);
-		Debug.print(this, city.getController().getClass().getSimpleName());
 		
 		maxAttackDistance = 8;
 		
@@ -88,6 +87,14 @@ public class Soldier extends Character {
 		spottedEnemies = new ArrayList<Character>();
 		inventory = new SoldierInventory(this);
 		setDepth(1);
+		
+		if(this.getCity().getController() instanceof PlayerController) {
+			this.setSprite(new Animation(AssetManager.getTexture("soldier")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("playerCorpse")));
+		} else {
+			this.setSprite(new Animation(AssetManager.getTexture("enemySoldier")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
+		}
 	}
 	
 	public void update(float deltaTime) {
@@ -246,7 +253,7 @@ public class Soldier extends Character {
 			sabotageKitButton.draw(batch);
 		}
 		
-		if(prepareSabotageKit) {
+		if(prepareSabotageKit && sabotageKits.size() > 0) {
 			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);
 		}
 	}

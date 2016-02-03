@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 
 public class Map {
 	final int TILE_SIZE = 32;
@@ -29,6 +30,10 @@ public class Map {
 				tiles[x][y].draw(batch);
 			}
 		}
+	}
+	
+	public float dotProduct(Vector3 v, Vector3 v2) {
+		return v.x * v2.x + v.y * v2.y + v.z * v2.z;
 	}
 	
 	public static float smoothStep(float edge0, float edge1, float x) {

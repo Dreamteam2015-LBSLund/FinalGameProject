@@ -20,6 +20,8 @@ public class Corpse extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
+		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
+		
 		deteriorateTime += deltaTime*5;
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
