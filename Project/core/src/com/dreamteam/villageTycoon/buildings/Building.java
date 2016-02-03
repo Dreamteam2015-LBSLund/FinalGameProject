@@ -256,7 +256,7 @@ public class Building extends GameObject {
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
 				});
 			} else {
-				return new Worker(new Vector2(this.getPosition().x, this.getPosition().y), new Animation(AssetManager.getTexture("worker")),  new Animation(AssetManager.getTexture("test")), city);
+				return new Worker(new Vector2(this.getPosition().x, this.getPosition().y),  new Animation(AssetManager.getTexture("test")), city);
 			}
 
 		}

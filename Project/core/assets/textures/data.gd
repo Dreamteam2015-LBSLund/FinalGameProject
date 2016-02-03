@@ -20,6 +20,10 @@ Textures: {
 	soldier: 950, 3, 64, 61;
 	soldierCorpse: 949, 82, 67, 65;
 	
+	enemySoldier: 1015, 3, 64, 64;
+	enemyWorker: 1074, 3, 64, 64;
+	enemyCorpse: 1039, 80, 64, 64;
+	
 	woodIcon:   	     454, 0, 16, 16;
 	ironIcon:    		 472, 0, 16, 16;
 	stoneIcon:  		 490, 0, 16, 16;

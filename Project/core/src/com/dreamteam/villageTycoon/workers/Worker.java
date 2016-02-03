@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.workers;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Character;
@@ -22,14 +23,19 @@ public class Worker extends Character {
 	private Inventory<Resource> inventory;
 	private Task task;
 	
-	public Worker(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
-		super(position, sprite, deathAnimation, city);
+	public Worker(Vector2 position, Animation deathAnimation, City city) {
+		super(position, new Animation(AssetManager.getTexture("worker")), deathAnimation, city);
 		inventory = new Inventory<Resource>();
 		
 		Debug.print(this, "worker constructed");
 		
 		city.addWorker(this);
 		
+		if(this.getCity().getController() instanceof PlayerController) {
+			this.setSprite(new Animation(AssetManager.getTexture("worker")));
+		} else {
+			this.setSprite(new Animation(AssetManager.getTexture("enemyWorker")));
+		}
 	}
 	
 	public void update(float deltaTime) {
