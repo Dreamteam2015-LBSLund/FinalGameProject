@@ -186,6 +186,21 @@ public class City extends GameObject {
 		}
 		return ret;
 	}
+	
+	public int getNoMaterials(Resource r) {
+		int i = 0;
+		for (Building b : buildings) {
+			for (InventoryItem r2 : b.getOutputInventory().getList()) {
+				if (r == r2) i++;
+			}
+		}
+		for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Prop) {
+				if (((Prop)g).getType().getResource() == r) i++;
+			}
+		}
+		return i;
+	}
 
 	public boolean hasResources(ArrayList<Resource> arg) {
 		ArrayList<Resource> resources = (ArrayList<Resource>) getMaterials().clone();

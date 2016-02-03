@@ -129,7 +129,12 @@ public class AIController2 extends CityController {
 
 		public State update() {
 			Building b = getCity().getBuildingByType(type);
-			if (b != null) Debug.print(this, "building at " + b.getPosition());
+			if (b != null) {
+				Debug.print(this, "building at " + b.getPosition());
+				if (!getCity().getScene().getObjects().contains(b)) {
+					getCity().getScene().addObject(b);
+				}
+			}
 			// if the building is not done
 			if (b == null || !b.isBuilt()) {
 				ArrayList<Resource> missing = getCity().missingResources(type.constructBuildResourceList());
@@ -195,7 +200,32 @@ public class AIController2 extends CityController {
 		}
 
 		public State update() {
-			return null;
+			if (resources.size() > 0) {
+				Resource r = resources.get(0);
+				Debug.print(this, "need resource " + r.getName());
+				// hanterar bara en fabrik som producerar varje sak. bör väga många mot varandra?
+				BuildingType type = BuildingType.factoryProduces(r);
+				Building b = getCity().getBuildingByType(type);
+				if (b != null && b.isBuilt()) {
+					for (Worker w : getCity().getWorkers()) {
+						if (w.getWorkplace() != b) w.workAt(b);
+						//Debug.print(this, "assigning worker to " + b.getType().getName());
+					}
+					int n = getCity().getNoMaterials(r);
+					if (n >= 10) {
+						Debug.print(this, "have " + n + " materials, going to next");
+						resources.remove(0);
+						return null;
+					} else {
+						Debug.print(this, "have " + n + " materials, continuing work");
+						return null;
+					}
+				} else {
+					return new MakeFactoryState(this, type);
+				}
+			} else {
+				return prevState;
+			}
 		}
 		
 	}

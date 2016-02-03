@@ -154,4 +154,17 @@ public class BuildingType {
 	public ArrayList<Resource> constructBuildResourceList() {
 		return Resource.constructList(getBuildResources(), getBuildAmount());
 	}
+
+	// get the first buildingType that produces the given resource
+	public static BuildingType factoryProduces(Resource r) {
+		for (Object k : BuildingType.getTypes().keySet().toArray()) {
+			BuildingType t = BuildingType.getTypes().get(k);
+			if (t.isFactory()) {
+				for (Resource r2 : t.products) {
+					if (r == r2) return t;					
+				}
+			}
+		}
+		return null;
+	}
 }
