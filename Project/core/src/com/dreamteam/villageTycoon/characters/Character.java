@@ -61,6 +61,8 @@ public class Character extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
+		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
+		
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
 
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
@@ -69,7 +71,7 @@ public class Character extends GameObject {
 			//if(getSprite() != deathAnimation) setSprite(deathAnimation);
 			//if(getSprite().animationDone()) getScene().removeObject(this);
 			//getSprite().animate(deltaTime);
-			getScene().addObject(new Corpse(this.getPosition(), new Animation(AssetManager.getTexture("soldierCorpse"))));
+			getScene().addObject(new Corpse(this.getPosition(), deathAnimation));
 			getScene().removeObject(this);
 		}
 		
@@ -219,7 +221,10 @@ public class Character extends GameObject {
 	public void setMaxCountFireDamegeTime(int maxCountFireDamegeTime) {
 		this.maxCountFireDamegeTime = maxCountFireDamegeTime;
 	}
-
+	
+	public void setDeathAnimation(Animation deathAnimation) {
+		this.deathAnimation = deathAnimation;
+	}
 	
 	protected void followPath(float deltaTime) {
 		//Debug.print(this, "following path");

@@ -18,7 +18,7 @@ Textures: {
 	
 	worker: 879, 3, 64, 61;
 	soldier: 950, 3, 64, 61;
-	soldierCorpse: 949, 82, 67, 65;
+	playerCorpse: 949, 82, 67, 65;
 	
 	enemySoldier: 1015, 3, 64, 64;
 	enemyWorker: 1074, 3, 64, 64;

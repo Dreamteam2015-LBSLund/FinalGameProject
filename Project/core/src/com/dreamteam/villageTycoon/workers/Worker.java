@@ -23,8 +23,8 @@ public class Worker extends Character {
 	private Inventory<Resource> inventory;
 	private Task task;
 	
-	public Worker(Vector2 position, Animation deathAnimation, City city) {
-		super(position, new Animation(AssetManager.getTexture("worker")), deathAnimation, city);
+	public Worker(Vector2 position, City city) {
+		super(position, new Animation(AssetManager.getTexture("worker")), new Animation(AssetManager.getTexture("worker")), city);
 		inventory = new Inventory<Resource>();
 		
 		Debug.print(this, "worker constructed");
@@ -33,8 +33,10 @@ public class Worker extends Character {
 		
 		if(this.getCity().getController() instanceof PlayerController) {
 			this.setSprite(new Animation(AssetManager.getTexture("worker")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("playerCorspe")));
 		} else {
 			this.setSprite(new Animation(AssetManager.getTexture("enemyWorker")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorspe")));
 		}
 	}
 	

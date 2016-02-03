@@ -90,8 +90,10 @@ public class Soldier extends Character {
 		
 		if(this.getCity().getController() instanceof PlayerController) {
 			this.setSprite(new Animation(AssetManager.getTexture("soldier")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("playerCorpse")));
 		} else {
 			this.setSprite(new Animation(AssetManager.getTexture("enemySoldier")));
+			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
 		}
 	}
 	
