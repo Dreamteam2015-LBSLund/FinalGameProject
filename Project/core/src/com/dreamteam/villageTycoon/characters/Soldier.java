@@ -77,7 +77,7 @@ public class Soldier extends Character {
 		
 		city.addSoldier(this);
 		
-		maxAttackDistance = 5;
+		maxAttackDistance = 8;
 		
 		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("firekit")));
 		
@@ -124,7 +124,7 @@ public class Soldier extends Character {
 		}
 		
 		for(GameObject g : getScene().getObjects()) {
-			if(g instanceof Character && g.distanceTo(this.getPosition()) <= this.maxAttackDistance && ((Character) g).getCity() != getCity()) {
+			if(g instanceof Character && g.distanceTo(this.getPosition().cpy()) <= this.maxAttackDistance && ((Character) g).getCity() != getCity()) {
 				this.addSpottedEnemies(((Character)g));
 			}
 		}
@@ -168,11 +168,13 @@ public class Soldier extends Character {
 	}
 	
 	public void moveToTarget() {
-		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE) {
+		System.out.println(currentTarget.distanceTo(this.getPosition()));
+		
+		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE && !getSelected()) {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
 			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 		}
-		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
+		if(currentTarget.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
 				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
@@ -182,7 +184,7 @@ public class Soldier extends Character {
 		if(this.spottedEnemies.size() <= 0 && this.targetBuilding != null) {
 			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE) {
 				float angle = (float)Math.atan2(targetBuilding.getPosition().y - this.getPosition().y, targetBuilding.getPosition().x - this.getPosition().x);
-				this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
+				//this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 			}
 			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
 				if(weapon.canShoot()) {

@@ -34,19 +34,19 @@ public class Animation extends Sprite {
 		setColor(color);
 	}
 	
-	public Animation(Sprite sprite, float maxAnimationTime, int maxFrame, int minFrame, boolean vertical){
+	public Animation(Sprite sprite, float maxAnimationTime, int maxFrame, boolean vertical){
 		super(sprite);
-		setAnimation(maxAnimationTime, maxFrame, minFrame, vertical);
+		setAnimation(maxAnimationTime, maxFrame, vertical);
 	}
 	
 	public Vector2 getSize() {
 		return this.getSize();
 	}
 	
-	public void setAnimation(float maxAnimationTime, int maxFrame, int minFrame, boolean vertical) {
+	public void setAnimation(float maxAnimationTime, int maxFrame, boolean vertical) {
 		this.maxAnimationTime = maxAnimationTime;
 		this.maxFrame = maxFrame;
-		this.minFrame = minFrame;
+		this.minFrame = (this.getRegionX() / this.getRegionWidth());
 		this.vertical = vertical;
 	}
 	
