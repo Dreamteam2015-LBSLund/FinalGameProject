@@ -20,6 +20,7 @@ import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
+import com.dreamteam.villageTycoon.utils.Debug;
 
 public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
@@ -76,6 +77,7 @@ public class Soldier extends Character {
 		}
 		
 		city.addSoldier(this);
+		Debug.print(this, city.getController().getClass().getSimpleName());
 		
 		maxAttackDistance = 8;
 		

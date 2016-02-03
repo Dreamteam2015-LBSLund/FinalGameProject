@@ -8,6 +8,7 @@ import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingButton;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.Worker;
@@ -26,10 +27,12 @@ public abstract class Debug {
 		//whitelist.add(PathFinder.class);		
 		//whitelist.add(BuildingPlacer.class);
 		//whitelist.add(BuildingButton.class);
+		whitelist.add(Soldier.class);
 		whitelist.add(City.class);
 		whitelist.add(AIController2.class);
 		whitelist.add(AIController2.MakeFactoryState.class);
 		whitelist.add(AIController2.MakeResourceState.class);
+		whitelist.add(AIController2.MakeSoldierState.class);
 	}
 	
 	public static void print(Object client, String message) {

@@ -90,6 +90,7 @@ public class AIController2 extends CityController {
 		public State update() {
 			if (getCity().hasBuildingType(BuildingType.getTypes().get("armyBarack"))) {
 				// make some soldiers
+				Debug.print(this, getCity().getSoldiers().size() + " soldiers");
 				if (getCity().getSoldiers().size() >= numSoldiers) {
 					return prevState; // done
 				} else {
