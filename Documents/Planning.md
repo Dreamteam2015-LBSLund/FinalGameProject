@@ -33,9 +33,10 @@ VFX | Tom | Bonus
 Feature| Status
 -------|-------
 Soldater kan attackera grannbyar självständig| ofärdigt
-Ta bort byggander | ofärdigt
-Förståligt UI(framför allt soldater, byggandet) | färdigt
+Gamescene | ofärdigt
 Stads AI | ofärdigt
+Ta bort byggander | färdigt
+Förståligt UI(framför allt soldater, byggandet) | färdigt
 Byggnader kan spawna karaktärer | färdigt
 UI for spawning charachters | färdigt
-Gamescene | ofärdigt
+
