@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Tile;
 
 /**
@@ -94,8 +95,8 @@ public abstract class GameObject {
 	}
 	
 	public Tile getTile() {
-		if (getScene() instanceof TestScene) {
-			return ((TestScene)getScene()).getMap().tileAt(position);
+		if (getScene() instanceof GameScene) {
+			return ((GameScene)getScene()).getMap().tileAt(position);
 		}
 		return null;
 	}

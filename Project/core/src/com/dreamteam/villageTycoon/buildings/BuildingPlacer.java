@@ -12,6 +12,7 @@ import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.utils.Debug;
 
@@ -21,7 +22,7 @@ public class BuildingPlacer {
 	
 	private enum State { CHOOSING, PLACING };
 	private State state;
-	private TestScene scene;
+	private GameScene scene;
 	private BuildingType building;
 	private boolean canPlace, clicked;
 	private Point placePosition;
@@ -31,7 +32,7 @@ public class BuildingPlacer {
 	
 	public BuildingPlacer(Scene scene) {
 		state = State.CHOOSING;
-		this.scene = (TestScene)scene;
+		this.scene = (GameScene)scene;
 		
 		if (buttons == null) {
 			buttons = new ArrayList<BuildingButton>();

@@ -12,6 +12,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
@@ -140,7 +141,7 @@ public class Worker extends Character {
 			print("resource not in inventory");
 			return false;
 		}
-		if (((TestScene)getScene()).getMap().tileAt(getPosition()).getBuilding() == destination) { // is at destination
+		if (((GameScene)getScene()).getMap().tileAt(getPosition()).getBuilding() == destination) { // is at destination
 			print("have arrived, putting");
 			destination.getInputInventory().add(r, 1);
 			inventory.remove(r, 1);

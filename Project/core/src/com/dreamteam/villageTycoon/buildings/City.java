@@ -13,6 +13,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
@@ -26,7 +27,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
  */
 public class City extends GameObject {
 	// well then
-	private TestScene scene;
+	private GameScene scene;
 	private ArrayList<Building> buildings;
 	private ArrayList<Worker> workers;
 	private ArrayList<Soldier> soldiers;
@@ -36,7 +37,7 @@ public class City extends GameObject {
 	public City(Scene scene, CityController controller, Vector2 position) {
 		super(position, new Animation(AssetManager.getTexture("error")));
 		buildings = new ArrayList<Building>();
-		this.scene = (TestScene) scene;
+		this.scene = (GameScene) scene;
 		controller.setCity(this);
 		this.controller = controller;
 		
@@ -142,7 +143,7 @@ public class City extends GameObject {
 		return buildings;
 	}
 
-	public TestScene getScene() {
+	public GameScene getScene() {
 		return scene;
 	}
 

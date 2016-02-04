@@ -33,6 +33,7 @@ import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
 import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.characters.Character;
 
@@ -86,7 +87,7 @@ public class Building extends GameObject {
     }
     
     private void setTiles() {
-    	Tile[][] tiles = ((TestScene)getScene()).getMap().getTiles();
+    	Tile[][] tiles = ((GameScene)getScene()).getMap().getTiles();
     	
     	ArrayList<Prop> props = new ArrayList<Prop>();
     	for (GameObject g : getScene().getObjects()) {

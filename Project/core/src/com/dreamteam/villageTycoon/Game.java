@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
+import com.dreamteam.villageTycoon.game.GameScene;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch, uiBatch;
@@ -24,8 +25,8 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		currentScene = new TestScene();
-		((TestScene)currentScene).initialize();
+		currentScene = new GameScene();
+		((GameScene)currentScene).initialize();
 	}
 	
 	public void update() {
