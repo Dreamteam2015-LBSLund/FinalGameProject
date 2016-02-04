@@ -1,3 +1,6 @@
+# AI States
+Olika tillstånd AI:n kan befinna sig i i sin kamp mot spelaren.
+
 ### AttackState
 Använd existerande soldater för att attackera.
 - om soldater inte finns: MakeSoldierState
