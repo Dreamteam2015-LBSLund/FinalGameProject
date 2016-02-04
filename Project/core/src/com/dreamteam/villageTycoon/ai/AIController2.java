@@ -174,20 +174,6 @@ public class AIController2 extends CityController {
 		}
 	}
 	
-	public class GatherResourceState extends State {
-		
-		private Resource resource;
-		
-		public GatherResourceState(State previous, Resource r) {
-			super(previous);
-			this.resource = r;
-		}
-
-		public State update() {
-			return null;
-		}
-	}
-	
 	public class MakeResourceState extends State {
 		
 		private ArrayList<Resource> resources;
@@ -206,6 +192,7 @@ public class AIController2 extends CityController {
 				// hanterar bara en fabrik som producerar varje sak. bör väga många mot varandra?
 				BuildingType type = BuildingType.factoryProduces(r);
 				Building b = getCity().getBuildingByType(type);
+				// check for not available production resource
 				if (b != null && b.isBuilt()) {
 					for (Worker w : getCity().getWorkers()) {
 						if (w.getWorkplace() != b) w.workAt(b);
