@@ -7,23 +7,16 @@ Använd existerande soldater för att attackera.
 Gör nya soldater.
 - Om ett antal soldater finns: AttackState
 - Om ArmyBarrack inte finns: MakeFactoryState
-- Om resurser inte finns: MakeResourceState
+- Om resurser inte finns: MakeResourceState *I nuläget behövs dock inga resurser*
 
 ### MakeFactoryState 
-vilken fabrikstyp?  
+Vilken fabrikstyp?  
 Konstruera en fabrik.
 - Om fabriken är färdig: Förra tillståndet
 - Om resurser inte finns: MakeResourceState
 
-### GatherResourceState 
-**överflödig eftersom arbetarna fixar detta själva**  
-vilken resurs? till vem?  
-Samla någon resurs åt staden. (Resurser som finns på kartan, färdiga i fabriker eller andra inventories.)
-- Om klar: förra tillståndet
-- Om resursen inte finns: MakeResourceState
-
 ### MakeResourceState 
-vilken resurs? 
+Vilken/Vilka resurs? 
 Konstruera någon resurs i fabriker. (Resurser som måste konstrueras i en fabrik, som inte finns nån annanstans.)
 - Om klar: förra tillståndet.
 - Om fabrik inte finns: MakeFactoryState
