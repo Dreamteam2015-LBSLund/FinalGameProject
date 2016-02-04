@@ -19,7 +19,7 @@ Konstruera en fabrik.
 - Om resurser inte finns: MakeResourceState
 
 ### MakeResourceState 
-Vilken/Vilka resurs? 
+Vilken/Vilka resurs?  
 Konstruera någon resurs i fabriker. (Resurser som måste konstrueras i en fabrik, som inte finns nån annanstans.)
 - Om klar: förra tillståndet.
 - Om fabrik inte finns: MakeFactoryState
