@@ -195,7 +195,7 @@ public class Soldier extends Character {
 				float angle = (float)Math.atan2(targetBuilding.getPosition().y - this.getPosition().y, targetBuilding.getPosition().x - this.getPosition().x);
 				//this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 			}
-			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance-1) {
+			if(targetBuilding.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
 				if(weapon.canShoot()) {
 					getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), targetBuilding.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 					weapon.onShoot();
