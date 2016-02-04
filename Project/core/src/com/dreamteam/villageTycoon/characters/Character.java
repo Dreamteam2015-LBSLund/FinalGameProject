@@ -25,9 +25,11 @@ import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.PathFinder;
 
 public class Character extends GameObject {
+	final float HUNGER_FORCE = 1;
+	
 	private boolean selected;
 	
-	private int health;
+	private float health;
 	
 	private Animation deathAnimation;
 	
@@ -47,6 +49,9 @@ public class Character extends GameObject {
 	private float onFireTime;
 	private float onFireIntervall;
 	
+	private float amountFull;
+	private float maxFull;
+	
 	private int countFireDamegeTime;
 	private int maxCountFireDamegeTime;
 	
@@ -55,7 +60,8 @@ public class Character extends GameObject {
 		
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		this.deathAnimation = deathAnimation;
-		health = 1;
+		this.health = 3;
+		this.amountFull = 1000;
 		this.city = city;
 	}
 	
@@ -69,11 +75,14 @@ public class Character extends GameObject {
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
 		
 		if(health <= 0) {
-			//if(getSprite() != deathAnimation) setSprite(deathAnimation);
-			//if(getSprite().animationDone()) getScene().removeObject(this);
-			//getSprite().animate(deltaTime);
 			getScene().addObject(new Corpse(this.getPosition(), deathAnimation));
 			getScene().removeObject(this);
+		}
+		
+		if(amountFull > 0) {
+			amountFull -= HUNGER_FORCE * deltaTime;
+		} else {
+			health -= 0.3f * deltaTime;
 		}
 		
 		followPath(deltaTime);
@@ -142,11 +151,11 @@ public class Character extends GameObject {
 		}
 	}
 	
-	public void setHealth(int health) {
+	public void setHealth(float health) {
 		this.health = health;
 	}
 	
-	public int getHealth() {
+	public float getHealth() {
 		return health;
 	}
 	
@@ -225,6 +234,18 @@ public class Character extends GameObject {
 	
 	public void setDeathAnimation(Animation deathAnimation) {
 		this.deathAnimation = deathAnimation;
+	}
+	
+	public float getAmountFull() {
+		return this.amountFull;
+	}
+	
+	public void setAmountFull(float amountFull) {
+		this.amountFull = amountFull;
+	}
+	
+	public void setMaxFull(float maxFull) {
+		this.maxFull = maxFull;
 	}
 	
 	protected void followPath(float deltaTime) {
