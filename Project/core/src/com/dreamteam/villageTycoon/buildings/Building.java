@@ -27,6 +27,7 @@ import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.CreateCharacterButton;
+import com.dreamteam.villageTycoon.userInterface.DestroyBuildingButton;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
@@ -52,6 +53,8 @@ public class Building extends GameObject {
     private Character characterToSpawn;
     private CreateCharacterButton createCharacterButton; 
     
+    private DestroyBuildingButton destroyBuildingButton;
+    
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position.add(new Vector2(.5f, .5f)), new Vector2(4, 3), new Animation(type.getBuildSprite())); // add .5 to position to align properly with tiles
@@ -74,6 +77,7 @@ public class Building extends GameObject {
 		toClear = new ArrayList<Prop>();
 		
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
+		this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 300));
     }
     
     public void onAdd(Scene scene) {
@@ -112,9 +116,7 @@ public class Building extends GameObject {
     	// TODO: instant build on Y press. remove before realease :^)
     	
     	if(this.type.getType() == BuildingType.Type.Home) {
-    		if(this.selected) System.out.println(type.getName());
-			
-			
+    		//if(this.selected) System.out.println(type.getName());			
 			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		}
     	
@@ -124,6 +126,10 @@ public class Building extends GameObject {
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		this.createCharacterButton.update(getScene());
+    	}
+    	
+    	if(selected) {
+    		destroyBuildingButton.update(this);
     	}
 
     	for(GameObject g : getScene().getObjects()) {
@@ -287,8 +293,10 @@ public class Building extends GameObject {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		
+    		destroyBuildingButton.draw(batch);
+    		
     		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
-        		this.createCharacterButton.draw(batch);
+        		createCharacterButton.draw(batch);
         	}
     	}
     }
