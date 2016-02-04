@@ -32,6 +32,8 @@ VFX | Tom | Bonus
 
 Feature| Status
 -------|-------
+Hämta vatten | ofäridgt
+Karaktärer blir hungriga | ofärdigt
 Stads AI (autonoma soldater och arbetare) | ofärdigt
 Gamescene | färdigt
 Ta bort byggander | färdigt
@@ -39,3 +41,15 @@ Förståligt UI(framför allt soldater, byggandet) | färdigt
 Byggnader kan spawna karaktärer | färdigt
 UI for spawning charachters | färdigt
 
+## Redraw houses
+
+Name | Staus
+-----|------
+Factory | ofärdig
+House | ofärdig
+Woodshop | ofärdig
+Mine | ofärdig
+Farm | ofärdig
+Military base | ofärdig
+Mill | ofärdig
+Backery | ofärdig
