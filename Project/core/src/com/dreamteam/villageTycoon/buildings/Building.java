@@ -109,6 +109,16 @@ public class Building extends GameObject {
     	}
     }
     
+    private void unsetTiles() {
+    	Tile[][] tiles = ((GameScene)getScene()).getMap().getTiles();
+    	for (int x = 0; x < (int)(getSize().x / Tile.WIDTH); x++) {
+    		for (int y = 0; y < (int)(getSize().y / Tile.HEIGHT); y++) {
+    			Tile t = tiles[x + (int)(getPosition().x / Tile.WIDTH)][y + (int)(getPosition().y / Tile.HEIGHT)];
+    			t.unBuild();
+    		}
+    	}
+    }
+    
     public boolean isBuilt() {
     	return buildState == BuildState.Done;
     }

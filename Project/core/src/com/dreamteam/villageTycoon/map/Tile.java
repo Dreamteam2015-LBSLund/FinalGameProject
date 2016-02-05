@@ -35,6 +35,10 @@ public class Tile {
 		this.building = b;
 	}
 	
+	public void unBuild() {
+		this.building = null;
+	}
+	
 	public void removeBuilding() {
 		building = null;
 	}
