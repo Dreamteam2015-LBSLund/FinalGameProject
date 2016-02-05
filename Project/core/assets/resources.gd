@@ -27,7 +27,7 @@ grass: {
 }
 
 food: {
-	icon: grassIcon;
+	icon: foodIcon;
 }
 
 diamond: {

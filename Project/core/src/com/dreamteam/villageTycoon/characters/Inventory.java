@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.InventoryItem;
 
 public class Inventory <T extends InventoryItem> {
@@ -66,7 +67,9 @@ public class Inventory <T extends InventoryItem> {
 			r = new Rectangle(position.cpy().add(new Vector2(0, i * ICON_SIZE)), new Vector2(ICON_SIZE, ICON_SIZE));
 			//System.out.println(items[i] + ", " + r + ", " + batch);
 			items[i].draw(r, batch);
-			AssetManager.font.draw(batch, count((T)items[i]) + "", r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
+			if (items[i] instanceof Resource) {
+				AssetManager.font.draw(batch, ((Resource)items[i]).getName() + count((T)items[i]), r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
+			} else AssetManager.font.draw(batch, "" + count((T)items[i]), r.getX() + ICON_SIZE, r.getY() + ICON_SIZE);
 		}
 	}
 }

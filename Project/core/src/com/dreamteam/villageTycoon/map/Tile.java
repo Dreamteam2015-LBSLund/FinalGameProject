@@ -1,11 +1,14 @@
 package com.dreamteam.villageTycoon.map;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.characters.Character;
 
@@ -61,5 +64,17 @@ public class Tile {
 
 	public boolean isBuildable() {
 		return type.isBuildable() && !hasBuilding();
+	}
+
+	public ArrayList<Tile> getNeighbors(GameScene scene) {
+		ArrayList<Tile> ret = new ArrayList<Tile>();
+		for (int dx = -1; dx < 2; dx++) {
+			for (int dy = -1; dy < 2; dy++) {
+				if (dx != 0 || dy != 0) {
+					ret.add(scene.getMap().tileAt(new Vector2(position.x + dx, position.y + dy)));
+				}
+			}
+		}
+		return ret;
 	}
 }

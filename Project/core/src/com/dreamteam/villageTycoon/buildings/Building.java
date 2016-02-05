@@ -163,7 +163,13 @@ public class Building extends GameObject {
     		}
     	} else if (type.isFactory()) {
     		// regular production
-    		if (isProductionGatheringDone() || toGather.size() == 0) {
+    		// TODO: what did i break?
+    		if (toGather.size() == 0) {
+    			if (!isProductionGatheringDone()) {
+    				startProduction();
+    			}
+    		}
+    		if (isProductionGatheringDone()) {
     			inputInventory.remove(type.getInputResourcesArray());
     			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
@@ -186,9 +192,9 @@ public class Building extends GameObject {
     }
     
     private ArrayList<Resource> getProductionResources() {
-    	for (int i = 0; i < type.getProductionResources().length; i++) {
+    	/*for (int i = 0; i < type.getProductionResources().length; i++) {
     		Debug.print(this, type.getProductionResources()[i].getName() + ": " + type.getInputResourceAmount()[i]);
-    	}
+    	}*/
     	return getInputInventoryDifference(type.getProductionResources(), type.getInputResourceAmount());
     }
     

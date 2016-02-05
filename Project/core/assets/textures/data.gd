@@ -35,6 +35,7 @@ Textures: {
 	weaponIcon: 		 589, 0, 16, 16;
 	flourIcon:			 606, 0, 16, 16;
 	wheatIcon:			 623, 0, 16, 16;
+	waterIcon: 			 434, 0, 16, 16;
 	
 	factory: 				 0, 457, 128, 96;
 	factoryProgress: 		 0, 553, 128, 96;

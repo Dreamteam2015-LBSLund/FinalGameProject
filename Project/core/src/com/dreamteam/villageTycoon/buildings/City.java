@@ -17,6 +17,7 @@ import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.InventoryItem;
 import com.dreamteam.villageTycoon.workers.Worker;
@@ -77,7 +78,8 @@ public class City extends GameObject {
 	}
 	
 	//find the location of a resource, optionally prioritizing ones close to some place. Returns null if it can't be found. Looks in buildings and on props on the map
-	public GameObject findResource(Resource r, Vector2 closeTo) {
+	public Object findResource(Resource r, Vector2 closeTo) {
+		Debug.print(this, "finding resource " + r.getName());
 		GameObject closest = null;
 		for (Building b : buildings) {
 			if (b.getOutputInventory().count(r) > 0){
@@ -107,6 +109,32 @@ public class City extends GameObject {
 				}
 			}
 		}
+		
+		if (r.getName().equals("water")) {
+			Debug.print(this, "resource is water");
+			Tile closestT = null;
+			float cd = 0;
+			for (Tile[] ta : ((GameScene)getScene()).getMap().getTiles()) {
+				for (Tile t : ta) {
+					if (t.getType().getName().equals("Water")) {
+						for (Tile t2 : t.getNeighbors((GameScene)getScene())) {
+							if (t2 != null && t2.isWalkable(null)) {
+								Vector2 delta = closeTo.cpy().sub(t2.getPosition());
+								float d = delta.len2();
+								if (closest == null || d < cd) {
+									closestT = t2;
+									cd = d;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (closestT != null) {
+				Debug.print(this, "returning watertile");
+				return closestT;
+			}
+		} else Debug.print(this, "not water: " + r.getName());
 		
 		return closest;
 	}

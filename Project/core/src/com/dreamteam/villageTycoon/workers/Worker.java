@@ -15,6 +15,7 @@ import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
+import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.utils.Debug;
 
 public class Worker extends Character {
@@ -71,41 +72,53 @@ public class Worker extends Character {
 
 	// finds the resource and puts it in the inventory. returns true if done
 	public boolean findResource(Resource r) {
-		//print("finding resource " + r.getName());
+		print("finding resource " + r.getName());
 		if (inventory.count(r) > 0) {
-			//print("is already in inventory");
+			print("is already in inventory");
 			return true;
-		}
-		else {
-			GameObject t = getCity().findResource(r, getPosition()); // this doesn't need to happen every frame
+		} else {
+			Object t = getCity().findResource(r, getPosition()); // this doesn't need to happen every frame
 			if (t != null) {
-				Vector2 target = t.getPosition();
-				print("found resource at " + target + ", setting path");
-			
-				setPath(target);
+				if (t instanceof GameObject) {
+					GameObject o = (GameObject)t;
+					Vector2 target = o.getPosition();
+					print("found resource at " + target + ", setting path");
 				
-				if (isAtPathEnd()) {
-					print("got to end of path");
-					if (t instanceof Building) {
-						print("thing is building, taking resource");
-						Building b = (Building)t;
-						if (b.getOutputInventory().count(r) > 0) {
-							b.getOutputInventory().remove(r, 1);
-							inventory.add(r, 1);
-							//Debug.print(this, "has resource, putting");
-							return true;
-						}
-					} else if (t instanceof Prop) {
-						print("thing is prop, destroying it");
-						if (((Prop)t).getType().getResource() == r) {
-							getScene().removeObject(t);
-							inventory.add(r, 1);
-							return true;
-						} else {
-							print("Wrong prop :^( resource = " + ((Prop)t).getType().getResource().getName());
-							return false;
+					setPath(target);
+					
+					if (isAtPathEnd()) {
+						print("got to end of path");
+						if (t instanceof Building) {
+							print("thing is building, taking resource");
+							Building b = (Building)t;
+							if (b.getOutputInventory().count(r) > 0) {
+								b.getOutputInventory().remove(r, 1);
+								inventory.add(r, 1);
+								//Debug.print(this, "has resource, putting");
+								return true;
+							}
+						} else if (t instanceof Prop) {
+							print("thing is prop, destroying it");
+							if (((Prop)t).getType().getResource() == r) {
+								getScene().removeObject(o);
+								inventory.add(r, 1);
+								return true;
+							} else {
+								print("Wrong prop :^( resource = " + ((Prop)t).getType().getResource().getName());
+								return false;
+							}
 						}
 					}
+				} else if (t instanceof Tile) {
+					Debug.print(this, "getting water tile");
+					setPath(((Tile) t).getPosition());
+					target = ((Tile)t).getPosition();
+					if (isAtPathEnd()) {
+						inventory.add(Resource.get("water"), 1);
+						return true;
+					}
+				} else {
+					print("resource is weird");
 				}
 			} else {
 				print("couldn't find resource");
@@ -114,7 +127,11 @@ public class Worker extends Character {
 		return false;
 	}
 	
+	Vector2 target;
+	
 	public void setTask(Task task) {
+		Debug.print(this, "got task " + task.getClass().getSimpleName());
+		if (task instanceof GatherTask) Debug.print(this, "resource: " + ((GatherTask)task).getResource().getName());
 		this.task = task;
 	}
 	
@@ -188,6 +205,7 @@ public class Worker extends Character {
 				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
 			}
 		}
+		
 		//AssetManager.font.draw(batch, getPosition() + "", getUiScreenCoords().x, getUiScreenCoords().y);
 	}
 	
