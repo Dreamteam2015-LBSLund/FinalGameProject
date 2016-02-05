@@ -33,8 +33,8 @@ VFX | Tom | Bonus
 Feature| Status
 -------|-------
 Hämta vatten | ofäridgt
-Karaktärer blir hungriga | ofärdigt
 Stads AI (autonoma soldater och arbetare) | ofärdigt
+Karaktärer blir hungriga | färdigt
 Gamescene | färdigt
 Ta bort byggander | färdigt
 Förståligt UI(framför allt soldater, byggandet) | färdigt

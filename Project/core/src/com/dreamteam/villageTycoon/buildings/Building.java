@@ -262,7 +262,7 @@ public class Building extends GameObject {
     public Character getCharacterToSpawn() {
     	if(this.type.getType() == BuildingType.Type.Home) {
 			if (!type.getName().equals("house")) {
-				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 15, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
 						new SabotageKit[]{ 
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
