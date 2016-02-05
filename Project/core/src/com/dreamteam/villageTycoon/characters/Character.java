@@ -19,13 +19,15 @@ import com.dreamteam.villageTycoon.framework.Point;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
+import com.dreamteam.villageTycoon.map.Prop;
+import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.map.Tile;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.PathFinder;
 
 public class Character extends GameObject {
-	final float HUNGER_FORCE = 1;
+	final float HUNGER_FORCE = 3;
 	
 	private boolean selected;
 	
@@ -61,7 +63,7 @@ public class Character extends GameObject {
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		this.deathAnimation = deathAnimation;
 		this.health = 3;
-		this.amountFull = 1000;
+		this.amountFull = maxFull = 1000;
 		this.city = city;
 	}
 	
@@ -248,10 +250,6 @@ public class Character extends GameObject {
 		this.amountFull = amountFull;
 	}
 	
-	public void setMaxFull(float maxFull) {
-		this.maxFull = maxFull;
-	}
-	
 	protected void followPath(float deltaTime) {
 		//Debug.print(this, "following path");
 		if (path != null && !path.isEmpty()) {
@@ -325,4 +323,66 @@ public class Character extends GameObject {
 	public boolean hasPath() {
 		return path != null;
 	}
+	
+	// finds the resource and puts it in the inventory. returns true if done
+		public boolean findResource(Resource r, Inventory<Resource> inventory) {
+			print("finding resource " + r.getName());
+			if (inventory != null && inventory.count(r) > 0) {
+				print("is already in inventory");
+				return true;
+			} else {
+				Object t = getCity().findResource(r, getPosition()); // this doesn't need to happen every frame
+				if (t != null) {
+					if (t instanceof GameObject) {
+						GameObject o = (GameObject)t;
+						Vector2 target = o.getPosition();
+						print("found resource at " + target + ", setting path");
+					
+						setPath(target);
+						
+						if (isAtPathEnd()) {
+							print("got to end of path");
+							if (t instanceof Building) {
+								print("thing is building, taking resource");
+								Building b = (Building)t;
+								if (b.getOutputInventory().count(r) > 0) {
+									b.getOutputInventory().remove(r, 1);
+									if (inventory != null) inventory.add(r, 1);
+									//Debug.print(this, "has resource, putting");
+									return true;
+								}
+							} else if (t instanceof Prop) {
+								print("thing is prop, destroying it");
+								if (((Prop)t).getType().getResource() == r) {
+									getScene().removeObject(o);
+									if (inventory != null) inventory.add(r, 1);
+									return true;
+								} else {
+									print("Wrong prop :^( resource = " + ((Prop)t).getType().getResource().getName());
+									return false;
+								}
+							}
+						}
+					} else if (t instanceof Tile) {
+						Debug.print(this, "getting water tile");
+						setPath(((Tile) t).getPosition());
+						//target = ((Tile)t).getPosition();
+						if (isAtPathEnd()) {
+							if (inventory != null) inventory.add(Resource.get("water"), 1);
+							return true;
+						}
+					} else {
+						print("resource is weird");
+					}
+				} else {
+					print("couldn't find resource");
+				}
+			}
+			return false;
+		}
+
+		private void print(String string) {
+			// TODO Auto-generated method stub
+			if (false) Debug.print(this, string);
+		}
 }

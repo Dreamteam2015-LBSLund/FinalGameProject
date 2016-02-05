@@ -54,7 +54,15 @@ public class Worker extends Character {
 			workplace = null;
 		}
 		
-		if (task != null) {
+		
+		Debug.print(this, "hunger = " + getAmountFull() / getMaxFull());
+		if (getAmountFull() / getMaxFull() < .3f) {
+			if (findResource(Resource.get("food"), inventory) || inventory.count(Resource.get("water")) > 0) {
+				inventory.remove(Resource.get("food"), 1);
+				setAmountFull(getMaxFull());
+				Debug.print(this, "ATE - hunger = " + getAmountFull() / getMaxFull() + "llllllllllllasdssssssssssssssssssssssssssssss");
+			}
+		} else if (task != null) {
 			if (task.work(this)) task = null;
 		}
 
@@ -70,62 +78,7 @@ public class Worker extends Character {
 		task = null;
 	}
 
-	// finds the resource and puts it in the inventory. returns true if done
-	public boolean findResource(Resource r) {
-		print("finding resource " + r.getName());
-		if (inventory.count(r) > 0) {
-			print("is already in inventory");
-			return true;
-		} else {
-			Object t = getCity().findResource(r, getPosition()); // this doesn't need to happen every frame
-			if (t != null) {
-				if (t instanceof GameObject) {
-					GameObject o = (GameObject)t;
-					Vector2 target = o.getPosition();
-					print("found resource at " + target + ", setting path");
-				
-					setPath(target);
-					
-					if (isAtPathEnd()) {
-						print("got to end of path");
-						if (t instanceof Building) {
-							print("thing is building, taking resource");
-							Building b = (Building)t;
-							if (b.getOutputInventory().count(r) > 0) {
-								b.getOutputInventory().remove(r, 1);
-								inventory.add(r, 1);
-								//Debug.print(this, "has resource, putting");
-								return true;
-							}
-						} else if (t instanceof Prop) {
-							print("thing is prop, destroying it");
-							if (((Prop)t).getType().getResource() == r) {
-								getScene().removeObject(o);
-								inventory.add(r, 1);
-								return true;
-							} else {
-								print("Wrong prop :^( resource = " + ((Prop)t).getType().getResource().getName());
-								return false;
-							}
-						}
-					}
-				} else if (t instanceof Tile) {
-					Debug.print(this, "getting water tile");
-					setPath(((Tile) t).getPosition());
-					target = ((Tile)t).getPosition();
-					if (isAtPathEnd()) {
-						inventory.add(Resource.get("water"), 1);
-						return true;
-					}
-				} else {
-					print("resource is weird");
-				}
-			} else {
-				print("couldn't find resource");
-			}
-		}
-		return false;
-	}
+	
 	
 	Vector2 target;
 	
@@ -224,5 +177,9 @@ public class Worker extends Character {
 	
 	public Building getWorkplace() {
 		return workplace;
+	}
+
+	public Inventory<Resource> getInventory() {
+		return inventory;
 	}
 }

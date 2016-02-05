@@ -17,6 +17,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.DistanceComparator;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
@@ -99,6 +100,13 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		if (getAmountFull() / getMaxFull() < .3f) {
+			if (findResource(Resource.get("food"), null)) {
+				setAmountFull(getMaxFull());
+			}
+		}
+		
 		if(prepareSabotageKit && sabotageKits.size() > 0) attack(deltaTime);
 		weapon.update(deltaTime);
 		

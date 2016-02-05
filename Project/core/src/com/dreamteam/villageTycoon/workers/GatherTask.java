@@ -34,7 +34,7 @@ public class GatherTask implements Task {
 		print("gather task working, state = " + state);
 		
 		if (state == State.Finding) {
-			if (w.findResource(resource)) state = State.Returning;
+			if (w.findResource(resource, w.getInventory())) state = State.Returning;
 		} else {
 			if (w.putResource(destination, resource)) return true;
 		}
