@@ -32,8 +32,8 @@ VFX | Tom | Bonus
 
 Feature| Status
 -------|-------
-Hämta vatten | ofäridgt
 Stads AI (autonoma soldater och arbetare) | ofärdigt
+Hämta vatten | färidgt
 Karaktärer blir hungriga | färdigt
 Gamescene | färdigt
 Ta bort byggander | färdigt
@@ -45,7 +45,7 @@ UI for spawning charachters | färdigt
 
 Name | Staus
 -----|------
-Factory | ofärdig
+Factory | färdig
 House | ofärdig
 Woodshop | ofärdig
 Mine | ofärdig
