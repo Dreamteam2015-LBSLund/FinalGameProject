@@ -240,6 +240,10 @@ public class Character extends GameObject {
 		return this.amountFull;
 	}
 	
+	public float getMaxFull() {
+		return this.maxFull;
+	}
+	
 	public void setAmountFull(float amountFull) {
 		this.amountFull = amountFull;
 	}
