@@ -33,6 +33,7 @@ VFX | Tom | Bonus
 Feature| Status
 -------|-------
 Stads AI (autonoma soldater och arbetare) | ofärdigt
+Soldater ska äta | ofärdigt
 Hämta vatten | färidgt
 Karaktärer blir hungriga | färdigt
 Gamescene | färdigt
