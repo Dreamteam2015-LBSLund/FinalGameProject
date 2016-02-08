@@ -28,7 +28,7 @@ public class AIController2 extends CityController {
 		if (!hasFood()) {
 			state = new GetFoodState(state);
 		} else if (!hasFoodProduction()) {
-			state = new MakeFoodFactoryState(state);	
+			state = new MakeFoodProductionState(state);	
 		}
 		State s = state.update();
 		if (s != null) {
