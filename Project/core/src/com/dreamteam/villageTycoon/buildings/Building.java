@@ -128,7 +128,7 @@ public class Building extends GameObject {
     	
     	if(this.type.getType() == BuildingType.Type.Home) {
     		//if(this.selected) System.out.println(type.getName());			
-			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
+			//this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		}
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);

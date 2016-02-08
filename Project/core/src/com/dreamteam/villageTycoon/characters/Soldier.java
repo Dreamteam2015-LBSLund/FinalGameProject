@@ -282,6 +282,10 @@ public class Soldier extends Character {
 		}
 	}
 	
+	public int getFoodReserve() {
+		return this.foodReserve;
+	}
+	
 	public void setEquipedSabotageKit(int equipedSabotageKit) {
 		this.equipedSabotageKit = equipedSabotageKit;
 	}

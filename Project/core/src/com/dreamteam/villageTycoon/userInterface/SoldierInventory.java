@@ -24,12 +24,18 @@ public class SoldierInventory {
 	
 	private AggressionStateButton[] aggressionStateButtons; 
 	
+	private Animation foodIcon;
+	
 	public SoldierInventory(Soldier soldier) {
 		this.soldier = soldier;
 		soldier.getWeapon().getIcon().setPosition(-4, 0);
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			soldier.getSabotageKits().get(i).getIcon().setPosition(4, -2*i);
 		}
+		
+		foodIcon = new Animation(AssetManager.getTexture("foodIcon"));
+		foodIcon.setPosition(200, 200);
+		foodIcon.setSize(100, 100);
 		
 		aggressionStateButtons = new AggressionStateButton[3];
 		aggressionStateButtons[0] = new AggressionStateButton(new Vector2(-Gdx.graphics.getWidth()+50, -Gdx.graphics.getHeight()+50), Soldier.AggressionState.ATTACKING_AND_MOVING);
@@ -70,6 +76,12 @@ public class SoldierInventory {
 		AssetManager.font.draw(batch, "IN CLIP: " + soldier.getWeapon().getType().getClipSize() + "/" + soldier.getWeapon().getClipCount(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+125);
 		
 		batch.draw(soldier.getWeapon().getIcon(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+225, 100, 100);
+		
+		if(soldier.getFoodReserve() > 0) {
+			AssetManager.font.draw(batch, "x" + soldier.getFoodReserve(), -Gdx.graphics.getWidth()+450+100, -Gdx.graphics.getHeight()+500);
+			foodIcon.setPosition(-Gdx.graphics.getWidth()+450-10, -Gdx.graphics.getHeight()+430);
+			foodIcon.draw(batch);
+		}
 	}
 	
 	public int getEquipedSabotageKit() {

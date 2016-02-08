@@ -1,5 +1,6 @@
 package com.dreamteam.villageTycoon.game;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
@@ -8,8 +9,18 @@ import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Controller;
+import com.dreamteam.villageTycoon.characters.SabotageKit;
+import com.dreamteam.villageTycoon.characters.SabotageKitType;
+import com.dreamteam.villageTycoon.characters.Soldier;
+import com.dreamteam.villageTycoon.characters.SoldierType;
+import com.dreamteam.villageTycoon.characters.WeaponType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
+import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
+import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
+import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 
 public class GameScene extends Scene {
 	City cities[];
@@ -33,6 +44,13 @@ public class GameScene extends Scene {
 		}
 		
 		map.setupGame(cities, this);
+		
+		addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+		}));
 		
 		addObject(new Controller());
 	}
