@@ -33,7 +33,7 @@ VFX | Tom | Bonus
 Feature| Status
 -------|-------
 Stads AI (autonoma soldater och arbetare) | ofärdigt
-Soldater ska äta | ofärdigt
+Soldater ska äta | färdigt
 Hämta vatten | färidgt
 Karaktärer blir hungriga | färdigt
 Gamescene | färdigt
@@ -47,10 +47,10 @@ UI for spawning charachters | färdigt
 Name | Staus
 -----|------
 Factory | färdig
-House | ofärdig
-Woodshop | ofärdig
-Mine | ofärdig
-Farm | ofärdig
-Military base | ofärdig
+House | färdig
+Woodshop | färdig
+Mine | färdig
+Farm | färdig
+Military base | färdig
 Mill | ofärdig
 Backery | ofärdig
