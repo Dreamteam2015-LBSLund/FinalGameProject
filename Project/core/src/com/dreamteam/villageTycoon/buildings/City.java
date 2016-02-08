@@ -121,7 +121,7 @@ public class City extends GameObject {
 							if (t2 != null && t2.isWalkable(null)) {
 								Vector2 delta = closeTo.cpy().sub(t2.getPosition());
 								float d = delta.len2();
-								if (closest == null || d < cd) {
+								if (closestT == null || d < cd) {
 									closestT = t2;
 									cd = d;
 								}
