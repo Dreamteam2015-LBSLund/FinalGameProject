@@ -10,16 +10,18 @@ Grass: {
 	isWalkable: true;
 	isBuildable: true;
 	resources: wood, iron, diamond;
-	props: tree, .3, stone, .1;
+	props: stone, .1;
 	sprite: grassTile;
 	gCost: 0.8;
 }
 
 treeTrunk: {
-	isWalkable: false;
-	isBuildable: false;
-	resources: tree;
-	sprite: treeTrunkTile;
+	isWalkable: true;
+	isBuildable: true;
+	resources: wood, iron, diamond;
+	props: tree, 1;
+	sprite: grassTile;
+	gCost: 0.8;
 }
 
 Water: {
