@@ -54,7 +54,8 @@ public class Soldier extends Character {
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
-	private ArrayList<Resource> foodReserve;
+	
+	private int foodReserve;
 	
 	private Building targetBuilding;
 	
@@ -91,10 +92,6 @@ public class Soldier extends Character {
 		inventory = new SoldierInventory(this);
 		setDepth(1);
 		
-		for(int i = 0; i < 10; i++) {
-			foodReserve.add(Resource.get("food"));
-		}
-		
 		if(this.getCity().getController() instanceof PlayerController) {
 			this.setSprite(new Animation(AssetManager.getTexture("soldier")));
 			this.setDeathAnimation(new Animation(AssetManager.getTexture("playerCorpse")));
@@ -102,13 +99,15 @@ public class Soldier extends Character {
 			this.setSprite(new Animation(AssetManager.getTexture("enemySoldier")));
 			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
 		}
+		
+		foodReserve = 10;
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
 		if (getAmountFull() / getMaxFull() < .3f) {
-			if(foodReserve.size() > 0) {
+			if(foodReserve > 0) {
 				consume();
 			} else {
 				if (findResource(Resource.get("food"), null)) {
@@ -277,9 +276,9 @@ public class Soldier extends Character {
 	}
 	
 	public void consume() {
-		if(foodReserve.size() > 0) {
+		if(foodReserve > 0) {
 			setAmountFull(getMaxFull());
-			foodReserve.remove(0);
+			foodReserve -= 1;
 		}
 	}
 	
