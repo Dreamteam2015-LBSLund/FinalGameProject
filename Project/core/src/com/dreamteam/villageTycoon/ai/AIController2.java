@@ -17,14 +17,19 @@ import com.dreamteam.villageTycoon.workers.Worker;
 public class AIController2 extends CityController {
 
 	private State state;
-	private int i;
-	
+
 	public AIController2(City targetCity) {
-		state = new AttackState(null, targetCity);
+		//ArrayList<Resource> r = new ArrayList<Resource>();
+		//r.add(Resource.get("flour"));
+		state = new AttackState(null, targetCity); //new MakeResourceState(null, r);
 	}
 
 	public void update(float dt) {
-		//if (i++ < 60) return;
+		if (!hasFood()) {
+			state = new GetFoodState(state);
+		} else if (!hasFoodProduction()) {
+			state = new MakeFoodFactoryState(state);	
+		}
 		State s = state.update();
 		if (s != null) {
 			state = s;
@@ -40,6 +45,17 @@ public class AIController2 extends CityController {
 		Debug.print(this, getCity().getWorkers().size() + " workers");
 	}
 	
+	private boolean hasFood() {
+		return getCity().getNoMaterials(Resource.get("food")) < getCity().getWorkers().size() + getCity().getSoldiers().size();
+	}
+	
+	private boolean hasFoodProduction() {
+		return getCity().hasBuildingType(BuildingType.getTypes().get("farm")) ||
+				(getCity().hasBuildingType(BuildingType.getTypes().get("wheatfarm")) 
+						&& getCity().hasBuildingType(BuildingType.getTypes().get("flourmill")) 
+						&& getCity().hasBuildingType(BuildingType.getTypes().get("bakery")));
+	}
+	
 
 	abstract class State {
 		
@@ -51,6 +67,28 @@ public class AIController2 extends CityController {
 
 		// returns next state, null if not done
 		public abstract State update();
+	}
+	
+	public class GetFoodState extends State {
+		public GetFoodState(State prState) {
+			super(prState);
+		}
+
+		public State update() {
+			return null;
+		}
+	}
+	
+	
+	
+	public class MakeFoodProductionState extends State {
+		public MakeFoodProductionState(State prev) {
+			super(prev);
+		}
+		
+		public State update() {
+			return null;
+		}
 	}
 	
 	// se https://github.com/Dreamteam2015-LBSLund/Village-Tycoon-RTS/blob/master/Documents/aiStates.md
@@ -194,18 +232,23 @@ public class AIController2 extends CityController {
 				Building b = getCity().getBuildingByType(type);
 				// check for not available production resource
 				if (b != null && b.isBuilt()) {
-					for (Worker w : getCity().getWorkers()) {
-						if (w.getWorkplace() != b) w.workAt(b);
-						//Debug.print(this, "assigning worker to " + b.getType().getName());
-					}
-					int n = getCity().getNoMaterials(r);
-					if (n >= 10) {
-						Debug.print(this, "have " + n + " materials, going to next");
-						resources.remove(0);
-						return null;
+					ArrayList<Resource> missing = getCity().missingResources(b.getType().constructProductionResourcesList());
+					if (missing.size() == 0) {
+						for (Worker w : getCity().getWorkers()) {
+							if (w.getWorkplace() != b) w.workAt(b);
+							//Debug.print(this, "assigning worker to " + b.getType().getName());
+						}
+						int n = getCity().getNoMaterials(r);
+						if (n >= 10) {
+							Debug.print(this, "have " + n + " materials, going to next");
+							resources.remove(0);
+							return null;
+						} else {
+							Debug.print(this, "have " + n + " materials, continuing work");
+							return null;
+						}
 					} else {
-						Debug.print(this, "have " + n + " materials, continuing work");
-						return null;
+						return new MakeResourceState(this, missing);
 					}
 				} else {
 					return new MakeFactoryState(this, type);

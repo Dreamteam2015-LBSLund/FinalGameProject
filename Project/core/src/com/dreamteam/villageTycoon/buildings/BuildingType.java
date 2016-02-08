@@ -167,4 +167,8 @@ public class BuildingType {
 		}
 		return null;
 	}
+
+	public ArrayList<Resource> constructProductionResourcesList() {
+		return Resource.constructList(getProductionResources(), getInputResourceAmount());
+	}
 }

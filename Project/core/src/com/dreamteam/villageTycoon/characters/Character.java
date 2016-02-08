@@ -27,7 +27,7 @@ import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.PathFinder;
 
 public class Character extends GameObject {
-	final float HUNGER_FORCE = 3;
+	final float HUNGER_FORCE = 1;
 	
 	private boolean selected;
 	

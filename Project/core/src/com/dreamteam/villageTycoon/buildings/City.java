@@ -254,6 +254,7 @@ public class City extends GameObject {
 
 	public ArrayList<Resource> missingResources(ArrayList<Resource> resources) {
 		ArrayList<Resource> have = (ArrayList<Resource>) getMaterials().clone();
+		for (int i = 0; i < 50; i++) have.add(Resource.get("water"));
 		for (Resource r : have) {
 			resources.remove(r);
 		}
