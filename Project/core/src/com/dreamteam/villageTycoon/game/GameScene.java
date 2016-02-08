@@ -35,7 +35,6 @@ public class GameScene extends Scene {
 		
 		cities = new City[] {
 				playerCity,
-				// Vi har fan gått full spaghetti min goda kamrat, Johannes "The spaghetti bagare" Larsson
 				new City(this, new AIController2(playerCity), new Vector2(25, 3))
 		};
 		

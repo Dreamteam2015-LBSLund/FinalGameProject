@@ -65,8 +65,10 @@ public class SoldierInventory {
 	public void drawUi(SpriteBatch batch) {
 		// TODO: Make the sabotagekits "buttons" so that you can equip the one you want
 		soldier.getWeapon().getIcon().draw(batch);
-		for(SabotageKit s : soldier.getSabotageKits()) {
-			s.getIcon().draw(batch);
+		if(soldier.getSabotageKits().size() > 0) {
+			for(SabotageKit s : soldier.getSabotageKits()) {
+				s.getIcon().draw(batch);
+			}
 		}
 
 		for(int i = 0; i < aggressionStateButtons.length; i++) {

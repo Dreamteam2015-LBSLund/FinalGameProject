@@ -35,7 +35,7 @@ public class CreateCharacterButton extends UiElement {
 		
 		canAdd = true;
 		
-		text = (this.building.getType().getName() == "house") ? "add soldier" : "add worker";
+		text = (!this.building.getType().getName().equals("house")) ? "add soldier" : "add worker";
 	}
 	
 	public void update(Scene scene) {
