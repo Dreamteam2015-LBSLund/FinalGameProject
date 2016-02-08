@@ -22,6 +22,7 @@ import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
+import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
@@ -53,6 +54,8 @@ public class Soldier extends Character {
 	
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
+	
+	private int foodReserve;
 	
 	private Building targetBuilding;
 	
@@ -96,14 +99,20 @@ public class Soldier extends Character {
 			this.setSprite(new Animation(AssetManager.getTexture("enemySoldier")));
 			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
 		}
+		
+		foodReserve = 10;
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
 		if (getAmountFull() / getMaxFull() < .3f) {
-			if (findResource(Resource.get("food"), null)) {
-				setAmountFull(getMaxFull());
+			if(foodReserve > 0) {
+				consume();
+			} else {
+				if (findResource(Resource.get("food"), null)) {
+					setAmountFull(getMaxFull());
+				}
 			}
 		}
 		
@@ -263,6 +272,13 @@ public class Soldier extends Character {
 		
 		if(prepareSabotageKit && sabotageKits.size() > 0) {
 			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);
+		}
+	}
+	
+	public void consume() {
+		if(foodReserve > 0) {
+			setAmountFull(getMaxFull());
+			foodReserve -= 1;
 		}
 	}
 	

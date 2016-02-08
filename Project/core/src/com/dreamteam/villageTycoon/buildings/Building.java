@@ -326,6 +326,11 @@ public class Building extends GameObject {
     	super.draw(batch);
     }
     
+    public void onRemove() {
+    	unsetTiles();
+    	super.onRemove();
+    }
+    
     public void setSelected(boolean selected) {
     	this.selected = selected;
     }

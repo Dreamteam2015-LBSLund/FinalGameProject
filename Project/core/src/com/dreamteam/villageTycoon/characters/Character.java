@@ -57,6 +57,8 @@ public class Character extends GameObject {
 	private int countFireDamegeTime;
 	private int maxCountFireDamegeTime;
 	
+	private boolean needToEat;
+	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, new Vector2(1, 1), sprite);
 		

@@ -22,6 +22,9 @@ import com.dreamteam.villageTycoon.workers.Worker;
 
 public class Map {
 	public final static int WIDTH = 100, HEIGHT = 100;
+	
+	final int LANGTON_LIMIT = 2000;
+	
 	private Tile[][] tiles;
 	private HashMap<String, PropType> propTypes;
 	private HashMap<String, TileType> tileTypes;
@@ -29,6 +32,8 @@ public class Map {
 	
 	private int amountOfCities;
 	private Point[] cityPositions;
+	
+	private int timesDone;
 	
 	City city;
 	
@@ -97,6 +102,16 @@ public class Map {
 				map[x][y] = "Grass"; 
 			}
 		}
+		
+		for(int i = 0; i < 500; i++) {
+			map[randomInt(0, WIDTH-1)][randomInt(0, HEIGHT-1)] = "treeTrunk";
+		}
+		
+		for(int i = 0; i < 5; i++) {
+			antIt(randomInt(0, WIDTH-1), randomInt(0, HEIGHT-1), 0, map);
+			timesDone = 0;
+		}
+		
 		for (int i = 0; i < lakes.length; i++) {		
 			lakes[i] = new Point(randomInt(40, WIDTH-40), randomInt(40, HEIGHT-40));		
 			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);		
@@ -235,6 +250,57 @@ public class Map {
 			return tiles[p.x][p.y];
 		}
 		return null;
+	}
+	
+	public void antIt(int x, int y, int direction, String[][] map) {
+		boolean canMove = true;
+		
+		timesDone += 1;
+		
+		if(map[x][y] == "Grass") {
+			plot(x, y, "treeTrunk", map);
+			direction -= 1;
+			if(direction <= -1) direction = 3;
+		} else {
+			plot(x, y, "Grass", map);
+			direction += 1;
+			if(direction >= 4) direction = 0;
+		}
+		
+		if(direction == 0 && x == WIDTH - 1) {
+			canMove = false;
+		}
+		
+		if(direction == 2 && x == 0) {
+			canMove = false;
+		}
+		
+		if(direction == 1 && y == 0) {
+			canMove = false;
+		}
+		
+		if(direction == 3 && y == HEIGHT-1) {
+			canMove = false;
+		}
+		
+		if(canMove && timesDone <= LANGTON_LIMIT) {
+			if(direction == 0) {
+				antIt(x+1, y, direction, map);
+			}
+			if(direction == 1) {
+				antIt(x, y-1, direction, map);
+			}
+			if(direction == 2) {
+				antIt(x-1, y, direction, map);
+			}
+			if(direction == 3) {
+				antIt(x, y+1, direction, map);
+			}
+		}
+	}
+	
+	public void plot(int x, int y, String n, String[][] map) {
+		map[x][y] = n;
 	}
 	
 	// VIsste inte vart jag skulle lägga denna
