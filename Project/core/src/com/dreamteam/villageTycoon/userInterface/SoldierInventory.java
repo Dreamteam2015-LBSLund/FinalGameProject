@@ -24,6 +24,8 @@ public class SoldierInventory {
 	
 	private AggressionStateButton[] aggressionStateButtons; 
 	
+	private ArrowButton[] arrowButtons = new ArrowButton[2];
+	
 	private Animation foodIcon;
 	
 	public SoldierInventory(Soldier soldier) {
@@ -32,6 +34,9 @@ public class SoldierInventory {
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			soldier.getSabotageKits().get(i).getIcon().setPosition(4, -2*i);
 		}
+		
+		arrowButtons[0] = new ArrowButton(new Rectangle(0, 128+32, 64, 64), ArrowButton.Direction.UP);
+		arrowButtons[1] = new ArrowButton(new Rectangle(0, 128-48, 64, 64), ArrowButton.Direction.DOWN);
 		
 		foodIcon = new Animation(AssetManager.getTexture("foodIcon"));
 		foodIcon.setPosition(200, 200);
@@ -53,6 +58,11 @@ public class SoldierInventory {
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			// När man spaghettiar till det och man ba' :^(
 		}
+		
+		for(int i = 0; i < arrowButtons.length; i++) {
+			arrowButtons[i].update();
+			equipedSabotageKit += arrowButtons[i].getValue();
+		}
 	}
 	
 	public void setSoldier(Soldier soldier) { 
@@ -70,7 +80,13 @@ public class SoldierInventory {
 				s.getIcon().draw(batch);
 			}
 		}
-
+		
+		if(soldier.getSabotageKits().size() > 0) {
+			for(int i = 0; i < arrowButtons.length; i++) {
+				arrowButtons[i].draw(batch);
+			}
+		}
+		
 		for(int i = 0; i < aggressionStateButtons.length; i++) {
 			aggressionStateButtons[i].draw(batch);
 		}

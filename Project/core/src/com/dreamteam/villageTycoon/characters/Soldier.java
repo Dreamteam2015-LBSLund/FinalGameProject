@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
@@ -105,6 +106,9 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		equipedSabotageKit = inventory.getEquipedSabotageKit();
+		equipedSabotageKit = MathUtils.clamp(equipedSabotageKit, 0, this.sabotageKits.size());
 		
 		if (getAmountFull() / getMaxFull() < .3f) {
 			if(foodReserve > 0) {
