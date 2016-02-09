@@ -35,6 +35,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.characters.Character;
 
 public class Building extends GameObject {
@@ -128,7 +129,7 @@ public class Building extends GameObject {
     	
     	if(this.type.getType() == BuildingType.Type.Home) {
     		//if(this.selected) System.out.println(type.getName());			
-			this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
+			//this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		}
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
@@ -136,7 +137,9 @@ public class Building extends GameObject {
     	if(health <= 0) getScene().removeObject(this);
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
-    		this.createCharacterButton.update(getScene());
+    		if(getCity().getController() instanceof PlayerController) {
+    			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull()) this.createCharacterButton.update(getScene());
+    		}
     	}
     	
     	if(selected) {
@@ -316,7 +319,9 @@ public class Building extends GameObject {
     		destroyBuildingButton.draw(batch);
     		
     		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
-        		createCharacterButton.draw(batch);
+        		if(getCity().getController() instanceof PlayerController) {
+        			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull()) createCharacterButton.draw(batch);
+        		}
         	}
     		
     		String s = "";

@@ -43,4 +43,8 @@ public class PlayerController extends CityController {
 		if (placer == null) placer = new BuildingPlacer(getCity().getScene());
 		else placer = null;
 	}
+	
+	public boolean getBuildingPlacerNull() {
+		return placer != null;
+	}
 }

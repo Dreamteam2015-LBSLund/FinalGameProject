@@ -24,12 +24,23 @@ public class SoldierInventory {
 	
 	private AggressionStateButton[] aggressionStateButtons; 
 	
+	private ArrowButton[] arrowButtons = new ArrowButton[2];
+	
+	private Animation foodIcon;
+	
 	public SoldierInventory(Soldier soldier) {
 		this.soldier = soldier;
 		soldier.getWeapon().getIcon().setPosition(-4, 0);
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			soldier.getSabotageKits().get(i).getIcon().setPosition(4, -2*i);
 		}
+		
+		arrowButtons[0] = new ArrowButton(new Rectangle(0, 128+32, 64, 64), ArrowButton.Direction.UP);
+		arrowButtons[1] = new ArrowButton(new Rectangle(0, 128-48, 64, 64), ArrowButton.Direction.DOWN);
+		
+		foodIcon = new Animation(AssetManager.getTexture("foodIcon"));
+		foodIcon.setPosition(200, 200);
+		foodIcon.setSize(100, 100);
 		
 		aggressionStateButtons = new AggressionStateButton[3];
 		aggressionStateButtons[0] = new AggressionStateButton(new Vector2(-Gdx.graphics.getWidth()+50, -Gdx.graphics.getHeight()+50), Soldier.AggressionState.ATTACKING_AND_MOVING);
@@ -47,6 +58,11 @@ public class SoldierInventory {
 		for(int i = 0; i < soldier.getSabotageKits().size(); i++) {
 			// När man spaghettiar till det och man ba' :^(
 		}
+		
+		for(int i = 0; i < arrowButtons.length; i++) {
+			arrowButtons[i].update();
+			equipedSabotageKit += arrowButtons[i].getValue();
+		}
 	}
 	
 	public void setSoldier(Soldier soldier) { 
@@ -59,10 +75,18 @@ public class SoldierInventory {
 	public void drawUi(SpriteBatch batch) {
 		// TODO: Make the sabotagekits "buttons" so that you can equip the one you want
 		soldier.getWeapon().getIcon().draw(batch);
-		for(SabotageKit s : soldier.getSabotageKits()) {
-			s.getIcon().draw(batch);
+		if(soldier.getSabotageKits().size() > 0) {
+			for(SabotageKit s : soldier.getSabotageKits()) {
+				s.getIcon().draw(batch);
+			}
 		}
-
+		
+		if(soldier.getSabotageKits().size() > 0) {
+			for(int i = 0; i < arrowButtons.length; i++) {
+				arrowButtons[i].draw(batch);
+			}
+		}
+		
 		for(int i = 0; i < aggressionStateButtons.length; i++) {
 			aggressionStateButtons[i].draw(batch);
 		}
@@ -70,6 +94,12 @@ public class SoldierInventory {
 		AssetManager.font.draw(batch, "IN CLIP: " + soldier.getWeapon().getType().getClipSize() + "/" + soldier.getWeapon().getClipCount(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+125);
 		
 		batch.draw(soldier.getWeapon().getIcon(), -Gdx.graphics.getWidth()+450, -Gdx.graphics.getHeight()+225, 100, 100);
+		
+		if(soldier.getFoodReserve() > 0) {
+			AssetManager.font.draw(batch, "x" + soldier.getFoodReserve(), -Gdx.graphics.getWidth()+450+100, -Gdx.graphics.getHeight()+500);
+			foodIcon.setPosition(-Gdx.graphics.getWidth()+450-10, -Gdx.graphics.getHeight()+430);
+			foodIcon.draw(batch);
+		}
 	}
 	
 	public int getEquipedSabotageKit() {

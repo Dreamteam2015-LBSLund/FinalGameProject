@@ -19,6 +19,7 @@ public class CreateCharacterButton extends UiElement {
 	private String text;
 	
 	private boolean canAdd;
+	private boolean pressed;
 	
 	private Building building;
 	
@@ -34,17 +35,21 @@ public class CreateCharacterButton extends UiElement {
 		
 		canAdd = true;
 		
-		text = (this.building.getType().getName() == "house") ? "add soldier" : "add worker";
+		text = (!this.building.getType().getName().equals("house")) ? "add soldier" : "add worker";
 	}
 	
 	public void update(Scene scene) {
 		super.update();
 		
-		if(wasPressed()) {
+		if(wasPressed() && !pressed) {
 			Character c = building.getCharacterToSpawn();
 			toAdd.add(c);
 			canAdd = true;
+			
+			pressed = true;
 		}
+		
+		if(!isPressed() && pressed) pressed = false;
 		
 		for(Character c : toAdd) {
 			for(GameObject o : scene.getObjects()) {

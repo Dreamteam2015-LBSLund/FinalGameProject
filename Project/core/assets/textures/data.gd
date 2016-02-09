@@ -60,4 +60,5 @@ Textures: {
 	projectile: 876, 92, 16, 16;
 	
 	button: 659, 0, 216, 108;
+	arrowButton: 304, 475, 64, 64;
 }
