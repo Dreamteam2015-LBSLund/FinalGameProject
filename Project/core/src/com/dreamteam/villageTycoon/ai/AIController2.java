@@ -260,11 +260,15 @@ public class AIController2 extends CityController {
 		}
 
 		public State update() {
-			if (b == null)  b = getCity().getBuildingByType(type);
-			if (b != null) {
-				Debug.print(this, "building at " + b.getPosition());
-				if (!getCity().getScene().getObjects().contains(b)) {
-					getCity().getScene().addObject(b);
+			if (b == null)  {
+				b = getCity().getBuildingByType(type);
+				if (b != null) {
+					Debug.print(this, "building at " + b.getPosition());
+					if (!getCity().getScene().getObjects().contains(b)) {
+						getCity().getScene().addObject(b);
+					}
+				} else {
+					
 				}
 			}
 			// if the building is not done
@@ -281,6 +285,7 @@ public class AIController2 extends CityController {
 				// if all resources are available
 				if (missing.size() == 0) {
 					// if the building is not placed, place it
+					Debug.print(this, "no missing resources for building");
 					if (b == null) {
 						Debug.print(this, "adding building " + type.getName());
 						b = new Building(getNextBuildingPosition(), type, getCity());
@@ -317,7 +322,7 @@ public class AIController2 extends CityController {
 		private Building building;
 		
 		public MakeResourceState(State previous, ArrayList<Resource> missing) {
-			this(previous, missing, null, 10);
+			this(previous, missing, null, 15);
 		}
 
 		public MakeResourceState(State prevState, ArrayList<Resource> missing, Building building, int target) {

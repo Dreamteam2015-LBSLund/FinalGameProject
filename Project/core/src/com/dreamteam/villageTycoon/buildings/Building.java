@@ -120,6 +120,12 @@ public class Building extends GameObject {
     	}
     }
     
+    public void setCity(City c) {
+    	city.removeBuilding(this);
+    	city = c;
+    	city.addBuilding(this);
+    }
+    
     public boolean isBuilt() {
     	return buildState == BuildState.Done;
     }
