@@ -159,6 +159,8 @@ public class Soldier extends Character {
 			}
 		}
 		
+		attackBuilding();
+		
 		if(spottedEnemies.size() > 0) {
 			float shortestRange = -1;
 			float currentRange = 0;
@@ -215,13 +217,16 @@ public class Soldier extends Character {
 				weapon.onShoot();
 			}
 		}
-		
+		//if(getBuilding() != null && getBuilding().getCity() == getCity()) targetBuilding = getBuilding();
+	}
+	
+	public void attackBuilding() {
 		if(this.spottedEnemies.size() <= 0 && this.targetBuilding != null) {
 			if(targetBuilding.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE) {
 				float angle = (float)Math.atan2(targetBuilding.getPosition().y - this.getPosition().y, targetBuilding.getPosition().x - this.getPosition().x);
 				//this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 			}
-			if(targetBuilding.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
+			if(/*targetBuilding.distanceTo(this.getPosition()) < this.maxAttackDistance*/true) {
 				if(weapon.canShoot()) {
 					getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), targetBuilding.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 					weapon.onShoot();
@@ -229,7 +234,18 @@ public class Soldier extends Character {
 			}
 		}
 		
-		if(getBuilding() != null && getBuilding().getCity() == getCity()) targetBuilding = getBuilding();
+		if(targetBuilding != null) {
+			if(targetBuilding.distanceTo(this.getPosition().cpy()) > this.maxAttackDistance*2 || targetBuilding.getHealth() <= 0) targetBuilding = null;
+			//setPath(targetBuilding.getPosition());
+		}
+		
+		for(GameObject g : getScene().getObjects()) {
+			if(g instanceof Building) {
+				if(((Building) g).getCity() != this.getCity() && g.distanceTo(getPosition().cpy()) < this.maxAttackDistance*2) { 
+					targetBuilding = (Building) g;
+				}
+			}
+		}
 	}
 	
 	public void attack(float deltaTime) {
