@@ -28,19 +28,19 @@ public class ProjectileType {
 	}
 	
 	public float getSpeed() {
-		return speed;
+		return this.speed;
 	}
 	
 	public int getDamege() {
-		return damege;
+		return this.damege;
 	}
 	
 	public String getSprite() {
-		return sprite;
+		return this.sprite;
 	}
 	
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 	
 	public void setExplosion(Explosion explosion) {
@@ -48,10 +48,10 @@ public class ProjectileType {
 	}
 	
 	public Explosion getExplosion() {
-		return explosion;
+		return this.explosion;
 	}
 	
 	public float getMaxRange() {
-		return maxRange;
+		return this.maxRange;
 	}
 }
