@@ -49,14 +49,14 @@ public class Worker extends Character {
 		if (getTile().getBuilding() != null && task == null) {
 			workplace = getTile().getBuilding();
 			onStartWork();
-		} else if (task == null){
+		} else if (task == null ){
 			if (workplace != null) onEndWork();
 			workplace = null;
 		}
 		
 		
-		Debug.print(this, "hunger = " + getAmountFull() / getMaxFull());
-		if (getAmountFull() / getMaxFull() < .3f) {
+		//Debug.print(this, "hunger = " + getAmountFull() / getMaxFull());
+		if (getAmountFull() / getMaxFull() < .3f && getCity().hasResource(Resource.get("food"))) {
 			if (findResource(Resource.get("food"), inventory) || inventory.count(Resource.get("water")) > 0) {
 				inventory.remove(Resource.get("food"), 1);
 				setAmountFull(getMaxFull());
@@ -73,7 +73,7 @@ public class Worker extends Character {
 		super.onPlayerInput(destination);
 		//Debug.print(this, "recieved input");
 		if (task != null) {
-			task.onCancel();
+			//task.onCancel();
 		}
 		task = null;
 	}
@@ -85,6 +85,7 @@ public class Worker extends Character {
 	public void setTask(Task task) {
 		Debug.print(this, "got task " + task.getClass().getSimpleName());
 		if (task instanceof GatherTask) Debug.print(this, "resource: " + ((GatherTask)task).getResource().getName());
+		if (task != null) task.onCancel();
 		this.task = task;
 	}
 	
@@ -152,11 +153,15 @@ public class Worker extends Character {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		if (getShowInventroy()) {
+		if (getShowInventroy() || true) {
 			inventory.drawList(getUiScreenCoords(), batch);
 			if (task != null) {
 				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
 			}
+			if (workplace != null) {
+				AssetManager.font.draw(batch, "\nWorkplace: " + workplace.getType().getName(), getUiScreenCoords().x, getUiScreenCoords().y);
+			}
+			AssetManager.font.draw(batch, "\n\nHunger: " + (getAmountFull() / getMaxFull()), getUiScreenCoords().x, getUiScreenCoords().y);
 		}
 		
 		//AssetManager.font.draw(batch, getPosition() + "", getUiScreenCoords().x, getUiScreenCoords().y);
@@ -167,6 +172,9 @@ public class Worker extends Character {
 	}
 
 	public void workAt(Building building) {
+		if (building == workplace) return;
+		building.addWorker(this);
+		//if (task != null) task.onCancel();
 		task = null;
 		setPath(building.getPosition(), building);
 		Debug.print(this, "working at building, pos = " + building.getPosition());

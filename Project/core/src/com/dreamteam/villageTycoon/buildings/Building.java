@@ -167,6 +167,8 @@ public class Building extends GameObject {
     			buildState = BuildState.Done;
     			if (type.isFactory()) startProduction();
     			inputInventory.remove(type.getBuildResourcesArray());
+    			outputInventory = inputInventory;
+    			inputInventory = new Inventory<Resource>();
     			setSprite(type.getSprite());
     		} else {
     			assignGatherTask(toGather);
@@ -174,7 +176,7 @@ public class Building extends GameObject {
     	} else if (type.isFactory()) {
     		// regular production
     		// TODO: what did i break?
-    		if (toGather.size() == 0) {
+    		if (toGather.size() == 0 && isProductionGatheringDone()) {
     			if (!isProductionGatheringDone()) {
     				startProduction();
     			}
@@ -194,6 +196,7 @@ public class Building extends GameObject {
     }
     
     public void cancelGather(Resource r) {
+    	System.out.println("cancel, adding r " + r.getName() + ", " + toGather.size());
     	toGather.add(r);
     }
     
@@ -306,7 +309,7 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	if (selected) {
+    	if (selected || true) {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		
@@ -315,6 +318,10 @@ public class Building extends GameObject {
     		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
         		createCharacterButton.draw(batch);
         	}
+    		
+    		String s = "";
+    		for (Resource r : toGather) s += r.getName() + ", ";
+    		AssetManager.font.draw(batch, s, getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     

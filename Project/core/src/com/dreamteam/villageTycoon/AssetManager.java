@@ -17,7 +17,7 @@ public abstract class AssetManager {
 	public static BitmapFont font;
 	
 	public static void load() {
-		FreeTypeFontGenerator g = new FreeTypeFontGenerator(Gdx.files.internal("fonts/COMIC.TTF"));
+		FreeTypeFontGenerator g = new FreeTypeFontGenerator(Gdx.files.internal("fonts/CALIST.TTF"));
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
 		param.size = 50;
 		font = g.generateFont(param);

@@ -4,8 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.AIController3.MakeFactoryState;
+import com.dreamteam.villageTycoon.ai.AIController3.MakeFoodProductionState;
+import com.dreamteam.villageTycoon.ai.AIController3.MakeResourceState;
+import com.dreamteam.villageTycoon.ai.AIController3.State;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -15,25 +21,39 @@ import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController2 extends CityController {
+	
+	private BuildingType[] expensiveFoodChain;
 
-	private State state;
+	private FSM stateMachine;
+	private FSM foodMachine;
 
 	public AIController2(City targetCity) {
 		//ArrayList<Resource> r = new ArrayList<Resource>();
 		//r.add(Resource.get("flour"));
-		state = new AttackState(null, targetCity); //new MakeResourceState(null, r);
+		stateMachine = new FSM(new AttackState(new DoneState(), targetCity)); //new MakeResourceState(null, r);
+		
+		expensiveFoodChain = new BuildingType[] {
+				BuildingType.getTypes().get("wheatFarm"),
+				BuildingType.getTypes().get("flourMill"),
+				BuildingType.getTypes().get("bakery")
+		};
+	
 	}
 
 	public void update(float dt) {
-		if (!hasFood()) {
-			state = new GetFoodState(state);
-		} else if (!hasFoodProduction()) {
-			state = new MakeFoodProductionState(state);	
-		}
-		State s = state.update();
-		if (s != null) {
-			state = s;
-			Debug.print(this, "switching to state " + s.getClass().getSimpleName());
+		if (foodMachine == null) {
+			if (!hasFood()) {
+				Debug.print(this, "need food!");
+				foodMachine = new FSM(new GetFoodState(new DoneState()));
+			} else if (!hasFoodProduction()) {
+				Debug.print(this, "need food production!");
+				foodMachine = new FSM(new MakeFoodProductionState(new DoneState()));
+			}
+
+			stateMachine.update();
+		} else {
+			foodMachine.update();
+			if (foodMachine.isDone()) foodMachine = null;
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Keys.O)) {
@@ -41,19 +61,46 @@ public class AIController2 extends CityController {
 		}
 	}
 	
+	public void drawUi(SpriteBatch batch) {
+		String s = "";
+		if (foodMachine != null) {
+			s = "f; state: " + foodMachine.getState().getClass().getSimpleName() + " " + foodMachine.getState().getInfo();
+		} else {
+			s = "r; state: " + stateMachine.getState().getClass().getSimpleName() + " " + stateMachine.getState().getInfo();
+		} 
+		AssetManager.font.draw(batch, s, -400, -400);
+	}
+	
 	public void init() {
 		Debug.print(this, getCity().getWorkers().size() + " workers");
 	}
 	
 	private boolean hasFood() {
-		return getCity().getNoMaterials(Resource.get("food")) < getCity().getWorkers().size() + getCity().getSoldiers().size();
+		int n = getCity().getNoMaterials(Resource.get("food"));
+		Debug.print(this, "have " + n + " food");
+		return n >= getCity().getWorkers().size() + getCity().getSoldiers().size();
 	}
 	
 	private boolean hasFoodProduction() {
-		return getCity().hasBuildingType(BuildingType.getTypes().get("farm")) ||
-				(getCity().hasBuildingType(BuildingType.getTypes().get("wheatfarm")) 
-						&& getCity().hasBuildingType(BuildingType.getTypes().get("flourmill")) 
-						&& getCity().hasBuildingType(BuildingType.getTypes().get("bakery")));
+		return hasCheapFoodChain() || hasExpensiveFoodChain();
+				
+	}
+	
+	private boolean hasCheapFoodChain() {
+		Building b = getCity().getBuildingByType(BuildingType.getTypes().get("farm"));
+		return b != null && b.isBuilt();
+	}
+	
+	private boolean hasExpensiveFoodChain() {
+		return hasBuildings(expensiveFoodChain);
+	}
+	
+	private boolean hasBuildings(BuildingType[] types) {
+		for (BuildingType t : types) {
+			Building b = getCity().getBuildingByType(t);
+			if (b == null || !b.isBuilt()) return false;
+		}
+		return true;
 	}
 	
 
@@ -67,27 +114,69 @@ public class AIController2 extends CityController {
 
 		// returns next state, null if not done
 		public abstract State update();
+		
+		public String getInfo() {
+			return "";
+		}
 	}
 	
+	
 	public class GetFoodState extends State {
+
 		public GetFoodState(State prState) {
 			super(prState);
 		}
 
 		public State update() {
-			return null;
+			if (!hasFoodProduction() || (!hasExpensiveFoodChain() && shouldMakeExpensiveFoodChain())) {
+				Debug.print(this, "Making food production");
+				return new MakeFoodProductionState(this);
+			} else {
+				if (getCity().getNoMaterials(Resource.get("food")) < getCity().getSoldiers().size() + getCity().getWorkers().size()) {
+					ArrayList<Resource> food = new ArrayList<Resource>();
+					food.add(Resource.get("food"));
+					if (hasExpensiveFoodChain()) {
+						return new MakeResourceState(this, food, getCity().getBuildingByType(BuildingType.getTypes().get("bakery")), getCity().getSoldiers().size() + getCity().getWorkers().size());
+					} else {
+						return new MakeResourceState(this, food);
+					}
+				} else {
+					return prevState;
+				}
+			}
 		}
 	}
 	
-	
+	private boolean shouldMakeExpensiveFoodChain() {
+		return true;
+	}
 	
 	public class MakeFoodProductionState extends State {
-		public MakeFoodProductionState(State prev) {
-			super(prev);
+
+		public MakeFoodProductionState(State prState) {
+			super(prState);
 		}
+
+		
 		
 		public State update() {
-			return null;
+			if (shouldMakeExpensiveFoodChain()) {
+				Debug.print(this, "making expensive thing");
+				for (BuildingType t : expensiveFoodChain) {
+					Building b = getCity().getBuildingByType(t);
+					if (b == null || !b.isBuilt()) return new MakeFactoryState(this, t);
+				}
+				Debug.print(this, "done");
+				return prevState;
+			} else {
+				Building b = getCity().getBuildingByType(BuildingType.getTypes().get("farm"));
+				Debug.print(this, "making cheap thing");
+				if (b == null || !b.isBuilt()) {
+					return new MakeFactoryState(this, BuildingType.getTypes().get("farm"));
+				}
+				Debug.print(this, "done");
+				return prevState;
+			}
 		}
 	}
 	
@@ -147,6 +236,10 @@ public class AIController2 extends CityController {
 			}
 			else return new MakeFactoryState(this, BuildingType.getTypes().get("armyBarack"));
 		}
+		
+		public String getInfo() {
+			return getCity().getSoldiers().size() + "/" + numSoldiers;
+		}
 	}
 	
 	private Vector2 getNextBuildingPosition() {
@@ -159,6 +252,7 @@ public class AIController2 extends CityController {
 	public class MakeFactoryState extends State {
 		
 		private BuildingType type;
+		private Building b;
 		
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
@@ -166,7 +260,7 @@ public class AIController2 extends CityController {
 		}
 
 		public State update() {
-			Building b = getCity().getBuildingByType(type);
+			if (b == null)  b = getCity().getBuildingByType(type);
 			if (b != null) {
 				Debug.print(this, "building at " + b.getPosition());
 				if (!getCity().getScene().getObjects().contains(b)) {
@@ -175,7 +269,7 @@ public class AIController2 extends CityController {
 			}
 			// if the building is not done
 			if (b == null || !b.isBuilt()) {
-				ArrayList<Resource> missing = getCity().missingResources(type.constructBuildResourceList());
+				ArrayList<Resource> missing = singularize(getCity().missingResources(type.constructBuildResourceList()));
 				/*Debug.print(this, "resources for " + type.getName() + ":");
 				for (Object r : singularize(type.constructBuildResourceList())) {
 					Debug.print(this, ((Resource)r).getName());
@@ -196,7 +290,7 @@ public class AIController2 extends CityController {
 					
 					// assign workers to it
 					for (Worker w : getCity().getWorkers()) {
-						if (w.getWorkplace() != b) w.workAt(b);
+						 w.workAt(b);
 						//Debug.print(this, "assigning worker to " + b.getType().getName());
 					}
 					
@@ -210,17 +304,29 @@ public class AIController2 extends CityController {
 				return prevState;
 			}
 		}
+		
+		public String getInfo() {
+			return type.getName();
+		}
 	}
 	
 	public class MakeResourceState extends State {
 		
 		private ArrayList<Resource> resources;
+		private int target;
+		private Building building;
 		
 		public MakeResourceState(State previous, ArrayList<Resource> missing) {
-			super(previous);
+			this(previous, missing, null, 10);
+		}
+
+		public MakeResourceState(State prevState, ArrayList<Resource> missing, Building building, int target) {
+			super(prevState);
 			this.resources = singularize(missing);
 			Debug.print(this, "neeed resources: ");
 			for (Resource r : resources) Debug.print(this, r.getName());
+			this.building = building;
+			this.target = target;
 		}
 
 		public State update() {
@@ -258,9 +364,30 @@ public class AIController2 extends CityController {
 			}
 		}
 		
+		public String getInfo() {
+			String s = "";
+			for (Resource r : resources) {
+				s += r.getName() + " ";
+			}
+			return s;
+		}
 	}
 	
-	public ArrayList singularize(ArrayList l) {
+
+	class DoneState extends State {
+
+		public DoneState() {
+			super(null);
+			// TODO Auto-generated constructor stub
+		}
+		
+		public State update() {
+			return null;
+		}
+		
+	}
+	
+	public static ArrayList singularize(ArrayList l) {
 		ArrayList ret = new ArrayList();
 		for (Object o : l) {
 			if (!ret.contains(o)) {
