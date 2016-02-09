@@ -52,7 +52,7 @@ public class Soldier extends Character {
 	private boolean isOnFire;
 	private boolean useSabotageKit;
 	private boolean prepareSabotageKit;
-	
+
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
 	
@@ -195,6 +195,11 @@ public class Soldier extends Character {
 				}
 			}
 		}
+	}
+	
+	public void attackCity(City city) {
+		aggressionState = AggressionState.ATTACKING_AND_MOVING; 
+		setPath(city.getPosition());
 	}
 	
 	public void moveToTarget() {

@@ -83,7 +83,7 @@ public class SoldierInventory {
 		
 		if(soldier.getSabotageKits().size() > 0) {
 			for(int i = 0; i < arrowButtons.length; i++) {
-				arrowButtons[i].draw(batch);
+				 arrowButtons[i].draw(batch);
 			}
 		}
 		
