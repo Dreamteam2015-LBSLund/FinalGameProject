@@ -9,7 +9,7 @@ Bonus   | Extra godis som inte bör prioriteras
 ---
 
 Feature | Person | Prioritet | Status
---------|-------|-------------|
+--------|-------|-------------|------
 Framework | Båda | Minimal | Done
 Tilesystem | Johannes | Minimal | Done
 Map Generation | Tom | Minimal | Not done
