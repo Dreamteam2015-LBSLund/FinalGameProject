@@ -330,9 +330,9 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		String s = "";
-    		for (Resource r : toGather) s += r.getName() + ", ";
-    		AssetManager.font.draw(batch, s, getUiScreenCoords().x, getUiScreenCoords().y);
+    		//String s = "";
+    		//for (Resource r : toGather) s += r.getName() + ", ";
+    		//AssetManager.font.draw(batch, s, getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     
@@ -346,6 +346,7 @@ public class Building extends GameObject {
     
     public void onRemove() {
     	unsetTiles();
+    	city.removeBuilding(this);
     	super.onRemove();
     }
     
