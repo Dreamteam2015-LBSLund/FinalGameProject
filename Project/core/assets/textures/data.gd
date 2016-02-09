@@ -46,6 +46,8 @@ Textures: {
 	mine: 					 0, 1041, 128, 96;
 	mineProgress: 			 0, 1136, 128, 96;
 	farm: 					 0, 1233, 128, 96;
+	wheatFarm: 				 137, 1232, 145, 97;
+	advancedFarm:			 290, 1232, 137, 97;
 	farmProgress: 		     0, 1330, 128, 96;
 	militaryBarrack: 		 0, 1427, 128, 96;
 	militaryBarrackProgress: 0, 1523, 128, 96;
