@@ -1,7 +1,10 @@
 package com.dreamteam.villageTycoon.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController;
@@ -18,13 +21,23 @@ import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
+import com.dreamteam.villageTycoon.userInterface.ArrowButton;
+import com.dreamteam.villageTycoon.userInterface.ArrowButton.Direction;
 
 public class GameScene extends Scene {
 	City cities[];
 	Map map;
+	
+	private float currentGameSpeed;
+	private float nextGameSpeed;
+	
+	private Vector2 timeControllerPosition;
+	
+	private ArrowButton[] timeControll = new ArrowButton[2];
 	
 	public GameScene() {
 		super();
@@ -51,6 +64,15 @@ public class GameScene extends Scene {
 						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
 		}));
 		
+		this.currentGameSpeed = 2;
+		this.nextGameSpeed = 2;
+		
+		
+		timeControllerPosition = new Vector2(-150, 300);
+		
+		timeControll[0] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y, 64, 64), ArrowButton.Direction.UP);
+		timeControll[1] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
+		
 		addObject(new Controller());
 	}
 	
@@ -59,13 +81,36 @@ public class GameScene extends Scene {
 	}
 	
 	public void update(float dt) {
-		super.update(dt*3);
+		super.update(dt*currentGameSpeed);
+		
+		currentGameSpeed = MathUtils.lerp(currentGameSpeed, nextGameSpeed, 0.1f);
+		
+		System.out.println(currentGameSpeed + "LLLLL");
+		
+		for(int i = 0; i < timeControll.length; i++) {
+			timeControll[i].update();
+			
+			nextGameSpeed += timeControll[i].getValue();
+		}
+		
+		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
+		
 		this.getCamera().zoom = 2f;
 	}
 	
 	public void draw(SpriteBatch batch) {
 		map.draw(batch);
 		super.draw(batch);
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		super.drawUi(batch);
+		
+		AssetManager.font.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
+		
+		for(int i = 0; i < timeControll.length; i++) {
+			timeControll[i].draw(batch);
+		}
 	}
 	
 	public Map getMap() {
@@ -79,5 +124,9 @@ public class GameScene extends Scene {
 			}
 		}
 		return true;
+	}
+	
+	public float getCurrentGameSpeed() {
+		return this.currentGameSpeed;
 	}
 }
