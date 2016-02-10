@@ -62,7 +62,7 @@ advancedFarm: {
 	materials:     wood, stone, iron;
 	material-amount: 10, 4, 2;
 	
-	sprite-finished: farm;
+	sprite-finished: advancedFarm;
 	sprite-building: farmProgress;
 	
 	max-workers: 4;
@@ -153,7 +153,7 @@ wheatFarm: {
 	materials:     wood, stone, iron;
 	material-amount: 10, 5, 3;
 	
-	sprite-finished: farm;
+	sprite-finished: wheatFarm;
 	sprite-building: farmProgress;
 	
 	max-workers: 4;
@@ -190,15 +190,6 @@ armyBarack: {
 	
 	inhabitants: 4;
 }
-
-
-
-
-
-
-
-
-
 
 diamondPowderMine?: {
 	type: factory;

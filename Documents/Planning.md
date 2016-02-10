@@ -8,25 +8,25 @@ Bonus   | Extra godis som inte bör prioriteras
 
 ---
 
-Feature | Person | Prioritet
---------|-------|-------------
-Framework | Båda | Minimal
-Tilesystem | Johannes | Minimal
-Map Generation | Tom | Minimal
-Pathfinding | Johannes | Minimal
-Kontrollsystem | Tom | Minimal
-Soldater | Tom | Minimal
-UI | Tom | Minimal
-Arbetare | Johannes | Minimal
-Basic AI | Johannes | Minimal 
-Fabriker | Johannes | Minimal
-Tech | Båda | Minimal
-Menyer | Tom | Normal
-Dag/Natt | Tom | Normal
-Mer Avancerad AI | Johannes | Normal
-Ljudeffekter | Tom | Normal
-Cutscene | Båda | Normal
-VFX | Tom | Bonus
+Feature | Person | Prioritet | Status
+--------|-------|-------------|------
+Framework | Båda | Minimal | Done
+Tilesystem | Johannes | Minimal | Done
+Map Generation | Tom | Minimal | Not done
+Pathfinding | Johannes | Minimal | Done
+Kontrollsystem | Tom | Minimal | Done
+Soldater | Tom | Minimal | Done
+UI | Tom | Minimal | Minimal Done, needs polish
+Arbetare | Johannes | Minimal | Done
+Basic AI | Johannes | Minimal | Not Done
+Fabriker | Johannes | Minimal | Done
+Tech | Båda | Minimal | Not Done
+Menyer | Tom | Normal | Not Done
+Dag/Natt | Tom | Normal | Not Done
+Mer Avancerad AI | Johannes | Normal| Not Done
+Ljudeffekter | Tom | Normal | Not Done
+Cutscene | Båda | Normal | LOL
+VFX | Tom | Bonus | Not Done
 
 ## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
 
