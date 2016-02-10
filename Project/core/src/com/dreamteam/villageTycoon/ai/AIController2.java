@@ -18,6 +18,8 @@ import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController2 extends CityController {
 	
+	public static boolean drawDebug;
+	
 	private BuildingType[] expensiveFoodChain;
 
 	private FSM stateMachine;
@@ -52,12 +54,20 @@ public class AIController2 extends CityController {
 			if (foodMachine.isDone()) foodMachine = null;
 		}
 		
-		if (Gdx.input.isKeyJustPressed(Keys.O)) {
+		if (Gdx.input.isKeyJustPressed(Keys.F2)) {
 			getCity().getScene().getCamera().position.set(new Vector3(getCity().getPosition(), 0));
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Keys.F3)) {
+			Debug.print(this, "toggling");
+			drawDebug = true;
+		} else if (Gdx.input.isKeyJustPressed(Keys.F4)) {
+			drawDebug = false;
 		}
 	}
 	
 	public void drawUi(SpriteBatch batch) {
+		if (!drawDebug) return;
 		String s = "";
 		if (foodMachine != null) {
 			s = "f; state: " + foodMachine.getState().getClass().getSimpleName() + " " + foodMachine.getState().getInfo();
@@ -380,6 +390,17 @@ public class AIController2 extends CityController {
 				if (t == thing) return true;
 			}
 			return false;
+		}
+		
+		private BuildingType getBuildPath(Resource r) {
+			ArrayList<BuildingType> types = new ArrayList<BuildingType>();
+			for (BuildingType t : BuildingType.getTypes().values()) {
+				if (arrayContains(t.getProducts(), r)) {
+					types.add(t);
+				}
+			}
+			// (byggnader ingående + byggnader som behöver byggas) / (resursrate * antal arbetare) + bygga fler arbetare
+			return null;
 		}
 	}
 	

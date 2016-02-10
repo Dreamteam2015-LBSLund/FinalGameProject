@@ -35,6 +35,7 @@ import com.dreamteam.villageTycoon.workers.Worker;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.characters.Character;
 
@@ -322,7 +323,7 @@ public class Building extends GameObject {
     }
     
     public void drawUi(SpriteBatch batch) {
-    	if (selected || true) {
+    	if (selected || AIController2.drawDebug) {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		

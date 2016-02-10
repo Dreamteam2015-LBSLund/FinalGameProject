@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.workers;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
@@ -155,7 +156,7 @@ public class Worker extends Character {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		if (getShowInventroy() || true) {
+		if (getShowInventroy() || AIController2.drawDebug) {
 			inventory.drawList(getUiScreenCoords(), batch);
 			if (task != null) {
 				AssetManager.font.draw(batch, "Task: " + task.getString(), getUiScreenCoords().x, getUiScreenCoords().y);
