@@ -28,11 +28,19 @@ Ljudeffekter | Tom | Normal | Not Done
 Cutscene | Båda | Normal | Won't add
 VFX | Tom | Bonus | Not Done
 
+## SAKER SOM TOM SKA FIXA :^)
+
+Task | Status
+-----|-------
+Hus ska inte landa på varandra | Ofärdigt
+Inventory kanske(?) | ofärdigt(?)
+Lite grafiska saker | ofrädigt
+
 ## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
 
 Feature| Status
 -------|-------
-Stads AI (autonoma soldater och arbetare) | ofärdigt
+Stads AI (autonoma soldater och arbetare) | färdigt
 Win/lose state | färdigt
 Speed up/down knapp | färdigt
 Soldater ska äta | färdigt
