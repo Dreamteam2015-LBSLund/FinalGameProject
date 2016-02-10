@@ -40,7 +40,7 @@ Lite grafiska saker | ofrädigt
 
 Feature| Status
 -------|-------
-Stads AI (autonoma soldater och arbetare) | ofärdigt
+Stads AI (autonoma soldater och arbetare) | färdigt
 Win/lose state | färdigt
 Speed up/down knapp | färdigt
 Soldater ska äta | färdigt
