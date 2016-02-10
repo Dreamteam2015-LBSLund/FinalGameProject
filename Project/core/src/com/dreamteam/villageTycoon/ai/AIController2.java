@@ -350,7 +350,7 @@ public class AIController2 extends CityController {
 							//Debug.print(this, "assigning worker to " + b.getType().getName());
 						}
 						int n = getCity().getNoMaterials(r);
-						if (n >= 10) {
+						if (n >= target) {
 							Debug.print(this, "have " + n + " materials, going to next");
 							resources.remove(0);
 							return null;
