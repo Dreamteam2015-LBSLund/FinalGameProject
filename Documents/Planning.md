@@ -34,7 +34,7 @@ Feature| Status
 -------|-------
 Stads AI (autonoma soldater och arbetare) | ofärdigt
 Win/lose state | ofärdigt
-Speed up/down knapp | ofärdigt
+Speed up/down knapp | färdigt
 Soldater ska äta | färdigt
 Hämta vatten | färidgt
 Karaktärer blir hungriga | färdigt
