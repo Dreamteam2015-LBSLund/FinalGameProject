@@ -126,6 +126,19 @@ public class AIController2 extends CityController {
 		}
 	}
 	
+	public class MakeWeaponsState extends State {
+
+		public MakeWeaponsState(State previous) {
+			super(previous);
+			// hur ska detta fungera @indietom
+		}
+
+		public State update() {
+			
+			return null;
+		}
+	}
+	
 	
 	public class GetFoodState extends State {
 
