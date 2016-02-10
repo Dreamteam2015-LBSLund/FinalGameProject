@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
+import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Controller;
+import com.dreamteam.villageTycoon.characters.Character;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
 import com.dreamteam.villageTycoon.characters.SabotageKitType;
 import com.dreamteam.villageTycoon.characters.Soldier;
@@ -21,6 +25,7 @@ import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
 import com.dreamteam.villageTycoon.framework.Animation;
+import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Map;
@@ -29,8 +34,12 @@ import com.dreamteam.villageTycoon.userInterface.ArrowButton;
 import com.dreamteam.villageTycoon.userInterface.ArrowButton.Direction;
 
 public class GameScene extends Scene {
-	City cities[];
-	Map map;
+	public enum MatchState { ON_GOING, WIN, LOSE };
+	
+	private MatchState matchState;
+	
+	private City cities[];
+	private Map map;
 	
 	private float currentGameSpeed;
 	private float nextGameSpeed;
@@ -57,21 +66,17 @@ public class GameScene extends Scene {
 		
 		map.setupGame(cities, this);
 		
-		addObject(new Soldier(playerCity, new Vector2(2, 2), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 15, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
-				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
-				new SabotageKit[]{ 
-						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
-						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
-		}));
-		
 		this.currentGameSpeed = 2;
 		this.nextGameSpeed = 2;
-		
 		
 		timeControllerPosition = new Vector2(-150, 300);
 		
 		timeControll[0] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y, 64, 64), ArrowButton.Direction.UP);
 		timeControll[1] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
+		
+		this.getCamera().position.set(new Vector3(playerCity.getPosition().x, playerCity.getPosition().y, 0));
+		
+		this.matchState = MatchState.ON_GOING;
 		
 		addObject(new Controller());
 	}
@@ -85,8 +90,6 @@ public class GameScene extends Scene {
 		
 		currentGameSpeed = MathUtils.lerp(currentGameSpeed, nextGameSpeed, 0.1f);
 		
-		System.out.println(currentGameSpeed + "LLLLL");
-		
 		for(int i = 0; i < timeControll.length; i++) {
 			timeControll[i].update();
 			
@@ -94,6 +97,8 @@ public class GameScene extends Scene {
 		}
 		
 		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
+		
+		matchUpdate();
 		
 		this.getCamera().zoom = 2f;
 	}
@@ -106,11 +111,62 @@ public class GameScene extends Scene {
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
 		
-		AssetManager.font.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
-		
-		for(int i = 0; i < timeControll.length; i++) {
-			timeControll[i].draw(batch);
+		if(matchState == MatchState.ON_GOING) {
+			AssetManager.font.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
+
+			for(int i = 0; i < timeControll.length; i++) {
+				timeControll[i].draw(batch);
+			}
+		} else if(matchState == MatchState.LOSE) {
+			AssetManager.font.draw(batch, "DEFEATED", 0, 0);
+		} else {
+			AssetManager.font.draw(batch, "VICTORY", 0, 0);
 		}
+	}
+	
+	public void matchUpdate() {
+		for(int i = 0; i < cities.length; i++) {	
+			if(!citiesCharactersLeft(cities[i]) && !citiesHousesLeft(cities[i])) {
+				if(cities[i].getController() instanceof PlayerController) {
+					matchState = MatchState.LOSE;
+				} else {
+					matchState = MatchState.WIN;
+				}
+				for(GameObject g : getObjects()) {
+					if(g instanceof Controller) removeObject(g);
+				}
+			}
+		}
+	}
+	
+	private boolean citiesCharactersLeft(City city) {
+		boolean noLeft = true;
+		
+		for(GameObject g : getObjects()) {
+			if(g instanceof Character) {
+				if(((Character) g).getCity() == city) {
+					noLeft = false;
+				}
+			}
+		}
+		return !noLeft;
+	}
+	
+	private boolean citiesHousesLeft(City city) {
+		boolean noLeft = true;
+		
+		for(GameObject g : getObjects()) {
+			if(g instanceof Building) {
+				if(((Building) g).getCity() == city && ((Building)g).getType().getType() == BuildingType.Type.Home && ((Building)g).isBuilt()) {
+					noLeft = false;
+				}
+			}
+		}
+		return !noLeft;
+	}
+	
+	public MatchState getMatchState() {
+		return this.matchState;
 	}
 	
 	public Map getMap() {

@@ -14,6 +14,7 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
+import com.dreamteam.villageTycoon.game.GameScene.MatchState;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
@@ -162,7 +163,7 @@ public class City extends GameObject {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		controller.drawUi(batch);
+		if(((GameScene)getScene()).getMatchState() == MatchState.ON_GOING) controller.drawUi(batch);
 	}
 	
 	public void draw(SpriteBatch batch) {}
