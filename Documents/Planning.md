@@ -33,6 +33,8 @@ VFX | Tom | Bonus | Not Done
 Feature| Status
 -------|-------
 Stads AI (autonoma soldater och arbetare) | ofärdigt
+Win/lose state | ofärdigt
+Speed up/down knapp | ofärdigt
 Soldater ska äta | färdigt
 Hämta vatten | färidgt
 Karaktärer blir hungriga | färdigt
@@ -52,5 +54,5 @@ Woodshop | färdig
 Mine | färdig
 Farm | färdig
 Military base | färdig
-Mill | ofärdig
-Backery | ofärdig
+Mill | färdig
+Backery | färdig
