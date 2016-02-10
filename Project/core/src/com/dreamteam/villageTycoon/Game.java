@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
+import com.dreamteam.villageTycoon.game.GameScene.MatchState;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch, uiBatch;
@@ -31,6 +32,15 @@ public class Game extends ApplicationAdapter {
 	
 	public void update() {
 		currentScene.update(Gdx.graphics.getDeltaTime());
+		
+		if(currentScene instanceof GameScene) {
+			if(((GameScene) currentScene).getMatchState() != MatchState.ON_GOING) {
+				if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+					currentScene = new GameScene();
+				}
+			}
+		}
+		
 		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) Gdx.app.exit();
 		
 		if (Gdx.input.isKeyJustPressed(Keys.F1)) {
