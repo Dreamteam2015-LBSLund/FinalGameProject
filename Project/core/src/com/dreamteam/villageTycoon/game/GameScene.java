@@ -59,13 +59,17 @@ public class GameScene extends Scene {
 	}
 	
 	public void update(float dt) {
-		super.update(dt*3);
+		super.update(dt*-3);
 		this.getCamera().zoom = 2f;
 	}
 	
 	public void draw(SpriteBatch batch) {
 		map.draw(batch);
 		super.draw(batch);
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		super.drawUi(batch);
 	}
 	
 	public Map getMap() {

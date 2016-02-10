@@ -79,7 +79,7 @@ public class Building extends GameObject {
 		toClear = new ArrayList<Prop>();
 		
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
-		this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 300));
+		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 300));
     }
     
     public void onAdd(Scene scene) {
@@ -148,7 +148,7 @@ public class Building extends GameObject {
     		}
     	}
     	
-    	if(selected) {
+    	if(selected && destroyBuildingButton != null) {
     		destroyBuildingButton.update(this);
     	}
 
@@ -322,7 +322,7 @@ public class Building extends GameObject {
     		inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		
-    		destroyBuildingButton.draw(batch);
+    		if(destroyBuildingButton != null) destroyBuildingButton.draw(batch);
     		
     		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
         		if(getCity().getController() instanceof PlayerController) {
