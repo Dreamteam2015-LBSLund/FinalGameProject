@@ -18,7 +18,7 @@ Kontrollsystem | Tom | Minimal | Done
 Soldater | Tom | Minimal | Done
 UI | Tom | Minimal | Minimal Done, needs polish
 Arbetare | Johannes | Minimal | Done
-Basic AI | Johannes | Minimal | Not Done
+Basic AI | Johannes | Minimal | Done
 Fabriker | Johannes | Minimal | Done
 Tech | Båda | Minimal | Not Done
 Menyer | Tom | Normal | Not Done
@@ -33,7 +33,7 @@ VFX | Tom | Bonus | Not Done
 Feature| Status
 -------|-------
 Stads AI (autonoma soldater och arbetare) | ofärdigt
-Win/lose state | ofärdigt
+Win/lose state | färdigt
 Speed up/down knapp | färdigt
 Soldater ska äta | färdigt
 Hämta vatten | färidgt
