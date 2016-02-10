@@ -22,10 +22,10 @@ Basic AI | Johannes | Minimal | Done
 Fabriker | Johannes | Minimal | Done
 Tech | Båda | Minimal | Not Done
 Menyer | Tom | Normal | Not Done
-Dag/Natt | Tom | Normal | Not Done
+Dag/Natt | Tom | Normal | Won't add
 Mer Avancerad AI | Johannes | Normal| Not Done
 Ljudeffekter | Tom | Normal | Not Done
-Cutscene | Båda | Normal | LOL
+Cutscene | Båda | Normal | Won't add
 VFX | Tom | Bonus | Not Done
 
 ## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
