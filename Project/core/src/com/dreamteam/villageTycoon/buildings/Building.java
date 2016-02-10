@@ -205,7 +205,7 @@ public class Building extends GameObject {
     }
     
     public void cancelGather(Resource r) {
-    	System.out.println("cancel, adding r " + r.getName() + ", " + toGather.size());
+    	//System.out.println("cancel, adding r " + r.getName() + ", " + toGather.size());
     	toGather.add(r);
     }
     
@@ -269,8 +269,12 @@ public class Building extends GameObject {
     	return hasAllResources;
     }
     
-    public void addWorker(Worker w) {
-    	if (!workers.contains(w)) workers.add(w);
+    public boolean addWorker(Worker w) {
+    	if (!workers.contains(w)) {
+    		workers.add(w);
+    		return true;
+    	}
+    	return false;
     }
     
     public void removeWorker(Worker w) {
@@ -330,9 +334,7 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		//String s = "";
-    		//for (Resource r : toGather) s += r.getName() + ", ";
-    		//AssetManager.font.draw(batch, s, getUiScreenCoords().x, getUiScreenCoords().y);
+    		AssetManager.font.draw(batch, workers.size() + " workers", getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     

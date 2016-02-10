@@ -46,10 +46,10 @@ public class Worker extends Character {
 		//if (getScene() == null) Debug.print(this, "SCENE IS NULL");
 		//else Debug.print(this, "worker updated");
 		//Debug.print(this, "tile: " + getTile().getPosition());
-		if (getTile().getBuilding() != null && task == null) {
+		if (getTile().getBuilding() != null && task == null && false) {
 			workplace = getTile().getBuilding();
 			onStartWork();
-		} else if (task == null ){
+		} else if (task == null && false ){
 			if (workplace != null) onEndWork();
 			workplace = null;
 		}
@@ -73,9 +73,11 @@ public class Worker extends Character {
 		super.onPlayerInput(destination);
 		//Debug.print(this, "recieved input");
 		if (task != null) {
-			//task.onCancel();
+			task.onCancel();
 		}
 		task = null;
+		Building b = ((GameScene)getScene()).getMap().tileAt(destination).getBuilding();
+		if (b != null) workAt(b);
 	}
 
 	
@@ -173,14 +175,16 @@ public class Worker extends Character {
 
 	public void workAt(Building building) {
 		if (building == workplace) return;
-		building.addWorker(this);
-		//if (task != null) task.onCancel();
-		task = null;
-		setPath(building.getPosition(), building);
-		Debug.print(this, "working at building, pos = " + building.getPosition());
-		Debug.print(this, "path target: " + getPath().get(getPath().size() - 1));
-		//workplace = building;
-		//onStartWork();
+		if (building.addWorker(this)) {
+			if (task != null) task.onCancel();
+			task = null;
+			setPath(building.getPosition(), building);
+			Debug.print(this, "working at building, pos = " + building.getPosition());
+			Debug.print(this, "path target: " + getPath().get(getPath().size() - 1));
+			if (workplace != null) workplace.removeWorker(this);
+			workplace = building;
+			//onStartWork();
+		}
 	}
 	
 	public Building getWorkplace() {

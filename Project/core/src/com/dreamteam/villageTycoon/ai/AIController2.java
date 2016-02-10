@@ -100,7 +100,7 @@ public class AIController2 extends CityController {
 	}
 	
 
-	abstract class State {
+	public abstract class State {
 		
 		protected State prevState;
 		
@@ -132,8 +132,10 @@ public class AIController2 extends CityController {
 					ArrayList<Resource> food = new ArrayList<Resource>();
 					food.add(Resource.get("food"));
 					if (hasExpensiveFoodChain()) {
+						Debug.print(this, "working at expensive place");
 						return new MakeResourceState(this, food, getCity().getBuildingByType(BuildingType.getTypes().get("bakery")), getCity().getSoldiers().size() + getCity().getWorkers().size());
 					} else {
+						Debug.print(this, "working at shitty place");
 						return new MakeResourceState(this, food);
 					}
 				} else {
@@ -315,7 +317,7 @@ public class AIController2 extends CityController {
 		
 		private ArrayList<Resource> resources;
 		private int target;
-		private Building building;
+		private Building b;
 		
 		public MakeResourceState(State previous, ArrayList<Resource> missing) {
 			this(previous, missing, null, 15);
@@ -326,7 +328,7 @@ public class AIController2 extends CityController {
 			this.resources = singularize(missing);
 			Debug.print(this, "neeed resources: ");
 			for (Resource r : resources) Debug.print(this, r.getName());
-			this.building = building;
+			this.b = building;
 			this.target = target;
 		}
 
@@ -336,13 +338,13 @@ public class AIController2 extends CityController {
 				Debug.print(this, "need resource " + r.getName());
 				// hanterar bara en fabrik som producerar varje sak. bör väga många mot varandra?
 				BuildingType type = BuildingType.factoryProduces(r);
-				Building b = getCity().getBuildingByType(type);
+				if (b == null || !b.isBuilt() || !arrayContains(b.getType().getProducts(), r)) b = getCity().getBuildingByType(type);
 				// check for not available production resource
 				if (b != null && b.isBuilt()) {
 					ArrayList<Resource> missing = getCity().missingResources(b.getType().constructProductionResourcesList());
 					if (missing.size() == 0) {
 						for (Worker w : getCity().getWorkers()) {
-							if (w.getWorkplace() != b) w.workAt(b);
+							w.workAt(b);
 							//Debug.print(this, "assigning worker to " + b.getType().getName());
 						}
 						int n = getCity().getNoMaterials(r);
@@ -371,6 +373,13 @@ public class AIController2 extends CityController {
 				s += r.getName() + " ";
 			}
 			return s;
+		}
+		
+		private <T> boolean arrayContains(T[] arr, T thing) {
+			for (T t : arr) {
+				if (t == thing) return true;
+			}
+			return false;
 		}
 	}
 	
