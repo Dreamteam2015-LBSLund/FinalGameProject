@@ -33,7 +33,7 @@ VFX | Tom | Bonus | Not Done
 Task | Status
 -----|-------
 Hus ska inte landa på varandra | Ofärdigt
-Inventory kanske(?) | ofärdigt(?)
+Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | ofrädigt
 
 ## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
