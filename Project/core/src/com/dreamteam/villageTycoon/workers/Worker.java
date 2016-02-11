@@ -77,8 +77,11 @@ public class Worker extends Character {
 			task.onCancel();
 		}
 		task = null;
-		Building b = ((GameScene)getScene()).getMap().tileAt(destination).getBuilding();
-		if (b != null) workAt(b);
+		Tile t = ((GameScene)getScene()).getMap().tileAt(destination);
+		if (t != null) {
+			Building b = t.getBuilding();
+			if (b != null) workAt(b);			
+		}
 	}
 
 	

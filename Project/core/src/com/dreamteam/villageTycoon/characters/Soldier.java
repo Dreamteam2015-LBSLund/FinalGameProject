@@ -14,6 +14,8 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.DistanceComparator;
 import com.dreamteam.villageTycoon.framework.GameObject;
@@ -23,11 +25,22 @@ import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
+import com.dreamteam.villageTycoon.userInterface.TargetWeaponButton;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
 	enum AlertLevel { ALERT, PASSIVE };
+	
+	private final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	private final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	
+	private WeaponType allWeaponTypes[] = new WeaponType[2];
+	private ArrayList<WeaponType> avaibleWeaponTypes;
+	
+	private WeaponType targetWeapon;
+	
+	private TargetWeaponButton targetWeaponButton;
 	
 	private AggressionState  aggressionState;
 	private AlertLevel alertLevel;
@@ -101,11 +114,40 @@ public class Soldier extends Character {
 			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
 		}
 		
+		avaibleWeaponTypes = new ArrayList<WeaponType>();
+		allWeaponTypes[0] = WOOD_SWORD;
+		allWeaponTypes[1] = IRON_SWORD;
+		
 		foodReserve = 10;
+	}
+	
+	public void checkForWeapons() {
+		for(int i = 0; i < allWeaponTypes.length; i++) {
+			if (getCity().getNoMaterials(Resource.get(allWeaponTypes[i].getName())) > 0 ) {
+				if(!avaibleWeaponTypes.contains(allWeaponTypes[i])) {
+					avaibleWeaponTypes.add(allWeaponTypes[i]);
+				}
+			}
+		}
+		
+		if(targetWeapon != null) {
+			findResource(Resource.get(targetWeapon.getName()), null);
+			
+			if(findResource(Resource.get(targetWeapon.getName()), null)) {
+				weapon = new Weapon(targetWeapon);
+				targetWeapon = null;
+			}
+		}
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		checkForWeapons();
+		
+		for(int i = 0; i < avaibleWeaponTypes.size(); i++) {
+			System.out.println(avaibleWeaponTypes.get(i).getName() + " - " + avaibleWeaponTypes.size());
+		}
 		
 		equipedSabotageKit = inventory.getEquipedSabotageKit();
 		equipedSabotageKit = MathUtils.clamp(equipedSabotageKit, 0, this.sabotageKits.size());
@@ -341,6 +383,10 @@ public class Soldier extends Character {
 	
 	public void setAggressionState(AggressionState aggressionState) {
 		this.aggressionState = aggressionState;
+	}
+	
+	public void setTargetWeapon(WeaponType targetWeapon) {
+		this.targetWeapon = targetWeapon;
 	}
 	
 	public void setSoldierType() {
