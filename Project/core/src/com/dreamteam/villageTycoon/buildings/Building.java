@@ -78,7 +78,7 @@ public class Building extends GameObject {
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
 		
 		toClear = new ArrayList<Prop>();
-		
+		this.setDepthBasedOnPosition();
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 300));
     }

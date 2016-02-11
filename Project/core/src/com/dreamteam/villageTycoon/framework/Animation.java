@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+// 1235, 131
+
 public class Animation extends Sprite {
 	private int currentFrame;
 	private int maxFrame;
@@ -60,11 +62,13 @@ public class Animation extends Sprite {
 			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight() + 1 + currentFrame*this.getRegionHeight(), 
 					this.getRegionWidth(), this.getRegionHeight());
 		
-		if(animationDone()) 
+		if(currentFrame == maxFrame+1) 
 			currentFrame = 0;
 		
 		if(animationTime >= maxAnimationTime) {
 			currentFrame += 1;
+			if(currentFrame == maxFrame) 
+				currentFrame = 0;
 			animationTime = 0;
 		}
 	}

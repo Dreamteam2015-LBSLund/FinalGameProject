@@ -15,6 +15,7 @@ public class Corpse extends GameObject {
 		super(position, sprite);
 		this.setSize(new Vector2(1, 1));
 		alpha = 1;
+		this.setDepthBasedOnPosition();
 	}
 
 	public void update(float deltaTime) {

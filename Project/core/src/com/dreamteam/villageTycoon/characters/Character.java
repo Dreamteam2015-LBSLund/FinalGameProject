@@ -72,6 +72,8 @@ public class Character extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
+		this.setDepthBasedOnPosition();
+		
 		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
 		
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());

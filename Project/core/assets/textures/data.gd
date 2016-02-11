@@ -7,8 +7,8 @@ Textures: {
 	dirtTile: 35, 101, 32, 32;
 	waterTile: 69, 101, 32, 32;
 	treeTrunkTile: 103, 101, 32, 32;
-	stoneProp: 4, 139, 23, 17;
-	treeProp: 44, 138, 13, 17;
+	stoneProp: 564, 162, 29, 22;
+	treeProp: 522, 126, 30, 60;
 	grassProp: 61, 140, 12, 15;
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;

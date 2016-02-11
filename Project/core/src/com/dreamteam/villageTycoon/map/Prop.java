@@ -19,6 +19,7 @@ public class Prop extends GameObject {
 		setOriginCenter();
 		setPosition(getPosition());
 		this.tile = tile;
+		this.setDepthBasedOnPosition();
 	}
 	
 	public Tile getTile() {

@@ -47,6 +47,10 @@ public abstract class GameObject {
 		if(sprite != null) sprite.setColor(c);
 	}
 	
+	public void setDepthBasedOnPosition() {
+		this.setDepth(-getPosition().y + this.getSize().y/2);
+	}
+	
 	public Vector2 getSize() { return size; }
 	
 	public Animation getSprite() { return sprite; }

@@ -46,6 +46,8 @@ public class Projectile extends GameObject {
 		
 		distanceTraveled += speed * deltaTime;
 		
+		this.setDepthBasedOnPosition();
+		
 		if(distanceTraveled >= projectileType.getMaxRange()) {
 			getScene().removeObject(this);
 		}
