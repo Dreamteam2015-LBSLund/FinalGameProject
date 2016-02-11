@@ -250,7 +250,7 @@ public class AIController2 extends CityController {
 						Debug.print(this, "spawning soldiers");
 						b.spawn();
 					} else {
-						getCity().addBuilding(new Building(getNextBuildingPosition(), BuildingType.getTypes().get("armyBarack"), getCity()), true);
+						getCity().addBuilding(new Building(getNextBuildingPosition(getCity()), BuildingType.getTypes().get("armyBarack"), getCity()), true);
 					}
 					return null;	
 				}
@@ -263,11 +263,11 @@ public class AIController2 extends CityController {
 		}
 	}
 	
-	private Vector2 getNextBuildingPosition() {
+	public static Vector2 getNextBuildingPosition(City c) {
 		return 
-				getCity().getBuildings().size() > 0 
-		? getCity().getBuildings().get(getCity().getBuildings().size() - 1).getPosition().cpy().add(5, 0) 
-		: getCity().getPosition();
+				c.getBuildings().size() > 0 
+		? c.getBuildings().get(c.getBuildings().size() - 1).getPosition().cpy().add(5, 0) 
+		: c.getPosition();
 	}
 	
 	public class MakeFactoryState extends State {
@@ -309,7 +309,7 @@ public class AIController2 extends CityController {
 					Debug.print(this, "no missing resources for building");
 					if (b == null) {
 						Debug.print(this, "adding building " + type.getName());
-						b = new Building(getNextBuildingPosition(), type, getCity());
+						b = new Building(getNextBuildingPosition(getCity()), type, getCity());
 						Debug.print(this, "new building at " + b.getPosition());
 						getCity().addBuilding(b, true);
 					}

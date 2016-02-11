@@ -385,4 +385,8 @@ public class Building extends GameObject {
 		if (character != null) return character.getCity() != city;
 		else return true;
 	}
+
+	public ArrayList<Worker> getWorkers() {
+		return workers;
+	}
 }

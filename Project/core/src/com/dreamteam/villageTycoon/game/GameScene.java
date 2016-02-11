@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.AIController2;
+import com.dreamteam.villageTycoon.ai.AIController3;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
@@ -57,7 +58,7 @@ public class GameScene extends Scene {
 		
 		cities = new City[] {
 				playerCity,
-				new City(this, new AIController2(playerCity), new Vector2(25, 3))
+				new City(this, new AIController3(playerCity), new Vector2(25, 3))
 		};
 		
 		for(int i = 0; i < cities.length; i++) {
