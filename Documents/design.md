@@ -1,5 +1,5 @@
 ### vapen saker och dylikt
-Soldater ska hämta/producera ett vapen vid lämplig fabrik. Den producerar det mest moderna vapen den kan.
+Soldater ska hämta ett vapen vid lämplig fabrik. Den producerar det mest moderna vapen den kan.
 
 ### Designdokument 
 
