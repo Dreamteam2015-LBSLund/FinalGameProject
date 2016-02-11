@@ -40,7 +40,8 @@ public class Soldier extends Character {
 	
 	private WeaponType targetWeapon;
 	
-	private TargetWeaponButton targetWeaponButton;
+	private ArrayList<TargetWeaponButton> targetWeaponButtons;
+	private Vector2 targetWeaponButtonPosition;
 	
 	private AggressionState  aggressionState;
 	private AlertLevel alertLevel;
@@ -118,6 +119,9 @@ public class Soldier extends Character {
 		allWeaponTypes[0] = WOOD_SWORD;
 		allWeaponTypes[1] = IRON_SWORD;
 		
+		targetWeaponButtons = new ArrayList<TargetWeaponButton>();
+		targetWeaponButtonPosition = new Vector2(0, 0);
+		
 		foodReserve = 10;
 	}
 	
@@ -126,6 +130,7 @@ public class Soldier extends Character {
 			if (getCity().getNoMaterials(Resource.get(allWeaponTypes[i].getName())) > 0 ) {
 				if(!avaibleWeaponTypes.contains(allWeaponTypes[i])) {
 					avaibleWeaponTypes.add(allWeaponTypes[i]);
+					targetWeaponButtons.add(new TargetWeaponButton(targetWeaponButtonPosition.cpy().add(0, i*64), allWeaponTypes[i]));
 				}
 			}
 		}
@@ -171,6 +176,10 @@ public class Soldier extends Character {
 		
 		if(getShowInventroy()) {
 			this.sabotageKitButton.update(this);
+			
+			for(TargetWeaponButton t : targetWeaponButtons) {
+				t.update(this);
+			}
 		}
 		
 		if(getShowInventroy()) {
@@ -335,6 +344,9 @@ public class Soldier extends Character {
 		if(getShowInventroy()) {
 			inventory.drawUi(batch);
 			sabotageKitButton.draw(batch);
+			for(TargetWeaponButton t : targetWeaponButtons) {
+				t.draw(batch);
+			}
 		}
 		
 		if(prepareSabotageKit && sabotageKits.size() > 0) {
