@@ -49,6 +49,8 @@ public class GameScene extends Scene {
 	
 	private ArrowButton[] timeControll = new ArrowButton[2];
 	
+	private Animation topBar;
+	
 	public GameScene() {
 		super();
 		AssetManager.load();
@@ -78,6 +80,10 @@ public class GameScene extends Scene {
 		this.getCamera().position.set(new Vector3(playerCity.getPosition().x, playerCity.getPosition().y, 0));
 		
 		this.matchState = MatchState.ON_GOING;
+		
+		this.topBar = new Animation(AssetManager.getTexture("topBar"));
+		topBar.setPosition(-Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/4);
+		topBar.setSize(Gdx.graphics.getWidth()*2, 256);
 		
 		addObject(new Controller());
 	}
@@ -109,7 +115,8 @@ public class GameScene extends Scene {
 		super.draw(batch);
 	}
 	
-	public void drawUi(SpriteBatch batch) {
+	public void drawUi(SpriteBatch batch) {		
+		topBar.draw(batch);
 		super.drawUi(batch);
 		
 		if(matchState == MatchState.ON_GOING) {

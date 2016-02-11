@@ -80,7 +80,7 @@ public class Building extends GameObject {
 		toClear = new ArrayList<Prop>();
 		this.setDepthBasedOnPosition();
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
-		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 300));
+		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 320));
     }
     
     public void onAdd(Scene scene) {

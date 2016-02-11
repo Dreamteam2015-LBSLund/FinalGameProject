@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-// 1235, 131
-
 public class Animation extends Sprite {
 	private int currentFrame;
 	private int maxFrame;
