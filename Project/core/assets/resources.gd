@@ -46,6 +46,18 @@ iron-sword: {
 	icon: weaponIcon;
 }
 
+gun: {
+	icon: gunIcon;
+}
+
+rifle: {
+	icon: rifleIcon;
+}
+
+machine-gun: {
+	icon: machineGunIcon;
+}
+
 flour: {
 	icon: flourIcon;
 }
