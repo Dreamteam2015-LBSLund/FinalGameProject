@@ -401,6 +401,10 @@ public class Soldier extends Character {
 		this.targetWeapon = targetWeapon;
 	}
 	
+	public void goGetWeapon(WeaponType targetWeapon) {
+		this.targetWeapon = targetWeapon;
+	}
+	
 	public void setSoldierType() {
 		this.setSprite(soldierType.getTypeSprite());
 		this.setHealth(soldierType.getStartHealth());
