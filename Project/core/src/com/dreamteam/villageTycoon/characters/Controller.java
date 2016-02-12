@@ -17,6 +17,7 @@ import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.map.Map;
+import com.dreamteam.villageTycoon.userInterface.ArrowButton;
 
 public class Controller extends GameObject {
 	private Rectangle selectionRectangle = new Rectangle(0, 0, 0, 0);
@@ -37,13 +38,15 @@ public class Controller extends GameObject {
 	
 	private float cameraSpeed;
 	private float cameraZoom = 1;
+	private float displayCameraZoom = 1;
 	// if mouse is 16 units within the border of the screen the camera moves
 	final float MOVE_CAMERA_FIELD = 16;
 	
-	ArrayList<Character> selectedCharacters;
-	ArrayList<Building> selectedBuildings;
+	private ArrayList<Character> selectedCharacters;
+	private ArrayList<Building> selectedBuildings;
 	
 	private Vector2 zoomButtonPosition;
+	private ArrowButton[] zoomButtons = new ArrowButton[2];
 	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(AssetManager.getTexture("selectionRectangle")));
@@ -57,7 +60,10 @@ public class Controller extends GameObject {
 		
 		active = true;
 		
-		zoomButtonPosition = new Vector2(0, 0);
+		zoomButtonPosition = new Vector2(-Gdx.graphics.getWidth()+70, 0);
+		
+		zoomButtons[0] = new ArrowButton(new Rectangle(zoomButtonPosition.x-70, zoomButtonPosition.y, 64, 64), ArrowButton.Direction.UP);
+		zoomButtons[1] = new ArrowButton(new Rectangle(zoomButtonPosition.x-70, zoomButtonPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
 	}
 	
 	void onMousePressed() {
@@ -148,6 +154,10 @@ public class Controller extends GameObject {
 			cameraMovment(deltaTime);
 			inventoryUpdate();
 			selectUpdate();
+			for(int i = 0; i < zoomButtons.length; i++){
+				zoomButtons[i].update();
+				cameraZoom += zoomButtons[i].getValue(); 
+			}
 		}
 	}
 	
@@ -276,12 +286,14 @@ public class Controller extends GameObject {
 	}
 	
 	public void cameraMovment(float deltaTime) {
-		getScene().getCamera().zoom = cameraZoom;
+		getScene().getCamera().zoom = displayCameraZoom;
 		
 		if(Gdx.input.isKeyJustPressed(Keys.UP)) cameraZoom -= 1;
 		if(Gdx.input.isKeyJustPressed(Keys.DOWN)) cameraZoom += 1;
 		
 		cameraZoom = MathUtils.clamp(cameraZoom, 1, 7);
+		
+		displayCameraZoom = MathUtils.lerp(displayCameraZoom, cameraZoom, 0.5f);
 		
 		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD  && getScene().getCamera().position.x <= Map.WIDTH - getScene().getCamera().viewportWidth/2 - deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(deltaTime*cameraSpeed, 0));
@@ -305,6 +317,14 @@ public class Controller extends GameObject {
 			getSprite().setBounds(selectionRectangle.getX(), selectionRectangle.getY(), selectionRectangle.getWidth(), selectionRectangle.getHeight());
 			super.draw(batch);
 		}
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		super.drawUi(batch);
+		for(int i = 0; i < zoomButtons.length; i++) {
+			zoomButtons[i].draw(batch);
+		}
+		AssetManager.font.draw(batch, "ZOOM", zoomButtonPosition.x, zoomButtonPosition.y+16);
 	}
 	
 	public boolean getActive() {
