@@ -14,27 +14,65 @@ import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
+import com.dreamteam.villageTycoon.utils.ResourceReader;
 import com.dreamteam.villageTycoon.workers.Worker;
 
 public class AIController3 extends CityController {
 
-	private Command[] script = new Command[] {
+	private Command[] script; /* = new Command[] {
 		new BuildCommand(BuildingType.getTypes().get("house")),
 		new MakeWorkerCommand(10),
 		new BuildCommand(BuildingType.getTypes().get("farm")),
 		new MakeResourceCommand(Resource.get("food"), 10, null),
-		new BuildCommand(BuildingType.getTypes().get("armyBarack"))
-	};
+		new BuildCommand(BuildingType.getTypes().get("armyBarack")),
+		new MakeSoldierCommand(10),
+		new MakeWorkerCommand(30),
+		new BuildCommand(BuildingType.getTypes().get("mine")),
+		new MakeResourceCommand(Resource.get("iron"), 20, null),
+		new BuildCommand(BuildingType.getTypes().get("advancedFarm")),
+		new MakeResourceCommand(Resource.get("food"), 40, BuildingType.getTypes().get("advancedFarm")),
+	};*/
+	
+	private City targetCity;
 
 	public AIController3 (City targetCity) {
-		
+		this.targetCity = targetCity;
+		String input = Gdx.files.internal("aiScript.gs").readString();
+		String[] lines = input.split("\n");
+		script = new Command[lines.length];
+		for (int i = 0; i < lines.length; i++) {
+			script[i] = parseLine(lines[i]);
+		}
+	}
+	
+	private Command parseLine(String l) {
+		String[] split = l.split(" ");
+		String[] cmds = new String[split.length];
+		for (int i = 0; i < split.length; i++) {
+			cmds[i] = ResourceReader.removeWhitespace(split[i]);
+		}
+		if (cmds[0].equals("make")) {
+			return new MakeResourceCommand(Resource.get(cmds[2]), Integer.parseInt(cmds[1]), (cmds[3].equals("none") ? null : BuildingType.getTypes().get(cmds[3])));
+		} else if (cmds[0].equals("build")) {
+			return new BuildCommand(BuildingType.getTypes().get(cmds[1]));
+		} else if (cmds[0].equals("makeWorker")) {
+			return new MakeWorkerCommand(Integer.parseInt(cmds[1]));
+		} else if (cmds[0].equals("makeSoldier")) {
+			return new MakeSoldierCommand(Integer.parseInt(cmds[1]));
+		} else {
+			System.out.println("ERROR: unrecognized ai command " + cmds[0]);
+			return null;
+		}
 	}
 
+	private int current;
+	
 	public void update(float dt) {
 		for (int i = 0; i < script.length; i++) {
 			if (script[i].isDone()) continue;
 			else {
 				script[i].update();
+				current = i;
 				break;
 			}
 		}
@@ -52,6 +90,7 @@ public class AIController3 extends CityController {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
+		AssetManager.font.draw(batch, "" + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -400, -400);
 	}
 
 	
@@ -77,7 +116,7 @@ public class AIController3 extends CityController {
 		public boolean isDone() {
 			if (b == null || !b.isBuilt()) {
 				Building tmp = getCity().getBuildingByType(t);
-				if (tmp != null && b.isBuilt()) {
+				if (tmp != null && tmp.isBuilt()) {
 					b = tmp;
 					return true;
 				}
@@ -112,15 +151,18 @@ public class AIController3 extends CityController {
 		private Resource r;
 		private int n;
 		private Building b;
+		private BuildingType bt;
 		
-		public MakeResourceCommand(Resource r, int n, Building b) {
+		public MakeResourceCommand(Resource r, int n, BuildingType bt) {
 			this.r = r;
 			this.n = n;
-			this.b = b;
+			this.bt = bt;
 		}
 		
 		public void update() {
-			if (b == null) b = getCity().getBuildingByType(BuildingType.factoryProduces(r)); // TODO: null somewhere?
+			if (b == null) {
+				b = getCity().getBuildingByType((bt == null ? BuildingType.factoryProduces(r) : bt), true); // TODO: null somewhere?
+			}
 			if (b.getWorkers().size() < getCity().getWorkers().size()) {
 				for (Worker w : getCity().getWorkers()) {
 					w.workAt(b);
@@ -131,12 +173,37 @@ public class AIController3 extends CityController {
 		public boolean isDone() {
 			return getCity().getNoMaterials(r) >= n;
 		}
+		
+		public String getInfo() {
+			return r.getName() + " " + n + ", have " + getCity().getNoMaterials(r);
+		}
+	}
+	
+	public class MakeSoldierCommand extends Command {
+		private int n;
+		
+		public MakeSoldierCommand(int n) {
+			this.n = n;
+		}
+		
+		public void update() {
+			Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
+			if (b != null && b.isBuilt()) {
+				b.spawn().setPath(targetCity.getPosition());
+			}
+		}
+		
+		public boolean isDone() {
+			Debug.print(this, getCity().getSoldiers().size() + "");
+			return getCity().getSoldiers().size() >= n;
+		}
 	}
 	
 	abstract class Command {
 		// returns true if completed, otherwise false
 		public abstract void update();
 		public abstract boolean isDone();
+		public String getInfo() { return ""; }
 	}
 }
 

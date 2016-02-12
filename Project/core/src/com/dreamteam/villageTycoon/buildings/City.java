@@ -148,11 +148,15 @@ public class City extends GameObject {
 	}
 	
 	public Building getBuildingByType(BuildingType type) {
+		return getBuildingByType(type, false);
+	}
+	
+	public Building getBuildingByType(BuildingType type, boolean onlyFinished) {
 		Building best = null;
 		for (Building b : buildings) {
 			if (b.getType() == type) {
 				//return b;
-				if (best == null || (!best.isBuilt() && b.isBuilt()) && false) best = b;
+				if (best == null || (!best.isBuilt() && b.isBuilt() && onlyFinished)) best = b;
 			}
 		}
 		return best;

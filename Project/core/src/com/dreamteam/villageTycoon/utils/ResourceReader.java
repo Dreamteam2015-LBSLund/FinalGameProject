@@ -46,7 +46,7 @@ public class ResourceReader {
 		}
 	}
 	
-	private static String removeWhitespace(String s) {
+	public static String removeWhitespace(String s) {
 		return s.replaceAll("\\s+","");
 	}
 	
