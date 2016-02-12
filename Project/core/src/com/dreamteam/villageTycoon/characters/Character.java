@@ -58,9 +58,11 @@ public class Character extends GameObject {
 	private int maxCountFireDamegeTime;
 	
 	private boolean needToEat;
+	private boolean flip;
 	
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, new Vector2(1, 1), sprite);
+		//this.getSprite().setAnimation(0.1f, 4, false);
 		
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		this.deathAnimation = deathAnimation;
@@ -71,6 +73,10 @@ public class Character extends GameObject {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		//getSprite().animate(deltaTime);
+		
+		this.getSprite().setFlip(flip, false);
 		
 		this.setDepthBasedOnPosition();
 		
@@ -104,7 +110,7 @@ public class Character extends GameObject {
 			}
 			
 			if(g instanceof Explosion) {
-				if(this.distanceTo(g.getPosition()) <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0 && g.getSprite().getAnimationTime() <= 0) {
+				if(this.distanceTo(g.getPosition()) <= ((Explosion)g).getRadius() && g.getSprite().getCurrentFrame() == 0) {
 					health -= ((Explosion) g).getMaxDamege();
 					if(((Explosion)g).getType() == Type.FIRE) {
 						countFireDamegeTime = 1;

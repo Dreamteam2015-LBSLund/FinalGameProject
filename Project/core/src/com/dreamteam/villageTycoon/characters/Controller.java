@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
@@ -35,11 +36,14 @@ public class Controller extends GameObject {
 	private Building building;
 	
 	private float cameraSpeed;
+	private float cameraZoom = 1;
 	// if mouse is 16 units within the border of the screen the camera moves
 	final float MOVE_CAMERA_FIELD = 16;
 	
 	ArrayList<Character> selectedCharacters;
 	ArrayList<Building> selectedBuildings;
+	
+	private Vector2 zoomButtonPosition;
 	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(AssetManager.getTexture("selectionRectangle")));
@@ -52,6 +56,8 @@ public class Controller extends GameObject {
 		selectedBuildings = new ArrayList<Building>();
 		
 		active = true;
+		
+		zoomButtonPosition = new Vector2(0, 0);
 	}
 	
 	void onMousePressed() {
@@ -270,9 +276,13 @@ public class Controller extends GameObject {
 	}
 	
 	public void cameraMovment(float deltaTime) {
-		// I tried to replicate the camera movment from red alert.
-		// TODO: Make the camera not when the mouse is over UI
-
+		getScene().getCamera().zoom = cameraZoom;
+		
+		if(Gdx.input.isKeyJustPressed(Keys.UP)) cameraZoom -= 1;
+		if(Gdx.input.isKeyJustPressed(Keys.DOWN)) cameraZoom += 1;
+		
+		cameraZoom = MathUtils.clamp(cameraZoom, 1, 7);
+		
 		if(getScene().getScreenMouse().x >= Gdx.graphics.getWidth()-MOVE_CAMERA_FIELD  && getScene().getCamera().position.x <= Map.WIDTH - getScene().getCamera().viewportWidth/2 - deltaTime*cameraSpeed) {
 			getScene().getCamera().translate(new Vector2(deltaTime*cameraSpeed, 0));
 		}

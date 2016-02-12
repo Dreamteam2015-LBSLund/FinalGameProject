@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+
 public class Animation extends Sprite {
 	private int currentFrame;
 	private int maxFrame;
@@ -15,6 +16,8 @@ public class Animation extends Sprite {
 	private float maxAnimationTime;
 	
 	private boolean vertical;
+	
+	private float orginalRegionX;
 	
 	public Animation(Texture sprite){
 		super(sprite);
@@ -32,33 +35,41 @@ public class Animation extends Sprite {
 		super(new Sprite(region));
 		setSize(size.x, size.y);
 		setColor(color);
+		this.orginalRegionX = this.getRegionX();
 	}
 	
 	public Animation(Sprite sprite, float maxAnimationTime, int maxFrame, boolean vertical){
 		super(sprite);
 		setAnimation(maxAnimationTime, maxFrame, vertical);
+		this.orginalRegionX = this.getRegionX();
 	}
 	
 	public Vector2 getSize() {
 		return this.getSize();
 	}
 	
+	public void flip() {
+		this.flip(true, false);
+	}
+	
 	public void setAnimation(float maxAnimationTime, int maxFrame, boolean vertical) {
 		this.maxAnimationTime = maxAnimationTime;
 		this.maxFrame = maxFrame;
-		this.minFrame = (this.getRegionX() / this.getRegionWidth());
+		this.minFrame = this.getRegionX() / this.getRegionWidth();
 		this.vertical = vertical;
+		this.orginalRegionX = this.getRegionX();
 	}
 	
 	public void animate(float deltaTime) {
-		animationTime += deltaTime;
+		animationTime += 2*deltaTime;
 		
 		if(!vertical)
-			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth() + 1 + currentFrame, 
+			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth()+1+currentFrame, 
 					this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		else
-			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight() + 1 + currentFrame*this.getRegionHeight(), 
+			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight()+ currentFrame*this.getRegionWidth(), 
 					this.getRegionWidth(), this.getRegionHeight());
+		
 		
 		if(currentFrame == maxFrame+1) 
 			currentFrame = 0;
@@ -71,27 +82,27 @@ public class Animation extends Sprite {
 		}
 	}
 	
-	public int getCurrentFrame() {
-		return currentFrame;
-	}
-	
-	public int getMaxFrame() {
-		return this.maxFrame;
-	}
-	
 	public boolean animationDone() {
-		return currentFrame == maxFrame;
+		return currentFrame == maxFrame+1;
 	}
 	
 	public void setCurrentFrame(int currentFrame) {
 		this.currentFrame = currentFrame;
 	}
 	
-	public void setAnimationTime(float animationTime) {
-		this.animationTime = animationTime;
+	public int getMaxFrame() {
+		return this.maxFrame;
 	}
 	
-	public float getAnimationTime() {
-		return animationTime;
+	public int getMinFrame() {
+		return this.minFrame;
+	}
+	
+	public int getCurrentFrame() {
+		return this.currentFrame;
+	}
+	
+	public void setAnimationTime(float animationTime) {
+		this.animationTime = animationTime;
 	}
 }
