@@ -35,6 +35,7 @@ Task | Status
 Hus ska inte landa på varandra | Ofärdigt
 Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | ofrädigt
+Map generation för vatten och jord | ofärdigt
 
 ## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
 

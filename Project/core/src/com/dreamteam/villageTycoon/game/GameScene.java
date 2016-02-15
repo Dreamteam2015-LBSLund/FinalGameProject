@@ -106,8 +106,6 @@ public class GameScene extends Scene {
 		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
 		
 		matchUpdate();
-		
-		this.getCamera().zoom = 2f;
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -116,7 +114,7 @@ public class GameScene extends Scene {
 	}
 	
 	public void drawUi(SpriteBatch batch) {		
-		topBar.draw(batch);
+		//topBar.draw(batch);
 		super.drawUi(batch);
 		
 		if(matchState == MatchState.ON_GOING) {
