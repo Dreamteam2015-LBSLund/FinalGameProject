@@ -52,7 +52,7 @@ public class AIController3 extends CityController {
 			cmds[i] = ResourceReader.removeWhitespace(split[i]);
 		}
 		if (cmds[0].equals("make")) {
-			return new MakeResourceCommand(Resource.get(cmds[2]), Integer.parseInt(cmds[1]), (cmds[3].equals("none") ? null : BuildingType.getTypes().get(cmds[3])));
+			return new MakeResourceCommand(Resource.get(cmds[3]), Integer.parseInt(cmds[1]), Integer.parseInt(cmds[2]), (cmds[4].equals("none") ? null : BuildingType.getTypes().get(cmds[3])));
 		} else if (cmds[0].equals("build")) {
 			return new BuildCommand(BuildingType.getTypes().get(cmds[1]));
 		} else if (cmds[0].equals("makeWorker")) {
@@ -90,7 +90,7 @@ public class AIController3 extends CityController {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		AssetManager.font.draw(batch, "" + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -400, -400);
+		AssetManager.font.draw(batch, "cmd " + current + "/" + script.length + " " + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -400, -400);
 	}
 
 	
@@ -125,6 +125,10 @@ public class AIController3 extends CityController {
 			}
 			return false;
 		}
+		
+		public String getInfo() {
+			return t.getName();
+		}
 	}
 	
 	public class MakeWorkerCommand extends Command {
@@ -149,13 +153,15 @@ public class AIController3 extends CityController {
 	
 	public class MakeResourceCommand extends Command {
 		private Resource r;
-		private int n;
+		private int min, max;
 		private Building b;
 		private BuildingType bt;
+		private boolean active;
 		
-		public MakeResourceCommand(Resource r, int n, BuildingType bt) {
+		public MakeResourceCommand(Resource r, int min, int max, BuildingType bt) {
 			this.r = r;
-			this.n = n;
+			this.min = min;
+			this.max = max;
 			this.bt = bt;
 		}
 		
@@ -168,14 +174,17 @@ public class AIController3 extends CityController {
 					w.workAt(b);
 				}
 			}
+			active = true;
 		}
 		
 		public boolean isDone() {
-			return getCity().getNoMaterials(r) >= n;
+			boolean ret = active ? (getCity().getNoMaterials(r) >= max) : (getCity().getNoMaterials(r) > min);
+			active = false;
+			return ret;
 		}
 		
 		public String getInfo() {
-			return r.getName() + " " + n + ", have " + getCity().getNoMaterials(r);
+			return r.getName() + " max: " + max + ", have " + getCity().getNoMaterials(r);
 		}
 	}
 	

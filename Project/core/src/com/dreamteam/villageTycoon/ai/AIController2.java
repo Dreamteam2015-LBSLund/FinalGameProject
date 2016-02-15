@@ -15,6 +15,7 @@ import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
+import com.sun.org.apache.bcel.internal.generic.LASTORE;
 
 public class AIController2 extends CityController {
 	
@@ -263,11 +264,14 @@ public class AIController2 extends CityController {
 		}
 	}
 	
+	private static float a;
+	private static Vector2 lastPos;
 	public static Vector2 getNextBuildingPosition(City c) {
-		return 
-				c.getBuildings().size() > 0 
-		? c.getBuildings().get(c.getBuildings().size() - 1).getPosition().cpy().add(5, 0) 
-		: c.getPosition();
+		if (lastPos == null) lastPos = c.getPosition();
+		a = (float)(a + Math.PI / Math.pow(c.getBuildings().size(), 1/2f));
+		Vector2 n = new Vector2(5, 0).setAngleRad(a).add(lastPos);
+		lastPos = n;
+		return n;
 	}
 	
 	public class MakeFactoryState extends State {
