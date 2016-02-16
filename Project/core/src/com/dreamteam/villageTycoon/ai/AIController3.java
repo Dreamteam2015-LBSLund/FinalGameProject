@@ -35,14 +35,18 @@ public class AIController3 extends CityController {
 	
 	private City targetCity;
 
+	private String text;
+	
 	public AIController3 (City targetCity) {
 		this.targetCity = targetCity;
 		String input = Gdx.files.internal("aiScript.gs").readString();
 		String[] lines = input.split("\n");
 		script = new Command[lines.length];
+		Debug.print(this, "parsing script");
 		for (int i = 0; i < lines.length; i++) {
 			script[i] = parseLine(lines[i]);
 		}
+		text = "";
 	}
 	
 	private Command parseLine(String l) {
@@ -52,7 +56,8 @@ public class AIController3 extends CityController {
 			cmds[i] = ResourceReader.removeWhitespace(split[i]);
 		}
 		if (cmds[0].equals("make")) {
-			return new MakeResourceCommand(Resource.get(cmds[3]), Integer.parseInt(cmds[1]), Integer.parseInt(cmds[2]), (cmds[4].equals("none") ? null : BuildingType.getTypes().get(cmds[3])));
+			Debug.print(this, cmds[4]);
+			return new MakeResourceCommand(Resource.get(cmds[3]), Integer.parseInt(cmds[1]), Integer.parseInt(cmds[2]), (cmds[4].equals("none") ? null : BuildingType.getTypes().get(cmds[4])));
 		} else if (cmds[0].equals("build")) {
 			return new BuildCommand(BuildingType.getTypes().get(cmds[1]));
 		} else if (cmds[0].equals("makeWorker")) {
@@ -68,11 +73,18 @@ public class AIController3 extends CityController {
 	private int current;
 	
 	public void update(float dt) {
+		text = "";
 		for (int i = 0; i < script.length; i++) {
-			if (script[i].isDone()) continue;
+			if (script[i].isDone()) {
+				//Debug.print(this, i + " is done, continuing");
+				text += "\n" + script[i].getInfo();
+				continue;
+			}
 			else {
+				//Debug.print(this, "updating " + i);
 				script[i].update();
 				current = i;
+				text += "\n updating " + i + ", " + script[i].getInfo();
 				break;
 			}
 		}
@@ -90,7 +102,8 @@ public class AIController3 extends CityController {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		AssetManager.font.draw(batch, "cmd " + current + "/" + script.length + " " + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -400, -400);
+		//AssetManager.font.draw(batch, "cmd " + current + "/" + script.length + " " + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -800, -400);
+		AssetManager.smallFont.draw(batch, text, -800, 400);
 	}
 
 	
@@ -163,10 +176,13 @@ public class AIController3 extends CityController {
 			this.min = min;
 			this.max = max;
 			this.bt = bt;
+			Debug.print(this, "new makeResource, bt = " + bt);
 		}
 		
 		public void update() {
 			if (b == null) {
+				Debug.print(this, "building is null");
+				Debug.print(this, bt == null ? "bt is null" : bt.getName());
 				b = getCity().getBuildingByType((bt == null ? BuildingType.factoryProduces(r) : bt), true); // TODO: null somewhere?
 			}
 			if (b.getWorkers().size() < getCity().getWorkers().size()) {
@@ -178,13 +194,19 @@ public class AIController3 extends CityController {
 		}
 		
 		public boolean isDone() {
-			boolean ret = active ? (getCity().getNoMaterials(r) >= max) : (getCity().getNoMaterials(r) > min);
-			active = false;
+			return isDone(false);
+		}
+		
+		public boolean isDone(boolean peek) {
+			int res = getCity().getNoMaterials(r);
+			boolean ret = active ? (res >= max) : (res > min);
+			Debug.print(this, "have " + res + ", active: " + active); 
+			if (!peek) active = false;
 			return ret;
 		}
 		
 		public String getInfo() {
-			return r.getName() + " max: " + max + ", have " + getCity().getNoMaterials(r);
+			return r.getName() + " max: " + max + ", have " + getCity().getNoMaterials(r) + ", bt = " + bt;
 		}
 	}
 	

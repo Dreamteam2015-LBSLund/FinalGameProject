@@ -12,6 +12,7 @@ make 30 50 food advancedFarm
 build wheatFarm
 build flourMill
 build bakery
-make 0 20 wheat none
-make 0 20 flour none
-make 0 20 food bakery
+make 0 30 wheat none
+make 0 50 flour none
+make 51 200 food bakery
+makeSoldier 100

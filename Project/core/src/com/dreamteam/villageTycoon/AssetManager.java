@@ -14,13 +14,15 @@ public abstract class AssetManager {
 	
 	private static HashMap<String, TextureRegion> regions;
 	
-	public static BitmapFont font;
+	public static BitmapFont font, smallFont;
 	
 	public static void load() {
 		FreeTypeFontGenerator g = new FreeTypeFontGenerator(Gdx.files.internal("fonts/CALIST.TTF"));
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
 		param.size = 50;
 		font = g.generateFont(param);
+		param.size = 35;
+		smallFont = g.generateFont(param);
 		
 		regions = new HashMap<String, TextureRegion>();
 		Texture spriteSheet = new Texture("textures/spritesheet.png");
