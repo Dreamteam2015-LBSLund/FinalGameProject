@@ -37,7 +37,7 @@ Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | ofrädigt
 Map generation för vatten och jord | ofärdigt
 
-## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
+## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS FÖR ATT SPELET SKA GRUNDLÄGGANDE BLI FÄRDIGT 
 
 Feature| Status
 -------|-------
