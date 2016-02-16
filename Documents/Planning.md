@@ -80,11 +80,12 @@ Menyer (inte minimal) | 1 | Ofärdig | Tom
 Fabriker för alla vapen | 1/2 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
+Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 
 Person | Total tid(d)
 -------|-------------
 Johannes | 4.5 
-Tom | 2.5 
+Tom | 4.5
 
 
 
