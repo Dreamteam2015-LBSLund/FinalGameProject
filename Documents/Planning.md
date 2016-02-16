@@ -72,12 +72,12 @@ Panik på en skala 0-1 så ligger vi på 0.2. Väldigt nära ett spelbart spel, 
 
 Uppgift | Tid(d) | Status | Person
 --------|-----|--------|-------
-Fixa autonom byar(placera byggnader) | 1/2 | Ofärdig | Johannes
-Autonomt ta beslut om vapen och mat | 3 | Ofärdig | Johannes
-Delay på att göra grejor(inte minimal) | 1 | Ofärdig | Johannes
+Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
+Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
+Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
 Göra så att byggnader inte spawnar ovanpå varandra | 1/2 | Ofrädig | Tom
-Menyer(inte minimal) | 1 | Ofärdig | Tom
+Menyer (inte minimal) | 1 | Ofärdig | Tom
 Fabriker för alla vapen | 1/2 | Ofärdig | Tom
-Snygg UI(inte minimal) | 1 | Ofärdig | Tom
+Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 
 
