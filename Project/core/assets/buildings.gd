@@ -109,6 +109,24 @@ blacksmith: {
 	resource-per-run: 2;
 }
 
+pistolFactory: {
+	type: factory;
+	
+	health: 10;
+	
+	materials: wood, stone, iron;
+	material-amount: 10, 5, 3;
+	
+	sprite-finished: pistolFactory;
+	sprite-building: factoryProgress;
+	
+	max-workers: 4;
+	product: gun;
+	product-per-run: 1;
+	production-resources: iron;
+	resource-per-run: 2;
+}
+
 flourMill: {
 	type: factory;
 	
