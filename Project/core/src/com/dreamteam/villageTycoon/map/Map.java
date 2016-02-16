@@ -79,7 +79,7 @@ public class Map {
 			
 			for(int j = 0; j < 5; j++) {
 				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
-				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-10, 10), randomInt(-10, 10))), cities[i]);
+				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-5, 5), randomInt(-5, 5))), cities[i]);
 				scene.addObject(w);
 				//cities[i].addWorker(w);
 			}
@@ -222,7 +222,7 @@ public class Map {
 		
 		for(Building b : buildings) {
 			if(b != building)
-				canPlace = (b.getHitbox().collision(building.getHitbox()));
+				canPlace = (b.distanceTo(building.getPosition().cpy()) < 5);
 		}
 		
 		return canPlace;
