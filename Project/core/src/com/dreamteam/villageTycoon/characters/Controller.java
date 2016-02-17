@@ -194,7 +194,12 @@ public class Controller extends GameObject {
 		}
 		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) { 
-			moveUnits();
+			if(!isMouseOnBuilding()) moveUnits();
+			else {
+				for(Character c : selectedCharacters) {
+					c.onPlayerInput(new Vector2(getScene().getWorldMouse().x, getScene().getWorldMouse().y));
+				}
+			}
 			rightMouseIsPressed = true;
 		} else {
 			rightMouseIsPressed = false;
@@ -203,6 +208,20 @@ public class Controller extends GameObject {
 		Vector2 rel = getScene().getWorldMouse().sub(selectionPoint);
 		selectionRectangle = new Rectangle(selectionPoint.x, selectionPoint.y, rel.x, rel.y);
 		selectionRectangle.normalize();
+	}
+	
+	public boolean isMouseOnBuilding() {
+		for(GameObject b : getScene().getObjects()) {
+			if(b instanceof Building) {
+				if(((Building) b).getCity().getController() instanceof PlayerController) {
+					if/*fuck you*/(new Rectangle(getScene().getWorldMouse().x, getScene().getWorldMouse().y, 1, 1).collision(b.getHitbox())) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 	public void checkBuildings() {
