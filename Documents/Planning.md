@@ -82,11 +82,13 @@ Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
 Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 Fixa animations systemet | 1/2 | Ofärdig | Tom
+Make soldiers aim good | 1/2 | Ofärdig | Tom
+Fixa snyggt sätt att plocka upp vapen | 1/2 | Tom
 
 Person | Total tid(d)
 -------|-------------
 Johannes | 4.5, varav 1 inte är minimal
-Tom | 5, varav 2 inte är minimal
+Tom | 6, varav 2 inte är minimal
 
 
 
