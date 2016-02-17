@@ -83,7 +83,7 @@ Simpel tutorial | 1/2 | Ofärdig | Tom
 Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 Fixa animations systemet | 1/2 | Ofärdig | Tom
 Make soldiers aim good | 1/2 | Ofärdig | Tom
-Fixa snyggt sätt att plocka upp vapen | 1/2 | Tom
+Fixa snyggt sätt att plocka upp vapen | 1/2 | Ofärdig | Tom
 
 Person | Total tid(d)
 -------|-------------
