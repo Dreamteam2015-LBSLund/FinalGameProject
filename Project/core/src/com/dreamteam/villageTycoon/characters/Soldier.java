@@ -321,8 +321,7 @@ public class Soldier extends Character {
 		alertLevel = AlertLevel.ALERT;
 		for (Character c : spottedEnemies) {
 			if(c != projectile.getOwner()) {
-				// TODO: @indietom seperate toadd list. concurrentModificationException
-				addSpottedEnemies(projectile.getOwner());
+				//addSpottedEnemies(projectile.getOwner());
 			}
 		}
 	}
