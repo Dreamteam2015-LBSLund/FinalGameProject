@@ -142,6 +142,10 @@ public class AIController3 extends CityController {
 		public String getInfo() {
 			return t.getName();
 		}
+		
+		public String toString() {
+			return getInfo();
+		}
 	}
 	
 	public class MakeWorkerCommand extends Command {

@@ -58,7 +58,7 @@ public class Worker extends Character {
 		
 		//Debug.print(this, "hunger = " + getAmountFull() / getMaxFull());
 		if (getAmountFull() / getMaxFull() < .3f && getCity().hasResource(Resource.get("food"))) {
-			if (findResource(Resource.get("food"), inventory) || inventory.count(Resource.get("water")) > 0) {
+			if (findResource(Resource.get("food"), inventory)) {
 				inventory.remove(Resource.get("food"), 1);
 				setAmountFull(getMaxFull());
 				Debug.print(this, "ATE - hunger = " + getAmountFull() / getMaxFull() + "llllllllllllasdssssssssssssssssssssssssssssss");

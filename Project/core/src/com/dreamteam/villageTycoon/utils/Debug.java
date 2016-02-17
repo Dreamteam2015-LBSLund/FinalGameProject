@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.AIController2;
+import com.dreamteam.villageTycoon.ai.AIController3;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingButton;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
@@ -31,8 +32,10 @@ public abstract class Debug {
 		//whitelist.add(City.class);
 		//whitelist.add(AIController2.class);
 		//whitelist.add(AIController2.MakeFactoryState.class);
-		//whitelist.add(AIController2.MakeResourceState.class);
+		whitelist.add(AIController2.MakeResourceState.class);
 		//whitelist.add(AIController2.MakeSoldierState.class);
+		//whitelist.add(AIController3.MakeSoldierCommand.class);
+		whitelist.add(AIController3.class);
 	}
 	
 	public static void print(Object client, String message) {
