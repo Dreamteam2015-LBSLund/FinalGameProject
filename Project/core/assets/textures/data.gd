@@ -42,6 +42,9 @@ Textures: {
 	
 	factory: 				 0, 457, 128, 96;
 	factoryProgress: 		 0, 553, 128, 96;
+	pistolFactory:			 146, 559, 128, 96;
+	rifleFactory: 			 146, 461, 128, 96;
+	machineGunFactory:		 146, 663, 128, 96;
 	house: 					 0, 651, 128, 96;
 	houseProgress: 			 0, 749, 128, 96;
 	woodShop: 				 0, 847, 128, 96;

@@ -37,7 +37,7 @@ Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | ofrädigt
 Map generation för vatten och jord | ofärdigt
 
-## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS
+## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS FÖR ATT SPELET SKA GRUNDLÄGGANDE BLI FÄRDIGT 
 
 Feature| Status
 -------|-------
@@ -65,3 +65,28 @@ Farm | färdig
 Military base | färdig
 Mill | färdig
 Backery | färdig
+
+# Lovplannering (innan och under lovet)
+
+Panik på en skala 0-1 så ligger vi på 0.2. Väldigt nära ett spelbart spel, allt som behövs sen är polish och debugging. 
+
+Uppgift | Tid(d) | Status | Person
+--------|-----|--------|-------
+Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
+Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
+Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
+Göra så att byggnader inte spawnar ovanpå varandra | 1/2 | Färdig | Tom
+Menyer (inte minimal) | 1 | Ofärdig | Tom
+Fabriker för alla vapen | 1/2 | Ofärdig | Tom
+Snygg UI (inte minimal) | 1 | Ofärdig | Tom
+Simpel tutorial | 1/2 | Ofärdig | Tom
+Fixa procedual generation för terräng | 2 | Ofärdig | Tom
+Fixa animations systemet | 1/2 | Ofärdig | Tom
+
+Person | Total tid(d)
+-------|-------------
+Johannes | 4.5, varav 1 inte är minimal
+Tom | 5, varav 2 inte är minimal
+
+
+

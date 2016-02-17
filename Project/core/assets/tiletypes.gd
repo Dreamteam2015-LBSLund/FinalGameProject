@@ -10,7 +10,7 @@ Grass: {
 	isWalkable: true;
 	isBuildable: true;
 	resources: wood, iron, diamond;
-	props: stone, .1;
+	props: stone, .05;
 	sprite: grassTile;
 	gCost: 0.8;
 }

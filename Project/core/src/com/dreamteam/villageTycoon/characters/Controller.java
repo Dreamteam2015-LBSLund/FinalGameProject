@@ -158,6 +158,8 @@ public class Controller extends GameObject {
 				zoomButtons[i].update();
 				cameraZoom += zoomButtons[i].getValue(); 
 			}
+			
+			cameraSpeed = 1+cameraZoom*2;
 		}
 	}
 	
