@@ -34,8 +34,11 @@ public class Soldier extends Character {
 	
 	private final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
 	private final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	private final WeaponType GUN = new WeaponType("gun", 1, 4, 6, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 8, 3, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	private final WeaponType RIFLE = new WeaponType("rifle", 1, 8, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	private final WeaponType MACHINE_GUN = new WeaponType("machine-gun", 1, 2, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
 	
-	private WeaponType allWeaponTypes[] = new WeaponType[2];
+	private WeaponType allWeaponTypes[] = new WeaponType[5];
 	private ArrayList<WeaponType> avaibleWeaponTypes;
 	
 	private WeaponType targetWeapon;
@@ -66,6 +69,7 @@ public class Soldier extends Character {
 	private boolean isOnFire;
 	private boolean useSabotageKit;
 	private boolean prepareSabotageKit;
+	private boolean hasPickedUpWeapon;
 
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
@@ -118,11 +122,18 @@ public class Soldier extends Character {
 		avaibleWeaponTypes = new ArrayList<WeaponType>();
 		allWeaponTypes[0] = WOOD_SWORD;
 		allWeaponTypes[1] = IRON_SWORD;
+		allWeaponTypes[2] = GUN;
+		allWeaponTypes[3] = RIFLE;
+		allWeaponTypes[4] = MACHINE_GUN;
 		
 		targetWeaponButtons = new ArrayList<TargetWeaponButton>();
 		targetWeaponButtonPosition = new Vector2(0, 0);
 		
 		foodReserve = 10;
+	}
+	
+	public void pickUpMostModernWeapon() {
+		this.targetWeapon = avaibleWeaponTypes.get(avaibleWeaponTypes.size()-1);
 	}
 	
 	public void checkForWeapons() {
@@ -141,6 +152,11 @@ public class Soldier extends Character {
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
 				weapon = new Weapon(targetWeapon);
 				targetWeapon = null;
+				hasPickedUpWeapon = true;
+			}
+		} else {
+			if(avaibleWeaponTypes.size() > 0 && !hasPickedUpWeapon) {
+				pickUpMostModernWeapon();
 			}
 		}
 	}
