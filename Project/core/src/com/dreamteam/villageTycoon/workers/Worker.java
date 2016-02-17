@@ -188,7 +188,7 @@ public class Worker extends Character {
 			setPath(building.getPosition(), building);
 			Debug.print(this, "working at building, pos = " + building.getPosition());
 			Debug.print(this, "path " + getPath());
-			Debug.print(this, "path target: " + getPath().get(getPath().size() - 1));
+			Debug.print(this, getPath() == null ? "path is null" : "path target: " + getPath().get(getPath().size() - 1));
 			if (workplace != null) workplace.removeWorker(this);
 			workplace = building;
 			//onStartWork();

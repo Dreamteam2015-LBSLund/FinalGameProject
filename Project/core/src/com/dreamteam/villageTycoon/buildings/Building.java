@@ -186,7 +186,7 @@ public class Building extends GameObject {
     	} else if (type.isFactory()) {
     		// regular production
     		// TODO: what did i break?
-    		if (toGather.size() == 0 && isProductionGatheringDone()) {
+    		if (toGather.size() == 0 ) { // removed && isProductionGatheringDone() to fix pistolFactory not starting work
     			if (!isProductionGatheringDone()) {
     				startProduction();
     			}
@@ -337,7 +337,7 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		AssetManager.font.draw(batch, workers.size() + " workers", getUiScreenCoords().x, getUiScreenCoords().y);
+    		AssetManager.font.draw(batch, workers.size() + " workers, state = " + buildState + ", toGather = " + toGather.size() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     
