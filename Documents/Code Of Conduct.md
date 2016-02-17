@@ -17,4 +17,4 @@ Bully equals power and borgarföreldrar, therefore Tom can't bully. This doesn't
 He can do whatever he wants, since Tom doesn't controll him. Especially in bullying matters.
 
 ##### 2.1 Ruben's spaghetti
-Ruben complaines so much about Tom's spaghetti that it overshadows his own spaghetti.
+Ruben complaines so much about Tom's spaghetti that it overshadows his own spaghetti, and that's a good thing.
