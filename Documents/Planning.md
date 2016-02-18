@@ -77,7 +77,7 @@ Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
 Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
 Göra så att byggnader inte spawnar ovanpå varandra | 1/2 | Färdig | Tom
 Menyer (inte minimal) | 1 | Ofärdig | Tom
-Fabriker för alla vapen | 1/2 | Ofärdig | Tom
+Fabriker för alla vapen | 1/2 | Färdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
 Fixa procedual generation för terräng | 2 | Ofärdig | Tom
