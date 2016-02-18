@@ -109,7 +109,7 @@ blacksmith: {
 	resource-per-run: 2;
 }
 
-pistolFactory: {
+gunFactory: {
 	type: factory;
 	
 	health: 10;
@@ -122,6 +122,42 @@ pistolFactory: {
 	
 	max-workers: 4;
 	product: gun;
+	product-per-run: 1;
+	production-resources: iron;
+	resource-per-run: 2;
+}
+
+rifleFactory: {
+	type: factory;
+	
+	health: 10;
+	
+	materials: wood, stone, iron;
+	material-amount: 10, 5, 3;
+	
+	sprite-finished: rifleFactory;
+	sprite-building: factoryProgress;
+	
+	max-workers: 4;
+	product: rifle;
+	product-per-run: 1;
+	production-resources: iron;
+	resource-per-run: 2;
+}
+
+machineGunFactory: {
+	type: factory;
+	
+	health: 10;
+	
+	materials: wood, stone, iron;
+	material-amount: 10, 5, 3;
+	
+	sprite-finished: machineGunFactory;
+	sprite-building: factoryProgress;
+	
+	max-workers: 4;
+	product: machine-gun;
 	product-per-run: 1;
 	production-resources: iron;
 	resource-per-run: 2;

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.effects.Explosion;
@@ -83,6 +84,8 @@ public class Character extends GameObject {
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
 
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
+		
+		if(getCity().getController() instanceof PlayerController) this.getMovmentVector(deltaTime);
 		
 		if(health <= 0) {
 			getScene().addObject(new Corpse(this.getPosition(), deathAnimation));
@@ -330,6 +333,19 @@ public class Character extends GameObject {
 	
 	public boolean hasPath() {
 		return path != null;
+	}
+	
+	public Vector2 getMovmentVector(float deltaTime) {
+		Vector2 delta = Vector2.Zero;
+		
+		if (path != null && !path.isEmpty()) {
+			Vector2 next = path.get(0);
+			delta = next.cpy().sub(getPosition().cpy());
+			System.out.println(delta);
+			delta.clamp(0, 1*deltaTime);
+		}
+		
+		return delta;
 	}
 	
 // finds the resource and puts it in the inventory. returns true if done

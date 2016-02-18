@@ -251,7 +251,7 @@ public class Soldier extends Character {
 			//System.out.println(this.currentTarget.getPosition());
 			
 			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
-				moveToTarget();
+				moveToTarget(deltaTime);
 			}
 			
 			if(this.aggressionState == AggressionState.STEALTH) {
@@ -271,7 +271,7 @@ public class Soldier extends Character {
 		setPath(city.getPosition());
 	}
 	
-	public void moveToTarget() {
+	public void moveToTarget(float deltaTime) {
 		System.out.println(currentTarget.distanceTo(this.getPosition()));
 		
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE && !getSelected()) {
@@ -280,7 +280,7 @@ public class Soldier extends Character {
 		}
 		if(currentTarget.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
-				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
+				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f).add(getMovmentVector(deltaTime).cpy()), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
 			}
 		}
