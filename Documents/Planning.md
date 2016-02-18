@@ -75,15 +75,15 @@ Uppgift | Tid(d) | Status | Person
 Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
 Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
 Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
+Make soldiers aim good | 1/2 | Färdig | Tom
+Fabriker för alla vapen | 1/2 | Färdig | Tom
+Fixa snyggt sätt att plocka upp vapen | 1/2 | Färdig | Tom
 Göra så att byggnader inte spawnar ovanpå varandra | 1/2 | Färdig | Tom
 Menyer (inte minimal) | 1 | Ofärdig | Tom
-Fabriker för alla vapen | 1/2 | Färdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
 Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 Fixa animations systemet | 1/2 | Ofärdig | Tom
-Make soldiers aim good | 1/2 | Ofärdig | Tom
-Fixa snyggt sätt att plocka upp vapen | 1/2 | Färdig | Tom
 
 Person | Total tid(d)
 -------|-------------
