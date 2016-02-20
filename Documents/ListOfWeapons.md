@@ -3,7 +3,12 @@
 ### Weapons
 Namn |  Type 
 --------|-------
-Sword | Melee
+Wooden Sword | Melee
+Iron Sword | Melee
+Gun | Ranged
+Rifle | Ranged
+Machine Gun | Ranged
+
 
 ### Sabotage kits
 
