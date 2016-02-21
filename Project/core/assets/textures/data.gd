@@ -16,12 +16,12 @@ Textures: {
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
 	
-	worker: 1235, 130, 64, 64;
-	soldier: 1235, 195, 64, 64;
+	worker: 1236, 130, 64, 64;
+	soldier: 1236, 195, 64, 64;
 	playerCorpse: 949, 82, 67, 65;
 	
-	enemySoldier: 1235, 264, 64, 64;
-	enemyWorker: 1235, 330, 64, 64;
+	enemySoldier: 1236, 264, 64, 64;
+	enemyWorker: 1236, 330, 64, 64;
 	enemyCorpse: 1039, 80, 64, 64;
 	
 	woodIcon:   	     454, 0, 16, 16;

@@ -48,10 +48,6 @@ public class Animation extends Sprite {
 		return this.getSize();
 	}
 	
-	public void flip() {
-		this.flip(true, false);
-	}
-	
 	public void setAnimation(float maxAnimationTime, int maxFrame, boolean vertical) {
 		this.maxAnimationTime = maxAnimationTime;
 		this.maxFrame = maxFrame;
@@ -60,11 +56,15 @@ public class Animation extends Sprite {
 		this.orginalRegionX = this.getRegionX();
 	}
 	
+	public int frame(int frame, int size) {
+		return 1+frame+size*frame;
+	}
+	
 	public void animate(float deltaTime) {
 		animationTime += 2*deltaTime;
 		
 		if(!vertical)
-			this.setRegion(minFrame*this.getRegionWidth() + currentFrame*this.getRegionWidth()+1+currentFrame, 
+			this.setRegion(frame(minFrame, this.getRegionWidth()) + currentFrame*this.getRegionWidth()+1+currentFrame, 
 					this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		else
 			this.setRegion(this.getRegionX(), minFrame*this.getRegionHeight()+ currentFrame*this.getRegionWidth(), 

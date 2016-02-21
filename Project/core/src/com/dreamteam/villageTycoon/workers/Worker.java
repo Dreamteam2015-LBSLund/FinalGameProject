@@ -41,6 +41,8 @@ public class Worker extends Character {
 			this.setSprite(new Animation(AssetManager.getTexture("enemyWorker")));
 			this.setDeathAnimation(new Animation(AssetManager.getTexture("enemyCorpse")));
 		}
+		
+		getSprite().setAnimation(1, 4, false);
 	}
 	
 	public void update(float deltaTime) {

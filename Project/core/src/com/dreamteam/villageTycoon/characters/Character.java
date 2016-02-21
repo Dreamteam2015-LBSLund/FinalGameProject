@@ -70,6 +70,8 @@ public class Character extends GameObject {
 		this.health = 3;
 		this.amountFull = maxFull = 1000;
 		this.city = city;
+		
+		getSprite().setAnimation(0.1f, 4, false);
 	}
 	
 	public void update(float deltaTime) {
@@ -79,7 +81,19 @@ public class Character extends GameObject {
 		
 		this.setDepthBasedOnPosition();
 		
-		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
+		if(getSprite().getMaxFrame() > 0) { 
+			if(isMoving(deltaTime)) getSprite().animate(deltaTime);
+			else getSprite().setCurrentFrame(0);
+		}
+		
+		if(getMovmentVector(deltaTime).x != 0) {
+			if(getMovmentVector(deltaTime).x > 0)
+				flip = false;
+			else
+				flip = true;
+		}
+		
+		getSprite().setFlip(flip, false);
 		
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
 
@@ -346,6 +360,10 @@ public class Character extends GameObject {
 		}
 		
 		return delta;
+	}
+	
+	public boolean isMoving(float deltaTime) {
+		return ((float)Math.abs(getMovmentVector(deltaTime).x) >= 0.0005f || (float)Math.abs(getMovmentVector(deltaTime).y) >= 0.0005f);
 	}
 	
 // finds the resource and puts it in the inventory. returns true if done

@@ -130,6 +130,8 @@ public class Soldier extends Character {
 		targetWeaponButtonPosition = new Vector2(0, 0);
 		
 		foodReserve = 10;
+		
+		getSprite().setAnimation(1, 4, false);
 	}
 	
 	public void pickUpMostModernWeapon() {
