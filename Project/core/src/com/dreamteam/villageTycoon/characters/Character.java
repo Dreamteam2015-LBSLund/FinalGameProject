@@ -355,7 +355,6 @@ public class Character extends GameObject {
 		if (path != null && !path.isEmpty()) {
 			Vector2 next = path.get(0);
 			delta = next.cpy().sub(getPosition().cpy());
-			System.out.println(delta);
 			delta.clamp(0, 1*deltaTime);
 		}
 		

@@ -19,8 +19,8 @@ public class Explosion extends GameObject {
 		super(position, new Animation(AssetManager.getTexture("explosion")));
 		this.type = type;
 		this.radius = radius;
-		this.getSprite().setAnimation(0.1f, 7, true);
-		this.getSprite().setSize(radius, radius);
+		this.getSprite().setAnimation(2, 5, false);
+		this.setSize(new Vector2(radius, radius));
 		this.maxDamege = maxDamege;
 	}
 	

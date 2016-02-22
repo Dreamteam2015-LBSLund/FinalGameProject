@@ -18,6 +18,7 @@ import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -141,7 +142,10 @@ public class Building extends GameObject {
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
 
-    	if(health <= 0) getScene().removeObject(this);
+    	if(health <= 0) { 
+    		getScene().removeObject(this);
+    		getScene().addObject(new Explosion(this.getPosition().cpy(), Explosion.Type.EXPLOSION, 4, 0, 0));
+    	}
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		if(getCity().getController() instanceof PlayerController) {

@@ -83,7 +83,7 @@ public class Animation extends Sprite {
 	}
 	
 	public boolean animationDone() {
-		return currentFrame == maxFrame+1;
+		return currentFrame == maxFrame;
 	}
 	
 	public void setCurrentFrame(int currentFrame) {
