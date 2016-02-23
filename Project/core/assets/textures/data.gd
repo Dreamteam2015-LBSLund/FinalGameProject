@@ -62,7 +62,7 @@ Textures: {
 	backery: 				 0, 1814, 128, 96;
 	backeryProgress: 		 129, 1814, 128, 96;
 	
-	explosion: 316, 207, 128, 128;
+	explosion: 388, 259, 128, 128;
 	flame: 325, 378, 47, 64;
 	
 	projectile: 876, 92, 16, 16;

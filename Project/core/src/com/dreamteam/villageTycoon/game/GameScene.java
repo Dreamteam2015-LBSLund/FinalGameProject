@@ -86,6 +86,13 @@ public class GameScene extends Scene {
 		topBar.setSize(Gdx.graphics.getWidth()*2, 256);
 		
 		addObject(new Controller());
+		
+		addObject(new Soldier(playerCity, new Vector2(2, 20), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 5, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
+				new SabotageKit[]{ 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 
+						new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)) 
+		}));
 	}
 	
 	public void initialize() {

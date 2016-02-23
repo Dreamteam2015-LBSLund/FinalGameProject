@@ -19,19 +19,19 @@ public class Explosion extends GameObject {
 		super(position, new Animation(AssetManager.getTexture("explosion")));
 		this.type = type;
 		this.radius = radius;
-		this.getSprite().setAnimation(2, 5, false);
 		this.setSize(new Vector2(radius, radius));
+		this.getSprite().setAnimation(0.5f, 6, false);
 		this.maxDamege = maxDamege;
 	}
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		getSprite().animate(deltaTime);
-		
-		if(getSprite().animationDone()) {
+		if(getSprite().getCurrentFrame() >= 5) {
 			getScene().removeObject(this);
 		}
+		
+		getSprite().animate(deltaTime);
 	}
 	
 	public Type getType() {

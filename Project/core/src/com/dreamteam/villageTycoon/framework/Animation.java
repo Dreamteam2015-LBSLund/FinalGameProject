@@ -17,6 +17,8 @@ public class Animation extends Sprite {
 	
 	private boolean vertical;
 	
+	private boolean animationIsDone;
+	
 	private float orginalRegionX;
 	
 	public Animation(Texture sprite){
@@ -71,8 +73,10 @@ public class Animation extends Sprite {
 					this.getRegionWidth(), this.getRegionHeight());
 		
 		
-		if(currentFrame == maxFrame+1) 
+		if(currentFrame == maxFrame+1) {
 			currentFrame = 0;
+			animationIsDone = true;
+		}
 		
 		if(animationTime >= maxAnimationTime) {
 			currentFrame += 1;
@@ -82,8 +86,8 @@ public class Animation extends Sprite {
 		}
 	}
 	
-	public boolean animationDone() {
-		return currentFrame == maxFrame;
+	public boolean getAnimationIsDone() {
+		return this.animationIsDone;
 	}
 	
 	public void setCurrentFrame(int currentFrame) {
