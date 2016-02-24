@@ -80,10 +80,10 @@ Fabriker för alla vapen | 1/2 | Färdig | Tom
 Fixa snyggt sätt att plocka upp vapen | 1/2 | Färdig | Tom
 Göra så att byggnader inte spawnar ovanpå varandra | 1/2 | Färdig | Tom
 Fixa animations systemet | 1/2 | Färdig | Tom
+Draw weapon icons | 1/2 | Färdig | Tom
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
-Draw weapon icons | 1/2 | Ofärdig | Tom
 Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 
 Person | Total tid(d)
