@@ -13,6 +13,13 @@ Textures: {
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;
 	
+	woodenSwordWeaponIcon: 503, 784, 128, 128;
+	ironSwordWeaponIcon: 632, 784, 128, 128;
+	gunWeaponIcon: 761, 784, 128, 128;
+	rifleWeaponIcon: 890, 784, 128, 128;
+	machineGunWeaponIcon: 1019, 784, 128, 128;
+	fistWeaponIcon: 1148, 784, 128, 128;
+	
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
 	
