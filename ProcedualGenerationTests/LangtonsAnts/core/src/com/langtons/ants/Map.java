@@ -22,10 +22,18 @@ public class Map {
 	public Map() {
 		map = new int[WIDTH][HEIGHT];
 		
+		int[][] box = new int[10][10];
+		
 		tileTex = new Texture("badlogic.jpg");
 		tile = new Texture("badlogic.jpg");
 		
 		Random random = new Random();
+		
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j  < 10; j++) {
+				box[i][j] = random.nextInt(2);
+			}
+		}
 		
 		for(int i = 0; i < 200; i++) {	
 			//plot(random.nextInt(WIDTH), random.nextInt(HEIGHT), 1, map);
@@ -33,6 +41,9 @@ public class Map {
 		
 		//antIt(random.nextInt(WIDTH), random.nextInt(HEIGHT), random.nextInt(4), map);
 		map = fillAntIt(50, 50, 50);
+		
+		replaceSection(map, box, 1, 1);
+		
 		
 		System.out.println(map[1].length + " - " + HEIGHT + " | " + map.length + " - " + WIDTH);
 		
@@ -45,6 +56,14 @@ public class Map {
 	
 	public void plot(int x, int y, int value, int[][] plane) {
 		plane[x][y] = value;
+	}
+	
+	public void replaceSection(int[][] plane, int[][] section, int offsetX, int offsetY) {
+		for(int x = 0; x < section.length; x++) {
+			for(int y = 0; y < section[1].length; y++) {
+				plane[x+offsetX][y+offsetY] = section[x][y];
+			}
+		}
 	}
 	
 	public int[][] fillAntIt(int width, int height, int plotAmount) {
