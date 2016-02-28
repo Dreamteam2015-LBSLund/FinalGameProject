@@ -42,7 +42,7 @@ public class Map {
 		//antIt(random.nextInt(WIDTH), random.nextInt(HEIGHT), random.nextInt(4), map);
 		map = fillAntIt(50, 50, 50);
 		
-		replaceSection(map, box, 1, 1);
+		replaceSection(map, box, 1, 1, 0);
 		
 		
 		System.out.println(map[1].length + " - " + HEIGHT + " | " + map.length + " - " + WIDTH);
@@ -58,10 +58,10 @@ public class Map {
 		plane[x][y] = value;
 	}
 	
-	public void replaceSection(int[][] plane, int[][] section, int offsetX, int offsetY) {
+	public void replaceSection(int[][] plane, int[][] section, int offsetX, int offsetY, int tileToIngnore) {
 		for(int x = 0; x < section.length; x++) {
 			for(int y = 0; y < section[1].length; y++) {
-				plane[x+offsetX][y+offsetY] = section[x][y];
+				if(section[x][y] != tileToIngnore) plane[x+offsetX][y+offsetY] = section[x][y];
 			}
 		}
 	}
@@ -79,7 +79,7 @@ public class Map {
 		
 		boolean[] sidesFilled = new boolean[4];
 		
-		for(int j = 0; j < 50; j++) {
+		for(int j = 0; j < 4; j++) {
 			for(int x = 1; x < tmp.length-1; x++) {
 				for(int y = 1; y < tmp[1].length-1; y++) {
 					if(tmp[x+1][y] == 1) sidesFilled[0] = true;
@@ -98,7 +98,8 @@ public class Map {
 				
 					if(count >= 3) {
 						//floodFill(x, y, 1, 0, tmp);
-						tmp[x][y] = 1;
+						if(j <= 4) tmp[x][y] = 1;
+						else tmp[x][y] = 0;
 					}
 				}
 			}	
