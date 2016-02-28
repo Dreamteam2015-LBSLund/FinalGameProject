@@ -68,7 +68,7 @@ Backery | färdig
 
 # Lovplannering (innan och under lovet)
 
-Panik på en skala 0-1 så ligger vi på 0.2. Väldigt nära ett spelbart spel, allt som behövs sen är polish och debugging. 
+Panik på en skala 0-1 så ligger vi på 0.2. Väldigt nära ett spelbart spel, allt som behövs sen är polish och debugging. Man kan ju vinna och förlora men det finns problem.
 
 Uppgift | Tid(d) | Status | Person
 --------|-----|--------|-------
