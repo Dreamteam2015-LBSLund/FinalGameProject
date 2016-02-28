@@ -126,6 +126,8 @@ public class Map {
 		
 		amountOfCities = villages.length;
 		
+		createField(10, 70, 20, 20, 20, new String[]{"Grass", "Dirt"}, map);
+		
 		return map;
 	}
 	
@@ -254,10 +256,8 @@ public class Map {
 	
 	// Major key in post-spaghetti is using the same word for different things
 	public void createField(int x, int y, int width, int height, int plotAmount, String[] tiles, String[][] map) {
-		String tmp[][] = new String[width][height];
-		
-		tmp = fillAntIt(width, height, plotAmount, tiles);
-		
+		String tmp[][] = fillAntIt(width, height, plotAmount, tiles);
+
 		replaceSection(map, tmp, x, y, tiles[0]);
 	}
 	
@@ -272,13 +272,20 @@ public class Map {
 	public String[][] fillAntIt(int width, int height, int plotAmount, String[] tiles) {
 		String tmp[][] = new String[width][height];
 		
+		for(int x = 0; x < tmp.length; x++) {
+			for(int y = 0; y < tmp[1].length; y++) {
+				tmp[x][y] = tiles[0];
+			}
+		}
+		
 		Random random = new Random();
 		
 		for(int i = 0; i < plotAmount; i++) {
 			plot(random.nextInt(width), random.nextInt(height), tiles[1], tmp);
 		}
 		
-		antIt(random.nextInt(width), random.nextInt(height), random.nextInt(4), tmp, tiles);
+		timesDone = 0;
+		antIt(width/2, height/2, random.nextInt(4), tmp, tiles);
 		
 		boolean[] sidesFilled = new boolean[4];
 		
@@ -305,6 +312,7 @@ public class Map {
 				}
 			}	
 		}
+		
 		return tmp;
 	}
 	
@@ -313,14 +321,16 @@ public class Map {
 		
 		timesDone += 1;
 		
-		if(map[x][y] == tiles[0]) {
-			plot(x, y, tiles[1], map);
-			direction -= 1;
-			if(direction <= -1) direction = 3;
-		} else {
-			plot(x, y, tiles[0], map);
-			direction += 1;
-			if(direction >= 4) direction = 0;
+		if(x >= 0 && x < map.length && y >= 0 && y < map[1].length) {
+			if(map[x][y] == tiles[0]) {
+				plot(x, y, tiles[1], map);
+				direction -= 1;
+				if(direction <= -1) direction = 3;
+			} else {
+				plot(x, y, tiles[0], map);
+				direction += 1;
+				if(direction >= 4) direction = 0;
+			}
 		}
 		
 		if(direction == 0 && x == WIDTH - 1) {
