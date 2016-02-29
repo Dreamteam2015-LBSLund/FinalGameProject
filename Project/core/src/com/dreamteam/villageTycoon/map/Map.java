@@ -121,12 +121,13 @@ public class Map {
 		for (int i = 0; i < villages.length; i++) {
 			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
 			cityPositions[i] = villages[i];
-			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
+			//map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
+			createField(villages[i].x, villages[i].y, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
 		}
 		
 		amountOfCities = villages.length;
 		
-		createField(10, 70, 20, 20, 20, new String[]{"Grass", "Dirt"}, map);
+		createField(10, 70, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
 		
 		return map;
 	}
@@ -255,8 +256,8 @@ public class Map {
 	}
 	
 	// Major key in post-spaghetti is using the same word for different things
-	public void createField(int x, int y, int width, int height, int plotAmount, String[] tiles, String[][] map) {
-		String tmp[][] = fillAntIt(width, height, plotAmount, tiles);
+	public void createField(int x, int y, int width, int height, int plotAmount, int thickness, String[] tiles, String[][] map) {
+		String tmp[][] = fillAntIt(width, height, plotAmount, thickness, tiles);
 
 		replaceSection(map, tmp, x, y, tiles[0]);
 	}
@@ -264,12 +265,12 @@ public class Map {
 	public void replaceSection(String[][] plane, String[][] section, int offsetX, int offsetY, String tileToIngnore) {
 		for(int x = 0; x < section.length; x++) {
 			for(int y = 0; y < section[1].length; y++) {
-				if(section[x][y] != tileToIngnore) plane[x+offsetX][y+offsetY] = section[x][y];
+				if(section[x][y] != tileToIngnore && x+offsetX >= 0 && x+offsetX <= plane.length-1 && y+offsetY >= 0 && y+offsetY <= plane[1].length-1) plane[x+offsetX][y+offsetY] = section[x][y];
 			}
 		}
 	}
 	
-	public String[][] fillAntIt(int width, int height, int plotAmount, String[] tiles) {
+	public String[][] fillAntIt(int width, int height, int plotAmount, int thickness, String[] tiles) {
 		String tmp[][] = new String[width][height];
 		
 		for(int x = 0; x < tmp.length; x++) {
@@ -289,7 +290,7 @@ public class Map {
 		
 		boolean[] sidesFilled = new boolean[4];
 		
-		for(int j = 0; j < 4; j++) {
+		for(int j = 0; j < thickness; j++) {
 			for(int x = 1; x < tmp.length-1; x++) {
 				for(int y = 1; y < tmp[1].length-1; y++) {
 					if(tmp[x+1][y] == tiles[1]) sidesFilled[0] = true;
