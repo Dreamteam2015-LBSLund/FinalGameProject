@@ -114,7 +114,8 @@ public class Map {
 		
 		for (int i = 0; i < lakes.length; i++) {		
 			lakes[i] = new Point(randomInt(40, WIDTH-40), randomInt(40, HEIGHT-40));		
-			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);		
+			//map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);
+			createField(lakes[i].x, lakes[i].y, 20+random.nextInt(5), 20+random.nextInt(5), 10, 4, new String[]{"Grass", "Water"}, map);
 		}
 		cityPositions = new Point[villages.length];
 		
