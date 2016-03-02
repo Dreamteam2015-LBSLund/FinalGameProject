@@ -26,6 +26,7 @@ import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.SabotageKitButton;
 import com.dreamteam.villageTycoon.userInterface.SoldierInventory;
 import com.dreamteam.villageTycoon.userInterface.TargetWeaponButton;
+import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.utils.ResourceReader;
 
 public class Soldier extends Character {
@@ -137,7 +138,7 @@ public class Soldier extends Character {
 	}
 	
 	public void pickUpMostModernWeapon() {
-		this.targetWeapon = avaibleWeaponTypes.get(avaibleWeaponTypes.size()-1);
+		this.targetWeapon = avaibleWeaponTypes.get(avaibleWeaponTypes.size() - 1);
 	}
 	
 	public void checkForWeapons() {
@@ -151,17 +152,19 @@ public class Soldier extends Character {
 		}
 		
 		if(targetWeapon != null) {
-			findResource(Resource.get(targetWeapon.getName()), null);
+			//findResource(Resource.get(targetWeapon.getName()), null);
 			
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
 				weapon = new Weapon(targetWeapon);
 				maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed();
 				targetWeapon = null;
 				hasPickedUpWeapon = true;
+				Debug.print(this, "picked up weapon");
 			}
 		} else {
 			if(avaibleWeaponTypes.size() > 0 && !hasPickedUpWeapon) {
 				pickUpMostModernWeapon();
+				Debug.print(this, "picking up weapon");
 			}
 		}
 	}
@@ -172,7 +175,7 @@ public class Soldier extends Character {
 		checkForWeapons();
 		
 		for(int i = 0; i < avaibleWeaponTypes.size(); i++) {
-			System.out.println(avaibleWeaponTypes.get(i).getName() + " - " + avaibleWeaponTypes.size());
+			//Debug.print(this, avaibleWeaponTypes.get(i).getName() + " - " + avaibleWeaponTypes.size());
 		}
 		
 		equipedSabotageKit = inventory.getEquipedSabotageKit();
@@ -277,7 +280,7 @@ public class Soldier extends Character {
 	}
 	
 	public void moveToTarget(float deltaTime) {
-		System.out.println(currentTarget.distanceTo(this.getPosition()));
+		Debug.print(this, "" + currentTarget.distanceTo(this.getPosition()));
 		
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE && !getSelected()) {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
@@ -373,6 +376,8 @@ public class Soldier extends Character {
 		if(prepareSabotageKit && sabotageKits.size() > 0) {
 			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);
 		}
+		
+		AssetManager.font.draw(batch, "SOLDIER", getUiScreenCoords().x, getUiScreenCoords().y);
 	}
 	
 	public void consume() {

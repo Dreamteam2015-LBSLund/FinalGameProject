@@ -334,7 +334,7 @@ public class Character extends GameObject {
 				}
 			}*/
 		}
-		Debug.print(this, "setting a new path");
+		//Debug.print(this, "setting a new path");
 		lastPathTarget = target;
 		//System.out.println("scene: " + getScene());// + ", map: " + ((TestScene)getScene()).getMap());
 		path = new PathFinder(getPosition(),

@@ -104,7 +104,8 @@ public class AIController3 extends CityController {
 	public void drawUi(SpriteBatch batch) {
 		//AssetManager.font.draw(batch, "cmd " + current + "/" + script.length + " " + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -800, -400);
 		AssetManager.smallFont.draw(batch, text, -800, 400);
-	}
+		AssetManager.smallFont.draw(batch, "soldiers: " + getCity().getSoldiers().size(), -800, 400);
+	} 
 
 	
 	class BuildCommand extends Command {
