@@ -35,6 +35,10 @@ public class WeaponType {
 		this.icon.setSize(2, 2);
 	}
 	
+	public float getRange() {
+		return this.projectileType.getMaxRange();
+	}
+	
 	public int getClipSize() {
 		return clipSize;
 	}

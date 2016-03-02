@@ -108,23 +108,27 @@ public class Map {
 		}
 		
 		for(int i = 0; i < 5; i++) {
-			antIt(randomInt(0, WIDTH-1), randomInt(0, HEIGHT-1), 0, map);
+			antIt(randomInt(0, WIDTH-1), randomInt(0, HEIGHT-1), 0, map, new String[]{"Grass", "treeTrunk"});
 			timesDone = 0;
 		}
 		
 		for (int i = 0; i < lakes.length; i++) {		
 			lakes[i] = new Point(randomInt(40, WIDTH-40), randomInt(40, HEIGHT-40));		
-			map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);		
+			//map = field(lakes[i].x, lakes[i].y, random.nextInt(5)+3, random.nextInt(5)+3, "Water", map);
+			createField(lakes[i].x, lakes[i].y, 20+random.nextInt(5), 20+random.nextInt(5), 10, 4, new String[]{"Grass", "Water"}, map);
 		}
 		cityPositions = new Point[villages.length];
 		
 		for (int i = 0; i < villages.length; i++) {
 			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
 			cityPositions[i] = villages[i];
-			map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
+			//map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
+			createField(villages[i].x, villages[i].y, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
 		}
 		
 		amountOfCities = villages.length;
+		
+		createField(10, 70, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
 		
 		return map;
 	}
@@ -252,19 +256,83 @@ public class Map {
 		return null;
 	}
 	
-	public void antIt(int x, int y, int direction, String[][] map) {
+	// Major key in post-spaghetti is using the same word for different things
+	public void createField(int x, int y, int width, int height, int plotAmount, int thickness, String[] tiles, String[][] map) {
+		String tmp[][] = fillAntIt(width, height, plotAmount, thickness, tiles);
+
+		replaceSection(map, tmp, x, y, tiles[0]);
+	}
+	
+	public void replaceSection(String[][] plane, String[][] section, int offsetX, int offsetY, String tileToIngnore) {
+		for(int x = 0; x < section.length; x++) {
+			for(int y = 0; y < section[1].length; y++) {
+				if(section[x][y] != tileToIngnore && x+offsetX >= 0 && x+offsetX <= plane.length-1 && y+offsetY >= 0 && y+offsetY <= plane[1].length-1) plane[x+offsetX][y+offsetY] = section[x][y];
+			}
+		}
+	}
+	
+	public String[][] fillAntIt(int width, int height, int plotAmount, int thickness, String[] tiles) {
+		String tmp[][] = new String[width][height];
+		
+		for(int x = 0; x < tmp.length; x++) {
+			for(int y = 0; y < tmp[1].length; y++) {
+				tmp[x][y] = tiles[0];
+			}
+		}
+		
+		Random random = new Random();
+		
+		for(int i = 0; i < plotAmount; i++) {
+			plot(random.nextInt(width), random.nextInt(height), tiles[1], tmp);
+		}
+		
+		timesDone = 0;
+		antIt(width/2, height/2, random.nextInt(4), tmp, tiles);
+		
+		boolean[] sidesFilled = new boolean[4];
+		
+		for(int j = 0; j < thickness; j++) {
+			for(int x = 1; x < tmp.length-1; x++) {
+				for(int y = 1; y < tmp[1].length-1; y++) {
+					if(tmp[x+1][y] == tiles[1]) sidesFilled[0] = true;
+					else sidesFilled[0] = false;
+					if(tmp[x][y-1] == tiles[1]) sidesFilled[1] = true;
+					else sidesFilled[1] = false;
+					if(tmp[x][y+1] == tiles[1]) sidesFilled[2] = true;
+					else sidesFilled[2] = false;
+					if(tmp[x][y-1] == tiles[1]) sidesFilled[3] = true;
+					else sidesFilled[3] = false;
+				
+					int count = 0;
+					for(int i = 0; i < sidesFilled.length; i++) {
+						if(sidesFilled[i]) count += 1;
+					}
+				
+					if(count >= 3) {
+						tmp[x][y] = tiles[1];
+					}
+				}
+			}	
+		}
+		
+		return tmp;
+	}
+	
+	public void antIt(int x, int y, int direction, String[][] map, String[] tiles) {
 		boolean canMove = true;
 		
 		timesDone += 1;
 		
-		if(map[x][y] == "Grass") {
-			plot(x, y, "treeTrunk", map);
-			direction -= 1;
-			if(direction <= -1) direction = 3;
-		} else {
-			plot(x, y, "Grass", map);
-			direction += 1;
-			if(direction >= 4) direction = 0;
+		if(x >= 0 && x < map.length && y >= 0 && y < map[1].length) {
+			if(map[x][y] == tiles[0]) {
+				plot(x, y, tiles[1], map);
+				direction -= 1;
+				if(direction <= -1) direction = 3;
+			} else {
+				plot(x, y, tiles[0], map);
+				direction += 1;
+				if(direction >= 4) direction = 0;
+			}
 		}
 		
 		if(direction == 0 && x == WIDTH - 1) {
@@ -285,16 +353,16 @@ public class Map {
 		
 		if(canMove && timesDone <= LANGTON_LIMIT) {
 			if(direction == 0) {
-				antIt(x+1, y, direction, map);
+				antIt(x+1, y, direction, map, tiles);
 			}
 			if(direction == 1) {
-				antIt(x, y-1, direction, map);
+				antIt(x, y-1, direction, map, tiles);
 			}
 			if(direction == 2) {
-				antIt(x-1, y, direction, map);
+				antIt(x-1, y, direction, map, tiles);
 			}
 			if(direction == 3) {
-				antIt(x, y+1, direction, map);
+				antIt(x, y+1, direction, map, tiles);
 			}
 		}
 	}

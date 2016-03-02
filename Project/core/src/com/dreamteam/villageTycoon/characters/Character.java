@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
+import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.effects.Explosion;
@@ -69,6 +70,8 @@ public class Character extends GameObject {
 		this.health = 3;
 		this.amountFull = maxFull = 1000;
 		this.city = city;
+		
+		getSprite().setAnimation(0.1f, 4, false);
 	}
 	
 	public void update(float deltaTime) {
@@ -78,11 +81,25 @@ public class Character extends GameObject {
 		
 		this.setDepthBasedOnPosition();
 		
-		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
+		if(getSprite().getMaxFrame() > 0) { 
+			if(isMoving(deltaTime)) getSprite().animate(deltaTime);
+			else getSprite().setCurrentFrame(0);
+		}
+		
+		if(getMovmentVector(deltaTime).x != 0) {
+			if(getMovmentVector(deltaTime).x > 0)
+				flip = false;
+			else
+				flip = true;
+		}
+		
+		getSprite().setFlip(flip, false);
 		
 		hitbox = new Rectangle(new Vector2(getPosition().x-getSprite().getScaleX()/2, getPosition().y-getSprite().getScaleY()/2), getSize());
 
 		selectedSign.setPosition(getPosition().x-selectedSign.getScaleX()/6, getPosition().y+selectedSign.getScaleY()/2);
+		
+		if(getCity().getController() instanceof PlayerController) this.getMovmentVector(deltaTime);
 		
 		if(health <= 0) {
 			getScene().addObject(new Corpse(this.getPosition(), deathAnimation));
@@ -330,6 +347,22 @@ public class Character extends GameObject {
 	
 	public boolean hasPath() {
 		return path != null;
+	}
+	
+	public Vector2 getMovmentVector(float deltaTime) {
+		Vector2 delta = Vector2.Zero;
+		
+		if (path != null && !path.isEmpty()) {
+			Vector2 next = path.get(0);
+			delta = next.cpy().sub(getPosition().cpy());
+			delta.clamp(0, 1*deltaTime);
+		}
+		
+		return delta;
+	}
+	
+	public boolean isMoving(float deltaTime) {
+		return ((float)Math.abs(getMovmentVector(deltaTime).x) >= 0.0005f || (float)Math.abs(getMovmentVector(deltaTime).y) >= 0.0005f);
 	}
 	
 // finds the resource and puts it in the inventory. returns true if done

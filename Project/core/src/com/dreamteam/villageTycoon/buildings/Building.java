@@ -18,6 +18,7 @@ import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Scene;
@@ -141,7 +142,10 @@ public class Building extends GameObject {
     	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
 
-    	if(health <= 0) getScene().removeObject(this);
+    	if(health <= 0) { 
+    		getScene().removeObject(this);
+    		getScene().addObject(new Explosion(this.getPosition().cpy(), Explosion.Type.EXPLOSION, 4, 0, 0));
+    	}
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		if(getCity().getController() instanceof PlayerController) {
@@ -291,7 +295,7 @@ public class Building extends GameObject {
     public Character getCharacterToSpawn() {
     	if(this.type.getType() == BuildingType.Type.Home) {
 			if (!type.getName().equals("house")) {
-				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 15, 5, 5, null, "projectile"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 15, 5, 5, null, "fistWeaponIcon"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
 						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
 						new SabotageKit[]{ 
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 

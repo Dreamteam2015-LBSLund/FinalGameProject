@@ -20,6 +20,4 @@ I byarna finns också resurser som spelaren kan ta.
 Detta kan vara en genväg uppåt i tech, men då får man se till att inte bli upptäckt.
 
 #### Att ta över byar
-**Osäker på detta, men jag slänger ut nåt i all fall.**  
-När spelaren har dödat alla soldater i en by och allt motsånd är krossat, tar den över all arbetskraft och resurser.
-Man kan välja att riva det och ta hem det till sin egen by, och riskera att bli attackerad på vägen, eller behålla det där det är, och så att säga styra två byar.
+När en by har förlorat alla soldater, arbetare och byggnader som kan producera karaktärer så förlorar byn.

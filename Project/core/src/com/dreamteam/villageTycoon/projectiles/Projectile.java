@@ -85,6 +85,10 @@ public class Projectile extends GameObject {
 		return new Vector2((float)Math.cos(angle)*speed, (float)Math.sin(angle)*speed);
 	}
 	
+	public float getSpeed() {
+		return this.speed;
+	}
+	
 	public int getDamege() {
 		return damege;
 	}

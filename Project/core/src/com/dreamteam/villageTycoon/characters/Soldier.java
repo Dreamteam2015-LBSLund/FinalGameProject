@@ -32,10 +32,13 @@ public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
 	enum AlertLevel { ALERT, PASSIVE };
 	
-	private final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
-	private final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectile"), new Sprite(AssetManager.getTexture("soldier")), Type.MELEE);
+	private final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("woodenSwordWeaponIcon")), Type.MELEE);
+	private final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectile"), new Sprite(AssetManager.getTexture("ironSwordWeaponIcon")), Type.MELEE);
+	private final WeaponType GUN = new WeaponType("gun", 1, 4, 6, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 8, 3, 1, null, "projectile"), new Sprite(AssetManager.getTexture("gunWeaponIcon")), Type.MELEE);
+	private final WeaponType RIFLE = new WeaponType("rifle", 1, 8, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("rifleWeaponIcon")), Type.MELEE);
+	private final WeaponType MACHINE_GUN = new WeaponType("machine-gun", 1, 2, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("machineGunWeaponIcon")), Type.MELEE);
 	
-	private WeaponType allWeaponTypes[] = new WeaponType[2];
+	private WeaponType allWeaponTypes[] = new WeaponType[5];
 	private ArrayList<WeaponType> avaibleWeaponTypes;
 	
 	private WeaponType targetWeapon;
@@ -66,6 +69,7 @@ public class Soldier extends Character {
 	private boolean isOnFire;
 	private boolean useSabotageKit;
 	private boolean prepareSabotageKit;
+	private boolean hasPickedUpWeapon;
 
 	private ArrayList<SabotageKit> sabotageKits;
 	private ArrayList<Character> spottedEnemies;
@@ -97,7 +101,9 @@ public class Soldier extends Character {
 		
 		city.addSoldier(this);
 		
-		maxAttackDistance = 8;
+		//maxAttackDistance = 8;
+		
+		this.maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed();
 		
 		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("firekit")));
 		
@@ -118,11 +124,20 @@ public class Soldier extends Character {
 		avaibleWeaponTypes = new ArrayList<WeaponType>();
 		allWeaponTypes[0] = WOOD_SWORD;
 		allWeaponTypes[1] = IRON_SWORD;
+		allWeaponTypes[2] = GUN;
+		allWeaponTypes[3] = RIFLE;
+		allWeaponTypes[4] = MACHINE_GUN;
 		
 		targetWeaponButtons = new ArrayList<TargetWeaponButton>();
 		targetWeaponButtonPosition = new Vector2(0, 0);
 		
 		foodReserve = 10;
+		
+		getSprite().setAnimation(1, 4, false);
+	}
+	
+	public void pickUpMostModernWeapon() {
+		this.targetWeapon = avaibleWeaponTypes.get(avaibleWeaponTypes.size()-1);
 	}
 	
 	public void checkForWeapons() {
@@ -140,7 +155,13 @@ public class Soldier extends Character {
 			
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
 				weapon = new Weapon(targetWeapon);
+				maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed();
 				targetWeapon = null;
+				hasPickedUpWeapon = true;
+			}
+		} else {
+			if(avaibleWeaponTypes.size() > 0 && !hasPickedUpWeapon) {
+				pickUpMostModernWeapon();
 			}
 		}
 	}
@@ -235,7 +256,7 @@ public class Soldier extends Character {
 			//System.out.println(this.currentTarget.getPosition());
 			
 			if(this.aggressionState == AggressionState.ATTACKING_AND_MOVING) {
-				moveToTarget();
+				moveToTarget(deltaTime);
 			}
 			
 			if(this.aggressionState == AggressionState.STEALTH) {
@@ -255,7 +276,7 @@ public class Soldier extends Character {
 		setPath(city.getPosition());
 	}
 	
-	public void moveToTarget() {
+	public void moveToTarget(float deltaTime) {
 		System.out.println(currentTarget.distanceTo(this.getPosition()));
 		
 		if(currentTarget.distanceTo(this.getPosition()) > this.maxAttackDistance && this.aggressionState != AggressionState.DEFENSIVE && !getSelected()) {
@@ -264,7 +285,7 @@ public class Soldier extends Character {
 		}
 		if(currentTarget.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
 			if(weapon.canShoot()) {
-				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
+				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f).add(getMovmentVector(deltaTime).cpy()), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
 			}
 		}
@@ -321,8 +342,7 @@ public class Soldier extends Character {
 		alertLevel = AlertLevel.ALERT;
 		for (Character c : spottedEnemies) {
 			if(c != projectile.getOwner()) {
-				// TODO: @indietom seperate toadd list. concurrentModificationException
-				addSpottedEnemies(projectile.getOwner());
+				//addSpottedEnemies(projectile.getOwner());
 			}
 		}
 	}

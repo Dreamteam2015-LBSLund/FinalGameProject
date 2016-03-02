@@ -13,15 +13,22 @@ Textures: {
 	error: 353, 24, 79, 42;
 	selectionRectangle: 0, 166, 291, 290;
 	
+	woodenSwordWeaponIcon: 503, 784, 128, 128;
+	ironSwordWeaponIcon: 632, 784, 128, 128;
+	gunWeaponIcon: 761, 784, 128, 128;
+	rifleWeaponIcon: 890, 784, 128, 128;
+	machineGunWeaponIcon: 1019, 784, 128, 128;
+	fistWeaponIcon: 1148, 784, 128, 128;
+	
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
 	
-	worker: 1235, 130, 64, 64;
-	soldier: 1235, 195, 64, 64;
+	worker: 1236, 130, 64, 64;
+	soldier: 1236, 195, 64, 64;
 	playerCorpse: 949, 82, 67, 65;
 	
-	enemySoldier: 1235, 264, 64, 64;
-	enemyWorker: 1235, 330, 64, 64;
+	enemySoldier: 1236, 264, 64, 64;
+	enemyWorker: 1236, 330, 64, 64;
 	enemyCorpse: 1039, 80, 64, 64;
 	
 	woodIcon:   	     454, 0, 16, 16;
@@ -62,7 +69,7 @@ Textures: {
 	backery: 				 0, 1814, 128, 96;
 	backeryProgress: 		 129, 1814, 128, 96;
 	
-	explosion: 301, 213, 128, 128;
+	explosion: 388, 259, 128, 128;
 	flame: 325, 378, 47, 64;
 	
 	projectile: 876, 92, 16, 16;
