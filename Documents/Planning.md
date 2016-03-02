@@ -91,5 +91,20 @@ Person | Total tid(d)
 Johannes | 4.5, varav 1 inte är minimal
 Tom | 6.5, varav 2 inte är minimal
 
+# Post-lovplannering andre mars till 15 april
+
+Uppgift | Tid(d) | Status | Person
+--------|-----|--------|-------
+Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
+Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
+Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
+Menyer (inte minimal) | 1 | Ofärdig | Tom
+Snygg UI (inte minimal) | 1 | Ofärdig | Tom
+Simpel tutorial | 1/2 | Ofärdig | Tom
+Fixa procedual generation för terräng | 2 | Ofärdig | Tom
+Balansera spelet | 1/2 | Ofärdig | Johannes och Tom
+Ljudeffekter (inte minimal) | 1/2 | Ofärdig | Johannes och Tom
+Polish och buggfixing | 1 | Ofärdig | Johannes och Tom
+
 
 
