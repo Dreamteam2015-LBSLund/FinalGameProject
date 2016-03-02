@@ -84,7 +84,7 @@ Draw weapon icons | 1/2 | Färdig | Tom
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
-Fixa procedual generation för terräng | 2 | Ofärdig | Tom
+Fixa procedual generation för terräng | 2 | Färdig(behövs dock massa polish) | Tom
 
 Person | Total tid(d)
 -------|-------------
@@ -101,7 +101,6 @@ Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
-Fixa procedual generation för terräng | 2 | Ofärdig | Tom
 Balansera spelet | 1/2 | Ofärdig | Johannes och Tom
 Ljudeffekter (inte minimal) | 1/2 | Ofärdig | Johannes och Tom
 Polish och buggfixing | 1 | Ofärdig | Johannes och Tom
