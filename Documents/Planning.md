@@ -105,5 +105,9 @@ Balansera spelet | 1/2 | Ofärdig | Johannes och Tom
 Ljudeffekter (inte minimal) | 1/2 | Ofärdig | Johannes och Tom
 Polish och buggfixing | 1 | Ofärdig | Johannes och Tom
 
-
+Person | Total tid(d)
+-------|-------------
+Johannes | 4.5, varav 1 inte är minimal
+Tom | 2.5, varav 2 inte är minimal
+Kollektiv | 2.5, varav 2 inte är minimal
 
