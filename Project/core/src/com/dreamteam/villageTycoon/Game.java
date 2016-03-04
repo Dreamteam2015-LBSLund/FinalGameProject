@@ -17,7 +17,8 @@ public class Game extends ApplicationAdapter {
 	private static Scene currentScene;
 	
 	public static Scene getScene() { return currentScene; }
-	public void setScene(Scene scene) {
+	
+	public static void setScene(Scene scene) {
 		currentScene.onPause();
 		currentScene = scene;
 		currentScene.onResume();
