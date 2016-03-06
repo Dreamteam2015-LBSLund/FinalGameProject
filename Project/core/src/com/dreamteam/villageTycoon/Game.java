@@ -10,6 +10,7 @@ import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.frameworkTest.TestScene;
 import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.game.GameScene.MatchState;
+import com.dreamteam.villageTycoon.userInterface.MenuScene;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch, uiBatch;
@@ -27,8 +28,8 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		currentScene = new GameScene();
-		((GameScene)currentScene).initialize();
+		currentScene = new MenuScene();
+		if(currentScene instanceof GameScene) ((GameScene)currentScene).initialize();
 	}
 	
 	public void update() {

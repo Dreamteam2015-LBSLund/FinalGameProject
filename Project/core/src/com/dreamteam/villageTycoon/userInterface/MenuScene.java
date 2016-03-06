@@ -20,6 +20,8 @@ public class MenuScene extends Scene {
 		showTitleScreen = true;
 		
 		titleScreen = new Sprite(new Texture("textures/titlescreen.png"));
+		titleScreen.setSize(Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
+		titleScreen.setPosition(-Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
 		
 		startGameButton = new MenuButton(new Vector2(0, 0), "Start game", new GameScene());
 	}

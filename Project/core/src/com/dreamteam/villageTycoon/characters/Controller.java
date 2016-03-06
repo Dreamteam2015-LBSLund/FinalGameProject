@@ -156,7 +156,7 @@ public class Controller extends GameObject {
 			selectUpdate();
 			for(int i = 0; i < zoomButtons.length; i++){
 				zoomButtons[i].update();
-				cameraZoom += zoomButtons[i].getValue(); 
+				cameraZoom -= zoomButtons[i].getValue(); 
 			}
 			
 			cameraSpeed = 1+cameraZoom*2;
