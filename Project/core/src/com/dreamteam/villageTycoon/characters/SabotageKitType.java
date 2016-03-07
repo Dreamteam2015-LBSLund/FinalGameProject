@@ -48,7 +48,7 @@ public class SabotageKitType {
 	
 	public Projectile constructProjectile() {		
 		Explosion.Type type = (effectType == EffectType.FIRE) ? Explosion.Type.FIRE : Explosion.Type.EXPLOSION;
-		ProjectileType projectileType = new ProjectileType(ProjectileType.Type.TRHOWABLE, 32, 2, 0, new Explosion(new Vector2(0, 0), type, this.explosionRadius, this.getExplosionRaduis(), 1), "test");
+		ProjectileType projectileType = new ProjectileType(ProjectileType.Type.TRHOWABLE, 32, 2, 0, new Explosion(new Vector2(0, 0), type, this.explosionRadius, this.getExplosionRaduis(), 1), "fireKitinGame");
 		return new Projectile(Vector2.Zero, Vector2.Zero, projectileType, null);
 	}
 	

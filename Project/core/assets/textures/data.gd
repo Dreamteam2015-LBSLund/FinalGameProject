@@ -2,7 +2,6 @@ Textures: {
 	test: 0, 0, 100, 100;
 	gun: 101, 0, 100, 100;
 	firekit: 201, 0, 100, 100;
-	firekitinGame: 201, 0, 100, 100;
 	grassTile: 1, 101, 32, 32;
 	dirtTile: 35, 101, 32, 32;
 	waterTile: 69, 101, 32, 32;
@@ -72,7 +71,12 @@ Textures: {
 	explosion: 388, 259, 128, 128;
 	flame: 325, 378, 47, 64;
 	
+	debris1: 403, 1024, 71, 59;
+	debris2: 491, 1016, 41, 52;
+	debris3: 557, 1026, 40, 53; 
+	
 	projectile: 876, 92, 16, 16;
+	fireKitinGame: 879, 121, 32, 32;
 	
 	button: 659, 0, 216, 108;
 	arrowButton: 304, 475, 64, 64;
