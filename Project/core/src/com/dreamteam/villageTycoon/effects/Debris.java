@@ -71,7 +71,7 @@ public class Debris extends GameObject {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		shadow.draw(batch);
+		//shadow.draw(batch);
 		super.draw(batch);
 	}
 }

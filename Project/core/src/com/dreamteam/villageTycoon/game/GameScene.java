@@ -108,10 +108,6 @@ public class GameScene extends Scene {
 		
 		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
 		
-		if(Gdx.input.isTouched()) {
-			this.addObject(new Debris(this.getWorldMouse().cpy(), new Vector2(randomInt(-16, 16), randomInt(-16, 16)), randomInt(4, 7), "debris"+randomInt(1, 3), new Vector2(0.5f+randomInt(1, 2), 0.5f+randomInt(1, 2))));
-		}
-		
 		matchUpdate();
 	}
 	
@@ -200,7 +196,7 @@ public class GameScene extends Scene {
 	}
 	
 	// Länge leve post-spaghetti
-	public int randomInt(int min, int max) {
+	public static int randomInt(int min, int max) {
 	    Random random = new Random();
 
 	    int randomNumber = random.nextInt((max - min) + 1) + min;

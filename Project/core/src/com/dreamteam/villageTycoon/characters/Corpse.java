@@ -11,9 +11,9 @@ public class Corpse extends GameObject {
 	
 	final float MAX_DETERIORATE_TIME = 10;
 	
-	public Corpse(Vector2 position, Animation sprite) {
+	public Corpse(Vector2 position, Animation sprite, Vector2 size) {
 		super(position, sprite);
-		this.setSize(new Vector2(1, 1));
+		this.setSize(size);
 		alpha = 1;
 		this.setDepthBasedOnPosition();
 	}
@@ -24,6 +24,8 @@ public class Corpse extends GameObject {
 		if(getSprite().getMaxFrame() > 0) getSprite().animate(deltaTime);
 		
 		deteriorateTime += deltaTime*5;
+		
+		setDepthBasedOnPosition();
 		
 		if(deteriorateTime >= MAX_DETERIORATE_TIME) {
 			alpha -= deltaTime*2;

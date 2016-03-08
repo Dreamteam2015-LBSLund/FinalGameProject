@@ -18,6 +18,7 @@ import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.ActivationType;
 import com.dreamteam.villageTycoon.characters.SabotageKitType.EffectType;
 import com.dreamteam.villageTycoon.characters.WeaponType.Type;
+import com.dreamteam.villageTycoon.effects.Debris;
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
@@ -39,6 +40,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.characters.Character;
+import com.dreamteam.villageTycoon.characters.Corpse;
 
 public class Building extends GameObject {
 
@@ -144,6 +146,11 @@ public class Building extends GameObject {
 
     	if(health <= 0) { 
     		getScene().removeObject(this);
+    		getScene().addObject(new Corpse(this.getPosition(), new Animation(AssetManager.getTexture("hole")), new Vector2(3, 3)));
+    		int amount = GameScene.randomInt(5, 10);
+    		for(int i = 0; i < amount; i++) {
+    			getScene().addObject(new Debris(getPosition().cpy(), new Vector2(GameScene.randomInt(-16, 16), GameScene.randomInt(-16, 16)), GameScene.randomInt(4, 7), "debris"+GameScene.randomInt(1, 3), new Vector2(0.5f, 0.5f)));
+    		}
     		getScene().addObject(new Explosion(this.getPosition().cpy(), Explosion.Type.EXPLOSION, 4, 0, 0));
     	}
     	

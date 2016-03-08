@@ -102,7 +102,7 @@ public class Character extends GameObject {
 		if(getCity().getController() instanceof PlayerController) this.getMovmentVector(deltaTime);
 		
 		if(health <= 0) {
-			getScene().addObject(new Corpse(this.getPosition(), deathAnimation));
+			getScene().addObject(new Corpse(this.getPosition(), deathAnimation, new Vector2(1, 1)));
 			getScene().removeObject(this);
 		}
 		
