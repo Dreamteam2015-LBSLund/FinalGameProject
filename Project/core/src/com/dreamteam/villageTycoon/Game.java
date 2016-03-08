@@ -28,7 +28,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		currentScene = new MenuScene();
+		currentScene = new GameScene();
 		if(currentScene instanceof GameScene) ((GameScene)currentScene).initialize();
 	}
 	
