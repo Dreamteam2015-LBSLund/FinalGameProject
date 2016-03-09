@@ -50,3 +50,13 @@ Civila klasser ska vara bonde, lärare och fabriksarbetare. (snickare och ingje�
 
 **Sen är frågan vad en vinst är. Ska man ta över hela kartan och kontrollera alla levande enheter? Jag antar att ”motståndarna” har en högre tech level i början men när man bygger ut så springer man om dem så småningom. Man kanske börjar nära lättare motståndare och ju längre man utforskar och tar över, desto större och avancerade blir byarna.
 När man tar över en by, får man alla saker då? Eller går det ut på att förstöra allt och ta hem resurserna? Det skulle göra spelarens perspektiv mindre uppdelat.**
+
+# Effekter
+
+När | Vad
+----|----
+Hus exploderar | Hål i marken, explosion, saker som flyger i luften
+Karaktär dör | Blod flyger i luften, lik
+Soldat skjuter | Hylsor
+Hus blir färigbyggt | ?
+Resurs blir plockad | ?
