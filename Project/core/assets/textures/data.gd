@@ -82,4 +82,8 @@ Textures: {
 	button: 659, 0, 216, 108;
 	arrowButton: 304, 475, 64, 64;
 	topBar: 505, 520, 800, 256;
+	
+	button-regular: 1531, 131, 407, 176;
+	button-hover: 1531, 313, 407, 177;
+	button-pressed: 1530, 491, 407, 177;
 }

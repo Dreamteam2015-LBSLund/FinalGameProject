@@ -4,31 +4,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
+import com.dreamteam.villageTycoon.characters.Controller;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 
-public class OpenBuildingPlacerButton extends UiElement {
-	private Vector2 position;
+public class OpenBuildingPlacerButton extends TextButton {
 	
-	private String text;
+	private PlayerController playerController;
 	
-	private boolean pressed;
-	
-	public OpenBuildingPlacerButton(Vector2 position) {
-		super(new Rectangle(position.x, position.y, 500, 30));
-		this.position = position;
-		
-		text = "BUILDING PLACER";
+	public OpenBuildingPlacerButton(Vector2 position, PlayerController playerController2) {
+		super(new Rectangle(position.x, position.y, 500, 30), "place building");
+		this.playerController = playerController2;
 	}
 	
-	public void update(PlayerController playerController) {
-		super.update();
-		
-		if(wasPressed()) {
-			playerController.openBuildingPlacer();
-		}
-	}
-	
-	public void draw(SpriteBatch batch) {
-		AssetManager.font.draw(batch, text, position.x, position.y + getArea().getHeight());
+	public void onClick() {
+		playerController.openBuildingPlacer();
 	}
 }

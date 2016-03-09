@@ -13,7 +13,7 @@ public class PlayerController extends CityController {
 	private BuildingPlacer placer;
 	
 	public PlayerController() {
-		openBuildingPlacerButton = new OpenBuildingPlacerButton(new Vector2(-750, 350));
+		openBuildingPlacerButton = new OpenBuildingPlacerButton(new Vector2(-750, 350), this);
 	}
 	
 	public void update(float dt) {
@@ -35,7 +35,7 @@ public class PlayerController extends CityController {
 			placer.draw(batch);
 		} else {
 			openBuildingPlacerButton.draw(batch);
-			openBuildingPlacerButton.update(this);
+			openBuildingPlacerButton.update();
 		}
 	} 
 	

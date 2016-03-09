@@ -14,7 +14,7 @@ public class MenuScene extends Scene {
 	
 	private Sprite titleScreen;
 	
-	private MenuButton startGameButton;
+	private SetSceneButton startGameButton;
 	
 	public MenuScene() {
 		showTitleScreen = true;
@@ -23,7 +23,7 @@ public class MenuScene extends Scene {
 		titleScreen.setSize(Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
 		titleScreen.setPosition(-Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
 		
-		startGameButton = new MenuButton(new Vector2(0, 0), "Start game", new GameScene());
+		startGameButton = new SetSceneButton(new Vector2(0, 0), "Start game", new GameScene());
 	}
 	
 	public void update(float deltaTime) {
