@@ -69,7 +69,7 @@ Textures: {
 	backeryProgress: 		 129, 1814, 128, 96;
 	
 	explosion: 388, 259, 128, 128;
-	flame: 325, 378, 47, 64;
+	flame: 904, 1162, 128, 128;
 	hole: 657, 1066, 127, 102;
 	shells: 909, 181, 16, 16;
 	
