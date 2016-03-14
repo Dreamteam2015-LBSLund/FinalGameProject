@@ -41,6 +41,7 @@ public class Character extends GameObject {
 	private Rectangle hitbox = new Rectangle(0, 0, 0, 0);
 	
 	private Animation selectedSign;
+	private Animation flame;
 	
 	private boolean showInventory;
 	private boolean isInBuilding;
@@ -70,6 +71,10 @@ public class Character extends GameObject {
 		this.health = 3;
 		this.amountFull = maxFull = 1000;
 		this.city = city;
+		
+		this.flame = new Animation(AssetManager.getTexture("flame"));
+		this.flame.setSize(this.getSize().x, this.getSize().x);
+		this.flame.setAnimation(0.1f, 4, false);
 		
 		getSprite().setAnimation(0.1f, 4, false);
 	}
@@ -134,7 +139,7 @@ public class Character extends GameObject {
 			}
 		}
 		
-		if(this.countFireDamegeTime > 0) onFire(deltaTime);
+		if(countFireDamegeTime > 0) onFire(deltaTime);
 	}
 	
 	public void onFire(float deltaTime) {
@@ -145,6 +150,9 @@ public class Character extends GameObject {
 			countFireDamegeTime += 1;
 			onFireTime = 0;
 		}
+		
+		flame.animate(deltaTime);
+		flame.setPosition(getPosition().cpy().x, getPosition().cpy().y);
 		
 		if(countFireDamegeTime >= maxCountFireDamegeTime) {
 			countFireDamegeTime = 0;
@@ -175,6 +183,9 @@ public class Character extends GameObject {
 		super.draw(batch);
 		if(selected) { 
 			selectedSign.draw(batch);
+		}
+		if(countFireDamegeTime > 0) {
+			flame.draw(batch);
 		}
 	}
 	
