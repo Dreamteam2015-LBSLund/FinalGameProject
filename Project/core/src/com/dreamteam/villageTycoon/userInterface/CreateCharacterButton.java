@@ -12,11 +12,9 @@ import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.framework.Scene;
 
-public class CreateCharacterButton extends UiElement {
+public class CreateCharacterButton extends TextButton {
 	
 	private Vector2 position;
-	
-	private String text;
 	
 	private boolean canAdd;
 	private boolean pressed;
@@ -24,9 +22,11 @@ public class CreateCharacterButton extends UiElement {
 	private Building building;
 	
 	ArrayList<Character> toAdd;
+
+	private CharSequence text;
 	
 	public CreateCharacterButton(Vector2 position, Building building) {
-		super(new Rectangle(position.x, position.y, 300, 50));
+		super(new Rectangle(position.x, position.y, 300, 50), (!building.getType().getName().equals("house")) ? "add soldier" : "add worker");
 		
 		this.position = position;
 		this.building = building;
@@ -34,9 +34,8 @@ public class CreateCharacterButton extends UiElement {
 		toAdd = new ArrayList<Character>();
 		
 		canAdd = true;
-		
-		text = (!this.building.getType().getName().equals("house")) ? "add soldier" : "add worker";
 	}
+	
 	
 	public void update(Scene scene) {
 		super.update();
@@ -69,9 +68,7 @@ public class CreateCharacterButton extends UiElement {
 		
 		toAdd.clear();
 		canAdd = true;
-	}
-
-	public void draw(SpriteBatch batch) {
-		AssetManager.font.draw(batch, text, getArea().getX(), getArea().getY() + getArea().getHeight());
+		
+		super.update();
 	}
 }

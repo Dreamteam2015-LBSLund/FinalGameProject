@@ -16,7 +16,6 @@ public class SetSceneButton extends TextButton {
 		this.targetScene = targetScene;
 	}
 	
-	
 	public void onClick() {
 		Game.setScene(targetScene);
 		System.out.println("setting scene");
