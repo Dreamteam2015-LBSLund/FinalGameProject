@@ -26,8 +26,8 @@ Textures: {
 	soldier: 1236, 195, 64, 64;
 	playerCorpse: 949, 82, 67, 65;
 	
-	enemySoldier: 1236, 264, 64, 64;
-	enemyWorker: 1236, 330, 64, 64;
+	enemyWorker: 1236, 264, 64, 64;
+	enemySoldier: 1236, 330, 64, 64;
 	enemyCorpse: 1039, 80, 64, 64;
 	
 	woodIcon:   	     454, 0, 16, 16;
