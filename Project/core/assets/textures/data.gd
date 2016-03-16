@@ -26,7 +26,7 @@ Textures: {
 	soldier: 1236, 195, 64, 64;
 	playerCorpse: 949, 82, 67, 65;
 	
-	enemyWorker: 1236, 264, 64, 64;
+	enemyWorker: 1236, 260, 64, 64;
 	enemySoldier: 1236, 330, 64, 64;
 	enemyCorpse: 1039, 80, 64, 64;
 	
@@ -73,7 +73,7 @@ Textures: {
 	hole: 657, 1066, 127, 102;
 	shells: 909, 181, 16, 16;
 	
-	blood1: 934, 177, 24, 24;
+	blood1: 944, 176, 24, 24;
 	blood2: 968, 177, 24, 24;
 	blood3: 993, 177, 24, 24;
 	blood4: 1018, 177, 24, 24;
