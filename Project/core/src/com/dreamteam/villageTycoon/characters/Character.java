@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.characters;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,6 +13,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.City;
+import com.dreamteam.villageTycoon.effects.Debris;
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.effects.Explosion.Type;
 import com.dreamteam.villageTycoon.framework.Animation;
@@ -142,6 +144,13 @@ public class Character extends GameObject {
 		if(countFireDamegeTime > 0) onFire(deltaTime);
 	}
 	
+	public void splashBlood() {
+		int amount = GameScene.randomInt(3, 6);
+		for(int i = 0; i < amount; i++) {
+			getScene().addObject(new Debris(getPosition().cpy(), new Vector2(GameScene.randomInt(-4, 4), GameScene.randomInt(-4, 4)), GameScene.randomInt(1, 2), "blood"+GameScene.randomInt(1, 3), new Vector2(0.2f, 0.2f)));
+		}
+	}
+	
 	public void onFire(float deltaTime) {
 		onFireTime += 1 * deltaTime;
 		
@@ -169,6 +178,7 @@ public class Character extends GameObject {
 	
 	public void onHit(Projectile projectile) {
 		health -= projectile.getDamege();
+		splashBlood();
 	}
 	
 	public City getCity() {

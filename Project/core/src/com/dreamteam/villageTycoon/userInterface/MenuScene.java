@@ -13,6 +13,7 @@ public class MenuScene extends Scene {
 	private boolean showTitleScreen;
 	
 	private Sprite titleScreen;
+	private Sprite background;
 	
 	private SetSceneButton startGameButton;
 	
@@ -22,6 +23,10 @@ public class MenuScene extends Scene {
 		titleScreen = new Sprite(new Texture("textures/titlescreen.png"));
 		titleScreen.setSize(Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
 		titleScreen.setPosition(-Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+		
+		background = new Sprite(new Texture("textures/menuBackground.png"));
+		background.setSize(Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
+		background.setPosition(-Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
 		
 		startGameButton = new SetSceneButton(new Vector2(0, 0), "Start game", new GameScene());
 	}
@@ -42,6 +47,7 @@ public class MenuScene extends Scene {
 		if(showTitleScreen) {
 			titleScreen.draw(batch);
 		} else {
+			background.draw(batch);
 			startGameButton.draw(batch);
 		}
 	}
