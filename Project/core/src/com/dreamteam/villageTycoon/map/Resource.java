@@ -46,7 +46,7 @@ public class Resource implements InventoryItem {
 	}
 	
 	public static Resource get(String name) {
-		Resource t = types.get(name);
+		Resource t = getTypes().get(name);
 		if (t == null) System.out.println("WARNING: Resource " + name + " not recognized");
 		return t;
 	}

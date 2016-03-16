@@ -21,7 +21,7 @@ Textures: {
 	
 	factory1: 330, 93, 78, 103;
 	factoryProgress1: 421, 103, 57, 94;
-	
+
 	worker: 1236, 130, 64, 64;
 	soldier: 1236, 195, 64, 64;
 	playerCorpse: 949, 82, 67, 65;
