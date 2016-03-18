@@ -12,7 +12,7 @@ Feature | Person | Prioritet | Status
 --------|-------|-------------|------
 Framework | Båda | Minimal | Done
 Tilesystem | Johannes | Minimal | Done
-Map Generation | Tom | Minimal | Not done
+Map Generation | Tom | Minimal |  Done, needs polish
 Pathfinding | Johannes | Minimal | Done
 Kontrollsystem | Tom | Minimal | Done
 Soldater | Tom | Minimal | Done
@@ -32,7 +32,7 @@ VFX | Tom | Bonus | Not Done
 
 Task | Status
 -----|-------
-Hus ska inte landa på varandra | Ofärdigt
+Hus ska inte landa på varandra | färdigt
 Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | frädigt
 Map generation för vatten och jord | färdigt
