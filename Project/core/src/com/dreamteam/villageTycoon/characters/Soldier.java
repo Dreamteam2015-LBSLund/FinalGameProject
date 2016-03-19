@@ -156,7 +156,7 @@ public class Soldier extends Character {
 			
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
 				weapon = new Weapon(targetWeapon);
-				maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed();
+				maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed() + 1;
 				targetWeapon = null;
 				hasPickedUpWeapon = true;
 				Debug.print(this, "picked up weapon");
