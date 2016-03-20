@@ -145,7 +145,7 @@ public class Character extends GameObject {
 	}
 	
 	public void splashBlood() {
-		int amount = GameScene.randomInt(3, 6);
+		int amount = GameScene.randomInt(2, 3);
 		for(int i = 0; i < amount; i++) {
 			getScene().addObject(new Debris(getPosition().cpy(), new Vector2(GameScene.randomInt(-4, 4), GameScene.randomInt(-4, 4)), GameScene.randomInt(1, 2), "blood"+GameScene.randomInt(1, 3), new Vector2(0.2f, 0.2f)));
 		}

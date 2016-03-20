@@ -242,17 +242,17 @@ public class Soldier extends Character {
 			
 			Character tempTarget = new Character(new Vector2(-1, -1), new Animation(AssetManager.getTexture("error")), new Animation(AssetManager.getTexture("error")), this.getCity());
 			
-			for(Character c : spottedEnemies) {
+			/*for(Character c : spottedEnemies) {
 				currentRange = c.distanceTo(this.getPosition());
 				if(shortestRange > currentRange && shortestRange != -1) {
 					tempTarget = c;
 					shortestRange = currentRange;
 				}
-			}
+			}*/
 			
 			this.currentTarget = this.spottedEnemies.get(0);
 			
-			if(currentTarget.getHealth() <= 0) {
+			if(currentTarget.getHealth() <= 0 || currentTarget.distanceTo(getPosition().cpy()) > this.maxAttackDistance) {
 				spottedEnemies.remove(currentTarget);
 			}
 			
@@ -286,7 +286,7 @@ public class Soldier extends Character {
 			float angle = (float)Math.atan2(currentTarget.getPosition().y - this.getPosition().y, currentTarget.getPosition().x - this.getPosition().x);
 			this.setPath(new Vector2((float)Math.cos(angle)*this.maxAttackDistance, (float)Math.sin(angle)*this.maxAttackDistance));
 		}
-		if(currentTarget.distanceTo(this.getPosition()) < this.maxAttackDistance-1) {
+		if(currentTarget.distanceTo(this.getPosition()) < this.maxAttackDistance) {
 			if(weapon.canShoot()) {
 				getScene().addObject(new Projectile(new Vector2(this.getPosition().x+0.5f, this.getPosition().y +0.5f).add(getMovmentVector(deltaTime).cpy()), currentTarget.getPosition(), weapon.getWeaponType().getProjectileType(), this));
 				weapon.onShoot();
@@ -316,7 +316,7 @@ public class Soldier extends Character {
 		
 		for(GameObject g : getScene().getObjects()) {
 			if(g instanceof Building) {
-				if(((Building) g).getCity() != this.getCity() && g.distanceTo(getPosition().cpy()) < this.maxAttackDistance) { 
+				if(((Building) g).getCity() != this.getCity() && distanceTo(new Vector2(g.getPosition().cpy().x + g.getSize().x/4, g.getPosition().cpy().y + g.getSize().y/4)) < maxAttackDistance) { 
 					targetBuilding = (Building) g;
 				}
 			}
