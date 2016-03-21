@@ -20,15 +20,15 @@ UI | Tom | Minimal | Minimal Done, needs polish
 Arbetare | Johannes | Minimal | Done
 Basic AI | Johannes | Minimal | Done
 Fabriker | Johannes | Minimal | Done
-Tech | Båda | Minimal | Not Done
+Tech | Båda | Minimal | Done (mostly)
 Menyer | Tom | Normal | Not Done
 Dag/Natt | Tom | Normal | Won't add
-Mer Avancerad AI | Johannes | Normal| Not Done
-Ljudeffekter | Tom | Normal | Not Done
+Mer Avancerad AI | Johannes | Normal | Basically done
+Ljudeffekter | Båda | Normal | Not Done
 Cutscene | Båda | Normal | Won't add
 VFX | Tom | Bonus | Not Done
 
-## SAKER SOM TOM SKA FIXA :^)
+## SAKER SOM TOM SKA FIXA :^) - __FÄRDIGT__
 
 Task | Status
 -----|-------
@@ -37,7 +37,7 @@ Inventory kanske(?) | färdigt(kanske)
 Lite grafiska saker | frädigt
 Map generation för vatten och jord | färdigt
 
-## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS FÖR ATT SPELET SKA GRUNDLÄGGANDE BLI FÄRDIGT 
+## SPECIFIK LISTA MED SAKER SOM MÅSTE GÖRAS FÖR ATT SPELET SKA GRUNDLÄGGANDE BLI FÄRDIGT - __FÄRDIGT__
 
 Feature| Status
 -------|-------
@@ -53,7 +53,7 @@ Förståligt UI(framför allt soldater, byggandet) | färdigt
 Byggnader kan spawna karaktärer | färdigt
 UI for spawning charachters | färdigt
 
-## Redraw houses
+## Redraw houses - __FÄRDIGT__
 
 Name | Staus
 -----|------
@@ -97,7 +97,8 @@ Uppgift | Tid(d) | Status | Person
 --------|-----|--------|-------
 Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
 Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
-Delay på att göra grejer (inte minimal) | 1 | Ofärdig | Johannes
+Delay på att göra grejer | 1 | Ofärdig | Johannes
+Visa hur mycket resurser hus behöver i UI | 1 | Ofärdigt | Johannes
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
@@ -109,7 +110,7 @@ Starta tigsource devlog | 0 | Ofärdig | Johannes och Tom
 
 Person | Total tid(d)
 -------|-------------
-Johannes | 4.5, varav 1 inte är minimal
+Johannes | 5.5
 Tom | 2.5, varav 2 inte är minimal
 Kollektiv | 4.5, varav 4 inte är minimal
 
