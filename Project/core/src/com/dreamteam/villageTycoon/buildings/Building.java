@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.dreamteam.villageTycoon.characters.Inventory;
 import com.dreamteam.villageTycoon.characters.SabotageKit;
 import com.dreamteam.villageTycoon.characters.SabotageKitType;
@@ -52,7 +53,7 @@ public class Building extends GameObject {
     private City city;
     private boolean selected;
     private Animation selectedSign;
-    private ArrayList<Resource> toGather;
+    //private ArrayList<Resource> toGather;
     private ArrayList<Prop> toClear;
     private int health;
     
@@ -60,6 +61,8 @@ public class Building extends GameObject {
     private CreateCharacterButton createCharacterButton; 
     
     private DestroyBuildingButton destroyBuildingButton;
+    
+    private BuildingTaskProvider taskProvider;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -70,13 +73,13 @@ public class Building extends GameObject {
     	outputInventory = new Inventory<Resource>();
 		this.type = type;
 		buildState = BuildState.Clearing;
-		setDepth(1);
+
 		workers = new ArrayList<Worker>();
 		
 		health = type.getHealth();
 		
-		toGather = getConstructionResources();
-		//setTiles();
+		taskProvider = new BuildingTaskProvider(getConstructionResources(), this);
+
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
 		
@@ -192,12 +195,12 @@ public class Building extends GameObject {
     			inputInventory = new Inventory<Resource>();
     			setSprite(type.getSprite());
     		} else {
-    			assignGatherTask(toGather);
+    			assignGatherTask();
     		}
     	} else if (type.isFactory()) {
     		// regular production
     		// TODO: what did i break?
-    		if (toGather.size() == 0 ) { // removed && isProductionGatheringDone() to fix pistolFactory not starting work
+    		if (taskProvider.isDone()) { // removed && isProductionGatheringDone() to fix pistolFactory not starting work
     			if (!isProductionGatheringDone()) {
     				startProduction();
     			}
@@ -207,7 +210,7 @@ public class Building extends GameObject {
     			outputInventory.add(type.getOutputResourceArray());
     			startProduction();
     		} else {
-    			assignGatherTask(toGather);
+    			assignGatherTask();
     		}
     	}
     }
@@ -218,7 +221,12 @@ public class Building extends GameObject {
     
     public void cancelGather(Resource r) {
     	//System.out.println("cancel, adding r " + r.getName() + ", " + toGather.size());
-    	toGather.add(r);
+    	taskProvider.cancelTask(r);
+    }
+    
+    public void gatherDone(Resource r) {
+    	if (!taskProvider.onAdd(r)) outputInventory.add(r, 1);
+    	else inputInventory.add(r, 1);
     }
     
     private ArrayList<Resource> getConstructionResources() {
@@ -229,7 +237,7 @@ public class Building extends GameObject {
     	/*for (int i = 0; i < type.getProductionResources().length; i++) {
     		Debug.print(this, type.getProductionResources()[i].getName() + ": " + type.getInputResourceAmount()[i]);
     	}*/
-    	return getInputInventoryDifference(type.getProductionResources(), type.getInputResourceAmount());
+    	return Resource.constructList(type.getProductionResources(), type.getInputResourceAmount());
     }
     
     private ArrayList<Resource> getInputInventoryDifference(Resource[] resources, int[] amounts) {
@@ -253,12 +261,11 @@ public class Building extends GameObject {
 		}
     }
     
-    private void assignGatherTask(ArrayList<Resource> toGet) {
+    private void assignGatherTask() {
     	for (Worker w : workers) {
 			if (!w.hasTask()) {
-				Debug.print(this, "resources to get: ");
-				for (Resource r : toGather) Debug.print(this, r.getName());
-				if (toGet.size() > 0) w.setTask(new GatherTask(this, toGet.remove(0)));
+				GatherTask t = taskProvider.nextTask();
+				if (t != null) w.setTask(t);
 			}
 		}
     }
@@ -266,7 +273,8 @@ public class Building extends GameObject {
     
     // reset the list of things to gather for production, so workers can get new tasks
     private void startProduction() {
-    	toGather = getProductionResources();
+    	if (!taskProvider.isDone()) System.out.println("WARNING: taskprovider reset when not done (Building: 269)"); // TODO: remove print
+    	taskProvider.reset(getProductionResources());
     }
     
     private boolean isProductionGatheringDone() {
@@ -337,8 +345,11 @@ public class Building extends GameObject {
     
     public void drawUi(SpriteBatch batch) {
     	if (selected || AIController2.drawDebug) {
-    		inputInventory.drawList(getUiScreenCoords(), batch);
+    		//inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
+    		if (!taskProvider.isDone()) {
+    			taskProvider.draw(new Vector2(getUiScreenCoords()), batch);
+    		}
     		
     		if(destroyBuildingButton != null) destroyBuildingButton.draw(batch);
     		
@@ -348,7 +359,7 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		AssetManager.font.draw(batch, workers.size() + " workers, state = " + buildState + ", toGather = " + toGather.size() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
+    		AssetManager.smallFont.draw(batch, workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     

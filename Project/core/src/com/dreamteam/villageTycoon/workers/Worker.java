@@ -57,6 +57,13 @@ public class Worker extends Character {
 			workplace = null;
 		}
 		
+		if (isCantFind() && task != null) {
+			System.out.println("canceling"); //TODO: remove
+			task.onCancel();
+			task = null;
+			setCantFind(false);
+		}
+		
 		
 		//Debug.print(this, "hunger = " + getAmountFull() / getMaxFull());
 		if (getAmountFull() / getMaxFull() < .3f && getCity().hasResource(Resource.get("food"))) {
@@ -125,7 +132,7 @@ public class Worker extends Character {
 		}
 		if (((GameScene)getScene()).getMap().tileAt(getPosition()).getBuilding() == destination) { // is at destination
 			print("have arrived, putting");
-			destination.getInputInventory().add(r, 1);
+			destination.gatherDone(r);
 			inventory.remove(r, 1);
 			return true;
 		} else {
@@ -133,7 +140,7 @@ public class Worker extends Character {
 			setPath(destination.getPosition());
 			if (isAtPathEnd()) {
 				print("im there, putting");
-				destination.getInputInventory().add(r, 1);
+				destination.gatherDone(r);
 				inventory.remove(r, 1);
 				return true;
 			}

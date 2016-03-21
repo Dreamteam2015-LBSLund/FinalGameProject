@@ -63,7 +63,17 @@ public class Character extends GameObject {
 	
 	private boolean needToEat;
 	private boolean flip;
+
+	private boolean cantFind;
 	
+	public void setCantFind(boolean cantFind) {
+		this.cantFind = cantFind;
+	}
+
+	public boolean isCantFind() {
+		return cantFind;
+	}
+
 	public Character(Vector2 position, Animation sprite, Animation deathAnimation, City city) {
 		super(position, new Vector2(1, 1), sprite);
 		//this.getSprite().setAnimation(0.1f, 4, false);
@@ -437,7 +447,8 @@ public class Character extends GameObject {
 					print("resource is weird");
 				}
 			} else {
-				print("couldn't find resource");
+				System.out.println("couldn't find resource"); //TODO: remove
+				cantFind = true;
 			}
 		}
 		return false;
