@@ -32,10 +32,10 @@ public abstract class Debug {
 		//whitelist.add(City.class);
 		//whitelist.add(AIController2.class);
 		//whitelist.add(AIController2.MakeFactoryState.class);
-		whitelist.add(AIController2.MakeResourceState.class);
+		//whitelist.add(AIController2.MakeResourceState.class);
 		//whitelist.add(AIController2.MakeSoldierState.class);
 		//whitelist.add(AIController3.MakeSoldierCommand.class);
-		whitelist.add(AIController3.class);
+		//whitelist.add(AIController3.class);
 	}
 	
 	public static void print(Object client, String message) {

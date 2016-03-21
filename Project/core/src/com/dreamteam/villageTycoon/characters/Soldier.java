@@ -104,7 +104,7 @@ public class Soldier extends Character {
 		
 		//maxAttackDistance = 8;
 		
-		this.maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed();
+		this.maxAttackDistance = weapon.getType().getRange() / (weapon.getType().getProjectileType().getSpeed() * 0.3f);
 		
 		this.sabotageKitButton = new SabotageKitButton(new Rectangle(100, 100, 100, 100), new Animation(AssetManager.getTexture("firekit")));
 		
@@ -156,7 +156,7 @@ public class Soldier extends Character {
 			
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
 				weapon = new Weapon(targetWeapon);
-				maxAttackDistance = weapon.getType().getRange() / weapon.getType().getProjectileType().getSpeed() + 1;
+				maxAttackDistance = weapon.getType().getRange() / (weapon.getType().getProjectileType().getSpeed() * 0.3f);
 				targetWeapon = null;
 				hasPickedUpWeapon = true;
 				Debug.print(this, "picked up weapon");
@@ -173,7 +173,7 @@ public class Soldier extends Character {
 		super.update(deltaTime);
 		
 		checkForWeapons();
-		
+		System.out.println(maxAttackDistance + " : MAX ATTACKD ISTANCE");
 		for(int i = 0; i < avaibleWeaponTypes.size(); i++) {
 			//Debug.print(this, avaibleWeaponTypes.get(i).getName() + " - " + avaibleWeaponTypes.size());
 		}
