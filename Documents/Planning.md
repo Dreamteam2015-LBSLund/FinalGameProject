@@ -98,7 +98,7 @@ Uppgift | Tid(d) | Status | Person
 Fixa ais placering av byggnader| 1/2 | Ofärdig | Johannes
 Autonomt ta beslut om vapen och mat | 3 | Ofärdig (omöjlig?) | Johannes
 Delay på att göra grejer | 1 | Ofärdig | Johannes
-Visa hur mycket resurser hus behöver i UI | 1 | Ofärdigt | Johannes
+Visa hur mycket resurser hus behöver i UI | 1 | Färdigt | Johannes
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
