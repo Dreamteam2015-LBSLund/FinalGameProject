@@ -363,10 +363,11 @@ public class Building extends GameObject {
     public void drawUi(SpriteBatch batch) {
     	if (selected || AIController2.drawDebug) {
     		//inputInventory.drawList(getUiScreenCoords(), batch);
-    		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
+    		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(300, 0)), batch);
     		if (!taskProvider.isDone()) {
     			taskProvider.draw(new Vector2(getUiScreenCoords()), batch);
     		} else {
+    			//TODO: make this a proper progress bar
     			AssetManager.font.draw(batch, Math.round(getElapsedLeft()) + "/" + Math.round(maxWaitTime) + "s", getUiScreenCoords().x, getUiScreenCoords().y);
     		}
     		
