@@ -5,6 +5,7 @@ mine: {
 	
 	materials:     wood, stone;
 	material-amount: 10, 3;
+	build-time: 10;
 	
 	sprite-finished: mine;
 	sprite-building: mineProgress;
@@ -14,6 +15,7 @@ mine: {
 	product-per-run: 3;
 	production-resources: wood;
 	resource-per-run: 1;
+	production-time: 5;
 }
 
 farm: {

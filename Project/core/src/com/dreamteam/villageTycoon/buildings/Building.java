@@ -46,6 +46,7 @@ import com.dreamteam.villageTycoon.characters.Corpse;
 public class Building extends GameObject {
 
 	private enum BuildState { Clearing, InProgress, Done };
+	private float waitTime;
     private BuildingType type;
     private BuildState buildState;
     private Inventory<Resource> inputInventory, outputInventory;
@@ -63,6 +64,7 @@ public class Building extends GameObject {
     private DestroyBuildingButton destroyBuildingButton;
     
     private BuildingTaskProvider taskProvider;
+	private float maxWaitTime;
     
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
@@ -83,6 +85,8 @@ public class Building extends GameObject {
 		selectedSign = new Animation(AssetManager.getTexture("test"), new Vector2(0.3f, 0.3f), new Color(0, 0, 1, 0.5f));
 		selectedSign.setSize(this.getSize().x, this.getSize().y);
 		
+		setWaitTime(type.getBuildTime());
+		
 		toClear = new ArrayList<Prop>();
 		this.setDepthBasedOnPosition();
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
@@ -92,6 +96,15 @@ public class Building extends GameObject {
     public void onAdd(Scene scene) {
     	super.onAdd(scene);
     	setTiles(); // this cant run in the constructor.
+    }
+    
+    private void setWaitTime(float time) {
+    	waitTime = time;
+    	maxWaitTime = time;
+    }
+    
+    private float getElapsedLeft() {
+    	return maxWaitTime - waitTime;
     }
     
     private void setTiles() {
@@ -140,11 +153,6 @@ public class Building extends GameObject {
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
     	
-    	if(this.type.getType() == BuildingType.Type.Home) {
-    		//if(this.selected) System.out.println(type.getName());			
-			//this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
-		}
-    	
     	selectedSign.setPosition(this.getPosition().x-0.5f, this.getPosition().y-0.5f);
 
     	if(health <= 0) { 
@@ -158,8 +166,8 @@ public class Building extends GameObject {
     	}
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
-    		if(getCity().getController() instanceof PlayerController) {
-    			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull()) this.createCharacterButton.update(getScene());
+    		if (getCity().getController() instanceof PlayerController) {
+    			if (!((PlayerController)getCity().getController()).getBuildingPlacerNull()) this.createCharacterButton.update(getScene());
     		}
     	}
     	
@@ -177,7 +185,7 @@ public class Building extends GameObject {
 				}
 			}
     	}
-    	
+    	// TODO: remove this
     	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
     		inputInventory.add(type.getBuildResourcesArray());
     	}
@@ -188,13 +196,15 @@ public class Building extends GameObject {
     	} else if (buildState == BuildState.InProgress) {
     		// check if inventory contains all materials. if so, building is done (plus some work?)
     		if (isBuildingDone()) {
-    			buildState = BuildState.Done;
-    			if (type.isFactory()) startProduction();
-    			inputInventory.remove(type.getBuildResourcesArray());
-    			outputInventory = inputInventory;
-    			inputInventory = new Inventory<Resource>();
-    			setSprite(type.getSprite());
-    		} else {
+    			if (waitTime <= 0) {
+	    			buildState = BuildState.Done;
+	    			if (type.isFactory()) startProduction();
+	    			inputInventory.remove(type.getBuildResourcesArray());
+	    			outputInventory = inputInventory;
+	    			inputInventory = new Inventory<Resource>();
+	    			setSprite(type.getSprite());
+    			} else incrementWaitTime(deltaTime);
+    		}else {
     			assignGatherTask();
     		}
     	} else if (type.isFactory()) {
@@ -206,13 +216,19 @@ public class Building extends GameObject {
     			}
     		}
     		if (isProductionGatheringDone()) {
-    			inputInventory.remove(type.getInputResourcesArray());
-    			outputInventory.add(type.getOutputResourceArray());
-    			startProduction();
+    			if (waitTime <= 0) {
+	    			inputInventory.remove(type.getInputResourcesArray());
+	    			outputInventory.add(type.getOutputResourceArray());
+	    			startProduction();
+    			} else incrementWaitTime(deltaTime);
     		} else {
     			assignGatherTask();
     		}
     	}
+    }
+    
+    private void incrementWaitTime(float deltaTime) {
+    	waitTime -= deltaTime * Math.max(type.getMaxWorkers(), workers.size());
     }
     
     public void onHit(Projectile projectile) {
@@ -275,6 +291,7 @@ public class Building extends GameObject {
     private void startProduction() {
     	if (!taskProvider.isDone()) System.out.println("WARNING: taskprovider reset when not done (Building: 269)"); // TODO: remove print
     	taskProvider.reset(getProductionResources());
+    	setWaitTime(type.getProductionTime());
     }
     
     private boolean isProductionGatheringDone() {
@@ -349,6 +366,8 @@ public class Building extends GameObject {
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(100, 0)), batch);
     		if (!taskProvider.isDone()) {
     			taskProvider.draw(new Vector2(getUiScreenCoords()), batch);
+    		} else {
+    			AssetManager.smallFont.draw(batch, getElapsedLeft() + "/" + maxWaitTime, getUiScreenCoords().x, getUiScreenCoords().y);
     		}
     		
     		if(destroyBuildingButton != null) destroyBuildingButton.draw(batch);
@@ -359,7 +378,7 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		AssetManager.smallFont.draw(batch, workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
+    		AssetManager.font.draw(batch, "time: " + waitTime + ", " + workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     

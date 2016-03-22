@@ -36,6 +36,10 @@ public class BuildingType {
 	private int[] outputProductPerRun;
 	private Resource[] productionResources;
 	private int[] inputResourcePerRun;
+
+	private int buildTime;
+
+	private int productionTime;
 	
 	public TextureRegion getSprite() {
 		return sprite;
@@ -64,6 +68,8 @@ public class BuildingType {
 		
 		health = r.getInt("health");
 		
+		if (r.getString("build-time") != null) buildTime = r.getInt("build-time");
+		
 		if (r.getString("type").equals("home")) {
 			type = Type.Home;
 			inhabitants = r.getInt("inhabitants");
@@ -74,11 +80,20 @@ public class BuildingType {
 			productionResources = Resource.fromStringArray(r.getList("production-resources"));
 			inputResourcePerRun = r.getIntList("resource-per-run");
 			maxWorkers = r.getInt("max-workers");
+			if (r.getString("production-time") != null) productionTime = r.getInt("production-time");
 		} else {
 			System.out.println("ERROR: type of building " + r.getObjectName() + " wasn't recognized (" + r.getString("type") + ")");
 		}
 	}
 	
+	public int getBuildTime() {
+		return buildTime;
+	}
+
+	public int getProductionTime() {
+		return productionTime;
+	}
+
 	public Resource[] getBuildResources() {
 		return buildResources;
 	}
