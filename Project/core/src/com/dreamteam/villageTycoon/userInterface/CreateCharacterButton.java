@@ -17,6 +17,7 @@ public class CreateCharacterButton extends TextButton {
 	private Vector2 position;
 	
 	private boolean canAdd;
+	private boolean added;
 	private boolean pressed;
 	
 	private Building building;
@@ -40,6 +41,8 @@ public class CreateCharacterButton extends TextButton {
 	public void update(Scene scene) {
 		super.update();
 		
+		added = false;
+		
 		if(wasPressed() && !pressed) {
 			Character c = building.getCharacterToSpawn();
 			toAdd.add(c);
@@ -62,7 +65,7 @@ public class CreateCharacterButton extends TextButton {
 			
 			if(canAdd) { 
 				scene.addObject(c);
-				System.out.println("added");
+				added = true;
 			}
 		}
 		
@@ -70,5 +73,13 @@ public class CreateCharacterButton extends TextButton {
 		canAdd = true;
 		
 		super.update();
+	}
+	
+	public boolean getAdded() {
+		return this.added;
+	}
+	
+	public void setCanAdd(boolean canAdd) {
+		this.canAdd = canAdd;
 	}
 }

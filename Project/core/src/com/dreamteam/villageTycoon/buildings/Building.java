@@ -66,6 +66,11 @@ public class Building extends GameObject {
     private BuildingTaskProvider taskProvider;
 	private float maxWaitTime;
     
+	private float BASE_CREATE_CHARACTER_DELAY = 10;
+    
+    private float createCharacterDelay;
+    private float createCharacterCount;
+	
     //  position is tile at lower left corner
     public Building(Vector2 position, BuildingType type, City owner) {
     	super(position.add(new Vector2(.5f, .5f)), new Vector2(4, 3), new Animation(type.getBuildSprite())); // add .5 to position to align properly with tiles
@@ -166,8 +171,23 @@ public class Building extends GameObject {
     	}
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
-    		if (getCity().getController() instanceof PlayerController) {
-    			if (!((PlayerController)getCity().getController()).getBuildingPlacerNull()) this.createCharacterButton.update(getScene());
+    		if(getCity().getController() instanceof PlayerController) {
+    			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull() && createCharacterCount <= 0) {
+    				createCharacterButton.update(getScene());
+    				if(createCharacterButton.getAdded()) {
+    					createCharacterCount = 0.1f;
+    				}
+    			}
+    			
+    			createCharacterDelay = MathUtils.clamp(createCharacterDelay, 0.1f, 30);
+    			
+    			createCharacterDelay = BASE_CREATE_CHARACTER_DELAY - workers.size();
+    			
+    			if(createCharacterCount > 0) {
+					createCharacterCount += 1 * deltaTime;
+					
+					if(createCharacterCount >= createCharacterDelay) createCharacterCount = 0;
+				} 
     		}
     	}
     	
