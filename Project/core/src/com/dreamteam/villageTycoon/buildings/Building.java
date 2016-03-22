@@ -228,7 +228,7 @@ public class Building extends GameObject {
     }
     
     private void incrementWaitTime(float deltaTime) {
-    	waitTime -= deltaTime * Math.max(type.getMaxWorkers(), workers.size());
+    	waitTime -= deltaTime * Math.min(type.getMaxWorkers(), workers.size());
     }
     
     public void onHit(Projectile projectile) {
@@ -367,7 +367,7 @@ public class Building extends GameObject {
     		if (!taskProvider.isDone()) {
     			taskProvider.draw(new Vector2(getUiScreenCoords()), batch);
     		} else {
-    			AssetManager.smallFont.draw(batch, getElapsedLeft() + "/" + maxWaitTime, getUiScreenCoords().x, getUiScreenCoords().y);
+    			AssetManager.font.draw(batch, Math.round(getElapsedLeft()) + "/" + Math.round(maxWaitTime) + "s", getUiScreenCoords().x, getUiScreenCoords().y);
     		}
     		
     		if(destroyBuildingButton != null) destroyBuildingButton.draw(batch);
@@ -378,7 +378,7 @@ public class Building extends GameObject {
         		}
         	}
     		
-    		AssetManager.font.draw(batch, "time: " + waitTime + ", " + workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
+    		//AssetManager.smallFont.draw(batch, "time: " + waitTime + ", " + workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
     	}
     }
     
