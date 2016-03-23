@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.dreamteam.villageTycoon.characters.Inventory;
@@ -396,6 +397,10 @@ public class Building extends GameObject {
     		if(type.getType() == BuildingType.Type.Home && this.isBuilt() && selected) {
         		if(getCity().getController() instanceof PlayerController) {
         			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull()) createCharacterButton.draw(batch);
+        		}
+        		
+        		if(createCharacterCount > 0) {
+        			AssetManager.font.draw(batch, "SPAWN DELAY: " + Math.round((createCharacterDelay - createCharacterCount)), getUiScreenCoords().x, getUiScreenCoords().y-50);
         		}
         	}
     		
