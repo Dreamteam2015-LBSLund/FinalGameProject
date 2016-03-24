@@ -8,10 +8,10 @@ Världen ska vara slumpmässigt generad. Baser ska starta på fält i skogen, de
 
 I följande ordining skapas världen: 
 
--Stort gräs fält
--Spawna slumpmässiga skogar slumpmässigt över världen
--Spawna jordfält som har sten på sig slumpmässigt över världen. Bra för gruvor och dylikt.
--Spawna sjöar i mitten av världen för att seperera byarna
--Spawna byarna i en "cirkel" längst utkanterna. Vid två byar blir det då på vinkel 0 och 180
+* Stort gräs fält
+* Spawna slumpmässiga skogar slumpmässigt över världen
+* Spawna jordfält som har sten på sig slumpmässigt över världen. Bra för gruvor och dylikt.
+* Spawna sjöar i mitten av världen för att seperera byarna
+* Spawna byarna i en "cirkel" längst utkanterna. Vid två byar blir det då på vinkel 0 och 180
 
 
