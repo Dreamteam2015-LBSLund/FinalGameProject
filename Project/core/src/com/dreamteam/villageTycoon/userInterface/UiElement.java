@@ -22,6 +22,10 @@ public abstract class UiElement {
 	
 	protected boolean keepGrabbed;
 	
+	public void setPosition(Vector2 position) {
+		area.set(position.x, position.y, area.getWidth(), area.getHeight());
+	}
+	
 	protected boolean isHover() {
 		return isHover;
 	}

@@ -24,6 +24,7 @@ import com.dreamteam.villageTycoon.effects.Debris;
 import com.dreamteam.villageTycoon.effects.Explosion;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
+import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.framework.Scene;
 import com.dreamteam.villageTycoon.map.Prop;
 import com.dreamteam.villageTycoon.map.Resource;
@@ -32,6 +33,7 @@ import com.dreamteam.villageTycoon.projectiles.Projectile;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.CreateCharacterButton;
 import com.dreamteam.villageTycoon.userInterface.DestroyBuildingButton;
+import com.dreamteam.villageTycoon.userInterface.ProgressBar;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
@@ -63,6 +65,7 @@ public class Building extends GameObject {
     private CreateCharacterButton createCharacterButton; 
     
     private DestroyBuildingButton destroyBuildingButton;
+    private ProgressBar delayBar;
     
     private BuildingTaskProvider taskProvider;
 	private float maxWaitTime;
@@ -97,6 +100,9 @@ public class Building extends GameObject {
 		this.setDepthBasedOnPosition();
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 320), this);
+		
+		
+		delayBar = new ProgressBar(new Rectangle(new Vector2(0, 0), new Vector2(500, 50)));
     }
     
     public void onAdd(Scene scene) {
@@ -390,6 +396,10 @@ public class Building extends GameObject {
     		} else {
     			//TODO: make this a proper progress bar
     			AssetManager.font.draw(batch, Math.round(getElapsedLeft()) + "/" + Math.round(maxWaitTime) + "s", getUiScreenCoords().x, getUiScreenCoords().y);
+    			delayBar.setPosition(getUiScreenCoords().add(new Vector2(0, -100)));
+    			delayBar.hint = "production delay";
+    			delayBar.progress = getElapsedLeft() / maxWaitTime;
+    			delayBar.draw(batch);
     		}
     		
     		if(destroyBuildingButton != null) destroyBuildingButton.draw(batch);

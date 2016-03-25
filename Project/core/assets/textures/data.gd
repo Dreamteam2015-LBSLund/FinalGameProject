@@ -92,4 +92,7 @@ Textures: {
 	button-regular: 1531, 131, 407, 176;
 	button-hover: 1531, 313, 407, 177;
 	button-pressed: 1530, 491, 407, 177;
+	
+	dark-pixel: 1700, 300, 1, 1;
+	light-pixel: 1700, 280, 1, 1;
 }
