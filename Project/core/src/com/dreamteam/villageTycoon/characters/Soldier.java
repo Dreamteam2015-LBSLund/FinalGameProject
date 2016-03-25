@@ -173,7 +173,7 @@ public class Soldier extends Character {
 		super.update(deltaTime);
 		
 		checkForWeapons();
-		System.out.println(maxAttackDistance + " : MAX ATTACKD ISTANCE");
+
 		for(int i = 0; i < avaibleWeaponTypes.size(); i++) {
 			//Debug.print(this, avaibleWeaponTypes.get(i).getName() + " - " + avaibleWeaponTypes.size());
 		}
