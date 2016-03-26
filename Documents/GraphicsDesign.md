@@ -29,7 +29,7 @@ Vi behöver explosioner och rökeffekter i varierande skalor.
 
 Ska vi ha en cool bitmap font eller håller vi oss till en standard font? Exempel: http://www.photonstorm.com/wp-content/uploads/2010/05/bitmapfonts.png
 
-Vi behöver en generisk knapp som går att skalera. Sen kan vi bara rita text över den during runtime.
+Vi behöver en generisk knapp som går att skalera. Sen kan vi bara rita text över den during runtime. Även arrow knappar.
 
 Ikoner för vapen och sabotagekit. Storlek kan vara 128x128. Dokumentet ListOfWeapons har en lista över vapen och sabotage kit. 
 
