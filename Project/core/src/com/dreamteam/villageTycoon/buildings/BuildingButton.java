@@ -6,23 +6,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.framework.Rectangle;
 import com.dreamteam.villageTycoon.framework.Scene;
+import com.dreamteam.villageTycoon.userInterface.TextButton;
 import com.dreamteam.villageTycoon.userInterface.UiElement;
 import com.dreamteam.villageTycoon.utils.Debug;
 
-public class BuildingButton extends UiElement {
+public class BuildingButton extends TextButton {
 	private BuildingType type;
 	
 	public BuildingButton(BuildingType type, Rectangle position) {
-		super(position);
+		super(position, type.getName());
 		this.type = type;
+		getArea().set(position.getX(), position.getY(), position.getWidth(), 0);
+		setFont(AssetManager.smallFont);
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(AssetManager.getTexture("button"), getArea().getX(), getArea().getY(), getArea().getWidth(), getArea().getHeight());
 		if (isHover()) {
-			batch.draw(type.getSprite(), getNewMouse().x, getNewMouse().y);
+			batch.draw(type.getSprite(), getArea().getX() + getArea().getWidth(), getArea().getY());
+			AssetManager.smallFont.draw(batch, type.getInfoText(), getArea().getX() + getArea().getWidth(), getArea().getY());
 		}
-		AssetManager.font.draw(batch, type.getName(), getArea().getX(), getArea().getY() + getArea().getHeight());
+		super.draw(batch);
 	}
 
 	public BuildingType getType() {

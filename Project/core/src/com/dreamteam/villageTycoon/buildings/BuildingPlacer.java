@@ -38,8 +38,8 @@ public class BuildingPlacer {
 			buttons = new ArrayList<BuildingButton>();
 			int y = -400;
 			for (String t : BuildingType.getTypes().keySet()) {
-				buttons.add(new BuildingButton(BuildingType.getTypes().get(t), new Rectangle(0, y, 300, 50)));
-				y += 50;
+				buttons.add(new BuildingButton(BuildingType.getTypes().get(t), new Rectangle(-200, y, 300, 50)));
+				y += buttons.get(buttons.size() - 1).getArea().getHeight();
 			}
 		}
 	}

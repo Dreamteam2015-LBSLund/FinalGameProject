@@ -113,6 +113,28 @@ public class BuildingType {
 	public int getMaxWorkers() {
 		return maxWorkers;
 	}
+	
+	public String getInfoText() {
+		String s = "";
+		if (type == type.Factory) {
+			s += "Makes ";
+			for (int i = 0; i < products.length; i++) {
+				s += products[i].getName();
+				if (i < products.length - 1) s += ", ";
+			}
+			s += " from ";
+			for (int i = 0; i < productionResources.length; i++) {
+				s += productionResources[i].getName();
+				if (i < productionResources.length - 1) s += ", ";
+			}
+		}
+		s += "\nContstruction resources:\n";
+		for (int i = 0; i < buildResources.length; i++) {
+			s += buildResources[i].getName();
+			if (i < buildResources.length - 1) s += ", ";
+		}
+		return s;
+	}
 
 	public Resource[] getProducts() {
 		return products;
