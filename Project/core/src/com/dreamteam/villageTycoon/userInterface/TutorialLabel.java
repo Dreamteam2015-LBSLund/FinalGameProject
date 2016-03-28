@@ -19,7 +19,14 @@ public class TutorialLabel {
 	}
 	
 	public void update(float deltaTime) {
+		if(currentPart < parts.length-1) {
+			changePartCount += 1 * deltaTime;
 		
+			if(changePartCount >= NEXT_PART_TIME) {
+				currentPart += 1;
+				changePartCount = 0;
+			}
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {
