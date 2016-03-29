@@ -71,21 +71,27 @@ public class AIController3 extends CityController {
 	}
 
 	private int current;
+
+	private boolean drawDebug;
 	
 	public void update(float dt) {
-		text = "";
-		for (int i = 0; i < script.length; i++) {
-			if (script[i].isDone()) {
-				//Debug.print(this, i + " is done, continuing");
-				text += "\n" + script[i].getInfo();
-				continue;
-			}
-			else {
-				//Debug.print(this, "updating " + i);
-				script[i].update();
-				current = i;
-				text += "\n updating " + i + ", " + script[i].getInfo();
-				break;
+		if (Gdx.input.isKeyJustPressed(Keys.F5)) drawDebug = true;
+		else if (Gdx.input.isKeyJustPressed(Keys.F6)) drawDebug = false;
+		if (drawDebug) {
+			text = "";
+			for (int i = 0; i < script.length; i++) {
+				if (script[i].isDone()) {
+					//Debug.print(this, i + " is done, continuing");
+					text += "\n" + script[i].getInfo();
+					continue;
+				}
+				else {
+					//Debug.print(this, "updating " + i);
+					script[i].update();
+					current = i;
+					text += "\n updating " + i + ", " + script[i].getInfo();
+					break;
+				}
 			}
 		}
 	
@@ -103,8 +109,10 @@ public class AIController3 extends CityController {
 	
 	public void drawUi(SpriteBatch batch) {
 		//AssetManager.font.draw(batch, "cmd " + current + "/" + script.length + " " + script[current].getClass().getSimpleName() + " " + script[current].getInfo(), -800, -400);
-		AssetManager.smallFont.draw(batch, text, -800, 400);
-		AssetManager.smallFont.draw(batch, "soldiers: " + getCity().getSoldiers().size(), -800, 400);
+		if (drawDebug) {
+			AssetManager.smallFont.draw(batch, text, -800, 400);
+			AssetManager.smallFont.draw(batch, "soldiers: " + getCity().getSoldiers().size(), -800, 400);
+		}
 	} 
 
 	
