@@ -58,7 +58,6 @@ public class Worker extends Character {
 		}
 		
 		if (isCantFind() && task != null) {
-			System.out.println("canceling"); //TODO: remove
 			task.onCancel();
 			task = null;
 			setCantFind(false);

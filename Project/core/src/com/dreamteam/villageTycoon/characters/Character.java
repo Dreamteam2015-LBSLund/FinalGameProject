@@ -447,7 +447,6 @@ public class Character extends GameObject {
 					print("resource is weird");
 				}
 			} else {
-				System.out.println("couldn't find resource"); //TODO: remove
 				cantFind = true;
 			}
 		}

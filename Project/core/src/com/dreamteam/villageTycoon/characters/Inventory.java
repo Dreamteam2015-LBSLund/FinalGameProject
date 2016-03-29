@@ -61,7 +61,7 @@ public class Inventory <T extends InventoryItem> {
 		//System.out.println(items);
 		for (int i = 0; i < items.length; i++) {
 			if (items[i] == null) {
-				System.out.println("OOPS ");
+				System.out.println("OOPS Inventory line 64"); 
 				continue;
 			}
 			r = new Rectangle(position.cpy().add(new Vector2(0, i * ICON_SIZE)), new Vector2(ICON_SIZE, ICON_SIZE));

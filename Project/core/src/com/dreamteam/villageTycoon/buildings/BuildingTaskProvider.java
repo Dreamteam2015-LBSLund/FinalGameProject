@@ -30,14 +30,12 @@ public class BuildingTaskProvider {
 		if (notDone.size() > 0) {
 			Resource ret = notDone.remove(0);
 			inProgress.add(ret);
-			System.out.println("next resource = " + ret.getName()); //TODO: remov
 			return new GatherTask(building, ret);
 		}
 		return null;
 	}
 	
 	public void cancelTask(GatherTask t) {
-		System.out.println("task canceled"); //TODO: remove
 		if (inProgress.remove(t.getResource())) notDone.add(t.getResource());
 	}
 	

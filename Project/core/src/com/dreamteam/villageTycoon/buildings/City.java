@@ -136,7 +136,6 @@ public class City extends GameObject {
 				return closestT;
 			}
 		} else Debug.print(this, "not water: " + r.getName());
-		//System.out.println(closest == null); // TODO: remove
 		return closest;
 	}
 	
