@@ -48,8 +48,6 @@ public class Controller extends GameObject {
 	private Vector2 zoomButtonPosition;
 	private ArrowButton[] zoomButtons = new ArrowButton[2];
 	
-	private boolean ignoreSelect;
-	
 	public Controller() {
 		super(new Vector2(0, 0), new Animation(AssetManager.getTexture("selectionRectangle")));
 		setColor(new Color(0, 1, 0, 0.3f));
@@ -70,10 +68,6 @@ public class Controller extends GameObject {
 	
 	void onMousePressed() {
 		selectionPoint = new Vector2(getScene().getWorldMouse());
-	}
-	
-	public void ignoreSelect() {
-		ignoreSelect = true;
 	}
 	
 	void onMouseReleased() {
@@ -99,7 +93,7 @@ public class Controller extends GameObject {
 		}
 	}
 	
-	public void select(Character c) {
+	private void select(Character c) {
 		if (!selectedCharacters.contains(c) && c.getCity().getController() instanceof PlayerController) { 
 			selectedCharacters.add(c);
 			c.setSelected(true);
@@ -110,7 +104,7 @@ public class Controller extends GameObject {
 		selectedCharacters.remove(c);
 	}
 	
-	public void deselectAll() {
+	private void deselectAll() {
 		for (Character c : selectedCharacters) {
 			c.setSelected(false);
 		}
@@ -156,16 +150,9 @@ public class Controller extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		if (ignoreSelect) ignoreSelect();
-
-		if (ignoreSelect) {
-			ignoreSelect = false;
-			return;
-		}
-		
 		if(active) {
 			cameraMovment(deltaTime);
-			if (!ignoreSelect) inventoryUpdate();
+			inventoryUpdate();
 			selectUpdate();
 			for(int i = 0; i < zoomButtons.length; i++){
 				zoomButtons[i].update();
@@ -174,8 +161,6 @@ public class Controller extends GameObject {
 			
 			cameraSpeed = 1+cameraZoom*2;
 		}
-
-		ignoreSelect = false;
 	}
 	
 	public void selectUpdate() {

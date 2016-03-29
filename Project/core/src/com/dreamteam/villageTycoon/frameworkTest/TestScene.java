@@ -46,14 +46,12 @@ public class TestScene extends Scene {
 		//city = map.generateCity(new Vector2(30, 30), 10, 1, this);
 		
 		Debug.print(this, "map == null =  " + (map == null));
-
-		Controller c = new Controller();
-		addObject(c);
 		
-		addObject(playerCity = new City(this, new PlayerController(c), new Vector2(3, 3)));
+		addObject(playerCity = new City(this, new PlayerController(), new Vector2(3, 3)));
 		addObject(enemyCity = new City(this, new AIController2(playerCity), new Vector2(25, 3)));
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
+		addObject(new Controller());
 		//addObject(new TestObject(AssetManager.getTexture("test")));
 		//addObject(new Character(new Vector2(0, 0), new Animation(AssetManager.getTexture("test"))));
 		//addObject(new Character(new Vector2(0, -1.5f), new Animation(AssetManager.getTexture("test"))));
@@ -79,9 +77,9 @@ public class TestScene extends Scene {
 	}
 	
 	public void initialize() {
-		//for(int i = 0; i < 1; i++) // varfï¿½r finns denna loopen? 
+		//for(int i = 0; i < 1; i++) // varför finns denna loopen? 
 			// yolo -johannes
-			// man blir ju lissen, ï¿½r det bud pï¿½ gamescene eller - tom
+			// man blir ju lissen, är det bud på gamescene eller - tom
 		//addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//city = new City(this, new AIController2(), new Vector2(50, 50));
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));
