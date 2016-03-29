@@ -58,8 +58,10 @@ public class GameScene extends Scene {
 		super();
 		AssetManager.load();
 		map = new Map(this);
-		
-		City playerCity = new City(this, new PlayerController(), new Vector2(3, 3));
+
+		Controller c = new Controller();
+		addObject(c);
+		City playerCity = new City(this, new PlayerController(c), new Vector2(3, 3));
 		
 		cities = new City[] {
 				playerCity,
@@ -88,7 +90,6 @@ public class GameScene extends Scene {
 		topBar.setPosition(-Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/4);
 		topBar.setSize(Gdx.graphics.getWidth()*2, 256);
 		
-		addObject(new Controller());
 	}
 	
 	public void initialize() {
@@ -195,7 +196,7 @@ public class GameScene extends Scene {
 		return this.currentGameSpeed;
 	}
 	
-	// Länge leve post-spaghetti
+	// Lï¿½nge leve post-spaghetti
 	public static int randomInt(int min, int max) {
 	    Random random = new Random();
 

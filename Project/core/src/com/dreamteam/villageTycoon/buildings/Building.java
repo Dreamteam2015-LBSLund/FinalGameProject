@@ -34,6 +34,7 @@ import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.CreateCharacterButton;
 import com.dreamteam.villageTycoon.userInterface.DestroyBuildingButton;
 import com.dreamteam.villageTycoon.userInterface.ProgressBar;
+import com.dreamteam.villageTycoon.userInterface.SelectWorkersButton;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.GatherTask;
 import com.dreamteam.villageTycoon.workers.GetPropTask;
@@ -63,6 +64,7 @@ public class Building extends GameObject {
     
     private Character characterToSpawn;
     private CreateCharacterButton createCharacterButton; 
+    private SelectWorkersButton selectWorkersButton;
     
     private DestroyBuildingButton destroyBuildingButton;
     private ProgressBar delayBar;
@@ -101,6 +103,7 @@ public class Building extends GameObject {
 		this.createCharacterButton = new CreateCharacterButton(new Vector2(0, 0), this);
 		if(this.getCity().getController() instanceof PlayerController) this.destroyBuildingButton = new DestroyBuildingButton(new Vector2(300, 320), this);
 		
+		selectWorkersButton = new SelectWorkersButton(new Rectangle(new Vector2(0, 0), new Vector2(0, 0)), this);
 		
 		delayBar = new ProgressBar(new Rectangle(new Vector2(0, 0), new Vector2(500, 50)));
     }
@@ -198,8 +201,9 @@ public class Building extends GameObject {
     		}
     	}
     	
-    	if(selected && destroyBuildingButton != null) {
-    		destroyBuildingButton.update();
+    	if(selected) {
+    		if (destroyBuildingButton != null) destroyBuildingButton.update();
+    		selectWorkersButton.update();
     	}
 
     	for(GameObject g : getScene().getObjects()) {
@@ -413,6 +417,8 @@ public class Building extends GameObject {
         			AssetManager.font.draw(batch, "SPAWN DELAY: " + Math.round((createCharacterDelay - createCharacterCount)), getUiScreenCoords().x, getUiScreenCoords().y-50);
         		}
         	}
+    		
+    		selectWorkersButton.draw(batch);
     		
     		//AssetManager.smallFont.draw(batch, "time: " + waitTime + ", " + workers.size() + " workers, state = " + buildState + ", toGather = " + taskProvider.getProgress() + (type.isFactory() ? ", prod. res. = " + type.constructProductionResourcesList().size() : ""), getUiScreenCoords().x, getUiScreenCoords().y);
     	}

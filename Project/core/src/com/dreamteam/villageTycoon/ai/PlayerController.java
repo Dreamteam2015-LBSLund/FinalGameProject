@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
+import com.dreamteam.villageTycoon.characters.Controller;
 import com.dreamteam.villageTycoon.userInterface.OpenBuildingPlacerButton;
 
 public class PlayerController extends CityController {
@@ -12,8 +13,15 @@ public class PlayerController extends CityController {
 
 	private BuildingPlacer placer;
 	
-	public PlayerController() {
+	private Controller controller;
+	
+	public PlayerController(Controller c) {
 		openBuildingPlacerButton = new OpenBuildingPlacerButton(new Vector2(-750, 350), this);
+		this.controller = c;
+	}
+	
+	public Controller getController() {
+		return controller;
 	}
 	
 	public void update(float dt) {
