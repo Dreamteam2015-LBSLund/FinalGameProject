@@ -12,6 +12,7 @@ import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Soldier;
+import com.dreamteam.villageTycoon.characters.WeaponType;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
@@ -136,8 +137,12 @@ public class AIController2 extends CityController {
 		}
 
 		public State update() {
-			
-			return null;
+			if (soldiersHaveWeapons()) return prevState;
+			else {
+				ArrayList<Resource> need = new ArrayList<Resource>();
+				need.add(Resource.get(getTargetWeapon().getName()));
+				return new MakeResourceState(this, need);
+			}
 		}
 	}
 	
@@ -205,6 +210,20 @@ public class AIController2 extends CityController {
 	
 	// se https://github.com/Dreamteam2015-LBSLund/Village-Tycoon-RTS/blob/master/Documents/aiStates.md
 	
+	private WeaponType targetWeapon;
+	
+	private WeaponType getTargetWeapon() {
+		targetWeapon = Soldier.MACHINE_GUN;
+		return targetWeapon;
+	}
+	
+	private boolean soldiersHaveWeapons() {
+		for (Soldier s : getCity().getSoldiers()) {
+			if (s.getWeapon().getType() != getTargetWeapon()) return false;
+		}
+		return true;
+	}
+	
 	// send soldiers to attack the player
 	public class AttackState extends State {
 		
@@ -218,6 +237,8 @@ public class AIController2 extends CityController {
 		public State update() {
 			if (getCity().getSoldiers().size() == 0) {
 				return new MakeSoldierState(this);
+			} else if (!soldiersHaveWeapons()) {
+				return new MakeWeaponsState(this);
 			} else {
 				for (Soldier s : getCity().getSoldiers()) {
 					if (!s.hasPath()) s.setPath(target.getPosition());
