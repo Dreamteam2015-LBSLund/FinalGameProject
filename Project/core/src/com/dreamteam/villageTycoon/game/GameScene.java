@@ -13,6 +13,7 @@ import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.ai.AIController;
 import com.dreamteam.villageTycoon.ai.AIController2;
 import com.dreamteam.villageTycoon.ai.AIController3;
+import com.dreamteam.villageTycoon.ai.AIControllerFactory;
 import com.dreamteam.villageTycoon.ai.PlayerController;
 import com.dreamteam.villageTycoon.buildings.Building;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
@@ -63,7 +64,7 @@ public class GameScene extends Scene {
 		
 		cities = new City[] {
 				playerCity,
-				new City(this, new AIController3(playerCity), new Vector2(25, 3))
+				new City(this, AIControllerFactory.getController(playerCity), new Vector2(25, 3))
 		};
 		
 		for(int i = 0; i < cities.length; i++) {
@@ -195,7 +196,7 @@ public class GameScene extends Scene {
 		return this.currentGameSpeed;
 	}
 	
-	// Länge leve post-spaghetti
+	// Lï¿½nge leve post-spaghetti
 	public static int randomInt(int min, int max) {
 	    Random random = new Random();
 

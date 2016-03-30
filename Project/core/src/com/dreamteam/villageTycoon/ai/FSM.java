@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.ai.AIController2.State;
 import com.dreamteam.villageTycoon.utils.Debug;
 
+// finite state machine
 public class FSM {
 	private State state;
 	

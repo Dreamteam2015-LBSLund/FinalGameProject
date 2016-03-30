@@ -55,6 +55,8 @@ public class AIController2 extends CityController {
 			if (foodMachine.isDone()) foodMachine = null;
 		}
 		
+		
+		// debug stuff
 		if (Gdx.input.isKeyJustPressed(Keys.F2)) {
 			getCity().getScene().getCamera().position.set(new Vector3(getCity().getPosition(), 0));
 		}
@@ -90,7 +92,6 @@ public class AIController2 extends CityController {
 	
 	private boolean hasFoodProduction() {
 		return hasCheapFoodChain() || hasExpensiveFoodChain();
-				
 	}
 	
 	private boolean hasCheapFoodChain() {
@@ -363,7 +364,7 @@ public class AIController2 extends CityController {
 			if (resources.size() > 0) {
 				Resource r = resources.get(0);
 				Debug.print(this, "need resource " + r.getName());
-				// hanterar bara en fabrik som producerar varje sak. bör väga många mot varandra?
+				// hanterar bara en fabrik som producerar varje sak. bï¿½r vï¿½ga mï¿½nga mot varandra?
 				BuildingType type = BuildingType.factoryProduces(r);
 				if (b == null || !b.isBuilt() || !arrayContains(b.getType().getProducts(), r)) b = getCity().getBuildingByType(type);
 				// check for not available production resource
@@ -416,7 +417,7 @@ public class AIController2 extends CityController {
 					types.add(t);
 				}
 			}
-			// (byggnader ingående + byggnader som behöver byggas) / (resursrate * antal arbetare) + bygga fler arbetare
+			// (byggnader ingï¿½ende + byggnader som behï¿½ver byggas) / (resursrate * antal arbetare) + bygga fler arbetare
 			return null;
 		}
 	}
