@@ -77,21 +77,20 @@ public class AIController3 extends CityController {
 	public void update(float dt) {
 		if (Gdx.input.isKeyJustPressed(Keys.F5)) drawDebug = true;
 		else if (Gdx.input.isKeyJustPressed(Keys.F6)) drawDebug = false;
-		if (drawDebug) {
-			text = "";
-			for (int i = 0; i < script.length; i++) {
-				if (script[i].isDone()) {
-					//Debug.print(this, i + " is done, continuing");
-					text += "\n" + script[i].getInfo();
-					continue;
-				}
-				else {
-					//Debug.print(this, "updating " + i);
-					script[i].update();
-					current = i;
-					text += "\n updating " + i + ", " + script[i].getInfo();
-					break;
-				}
+		
+		text = "";
+		for (int i = 0; i < script.length; i++) {
+			if (script[i].isDone()) {
+				//Debug.print(this, i + " is done, continuing");
+				text += "\n" + script[i].getInfo();
+				continue;
+			}
+			else {
+				//Debug.print(this, "updating " + i);
+				script[i].update();
+				current = i;
+				text += "\n updating " + i + ", " + script[i].getInfo();
+				break;
 			}
 		}
 	
