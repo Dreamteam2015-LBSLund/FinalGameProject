@@ -296,6 +296,23 @@ public class AIController2 extends CityController {
 		return n;
 	}
 	
+	public class MakeMultipleFactoryState extends State {
+		private ArrayList<BuildingType> types;
+		
+		public MakeMultipleFactoryState(State previous, ArrayList<BuildingType> types) {
+			super(previous);
+			this.types = types;
+		}
+		
+		public State update() {
+			if (types.size() == 0) {
+				return prevState;
+			} else {
+				return new MakeFactoryState(this, types.remove(0));
+			}
+		}
+	}
+	
 	public class MakeFactoryState extends State {
 		
 		private BuildingType type;
