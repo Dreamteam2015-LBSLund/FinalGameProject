@@ -204,6 +204,19 @@ public class BuildingType {
 		}
 		return null;
 	}
+	
+	public static ArrayList<BuildingType> factoriesProduce(Resource r) {
+		ArrayList<BuildingType> ret = new ArrayList<BuildingType>();
+		for (Object k : BuildingType.getTypes().keySet().toArray()) {
+			BuildingType t = BuildingType.getTypes().get(k);
+			if (t.isFactory()) {
+				for (Resource r2 : t.products) {
+					if (r == r2) ret.add(t);					
+				}
+			}
+		}
+		return ret;
+	}
 
 	public ArrayList<Resource> constructProductionResourcesList() {
 		return Resource.constructList(getProductionResources(), getInputResourceAmount());

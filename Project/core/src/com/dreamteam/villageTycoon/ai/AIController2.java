@@ -112,6 +112,31 @@ public class AIController2 extends CityController {
 		return true;
 	}
 	
+	private ArrayList<BuildingType> getProductionChain(Resource target) {
+		ArrayList<ArrayList<BuildingType>> chains = new ArrayList<ArrayList<BuildingType>>();
+		for (BuildingType t : BuildingType.factoriesProduce(target)) {
+			ArrayList<BuildingType> c = new ArrayList<BuildingType> ();
+			c.add(t);
+			chains.add(c);
+		}
+		for (ArrayList<BuildingType> chain : chains) {
+			fillChain(chain);
+		}
+		return bestChain(chains);
+	}
+	
+	private void fillChain(ArrayList<BuildingType> chain) {
+		//if (isTopLevel(chain.get(0)))
+	}
+	
+	private boolean isTopLevel() {
+		return true;
+	}
+	
+	private ArrayList<BuildingType> bestChain(ArrayList<ArrayList<BuildingType>> chains) {
+		return chains.get(0);
+	}
+	
 
 	public abstract class State {
 		
