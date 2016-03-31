@@ -106,7 +106,7 @@ Balansera spelet | 1/2 | Ofärdig | Johannes och Tom
 Ljudeffekter (inte minimal) | 1/2 | Ofärdig | Johannes och Tom
 Juice (inte minimal) | 2 | Ofärdig | Johannes och Tom
 Polish och buggfixing | 1 | Ofärdig | Johannes och Tom
-Starta tigsource devlog | 0 | Ofärdig | Johannes och Tom
+Starta tigsource devlog | 0 | Won't add | Johannes och Tom
 
 Person | Total tid(d)
 -------|-------------
