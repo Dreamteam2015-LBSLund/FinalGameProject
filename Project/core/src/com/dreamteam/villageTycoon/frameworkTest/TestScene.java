@@ -30,6 +30,7 @@ import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
 
+@Deprecated
 public class TestScene extends Scene {
 	private Map map;
 	private City playerCity;
@@ -47,8 +48,8 @@ public class TestScene extends Scene {
 		
 		Debug.print(this, "map == null =  " + (map == null));
 		
-		addObject(playerCity = new City(this, new PlayerController(), new Vector2(3, 3)));
-		addObject(enemyCity = new City(this, new AIController2(playerCity), new Vector2(25, 3)));
+		//addObject(playerCity = new City(this, new PlayerController(), new Vector2(3, 3)));
+		//addObject(enemyCity = new City(this, new AIController2(playerCity), new Vector2(25, 3)));
 		
 		//addObject(new TestObject(AssetManager.getTexture("grassTile")));
 		addObject(new Controller());
@@ -77,9 +78,9 @@ public class TestScene extends Scene {
 	}
 	
 	public void initialize() {
-		//for(int i = 0; i < 1; i++) // varför finns denna loopen? 
+		//for(int i = 0; i < 1; i++) // varfï¿½r finns denna loopen? 
 			// yolo -johannes
-			// man blir ju lissen, är det bud på gamescene eller - tom
+			// man blir ju lissen, ï¿½r det bud pï¿½ gamescene eller - tom
 		//addObject(new Building(new Vector2(3+i*3, 3), BuildingType.getTypes().get("factory1"), playerCity));
 		//city = new City(this, new AIController2(), new Vector2(50, 50));
 		//addObject(new Building(new Vector2(3, 3), BuildingType.getTypes().get("factory1"), playerCity));

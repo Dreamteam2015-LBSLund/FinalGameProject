@@ -36,17 +36,26 @@ public class City extends GameObject {
 
 	private CityController controller;
 	
-	public City(Scene scene, CityController controller, Vector2 position) {
+	private String name;
+	
+	public City(Scene scene, String name, CityController controller, Vector2 position) {
 		super(position, new Animation(AssetManager.getTexture("error")));
 		buildings = new ArrayList<Building>();
 		this.scene = (GameScene) scene;
-		controller.setCity(this);
-		this.controller = controller;
+		
+		setController(controller);
 		
 		workers  = new ArrayList<Worker>();
 		soldiers = new ArrayList<Soldier>();
 		
+		this.name = name;
+		
 		Debug.print(this, "city at " + getPosition() + ", controller: " + controller.getClass().getSimpleName());
+	}
+	
+	public void setController(CityController controller) {
+		controller.setCity(this);
+		this.controller = controller;
 	}
 	
 	public void init() {
@@ -267,5 +276,9 @@ public class City extends GameObject {
 			resources.remove(r);
 		}
 		return resources;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

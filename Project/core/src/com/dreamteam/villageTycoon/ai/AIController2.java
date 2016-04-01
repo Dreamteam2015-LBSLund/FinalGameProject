@@ -13,6 +13,7 @@ import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Soldier;
 import com.dreamteam.villageTycoon.characters.WeaponType;
+import com.dreamteam.villageTycoon.map.PropType;
 import com.dreamteam.villageTycoon.map.Resource;
 import com.dreamteam.villageTycoon.utils.Debug;
 import com.dreamteam.villageTycoon.workers.Worker;
@@ -27,6 +28,8 @@ public class AIController2 extends CityController {
 	private FSM stateMachine;
 	private FSM foodMachine;
 
+	private City targetCity;
+
 	public AIController2(City targetCity) {
 		//ArrayList<Resource> r = new ArrayList<Resource>();
 		//r.add(Resource.get("flour"));
@@ -38,6 +41,7 @@ public class AIController2 extends CityController {
 				BuildingType.getTypes().get("bakery")
 		};
 	
+		this.targetCity = targetCity;
 	}
 
 	public void update(float dt) {
@@ -113,24 +117,36 @@ public class AIController2 extends CityController {
 	}
 	
 	private ArrayList<BuildingType> getProductionChain(Resource target) {
+		ArrayList<BuildingType> starts = new ArrayList<BuildingType>();
 		ArrayList<ArrayList<BuildingType>> chains = new ArrayList<ArrayList<BuildingType>>();
 		for (BuildingType t : BuildingType.factoriesProduce(target)) {
-			ArrayList<BuildingType> c = new ArrayList<BuildingType> ();
-			c.add(t);
-			chains.add(c);
+			starts.add(t);
 		}
-		for (ArrayList<BuildingType> chain : chains) {
-			fillChain(chain);
+		for (BuildingType bt : starts) {
+			chains.add(makeChain(bt));
 		}
 		return bestChain(chains);
 	}
 	
-	private void fillChain(ArrayList<BuildingType> chain) {
-		//if (isTopLevel(chain.get(0)))
+	// makes a chain with all necessary buildings
+	private ArrayList<BuildingType> makeChain(BuildingType start) {
+		ArrayList<BuildingType> chain = new ArrayList<BuildingType>();
+		chain.add(start);
+		/*
+			for needed resource
+				if !resource is on map
+					chain += getProductionChain(Resource)
+		*/
+		for (Resource r : chain.get(0).getProductionResources()) {
+			if (!PropType.exists(r)) {
+				for (BuildingType b : getProductionChain(r)) chain.add(b);
+			}
+		}
+		return chain;
 	}
 	
-	private boolean isTopLevel() {
-		return true;
+	public void setTarget(City target) {
+		this.targetCity = target;
 	}
 	
 	private ArrayList<BuildingType> bestChain(ArrayList<ArrayList<BuildingType>> chains) {
@@ -201,7 +217,7 @@ public class AIController2 extends CityController {
 	}
 	
 	private boolean shouldMakeExpensiveFoodChain() {
-		return true;
+		return false;
 	}
 	
 	public class MakeFoodProductionState extends State {

@@ -26,4 +26,5 @@ public abstract class CityController {
 	
 	public abstract void update(float dt);
 	public void drawUi(SpriteBatch batch) {}
+
 }

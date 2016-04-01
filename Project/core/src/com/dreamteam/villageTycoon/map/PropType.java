@@ -51,4 +51,11 @@ public class PropType {
 	public String getName() {
 		return name;
 	}
+
+	public static boolean exists(Resource r) {
+		for (String k : types.keySet()) {
+			if (types.get(k).resource == r) return true;
+		}
+		return false;
+	}
 }

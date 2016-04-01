@@ -39,7 +39,7 @@ import com.dreamteam.villageTycoon.userInterface.ArrowButton;
 import com.dreamteam.villageTycoon.userInterface.ArrowButton.Direction;
 
 public class GameScene extends Scene {
-	public enum MatchState { ON_GOING, WIN, LOSE };
+	public enum MatchState { ON_GOING, OVER };
 	
 	private MatchState matchState;
 	
@@ -55,17 +55,14 @@ public class GameScene extends Scene {
 	
 	private Animation topBar;
 	
-	public GameScene() {
+	private City loser;
+	
+	public GameScene(PlayerConfig cfg) {
 		super();
 		AssetManager.load();
 		map = new Map(this);
 		
-		City playerCity = new City(this, new PlayerController(), new Vector2(3, 3));
-		
-		cities = new City[] {
-				playerCity,
-				new City(this, AIControllerFactory.getController(playerCity), new Vector2(25, 3))
-		};
+		cities = cfg.getCities(this);
 		
 		for(int i = 0; i < cities.length; i++) {
 			addObject(cities[i]);
@@ -81,7 +78,7 @@ public class GameScene extends Scene {
 		timeControll[0] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y, 64, 64), ArrowButton.Direction.UP);
 		timeControll[1] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
 		
-		this.getCamera().position.set(new Vector3(playerCity.getPosition().x, playerCity.getPosition().y, 0));
+		this.getCamera().position.set(new Vector3(cities[0].getPosition().x, cities[0].getPosition().y, 0));
 		
 		this.matchState = MatchState.ON_GOING;
 		
@@ -122,29 +119,24 @@ public class GameScene extends Scene {
 		super.drawUi(batch);
 		
 		if(matchState == MatchState.ON_GOING) {
-			AssetManager.font.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
+			AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
 
 			for(int i = 0; i < timeControll.length; i++) {
 				timeControll[i].draw(batch);
 			}
-		} else if(matchState == MatchState.LOSE) {
-			AssetManager.font.draw(batch, "DEFEATED", 0, 0);
-		} else {
-			AssetManager.font.draw(batch, "VICTORY", 0, 0);
+		} else if(matchState == MatchState.OVER) {
+			AssetManager.font.draw(batch, "Game Over! " + loser.getName() + " lost!", -this.getUiCamera().viewportWidth / 3, 0);
 		}
 	}
 	
 	public void matchUpdate() {
 		for(int i = 0; i < cities.length; i++) {	
 			if(!citiesCharactersLeft(cities[i]) && !citiesHousesLeft(cities[i])) {
-				if(cities[i].getController() instanceof PlayerController) {
-					matchState = MatchState.LOSE;
-				} else {
-					matchState = MatchState.WIN;
-				}
+				loser = cities[i];
 				for(GameObject g : getObjects()) {
 					if(g instanceof Controller) removeObject(g);
 				}
+				matchState = matchState.OVER;
 			}
 		}
 	}

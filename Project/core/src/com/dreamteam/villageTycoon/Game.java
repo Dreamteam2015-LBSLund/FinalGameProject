@@ -37,8 +37,8 @@ public class Game extends ApplicationAdapter {
 		
 		if(currentScene instanceof GameScene) {
 			if(((GameScene) currentScene).getMatchState() != MatchState.ON_GOING) {
-				if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-					currentScene = new GameScene();
+				if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+					currentScene = new MenuScene();
 				}
 			}
 		}
