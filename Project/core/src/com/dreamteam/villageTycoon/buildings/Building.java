@@ -389,6 +389,7 @@ public class Building extends GameObject {
     
     public void drawUi(SpriteBatch batch) {
     	if (selected || AIController2.drawDebug) {
+    		AssetManager.font.draw(batch, city.getName(), getUiScreenCoords().x, getUiScreenCoords().y-20);
     		//inputInventory.drawList(getUiScreenCoords(), batch);
     		outputInventory.drawList(getUiScreenCoords().cpy().add(new Vector2(300, 0)), batch);
     		if (!taskProvider.isDone()) {

@@ -65,21 +65,23 @@ public class Map {
 		
 		float angleInterval = ((float)Math.PI*2)/cities.length;
 		
+		float distance = (WIDTH/2)-15;
+		
 		for(int i = 0; i < cities.length; i++) {
-			float distance = (WIDTH/2)-15;
-			
+			cities[i].setPosition(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance));
+		}
+		
+		for(int i = 0; i < cities.length; i++) {
 			if(cities[i].getController() instanceof PlayerController) {
-				Building startBuilding = new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]);
+				Building startBuilding = new Building(cities[i].getPosition().cpy(), BuildingType.getTypes().get("house"), cities[i]);
 				scene.addObject(startBuilding);
 				cities[i].addBuilding(startBuilding);
 			} else {
-				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 3, 2, scene, cities[i]);
+				generateCity(cities[i].getPosition().cpy(), 1, 2, scene, cities[i]);
 			}
 			
-			cities[i].setPosition(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance));
-			
 			for(int j = 0; j < 5; j++) {
-				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
+				Vector2 buildingPos = cities[i].getPosition().cpy(); //new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
 				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-5, 5), randomInt(-5, 5))), cities[i]);
 				scene.addObject(w);
 			}
@@ -171,23 +173,17 @@ public class Map {
 		scene.addObject(city);
 		
 		// Houses for the workers should be the core of cities
-		for(int x = 0; x < size/2; x++) {
-			for(int y = 0; y < size/2; y++) {
-				Vector2 buildingSize = new Vector2(4, 4);
-				Vector2 center = new Vector2(position.x, position.y);
-			}
-		}
 
 		String farmType = (techLevel >= 2) ? "advancedFarm" : "farm";
 
-		addCityPart(size/2, farmType, position, 0, 3, city, random, scene);
+		addCityPart(size, farmType, position, 1, 3, city, random, scene);
 		
 		String industryType = (techLevel >= 1) ? "mine" : "woodshop";
-		addCityPart(size/2, "mine", position, 4, 6, city, random, scene);
+		addCityPart(size, "mine", position, 4, 6, city, random, scene);
 		
-		addCityPart(size/2, "bakery", position, 5, 8, city, random, scene);
-		addCityPart(size/2, "flourMill", position, 10, 12, city, random, scene);
-		addCityPart(size/2, "wheatFarm", position, 13, 15, city, random, scene);
+		addCityPart(size, "bakery", position, 5, 8, city, random, scene);
+		addCityPart(size, "flourMill", position, 10, 12, city, random, scene);
+		addCityPart(size, "wheatFarm", position, 12, 16, city, random, scene);
 		
 		//addCityPart(size/2, "armyBarack", position, -size/2, size/2, city, random, scene);
 	}
