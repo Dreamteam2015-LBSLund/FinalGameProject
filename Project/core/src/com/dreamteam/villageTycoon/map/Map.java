@@ -69,8 +69,9 @@ public class Map {
 			float distance = (WIDTH/2)-15;
 			
 			if(cities[i].getController() instanceof PlayerController) {
-				scene.addObject(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
-				cities[i].addBuilding(new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]));
+				Building startBuilding = new Building(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), BuildingType.getTypes().get("house"), cities[i]);
+				scene.addObject(startBuilding);
+				cities[i].addBuilding(startBuilding);
 			} else {
 				generateCity(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance), 3, 2, scene, cities[i]);
 			}
@@ -81,7 +82,6 @@ public class Map {
 				Vector2 buildingPos = new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance);
 				Worker w = new Worker(buildingPos.add(new Vector2(randomInt(-5, 5), randomInt(-5, 5))), cities[i]);
 				scene.addObject(w);
-				//cities[i].addWorker(w);
 			}
 			
 			cities[i].init();
