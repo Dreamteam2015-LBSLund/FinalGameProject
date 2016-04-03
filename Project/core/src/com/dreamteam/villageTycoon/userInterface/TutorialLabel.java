@@ -15,6 +15,8 @@ public class TutorialLabel {
 	
 	private float changePartCount;
 	
+	private boolean done;
+	
 	public TutorialLabel(Vector2 position) {
 		this.position = position;
 		
@@ -34,10 +36,12 @@ public class TutorialLabel {
 				currentPart += 1;
 				changePartCount = 0;
 			}
+		} else {
+			done = true;
 		}
 	}
 	
 	public void draw(SpriteBatch batch) {
-		AssetManager.font.draw(batch, parts[currentPart], position.x, position.y);
+		if(!done) AssetManager.font.draw(batch, parts[currentPart], position.x, position.y);
 	}
 }
