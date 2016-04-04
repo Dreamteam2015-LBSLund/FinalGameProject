@@ -31,6 +31,8 @@ public class AIController2 extends CityController {
 
 	private City targetCity;
 
+	private BuildingPlacementProvider bp;
+
 	public AIController2(City targetCity) {
 		//ArrayList<Resource> r = new ArrayList<Resource>();
 		//r.add(Resource.get("flour"));
@@ -295,11 +297,10 @@ public class AIController2 extends CityController {
 	public class MakeSoldierState extends State {
 		
 		private final int numSoldiers = 5;
-		private BuildingPlacementProvider bp;
 		
 		public MakeSoldierState(State previous) {
 			super(previous);
-			bp = new BuildingPlacementProvider();
+			if (bp == null) bp = new BuildingPlacementProvider();
 		}
 
 		public State update() {
@@ -351,12 +352,11 @@ public class AIController2 extends CityController {
 		
 		private BuildingType type;
 		private Building b;
-		private BuildingPlacementProvider bp;
 		
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
 			this.type = type;
-			bp = new BuildingPlacementProvider();
+			if (bp == null) bp = new BuildingPlacementProvider();
 		}
 
 		public State update() {

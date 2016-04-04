@@ -33,6 +33,8 @@ public class AIController3 extends CityController {
 		new BuildCommand(BuildingType.getTypes().get("advancedFarm")),
 		new MakeResourceCommand(Resource.get("food"), 40, BuildingType.getTypes().get("advancedFarm")),
 	};*/
+
+	private BuildingPlacementProvider bp;
 	
 	private City targetCity;
 
@@ -119,12 +121,10 @@ public class AIController3 extends CityController {
 	class BuildCommand extends Command {
 		private BuildingType t;
 		private Building b;
-
-		private BuildingPlacementProvider bp;
 		
 		public BuildCommand(BuildingType t) {
 			this.t = t;
-			bp = new BuildingPlacementProvider();
+			if (bp == null) bp = new BuildingPlacementProvider();
 		}
 		
 		
