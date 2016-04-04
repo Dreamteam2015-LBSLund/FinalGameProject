@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingPlacementProvider;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Soldier;
@@ -294,9 +295,11 @@ public class AIController2 extends CityController {
 	public class MakeSoldierState extends State {
 		
 		private final int numSoldiers = 5;
+		private BuildingPlacementProvider bp;
 		
 		public MakeSoldierState(State previous) {
 			super(previous);
+			bp = new BuildingPlacementProvider();
 		}
 
 		public State update() {
@@ -314,7 +317,7 @@ public class AIController2 extends CityController {
 						Debug.print(this, "spawning soldiers");
 						b.spawn();
 					} else {
-						getCity().addBuilding(new Building(getNextBuildingPosition(getCity()), BuildingType.getTypes().get("armyBarack"), getCity()), true);
+						getCity().addBuilding(new Building(bp.getNextBuildingPosition(getCity()), BuildingType.getTypes().get("armyBarack"), getCity()), true);
 					}
 					return null;	
 				}
@@ -325,16 +328,6 @@ public class AIController2 extends CityController {
 		public String getInfo() {
 			return getCity().getSoldiers().size() + "/" + numSoldiers;
 		}
-	}
-	
-	private static float a;
-	private static Vector2 lastPos;
-	public static Vector2 getNextBuildingPosition(City c) {
-		if (lastPos == null) lastPos = c.getPosition();
-		a = (float)(a + Math.PI / Math.pow(c.getBuildings().size(), 1/2f));
-		Vector2 n = new Vector2(5, 0).setAngleRad(a).add(lastPos);
-		lastPos = n;
-		return n;
 	}
 	
 	public class MakeMultipleFactoryState extends State {
@@ -358,10 +351,12 @@ public class AIController2 extends CityController {
 		
 		private BuildingType type;
 		private Building b;
+		private BuildingPlacementProvider bp;
 		
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
 			this.type = type;
+			bp = new BuildingPlacementProvider();
 		}
 
 		public State update() {
@@ -390,10 +385,10 @@ public class AIController2 extends CityController {
 				// if all resources are available
 				if (missing.size() == 0) {
 					// if the building is not placed, place it
-					Debug.print(this, "no missing resources for building");
+					//Debug.print(this, "no missing resources for building");
 					if (b == null) {
 						Debug.print(this, "adding building " + type.getName());
-						b = new Building(getNextBuildingPosition(getCity()), type, getCity());
+						b = new Building(bp.getNextBuildingPosition(getCity()), type, getCity());
 						Debug.print(this, "new building at " + b.getPosition());
 						getCity().addBuilding(b, true);
 					}

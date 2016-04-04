@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.buildings.Building;
+import com.dreamteam.villageTycoon.buildings.BuildingPlacementProvider;
 import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.characters.Soldier;
@@ -118,14 +119,18 @@ public class AIController3 extends CityController {
 	class BuildCommand extends Command {
 		private BuildingType t;
 		private Building b;
+
+		private BuildingPlacementProvider bp;
 		
 		public BuildCommand(BuildingType t) {
 			this.t = t;
+			bp = new BuildingPlacementProvider();
 		}
+		
 		
 		public void update() {
 			if (b == null) {
-				b = new Building(AIController2.getNextBuildingPosition(getCity()), t, getCity());
+				b = new Building(bp.getNextBuildingPosition(getCity()), t, getCity());
 				getCity().addBuilding(b, true);
 			} if (b.getWorkers().size() < getCity().getWorkers().size()) {
 				for (Worker w : getCity().getWorkers()) {
