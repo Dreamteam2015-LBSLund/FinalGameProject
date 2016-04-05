@@ -37,6 +37,7 @@ import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 import com.dreamteam.villageTycoon.userInterface.ArrowButton;
 import com.dreamteam.villageTycoon.userInterface.ArrowButton.Direction;
+import com.dreamteam.villageTycoon.userInterface.TutorialLabel;
 
 public class GameScene extends Scene {
 	public enum MatchState { ON_GOING, OVER };
@@ -57,6 +58,8 @@ public class GameScene extends Scene {
 	
 	private City loser;
 	
+	private TutorialLabel tutorial;
+	
 	public GameScene(PlayerConfig cfg) {
 		super();
 		AssetManager.load();
@@ -66,6 +69,13 @@ public class GameScene extends Scene {
 		
 		for(int i = 0; i < cities.length; i++) {
 			addObject(cities[i]);
+		}
+		
+		for(int i = 0; i < cities.length; i++) {
+			if(cities[i].getController() instanceof PlayerController) {
+				tutorial = new TutorialLabel(new Vector2(-Gdx.graphics.getWidth(), -100));
+				break;
+			}
 		}
 		
 		map.setupGame(cities, this);
@@ -107,6 +117,8 @@ public class GameScene extends Scene {
 		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
 		
 		matchUpdate();
+		
+		if(tutorial != null) tutorial.update(dt);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -120,7 +132,9 @@ public class GameScene extends Scene {
 		
 		if(matchState == MatchState.ON_GOING) {
 			AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
-
+			
+			if(tutorial != null && !tutorial.isDone()) tutorial.draw(batch);
+			
 			for(int i = 0; i < timeControll.length; i++) {
 				timeControll[i].draw(batch);
 			}
