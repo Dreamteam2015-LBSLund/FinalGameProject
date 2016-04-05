@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dreamteam.villageTycoon.buildings.BuildingPlacer;
+import com.dreamteam.villageTycoon.buildings.City;
 import com.dreamteam.villageTycoon.userInterface.OpenBuildingPlacerButton;
 
 public class PlayerController extends CityController {
@@ -46,5 +47,14 @@ public class PlayerController extends CityController {
 	
 	public boolean getBuildingPlacerNull() {
 		return placer != null;
+	}
+	
+	public City getTargetCity() {
+		return null;
+	}
+
+	@Override
+	public boolean soldierIsAI() {
+		return false;
 	}
 }

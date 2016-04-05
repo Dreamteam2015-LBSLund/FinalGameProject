@@ -113,4 +113,13 @@ public class AIController extends CityController {
 	private void attackPlayer() {
 		
 	}
+
+	public boolean soldierIsAI() {
+		return true;
+	}
+
+	@Override
+	public City getTargetCity() {
+		return playerCity;
+	}
 }

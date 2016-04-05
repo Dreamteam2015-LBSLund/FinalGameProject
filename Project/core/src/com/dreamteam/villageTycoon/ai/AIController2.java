@@ -519,5 +519,13 @@ public class AIController2 extends CityController {
 		}
 		return ret;
 	}
+	
+	public City getTargetCity() {
+		return targetCity;
+	}
+
+	public boolean soldierIsAI() {
+		return true;
+	}
 }
 

@@ -76,6 +76,7 @@ public class Soldier extends Character {
 	private ArrayList<Character> spottedEnemies;
 	
 	private int foodReserve;
+	private boolean isAISoldier;
 	
 	private Building targetBuilding;
 	
@@ -86,7 +87,7 @@ public class Soldier extends Character {
 	private Vector2 sabotageKitTarget;
 	
 	private SabotageKitButton sabotageKitButton;
-	
+	private City targetCity;
 	private float sabotageKitDelay;
 	
 	public Soldier(City city, Vector2 position, WeaponType weaponType, SoldierType soldierType, SabotageKit startSabotageKits[]) {
@@ -99,6 +100,9 @@ public class Soldier extends Character {
 		for(SabotageKit s : startSabotageKits) {
 			if(s != null) sabotageKits.add(s);
 		}
+	
+		isAISoldier = city.getController().soldierIsAI();
+		if (isAISoldier) targetCity = city.getController().getTargetCity();
 		
 		city.addSoldier(this);
 		
@@ -137,6 +141,25 @@ public class Soldier extends Character {
 		getSprite().setAnimation(1, 4, false);
 	}
 	
+	private void autoAttack() {
+		if (hasPickedUpWeapon) {
+			if (targetCity.getSoldiers().size() > 0) {
+				setPath(targetCity.getSoldiers().get(0).getPosition());
+				Debug.print(this, "going to soldier");
+			} else if (targetCity.getWorkers().size() > 0) {
+				setPath(targetCity.getWorkers().get(0).getPosition());		
+				Debug.print(this, "going to worker");		
+			} else if (targetCity.getBuildings().size() > 0) {
+				setPath(targetCity.getBuildings().get(0).getPosition());	
+				Debug.print(this, "going to building");			
+			}
+		}
+	}
+	
+	public void onRemove() {
+		this.getCity().removeSoldier(this);
+	}
+	
 	public void pickUpMostModernWeapon() {
 		this.targetWeapon = avaibleWeaponTypes.get(avaibleWeaponTypes.size() - 1);
 	}
@@ -171,6 +194,10 @@ public class Soldier extends Character {
 	
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
+		if (isAISoldier) {
+			autoAttack();
+		}
 		
 		checkForWeapons();
 

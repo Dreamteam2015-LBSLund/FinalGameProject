@@ -253,5 +253,14 @@ public class AIController3 extends CityController {
 		public abstract boolean isDone();
 		public String getInfo() { return ""; }
 	}
+	
+	public City getTargetCity() {
+		return targetCity;
+	}
+
+	@Override
+	public boolean soldierIsAI() {
+		return true;
+	}
 }
 

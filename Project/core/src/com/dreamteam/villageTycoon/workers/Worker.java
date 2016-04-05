@@ -45,6 +45,10 @@ public class Worker extends Character {
 		getSprite().setAnimation(1, 4, false);
 	}
 	
+	public void onRemove() {
+		this.getCity().removeWorker(this);
+	}
+	
 	public void update(float deltaTime) {
 		//if (getScene() == null) Debug.print(this, "SCENE IS NULL");
 		//else Debug.print(this, "worker updated");

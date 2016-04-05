@@ -24,7 +24,12 @@ public abstract class CityController {
 		
 	}
 	
+	public abstract boolean soldierIsAI();
+	
 	public abstract void update(float dt);
 	public void drawUi(SpriteBatch batch) {}
+
+
+	public abstract City getTargetCity();
 
 }
