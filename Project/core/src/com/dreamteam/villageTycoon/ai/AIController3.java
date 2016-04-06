@@ -42,6 +42,9 @@ public class AIController3 extends CityController {
 	
 	public AIController3 (City targetCity) {
 		this.targetCity = targetCity;
+	}
+	
+	private void loadScript() {
 		String input = Gdx.files.internal("aiScript.gs").readString();
 		String[] lines = input.split("\n");
 		script = new Command[lines.length];
@@ -78,6 +81,10 @@ public class AIController3 extends CityController {
 	private boolean drawDebug;
 	
 	public void update(float dt) {
+		if (script == null || script.length == 0) {
+			loadScript();
+		}
+		
 		if (Gdx.input.isKeyJustPressed(Keys.F5)) drawDebug = true;
 		else if (Gdx.input.isKeyJustPressed(Keys.F6)) drawDebug = false;
 		
@@ -124,13 +131,13 @@ public class AIController3 extends CityController {
 		
 		public BuildCommand(BuildingType t) {
 			this.t = t;
-			if (bp == null) bp = new BuildingPlacementProvider();
+			if (bp == null) bp = new BuildingPlacementProvider(getCity());
 		}
 		
 		
 		public void update() {
 			if (b == null) {
-				b = new Building(bp.getNextBuildingPosition(getCity()), t, getCity());
+				b = new Building(bp.getNextBuildingPosition(), t, getCity());
 				getCity().addBuilding(b, true);
 			} if (b.getWorkers().size() < getCity().getWorkers().size()) {
 				for (Worker w : getCity().getWorkers()) {

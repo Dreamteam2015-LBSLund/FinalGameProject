@@ -300,7 +300,8 @@ public class AIController2 extends CityController {
 		
 		public MakeSoldierState(State previous) {
 			super(previous);
-			if (bp == null) bp = new BuildingPlacementProvider();
+			System.out.println("City: " + getCity()); // TODO: remove me
+			if (bp == null) bp = new BuildingPlacementProvider(getCity());
 		}
 
 		public State update() {
@@ -318,7 +319,7 @@ public class AIController2 extends CityController {
 						Debug.print(this, "spawning soldiers");
 						b.spawn();
 					} else {
-						getCity().addBuilding(new Building(bp.getNextBuildingPosition(getCity()), BuildingType.getTypes().get("armyBarack"), getCity()), true);
+						getCity().addBuilding(new Building(bp.getNextBuildingPosition(), BuildingType.getTypes().get("armyBarack"), getCity()), true);
 					}
 					return null;	
 				}
@@ -356,7 +357,7 @@ public class AIController2 extends CityController {
 		public MakeFactoryState(State previous, BuildingType type) {
 			super(previous);
 			this.type = type;
-			if (bp == null) bp = new BuildingPlacementProvider();
+			if (bp == null) bp = new BuildingPlacementProvider(getCity());
 		}
 
 		public State update() {
@@ -388,7 +389,7 @@ public class AIController2 extends CityController {
 					//Debug.print(this, "no missing resources for building");
 					if (b == null) {
 						Debug.print(this, "adding building " + type.getName());
-						b = new Building(bp.getNextBuildingPosition(getCity()), type, getCity());
+						b = new Building(bp.getNextBuildingPosition(), type, getCity());
 						Debug.print(this, "new building at " + b.getPosition());
 						getCity().addBuilding(b, true);
 					}

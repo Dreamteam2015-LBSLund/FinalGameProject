@@ -190,10 +190,14 @@ public class GameScene extends Scene {
 	}
 	
 	public boolean canBuild(Vector2 position) {
-		for (int x = 0; x < 4; x++) {
-			for (int y = 0; y < 3; y++) {
-				if (!map.getTiles()[x + (int)position.x][y + (int)position.y].isBuildable()) return false;
+		try {
+			for (int x = 0; x < 4; x++) {
+				for (int y = 0; y < 3; y++) {
+					if (!map.getTiles()[x + (int)position.x][y + (int)position.y].isBuildable()) return false;
+				}
 			}
+		} catch (IndexOutOfBoundsException e) {
+			return false;
 		}
 		return true;
 	}
