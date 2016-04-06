@@ -60,10 +60,10 @@ public class Controller extends GameObject {
 		
 		active = true;
 		
-		zoomButtonPosition = new Vector2(-Gdx.graphics.getWidth()+70, 0);
+		zoomButtonPosition = new Vector2(-220, 270);
 		
-		zoomButtons[0] = new ArrowButton(new Rectangle(zoomButtonPosition.x-70, zoomButtonPosition.y, 64, 64), ArrowButton.Direction.UP);
-		zoomButtons[1] = new ArrowButton(new Rectangle(zoomButtonPosition.x-70, zoomButtonPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
+		zoomButtons[0] = new ArrowButton(new Rectangle(zoomButtonPosition.x, zoomButtonPosition.y, 32, 32), ArrowButton.Direction.UP);
+		zoomButtons[1] = new ArrowButton(new Rectangle(zoomButtonPosition.x, zoomButtonPosition.y-40, 32, 32), ArrowButton.Direction.DOWN);
 	}
 	
 	void onMousePressed() {
@@ -345,7 +345,7 @@ public class Controller extends GameObject {
 		for(int i = 0; i < zoomButtons.length; i++) {
 			zoomButtons[i].draw(batch);
 		}
-		AssetManager.font.draw(batch, "ZOOM", zoomButtonPosition.x, zoomButtonPosition.y+16);
+		AssetManager.smallFont.draw(batch, "ZOOM", zoomButtonPosition.x+45, zoomButtonPosition.y+16);
 	}
 	
 	public boolean getActive() {

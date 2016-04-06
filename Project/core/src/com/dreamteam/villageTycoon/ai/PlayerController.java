@@ -23,7 +23,7 @@ public class PlayerController extends CityController {
 		}
 		
 		if (placer != null) {
-			if (placer.done) {
+			if (placer.done || Gdx.input.isKeyJustPressed(Keys.Q)) {
 				placer = null;
 			} else {
 				placer.update(getCity());

@@ -85,8 +85,8 @@ public class GameScene extends Scene {
 		
 		timeControllerPosition = new Vector2(-150, 300);
 		
-		timeControll[0] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y, 64, 64), ArrowButton.Direction.UP);
-		timeControll[1] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y-70, 64, 64), ArrowButton.Direction.DOWN);
+		timeControll[0] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y+60, 32, 32), ArrowButton.Direction.UP);
+		timeControll[1] = new ArrowButton(new Rectangle(timeControllerPosition.x-70, timeControllerPosition.y+20, 32, 32), ArrowButton.Direction.DOWN);
 		
 		this.getCamera().position.set(new Vector3(cities[0].getPosition().x, cities[0].getPosition().y, 0));
 		
@@ -119,6 +119,8 @@ public class GameScene extends Scene {
 		matchUpdate();
 		
 		if(tutorial != null) tutorial.update(dt);
+		
+		System.out.println(timeControll[0].getArea().getX());
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -131,7 +133,7 @@ public class GameScene extends Scene {
 		super.drawUi(batch);
 		
 		if(matchState == MatchState.ON_GOING) {
-			AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x, this.timeControllerPosition.y + 16);
+			AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x-30, this.timeControllerPosition.y + 70);
 			
 			if(tutorial != null && !tutorial.isDone()) tutorial.draw(batch);
 			
