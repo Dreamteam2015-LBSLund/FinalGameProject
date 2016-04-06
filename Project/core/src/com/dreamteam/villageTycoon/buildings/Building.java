@@ -259,7 +259,7 @@ public class Building extends GameObject {
     }
     
     public void onHit(Projectile projectile) {
-    	health -= projectile.getDamege();
+    	health -= projectile.getDamage();
     }
     
     public void cancelGather(Resource r) {

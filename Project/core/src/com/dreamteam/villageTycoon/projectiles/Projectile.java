@@ -22,6 +22,8 @@ public class Projectile extends GameObject {
 	
 	private Vector2 target;
 	
+	private boolean hasHit;
+	
 	public Projectile(Vector2 position, Vector2 target, ProjectileType projectileType, Character owner) {
 		super(position, new Animation(AssetManager.getTexture(projectileType.getSprite())));
 		
@@ -64,6 +66,14 @@ public class Projectile extends GameObject {
 		}
 	}
 	
+	public void setHasHit(boolean hasHit) {
+		this.hasHit = hasHit;
+	}
+	
+	public boolean getHasHit() {
+		return this.hasHit;
+	}
+	
 	public void setTarget(Vector2 target) {
 		this.target = target;
 		this.angle = (float)Math.atan2(target.y - this.getPosition().y, target.x - this.getPosition().x);
@@ -89,7 +99,7 @@ public class Projectile extends GameObject {
 		return this.speed;
 	}
 	
-	public int getDamege() {
+	public int getDamage() {
 		return damege;
 	}
 }

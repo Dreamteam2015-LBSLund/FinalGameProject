@@ -187,7 +187,8 @@ public class Character extends GameObject {
 	}
 	
 	public void onHit(Projectile projectile) {
-		health -= projectile.getDamege();
+		if(!projectile.getHasHit()) health -= projectile.getDamage();
+		projectile.setHasHit(true);
 		splashBlood();
 	}
 	
