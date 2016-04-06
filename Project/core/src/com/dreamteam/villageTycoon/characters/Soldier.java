@@ -144,16 +144,29 @@ public class Soldier extends Character {
 	private void autoAttack() {
 		if (hasPickedUpWeapon) {
 			if (targetCity.getSoldiers().size() > 0) {
-				setPath(targetCity.getSoldiers().get(0).getPosition());
+				setPath(getClosest(targetCity.getSoldiers()));
 				Debug.print(this, "going to soldier");
 			} else if (targetCity.getWorkers().size() > 0) {
-				setPath(targetCity.getWorkers().get(0).getPosition());		
+				setPath(getClosest(targetCity.getWorkers()));		
 				Debug.print(this, "going to worker");		
 			} else if (targetCity.getBuildings().size() > 0) {
-				setPath(targetCity.getBuildings().get(0).getPosition());	
+				setPath(getClosest(targetCity.getBuildings()));	
 				Debug.print(this, "going to building");			
 			}
 		}
+	}
+	
+	private Vector2 getClosest(ArrayList objects) {
+		Vector2 closest = null;
+		for (Object o : objects) {
+			if (o instanceof GameObject) {
+				GameObject g = (GameObject)o;
+				if (closest == null || distanceTo(g.getPosition()) < distanceTo(closest)) {
+					closest = g.getPosition();
+				}
+			}
+		}
+		return closest;
 	}
 	
 	public void onRemove() {
