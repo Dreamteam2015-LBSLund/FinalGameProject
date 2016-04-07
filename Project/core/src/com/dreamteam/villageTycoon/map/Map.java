@@ -121,8 +121,15 @@ public class Map {
 		}
 		cityPositions = new Point[villages.length];
 		
-		for (int i = 0; i < villages.length; i++) {
-			villages[i] = new Point(random.nextInt(WIDTH-10)+10, random.nextInt(HEIGHT-10)+10);
+		for (int i = 0; i < villages.length/2; i++) {
+			villages[i] = new Point(this.randomInt(0, 15), this.randomInt(0, 90));
+			cityPositions[i] = villages[i];
+			//map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
+			createField(villages[i].x, villages[i].y, 20, 20, 10, 800, new String[]{"Grass", "Dirt"}, map);
+		}
+		
+		for (int i = 0; i < villages.length/2; i++) {
+			villages[i] = new Point(this.randomInt(0, 15)+65, this.randomInt(0, 90));
 			cityPositions[i] = villages[i];
 			//map = field(villages[i].x, villages[i].y, random.nextInt(5)+4, random.nextInt(1), "Dirt", map);
 			createField(villages[i].x, villages[i].y, 20, 20, 10, 800, new String[]{"Grass", "Dirt"}, map);
