@@ -84,7 +84,7 @@ Draw weapon icons | 1/2 | Färdig | Tom
 Menyer (inte minimal) | 1 | Ofärdig | Tom
 Snygg UI (inte minimal) | 1 | Ofärdig | Tom
 Simpel tutorial | 1/2 | Ofärdig | Tom
-Fixa procedual generation för terräng | 2 | Färdig(behövs dock massa polish) | Tom
+Fixa procedual generation för terräng | 2 | Färdig | Tom
 
 Person | Total tid(d)
 -------|-------------
