@@ -119,8 +119,6 @@ public class GameScene extends Scene {
 		matchUpdate();
 		
 		if(tutorial != null) tutorial.update(dt);
-		
-		System.out.println(timeControll[0].getArea().getX());
 	}
 	
 	public void draw(SpriteBatch batch) {

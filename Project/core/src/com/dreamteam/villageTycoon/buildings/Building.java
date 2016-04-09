@@ -179,8 +179,10 @@ public class Building extends GameObject {
     	
     	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
     		if(getCity().getController() instanceof PlayerController) {
+    			
     			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull() && createCharacterCount <= 0) {
     				createCharacterButton.update(getScene());
+    				
     				if(createCharacterButton.getAdded()) {
     					createCharacterCount = 0.1f;
     				}

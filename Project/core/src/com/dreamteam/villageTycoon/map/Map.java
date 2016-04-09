@@ -65,7 +65,7 @@ public class Map {
 		
 		float angleInterval = ((float)Math.PI*2)/cities.length;
 		
-		float distance = (WIDTH/2)-15;
+		float distance = (WIDTH/2)-20;
 		
 		for(int i = 0; i < cities.length; i++) {
 			cities[i].setPosition(new Vector2(midPoint.x + (float)Math.cos(angleInterval*i) * distance, midPoint.y + (float)Math.sin(angleInterval*i) * distance));
