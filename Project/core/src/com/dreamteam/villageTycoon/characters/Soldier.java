@@ -417,7 +417,7 @@ public class Soldier extends Character {
 			AssetManager.font.draw(batch, "PICK TARGET POSISTION", 0, 0);
 		}
 		
-		AssetManager.font.draw(batch, "SOLDIER", getUiScreenCoords().x, getUiScreenCoords().y);
+		//AssetManager.font.draw(batch, "SOLDIER", getUiScreenCoords().x, getUiScreenCoords().y);
 	}
 	
 	public void consume() {
