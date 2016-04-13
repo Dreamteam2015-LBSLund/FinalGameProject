@@ -186,7 +186,7 @@ public class Building extends GameObject {
     		getScene().addObject(new Corpse(this.getPosition(), new Animation(AssetManager.getTexture("hole")), new Vector2(3, 3)));
     		int amount = GameScene.randomInt(5, 10);
     		for(int i = 0; i < amount; i++) {
-    			getScene().addObject(new Debris(getPosition().cpy(), new Vector2(GameScene.randomInt(-16, 16), GameScene.randomInt(-16, 16)), GameScene.randomInt(4, 7), "debris"+GameScene.randomInt(1, 3), new Vector2(0.5f, 0.5f)));
+    			getScene().addObject(new Debris(getPosition().cpy(), new Vector2(GameScene.randomInt(-16, 16), GameScene.randomInt(-16, 16)), GameScene.randomInt(4, 8), "debris"+GameScene.randomInt(1, 3), new Vector2(0.5f, 0.5f)));
     		}
     		getScene().addObject(new Explosion(this.getPosition().cpy(), Explosion.Type.EXPLOSION, 4, 0, 0));
     	}
@@ -361,7 +361,7 @@ public class Building extends GameObject {
     public Character getCharacterToSpawn() {
     	if(this.type.getType() == BuildingType.Type.Home) {
 			if (!type.getName().equals("house")) {
-				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), new WeaponType("pistol", 1, 1, 1, 1, 1, new ProjectileType(ProjectileType.Type.SHOT, 15, 5, 5, null, "fistWeaponIcon"), new Sprite(AssetManager.getTexture("gun")), Type.HANDGUN), 
+				return new Soldier(city, new Vector2(this.getPosition().x, this.getPosition().y), Soldier.FIST, 
 						new SoldierType(1, 1, 1, 1, new Animation(AssetManager.getTexture("soldier"))), 
 						new SabotageKit[]{ 
 								new SabotageKit(new SabotageKitType("motolv coctalil", 1, 1, "firekit", ActivationType.INSTANT, EffectType.FIRE)), 

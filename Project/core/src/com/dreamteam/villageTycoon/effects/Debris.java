@@ -54,7 +54,7 @@ public class Debris extends GameObject {
 		
 		fallSpeed -= 2 * deltaTime;
 		
-		distanceToGround = MathUtils.clamp(distanceToGround, 0, 100);
+		distanceToGround = MathUtils.clamp(distanceToGround, 0, 10);
 		
 		setPosition(getPosition().cpy().add(new Vector2(velocity.x*deltaTime, velocity.y*deltaTime)));
 		
