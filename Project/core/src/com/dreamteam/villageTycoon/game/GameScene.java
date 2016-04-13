@@ -60,12 +60,16 @@ public class GameScene extends Scene {
 	
 	private TutorialLabel tutorial;
 	
+	private boolean hasPlayedEndGameSound;
+	
 	public GameScene(PlayerConfig cfg) {
 		super();
 		AssetManager.load();
 		map = new Map(this);
 		
 		cities = cfg.getCities(this);
+		
+		this.hasPlayedEndGameSound = false;
 		
 		for(int i = 0; i < cities.length; i++) {
 			addObject(cities[i]);
@@ -140,6 +144,11 @@ public class GameScene extends Scene {
 			}
 		} else if(matchState == MatchState.OVER) {
 			AssetManager.font.draw(batch, "Game Over! " + loser.getName() + " lost!", -this.getUiCamera().viewportWidth / 3, 0);
+			
+			if(hasPlayedEndGameSound) {
+				AssetManager.getSound("game-over").play();
+				hasPlayedEndGameSound = true;
+			}
 		}
 	}
 	

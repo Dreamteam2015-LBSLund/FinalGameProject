@@ -3,6 +3,7 @@ package com.dreamteam.villageTycoon.characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.dreamteam.villageTycoon.AssetManager;
 import com.dreamteam.villageTycoon.projectiles.ProjectileType;
 
 public class Weapon {
@@ -41,6 +42,7 @@ public class Weapon {
 	}
 	
 	public void onShoot() {
+		AssetManager.getSound("shot").play();
 		if(type.getWeaponType() != WeaponType.Type.MELEE) clipCount -= 1;
 		currentFireRate = 0.1f;
 	}

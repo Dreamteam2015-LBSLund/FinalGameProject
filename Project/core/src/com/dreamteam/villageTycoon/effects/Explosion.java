@@ -22,6 +22,7 @@ public class Explosion extends GameObject {
 		this.setSize(new Vector2(radius, radius));
 		this.getSprite().setAnimation(0.5f, 6, false);
 		this.maxDamege = maxDamege;
+		AssetManager.getSound("explosion").play();
 	}
 	
 	public void update(float deltaTime) {
