@@ -119,6 +119,7 @@ public class Character extends GameObject {
 		if(getCity().getController() instanceof PlayerController) this.getMovmentVector(deltaTime);
 		
 		if(health <= 0) {
+			AssetManager.getSound("death").play();
 			getScene().addObject(new Corpse(this.getPosition(), deathAnimation, new Vector2(1, 1)));
 			getScene().removeObject(this);
 		}
