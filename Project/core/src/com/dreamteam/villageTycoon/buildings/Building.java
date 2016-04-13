@@ -161,15 +161,15 @@ public class Building extends GameObject {
     	return buildState == BuildState.Done;
     }
     
-    public void trySpawn() {
+    public Character trySpawn() {
     	if (createCharacterCount <= 0) {
-    		spawnCharacter();
-    	}
+    		return spawnCharacter();
+    	} else return null;
     }
     
-    public void spawnCharacter() {
+    private Character spawnCharacter() {
 		createCharacterCount = BASE_CREATE_CHARACTER_DELAY;  
-		getScene().addObject(getCharacterToSpawn());
+		return spawn();
     }
     
     private float getCharacterCountdownRate() {
@@ -352,7 +352,7 @@ public class Building extends GameObject {
     	workers.remove(w);
     }
     
-    public Character spawn() {
+    private Character spawn() {
     	Character c = getCharacterToSpawn();
     	getScene().addObject(c);
     	return c;

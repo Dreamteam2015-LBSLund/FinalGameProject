@@ -317,7 +317,7 @@ public class AIController2 extends CityController {
 					Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
 					if (b != null && b.isBuilt()) {
 						Debug.print(this, "spawning soldiers");
-						b.spawn();
+						b.trySpawn();
 					} else {
 						getCity().addBuilding(new Building(bp.getNextBuildingPosition(), BuildingType.getTypes().get("armyBarack"), getCity()), true);
 					}

@@ -177,8 +177,11 @@ public class AIController3 extends CityController {
 		
 		public void update() {
 			Building b = getCity().getBuildingByType(BuildingType.getTypes().get("house"));
+			for (Worker w : getCity().getWorkers()) {
+				w.workAt(b);
+			}
 			if (b != null && b.isBuilt()) {
-				b.spawn();
+				b.trySpawn();
 			}
 		}
 		
@@ -244,7 +247,8 @@ public class AIController3 extends CityController {
 		public void update() {
 			Building b = getCity().getBuildingByType(BuildingType.getTypes().get("armyBarack"));
 			if (b != null && b.isBuilt()) {
-				b.spawn().setPath(targetCity.getPosition());
+				com.dreamteam.villageTycoon.characters.Character c = b.trySpawn();
+				if (c != null) c.setPath(targetCity.getPosition());
 			}
 		}
 		
