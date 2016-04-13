@@ -70,9 +70,8 @@ public class Building extends GameObject {
     private BuildingTaskProvider taskProvider;
 	private float maxWaitTime;
     
-	private float BASE_CREATE_CHARACTER_DELAY = 10;
+	private final float BASE_CREATE_CHARACTER_DELAY = 10;
     
-    private float createCharacterDelay;
     private float createCharacterCount;
 	
     //  position is tile at lower left corner
@@ -162,6 +161,21 @@ public class Building extends GameObject {
     	return buildState == BuildState.Done;
     }
     
+    public void trySpawn() {
+    	if (createCharacterCount <= 0) {
+    		spawnCharacter();
+    	}
+    }
+    
+    public void spawnCharacter() {
+		createCharacterCount = BASE_CREATE_CHARACTER_DELAY;  
+		getScene().addObject(getCharacterToSpawn());
+    }
+    
+    private float getCharacterCountdownRate() {
+    	return MathUtils.clamp(getWorkers().size(), 0, getType().getMaxWorkers()) * 1;
+    }
+    
     public void update(float deltaTime) {
     	// TODO: instant build on Y press. remove before realease :^)
     	
@@ -177,27 +191,18 @@ public class Building extends GameObject {
     		getScene().addObject(new Explosion(this.getPosition().cpy(), Explosion.Type.EXPLOSION, 4, 0, 0));
     	}
     	
-    	if(type.getType() == BuildingType.Type.Home && selected && this.isBuilt()) {
-    		if(getCity().getController() instanceof PlayerController) {
-    			
-    			if(!((PlayerController)getCity().getController()).getBuildingPlacerNull() && createCharacterCount <= 0) {
-    				createCharacterButton.update(getScene());
-    				
-    				if(createCharacterButton.getAdded()) {
-    					createCharacterCount = 0.1f;
-    				}
-    			}
-    			
-    			createCharacterDelay = MathUtils.clamp(createCharacterDelay, 0.1f, 30);
-    			
-    			createCharacterDelay = BASE_CREATE_CHARACTER_DELAY - workers.size();
-    			
-    			if(createCharacterCount > 0) {
-					createCharacterCount += 1 * deltaTime;
-					
-					if(createCharacterCount >= createCharacterDelay) createCharacterCount = 0;
-				} 
-    		}
+    	if(type.getType() == BuildingType.Type.Home && this.isBuilt()) {
+			// TODO: this is the bug @indietom, #27
+			if(getCity().getController() instanceof PlayerController && !((PlayerController)getCity().getController()).getBuildingPlacerNull()) {
+				createCharacterButton.update(getScene());
+			}
+			
+			System.out.println(createCharacterCount);
+			if(createCharacterCount > 0) {
+				System.out.println("delta: " + getCharacterCountdownRate() * deltaTime);
+				createCharacterCount -= getCharacterCountdownRate() * deltaTime;
+				delayBar.progress = createCharacterCount / BASE_CREATE_CHARACTER_DELAY;
+			} 
     	}
     	
     	if(selected && destroyBuildingButton != null) {
@@ -413,7 +418,9 @@ public class Building extends GameObject {
         		}
         		
         		if(createCharacterCount > 0) {
-        			AssetManager.font.draw(batch, "SPAWN DELAY: " + Math.round((createCharacterDelay - createCharacterCount)), getUiScreenCoords().x, getUiScreenCoords().y-50);
+        			delayBar.setPosition(getUiScreenCoords().add(new Vector2(0, -100)));
+        			delayBar.draw(batch);
+        			AssetManager.font.draw(batch, "SPAWN DELAY: " + Math.round(createCharacterCount), getUiScreenCoords().x, getUiScreenCoords().y-50);
         		}
         	}
     		

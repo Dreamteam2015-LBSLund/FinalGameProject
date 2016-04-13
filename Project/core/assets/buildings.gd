@@ -227,6 +227,8 @@ house: {
 	materials: wood, stone;
 	material-amount: 5, 3;
 	
+	max-workers: 4;
+	
 	sprite-finished: house;
 	sprite-building: houseProgress;
 	
@@ -241,26 +243,10 @@ armyBarack: {
 	materials:     wood, stone;
 	material-amount: 10, 5;
 	
+	max-workers: 4;
+	
 	sprite-finished: militaryBarrack;
 	sprite-building: militaryBarrackProgress;
 	
 	inhabitants: 4;
-}
-
-diamondPowderMine?: {
-	type: factory;
-	
-	health: 15;
-	
-	materials:     wood, stone;
-	material-amount: 10, 5;
-	
-	sprite-finished: mine;
-	sprite-building: mineProgress;
-	
-	max-workers: 4;
-	product:         diamond;
-	product-per-run: 5;
-	production-resources:        wood;
-	resource-per-run: 1,    4;
 }

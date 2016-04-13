@@ -37,10 +37,13 @@ public class CreateCharacterButton extends TextButton {
 		canAdd = true;
 	}
 	
+	public void onClick() {
+		building.trySpawn();
+	}
 	
 	public void update(Scene scene) {
 		super.update();
-		
+		/*
 		added = false;
 		
 		if(wasPressed() && !pressed) {
@@ -72,7 +75,7 @@ public class CreateCharacterButton extends TextButton {
 		toAdd.clear();
 		canAdd = true;
 		
-		super.update();
+		super.update(); */
 	}
 	
 	public boolean getAdded() {

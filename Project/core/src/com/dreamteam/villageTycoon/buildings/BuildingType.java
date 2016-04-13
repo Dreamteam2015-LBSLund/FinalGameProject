@@ -69,7 +69,8 @@ public class BuildingType {
 		health = r.getInt("health");
 		
 		if (r.getString("build-time") != null) buildTime = r.getInt("build-time");
-		
+
+		maxWorkers = r.getInt("max-workers");
 		if (r.getString("type").equals("home")) {
 			type = Type.Home;
 			inhabitants = r.getInt("inhabitants");
@@ -79,7 +80,6 @@ public class BuildingType {
 			outputProductPerRun = r.getIntList("product-per-run");
 			productionResources = Resource.fromStringArray(r.getList("production-resources"));
 			inputResourcePerRun = r.getIntList("resource-per-run");
-			maxWorkers = r.getInt("max-workers");
 			if (r.getString("production-time") != null) productionTime = r.getInt("production-time");
 		} else {
 			System.out.println("ERROR: type of building " + r.getObjectName() + " wasn't recognized (" + r.getString("type") + ")");
