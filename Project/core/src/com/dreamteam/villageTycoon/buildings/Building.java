@@ -173,7 +173,7 @@ public class Building extends GameObject {
     }
     
     private float getCharacterCountdownRate() {
-    	return MathUtils.clamp(getWorkers().size(), 0, getType().getMaxWorkers()) * 1;
+    	return MathUtils.clamp(getWorkers().size(), 0.5f, getType().getMaxWorkers() + 0.5f) * 1;
     }
     
     public void update(float deltaTime) {
