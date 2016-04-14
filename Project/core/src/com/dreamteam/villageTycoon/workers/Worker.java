@@ -193,6 +193,7 @@ public class Worker extends Character {
 	}
 
 	public void workAt(Building building) {
+		if (building == null) return;
 		if (building == workplace) return;
 		if (building.addWorker(this)) {
 			if (task != null) task.onCancel();

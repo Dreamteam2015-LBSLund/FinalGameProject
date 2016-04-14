@@ -20,6 +20,7 @@ mine: {
 
 farm: {
 	type: factory;
+	build-time: 10;
 	
 	health: 5;
 	
@@ -29,16 +30,18 @@ farm: {
 	sprite-finished: farm;
 	sprite-building: farmProgress;
 	
-	max-workers: 4;
+	max-workers: 8;
 	
 	product: food;
 	product-per-run: 1;
 	production-resources: water;
 	resource-per-run: 1;
+	production-time: 5;
 }
 
 woodShop: {
 	type: factory;
+	build-time: 15;
 	
 	health: 10;
 	
@@ -54,10 +57,12 @@ woodShop: {
 	product-per-run: 1;
 	production-resources: wood;
 	resource-per-run: 2;
+	production-time: 5;
 }
 
 advancedFarm: {
 	type: factory;
+	build-time: 15;
 	
 	health: 10;
 	
@@ -67,34 +72,18 @@ advancedFarm: {
 	sprite-finished: advancedFarm;
 	sprite-building: farmProgress;
 	
-	max-workers: 4;
+	max-workers: 12;
 	
 	product: food;
 	product-per-run: 3;
 	production-resources: water;
 	resource-per-run: 1;
-}
-
-explosivePowderMine: {
-	type: factory;
-	
-	health: 12;
-	
-	materials: wood, stone, iron;
-	material-amount: 10, 5, 3;
-	
-	sprite-finished: mine;
-	sprite-building: mineProgress;
-	
-	max-workers: 4;
-	product: explosive-powder;
-	product-per-run: 1;
-	production-resources: wood;
-	resource-per-run: 2;
+	production-time: 5;
 }
 
 blacksmith: {
 	type: factory;
+	build-time: 15;
 	
 	health: 10;
 	
@@ -109,10 +98,12 @@ blacksmith: {
 	product-per-run: 1;
 	production-resources: iron;
 	resource-per-run: 2;
+	production-time: 7;
 }
 
 gunFactory: {
 	type: factory;
+	build-time: 20;
 	
 	health: 10;
 	
@@ -127,10 +118,13 @@ gunFactory: {
 	product-per-run: 1;
 	production-resources: iron;
 	resource-per-run: 2;
+	production-time: 10;
 }
 
 rifleFactory: {
 	type: factory;
+	
+	build-time: 20;
 	
 	health: 10;
 	
@@ -145,10 +139,12 @@ rifleFactory: {
 	product-per-run: 1;
 	production-resources: iron;
 	resource-per-run: 2;
+	production-time: 10;
 }
 
 machineGunFactory: {
 	type: factory;
+	build-time: 25;
 	
 	health: 10;
 	
@@ -163,10 +159,12 @@ machineGunFactory: {
 	product-per-run: 1;
 	production-resources: iron;
 	resource-per-run: 2;
+	production-time: 12;
 }
 
 flourMill: {
 	type: factory;
+	build-time: 15;
 	
 	health: 10;
 	
@@ -181,10 +179,13 @@ flourMill: {
 	product-per-run: 2;
 	production-resources: wheat;
 	resource-per-run: 1;
+	production-time: 5;
 }
 
 bakery: {
 	type: factory;
+	
+	build-time: 15;
 	
 	health: 10;
 	
@@ -199,10 +200,12 @@ bakery: {
 	product-per-run: 8;
 	production-resources: flour;
 	resource-per-run: 4;
+	production-time: 5;
 }
 
 wheatFarm: {
 	type: factory;
+	build-time: 15;
 	
 	health: 10;
 	
@@ -212,15 +215,17 @@ wheatFarm: {
 	sprite-finished: wheatFarm;
 	sprite-building: farmProgress;
 	
-	max-workers: 4;
+	max-workers: 12;
 	product: wheat;
 	product-per-run: 1;
 	production-resources: water;
 	resource-per-run: 1;
+	production-time: 7;
 }
 
 house: {
 	type: home;
+	build-time: 10;
 	
 	health: 8;	
 	
@@ -237,6 +242,7 @@ house: {
 
 armyBarack: {
 	type: home;
+	build-time: 15;
 	
 	health: 10;
 	
