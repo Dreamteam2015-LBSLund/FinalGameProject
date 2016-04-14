@@ -1,7 +1,7 @@
 mine: {
 	type: factory;
 	
-	health: 5;
+	health: 20;
 	
 	materials:     wood, stone;
 	material-amount: 10, 3;
@@ -22,7 +22,7 @@ farm: {
 	type: factory;
 	build-time: 10;
 	
-	health: 5;
+	health: 20;
 	
 	materials:     wood, stone;
 	material-amount: 6, 2;
@@ -43,7 +43,7 @@ woodShop: {
 	type: factory;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone;
 	material-amount: 10, 5;
@@ -64,7 +64,7 @@ advancedFarm: {
 	type: factory;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials:     wood, stone, iron;
 	material-amount: 10, 4, 2;
@@ -85,7 +85,7 @@ blacksmith: {
 	type: factory;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -105,7 +105,7 @@ gunFactory: {
 	type: factory;
 	build-time: 20;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -126,7 +126,7 @@ rifleFactory: {
 	
 	build-time: 20;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -146,7 +146,7 @@ machineGunFactory: {
 	type: factory;
 	build-time: 25;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -166,7 +166,7 @@ flourMill: {
 	type: factory;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials: wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -187,7 +187,7 @@ bakery: {
 	
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials:     wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -207,7 +207,7 @@ wheatFarm: {
 	type: factory;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials:     wood, stone, iron;
 	material-amount: 10, 5, 3;
@@ -227,7 +227,7 @@ house: {
 	type: home;
 	build-time: 10;
 	
-	health: 8;	
+	health: 20;	
 	
 	materials: wood, stone;
 	material-amount: 5, 3;
@@ -244,7 +244,7 @@ armyBarack: {
 	type: home;
 	build-time: 15;
 	
-	health: 10;
+	health: 20;
 	
 	materials:     wood, stone;
 	material-amount: 10, 5;

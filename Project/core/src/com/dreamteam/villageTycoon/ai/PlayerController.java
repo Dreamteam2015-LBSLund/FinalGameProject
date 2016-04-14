@@ -52,7 +52,7 @@ public class PlayerController extends CityController {
 	public City getTargetCity() {
 		return null;
 	}
-
+	
 	@Override
 	public boolean soldierIsAI() {
 		return false;
