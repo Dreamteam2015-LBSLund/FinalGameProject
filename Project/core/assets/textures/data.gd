@@ -83,6 +83,7 @@ Textures: {
 	debris3: 557, 1026, 40, 53; 
 	
 	projectile: 876, 92, 16, 16;
+	projectileEmpty: 849, 112, 16, 16;
 	fireKitinGame: 879, 121, 32, 32;
 	
 	button: 659, 0, 216, 108;
