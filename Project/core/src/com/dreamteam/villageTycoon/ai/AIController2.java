@@ -300,7 +300,6 @@ public class AIController2 extends CityController {
 		
 		public MakeSoldierState(State previous) {
 			super(previous);
-			//System.out.println("City: " + getCity()); // TODO: remove me
 			if (bp == null) bp = new BuildingPlacementProvider(getCity());
 		}
 
