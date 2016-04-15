@@ -35,8 +35,8 @@ public class MenuScene extends Scene {
 		background.setPosition(-Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
 		
 		buttons = new ArrayList<SetSceneButton>();
-		buttons.add(new SetSceneButton(new Vector2(0, -100), "Start player vs 'simple ai' game (harder)", new GameScene(new PlayerVsSimpleConfig())));
-		buttons.add(new SetSceneButton(new Vector2(0, -200), "Start player vs 'advanced ai' game (easier)", new GameScene(new PlayerVsAdvancedConfig())));
+		buttons.add(new SetSceneButton(new Vector2(0, -100), "Start player vs 'simple ai' game", new GameScene(new PlayerVsSimpleConfig())));
+		buttons.add(new SetSceneButton(new Vector2(0, -200), "Start player vs 'advanced ai' game", new GameScene(new PlayerVsAdvancedConfig())));
 		buttons.add(new SetSceneButton(new Vector2(0, -300), "Start 'advanced ai' vs 'simple ai' game", new GameScene(new AIFaceoffConfig())));
 	}
 	
