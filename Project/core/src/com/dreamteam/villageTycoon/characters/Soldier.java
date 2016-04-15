@@ -236,10 +236,6 @@ public class Soldier extends Character {
 		if(prepareSabotageKit && sabotageKits.size() > 0) attack(deltaTime);
 		weapon.update(deltaTime);
 		
-<<<<<<< HEAD
-		
-=======
->>>>>>> 2b523a897e43f9175ad2bc9e7efb80cdd3a11194
 		if(getShowInventroy()) {
 			this.sabotageKitButton.update(this);
 			
