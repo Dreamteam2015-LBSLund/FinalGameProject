@@ -189,7 +189,7 @@ public class Soldier extends Character {
 			}
 		}
 		
-		if(targetWeapon != null) {
+		if(targetWeapon != null && targetWeapon != FIST) {
 			//findResource(Resource.get(targetWeapon.getName()), null);
 			
 			if(findResource(Resource.get(targetWeapon.getName()), null)) {
@@ -236,9 +236,6 @@ public class Soldier extends Character {
 		if(prepareSabotageKit && sabotageKits.size() > 0) attack(deltaTime);
 		weapon.update(deltaTime);
 		
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-			getScene().addObject(new Projectile(getPosition(), new Vector2(0, 0), weapon.getWeaponType().getProjectileType(), this));
-		}
 		
 		if(getShowInventroy()) {
 			this.sabotageKitButton.update(this);
