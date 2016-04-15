@@ -33,13 +33,13 @@ public class Soldier extends Character {
 	public enum AggressionState { ATTACKING_AND_MOVING, STEALTH, DEFENSIVE };
 	enum AlertLevel { ALERT, PASSIVE };
 	
-	public static final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("woodenSwordWeaponIcon")), Type.MELEE);
-	public static final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectile"), new Sprite(AssetManager.getTexture("ironSwordWeaponIcon")), Type.MELEE);
+	public static final WeaponType WOOD_SWORD = new WeaponType("wooden-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 1, null, "projectileEmpty"), new Sprite(AssetManager.getTexture("woodenSwordWeaponIcon")), Type.MELEE);
+	public static final WeaponType IRON_SWORD = new WeaponType("iron-sword", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 1, 1, 3, null, "projectileEmpty"), new Sprite(AssetManager.getTexture("ironSwordWeaponIcon")), Type.MELEE);
 	public static final WeaponType GUN = new WeaponType("gun", 1, 4, 6, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 8, 3, 1, null, "projectile"), new Sprite(AssetManager.getTexture("gunWeaponIcon")), Type.HANDGUN);
 	public static final WeaponType RIFLE = new WeaponType("rifle", 1, 8, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("rifleWeaponIcon")), Type.RIFE);
 	public static final WeaponType MACHINE_GUN = new WeaponType("machine-gun", 1, 2, 8, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 15, 4, 1, null, "projectile"), new Sprite(AssetManager.getTexture("machineGunWeaponIcon")), Type.RIFE);
 	
-	public static final WeaponType FIST = new WeaponType("fistWeaponIcon", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 0.1f, 1, 1, null, "projectile"), new Sprite(AssetManager.getTexture("woodenSwordWeaponIcon")), Type.MELEE);
+	public static final WeaponType FIST = new WeaponType("fistWeaponIcon", 1, 1, 1, 0, 0, new ProjectileType(ProjectileType.Type.SHOT, 0.1f, 1, 1, null, "projectileEmpty"), new Sprite(AssetManager.getTexture("woodenSwordWeaponIcon")), Type.MELEE);
 	
 	private WeaponType allWeaponTypes[] = new WeaponType[5];
 	private ArrayList<WeaponType> avaibleWeaponTypes;
@@ -236,7 +236,10 @@ public class Soldier extends Character {
 		if(prepareSabotageKit && sabotageKits.size() > 0) attack(deltaTime);
 		weapon.update(deltaTime);
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 2b523a897e43f9175ad2bc9e7efb80cdd3a11194
 		if(getShowInventroy()) {
 			this.sabotageKitButton.update(this);
 			

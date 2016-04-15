@@ -16,6 +16,7 @@ import com.dreamteam.villageTycoon.buildings.BuildingType;
 import com.dreamteam.villageTycoon.framework.Animation;
 import com.dreamteam.villageTycoon.framework.GameObject;
 import com.dreamteam.villageTycoon.framework.Rectangle;
+import com.dreamteam.villageTycoon.game.GameScene;
 import com.dreamteam.villageTycoon.map.Map;
 import com.dreamteam.villageTycoon.userInterface.ArrowButton;
 
@@ -150,7 +151,7 @@ public class Controller extends GameObject {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		
-		if(active) {
+		if(active && !GameScene.turnOffOtherUI) {
 			cameraMovment(deltaTime);
 			inventoryUpdate();
 			selectUpdate();
@@ -342,10 +343,12 @@ public class Controller extends GameObject {
 	
 	public void drawUi(SpriteBatch batch) {
 		super.drawUi(batch);
-		for(int i = 0; i < zoomButtons.length; i++) {
-			zoomButtons[i].draw(batch);
+		if(!GameScene.turnOffOtherUI) {
+			for(int i = 0; i < zoomButtons.length; i++) {
+				zoomButtons[i].draw(batch);
+			}
+			AssetManager.smallFont.draw(batch, "ZOOM", zoomButtonPosition.x+45, zoomButtonPosition.y+16);
 		}
-		AssetManager.smallFont.draw(batch, "ZOOM", zoomButtonPosition.x+45, zoomButtonPosition.y+16);
 	}
 	
 	public boolean getActive() {

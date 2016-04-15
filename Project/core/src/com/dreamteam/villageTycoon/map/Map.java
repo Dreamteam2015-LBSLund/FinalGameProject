@@ -96,7 +96,7 @@ public class Map {
 
 		String[][] map = new String[WIDTH][HEIGHT];
 
-		Point[] lakes = new Point[3];
+		Point[] lakes = new Point[6];
 		Point[] villages = new Point[4];
 		
 		for (int x = 0; x < WIDTH; x++) {
@@ -137,7 +137,7 @@ public class Map {
 		
 		amountOfCities = villages.length;
 		
-		createField(10, 70, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
+		//createField(10, 70, 20, 20, 10, 4, new String[]{"Grass", "Dirt"}, map);
 		
 		return map;
 	}

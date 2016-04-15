@@ -62,6 +62,8 @@ public class GameScene extends Scene {
 	
 	private boolean hasPlayedEndGameSound;
 	
+	public static boolean turnOffOtherUI;
+	
 	public GameScene(PlayerConfig cfg) {
 		super();
 		AssetManager.load();
@@ -110,12 +112,24 @@ public class GameScene extends Scene {
 	public void update(float dt) {
 		super.update(dt*currentGameSpeed);
 		
+		for(int i = 0; i < cities.length; i++) {
+			if(cities[i].getController() instanceof PlayerController) {
+				if(((PlayerController) cities[i].getController()).getBuildingPlacerNull()) {
+					GameScene.turnOffOtherUI = true;
+				} else {
+					GameScene.turnOffOtherUI = false;
+				}
+			}
+		}
+		
 		currentGameSpeed = MathUtils.lerp(currentGameSpeed, nextGameSpeed, 0.1f);
 		
-		for(int i = 0; i < timeControll.length; i++) {
-			timeControll[i].update();
+		if(!GameScene.turnOffOtherUI) {
+			for(int i = 0; i < timeControll.length; i++) {
+				timeControll[i].update();
 			
-			nextGameSpeed += timeControll[i].getValue();
+				nextGameSpeed += timeControll[i].getValue();
+			}
 		}
 		
 		nextGameSpeed = MathUtils.clamp(nextGameSpeed, 1, 5);
@@ -135,12 +149,13 @@ public class GameScene extends Scene {
 		super.drawUi(batch);
 		
 		if(matchState == MatchState.ON_GOING) {
-			AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x-30, this.timeControllerPosition.y + 70);
-			
 			if(tutorial != null && !tutorial.isDone()) tutorial.draw(batch);
 			
-			for(int i = 0; i < timeControll.length; i++) {
-				timeControll[i].draw(batch);
+			if(!GameScene.turnOffOtherUI) {
+				AssetManager.smallFont.draw(batch, "GAME SPEED x " + (int)currentGameSpeed, this.timeControllerPosition.x-30, this.timeControllerPosition.y + 70);
+				for(int i = 0; i < timeControll.length; i++) {
+					timeControll[i].draw(batch);
+				}
 			}
 		} else if(matchState == MatchState.OVER) {
 			AssetManager.font.draw(batch, "Game Over! " + loser.getName() + " lost!", -this.getUiCamera().viewportWidth / 3, 0);

@@ -219,10 +219,6 @@ public class Building extends GameObject {
 				}
 			}
     	}
-    	// TODO: remove this
-    	if (Gdx.input.isKeyJustPressed(Keys.Y)) {
-    		inputInventory.add(type.getBuildResourcesArray());
-    	}
 
     	if (buildState == BuildState.Clearing) {
     		if (toClear.size() > 0) assignGetPropTask(toClear);
